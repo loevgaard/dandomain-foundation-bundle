@@ -1,0 +1,25 @@
+{
+    "name": "loevgaard/dandomain-foundation",
+    "type": "library",
+    "description": "Dandomain Foundation",
+    "homepage": "https://github.com/loevgaard/dandomain-foundation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joachim Loevgaard",
+            "email": "joachim@loevgaard.dk"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "doctrine/common": "^2.7",
+        "loevgaard/dandomain-api": "^2.2",
+        "doctrine/orm": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Loevgaard\\DandomainFoundation\\": ""
+        }
+    },
+    "minimum-stability": "dev"
+}
