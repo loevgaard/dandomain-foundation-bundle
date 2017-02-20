@@ -1,5 +1,5 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Synchronizer;
+namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api as DandomainApi;
 use Doctrine\Common\Persistence\ObjectManager;

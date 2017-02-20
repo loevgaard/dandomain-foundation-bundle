@@ -1,7 +1,7 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Manager;
+namespace Loevgaard\DandomainFoundationBundle\Manager;
 
-use Loevgaard\DandomainFoundation\Model\Site;
+use Loevgaard\DandomainFoundationBundle\Model\Site;
 
 class SiteManager extends Manager implements SiteManagerInterface
 {
@@ -13,7 +13,7 @@ class SiteManager extends Manager implements SiteManagerInterface
      */
     public function findSiteByExternalId($id)
     {
-        return $this->getEntityManager()->getRepository('Loevgaard\\DandomainFoundation\\Model\\Site')->findOneBy([
+        return $this->getEntityManager()->getRepository('Loevgaard\\DandomainFoundationBundle\\Model\\Site')->findOneBy([
             'externalId' => $id
         ]);
     }

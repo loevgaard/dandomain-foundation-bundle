@@ -1,5 +1,5 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Manager;
+namespace Loevgaard\DandomainFoundationBundle\Manager;
 
 interface SiteManagerInterface {
 

@@ -1,5 +1,5 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Synchronizer;
+namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 interface SynchronizerInterface {
 

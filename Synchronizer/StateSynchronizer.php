@@ -1,14 +1,14 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Synchronizer;
+namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundation\Manager\StateManager;
-use Loevgaard\DandomainFoundation\Model\State;
+use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
+use Loevgaard\DandomainFoundationBundle\Model\State;
 
 class StateSynchronizer extends Synchronizer {
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundation\\Model\\StateInterface';
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\StateInterface';
 
     /** @var string */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundation\\Model\\State';
+    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\State';
 
     public function syncStates($flush = true) {
         $states = \GuzzleHttp\json_decode($this->api->settings->getSites()->getBody()->getContents());

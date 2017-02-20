@@ -1,16 +1,16 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Synchronizer;
+namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundation\Manager\SiteManager;
-use Loevgaard\DandomainFoundation\Manager\StateManager;
-use Loevgaard\DandomainFoundation\Model\Order;
+use Loevgaard\DandomainFoundationBundle\Manager\SiteManager;
+use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
+use Loevgaard\DandomainFoundationBundle\Model\Order;
 
 class OrderSynchronizer extends Synchronizer {
     /** @var string */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundation\\Model\\OrderInterface';
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     /** @var string */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundation\\Model\\Order';
+    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
 
     public function syncOrder($order, $flush = true) {
         $result = new Result();
@@ -37,7 +37,7 @@ class OrderSynchronizer extends Synchronizer {
 
         // get site / language
         /** @var SiteManager $siteManager */
-        $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundation\Model\Site');
+        $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\Site');
         $site = $siteManager->findSiteByExternalId($order->siteId);
         if(!$site) {
             $this->getSiteSynchronizer()->syncSites();
@@ -57,7 +57,7 @@ class OrderSynchronizer extends Synchronizer {
 
         // get order state
         /** @var StateManager $stateManager */
-        $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundation\Model\State');
+        $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\State');
         $state = $stateManager->findStateByExternalId($order->orderState->id);
         if(!$state) {
             $this->getStateSynchronizer()->syncStates();

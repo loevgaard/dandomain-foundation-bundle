@@ -1,13 +1,13 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Synchronizer;
+namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundation\Model\Site;
+use Loevgaard\DandomainFoundationBundle\Model\Site;
 
 class SiteSynchronizer extends Synchronizer {
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundation\\Model\\SiteInterface';
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\SiteInterface';
 
     /** @var string */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundation\\Model\\Site';
+    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Site';
 
     public function syncSites($flush = true) {
         $sites = \GuzzleHttp\json_decode($this->api->settings->getSites()->getBody()->getContents());

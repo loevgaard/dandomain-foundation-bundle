@@ -1,5 +1,5 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Model;
+namespace Loevgaard\DandomainFoundationBundle\Model;
 
 interface ProductInterface {
 

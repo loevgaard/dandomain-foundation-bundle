@@ -1,15 +1,12 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Model;
+namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="shipping_methods")
+ * @ORM\MappedSuperclass
  */
-class ShippingMethod implements ShippingMethodInterface {
-    use ShippingMethodTrait;
-
+abstract class ShippingMethod implements ShippingMethodInterface {
     /**
      * @var int
      * @ORM\Id

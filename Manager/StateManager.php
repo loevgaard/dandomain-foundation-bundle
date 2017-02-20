@@ -1,7 +1,7 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Manager;
+namespace Loevgaard\DandomainFoundationBundle\Manager;
 
-use Loevgaard\DandomainFoundation\Model\Site;
+use Loevgaard\DandomainFoundationBundle\Model\Site;
 
 class StateManager extends Manager implements StateManagerInterface
 {
@@ -13,7 +13,7 @@ class StateManager extends Manager implements StateManagerInterface
      */
     public function findStateByExternalId($id)
     {
-        return $this->getEntityManager()->getRepository('Loevgaard\\DandomainFoundation\\Model\\State')->findOneBy([
+        return $this->getEntityManager()->getRepository('Loevgaard\\DandomainFoundationBundle\\Model\\State')->findOneBy([
             'externalId' => $id
         ]);
     }

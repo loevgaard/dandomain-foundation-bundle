@@ -1,8 +1,8 @@
 {
-    "name": "loevgaard/dandomain-foundation",
-    "type": "library",
+    "name": "loevgaard/dandomain-foundation-bundle",
+    "type": "symfony-bundle",
     "description": "Dandomain Foundation",
-    "homepage": "https://github.com/loevgaard/dandomain-foundation",
+    "homepage": "https://github.com/loevgaard/dandomain-foundation-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -15,11 +15,13 @@
         "doctrine/common": "^2.7",
         "loevgaard/dandomain-api": "^2.2",
         "doctrine/orm": "^2.5",
+        "symfony/framework-bundle": "^2.7 || ^3.0",
+        "symfony/filesystem": "^2.7 || ^3.0",
         "symfony/console": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "Loevgaard\\DandomainFoundation\\": ""
+            "Loevgaard\\DandomainFoundationBundle\\": ""
         }
     },
     "minimum-stability": "dev"

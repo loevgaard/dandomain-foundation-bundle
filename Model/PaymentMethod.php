@@ -1,15 +1,12 @@
 <?php
-namespace Loevgaard\DandomainFoundation\Model;
+namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="payment_methods")
+ * @ORM\MappedSuperclass
  */
-class PaymentMethod implements PaymentMethodInterface {
-    use PaymentMethodTrait;
-
+abstract class PaymentMethod implements PaymentMethodInterface {
     /**
      * @var int
      * @ORM\Id
