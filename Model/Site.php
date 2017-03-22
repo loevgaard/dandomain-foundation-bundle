@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -6,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Site implements SiteInterface  {
+abstract class Site implements SiteInterface
+{
     /**
      * @var int
      */
@@ -46,11 +48,13 @@ abstract class Site implements SiteInterface  {
 
     /**
      * @param int $id
+     *
      * @return Site
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -64,11 +68,13 @@ abstract class Site implements SiteInterface  {
 
     /**
      * @param int $externalId
+     *
      * @return Site
      */
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+
         return $this;
     }
 
@@ -82,11 +88,13 @@ abstract class Site implements SiteInterface  {
 
     /**
      * @param int $countryId
+     *
      * @return Site
      */
     public function setCountryId($countryId)
     {
         $this->countryId = $countryId;
+
         return $this;
     }
 
@@ -100,11 +108,13 @@ abstract class Site implements SiteInterface  {
 
     /**
      * @param string $currencyCode
+     *
      * @return Site
      */
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
         return $this;
     }
 
@@ -118,11 +128,13 @@ abstract class Site implements SiteInterface  {
 
     /**
      * @param string $name
+     *
      * @return Site
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 }

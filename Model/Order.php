@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -6,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Order implements OrderInterface {
+abstract class Order implements OrderInterface
+{
     /**
      * @var int
      */
@@ -45,6 +47,7 @@ abstract class Order implements OrderInterface {
     /**
      * @ORM\ManyToOne(targetEntity="Site")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
+     *
      * @var Site
      */
     protected $site;
@@ -178,7 +181,6 @@ abstract class Order implements OrderInterface {
      */
     protected $xmlParams;
 
-
     /*******************
      * Customer object *
      ******************/
@@ -260,7 +262,6 @@ abstract class Order implements OrderInterface {
      * @ORM\Column(type="string", nullable=true)
      */
     protected $customerEan;
-
 
     /*******************
      * Delivery object *
@@ -344,7 +345,6 @@ abstract class Order implements OrderInterface {
      */
     protected $deliveryEan;
 
-
     /**********************
      * Order State Object *
      *********************/
@@ -352,6 +352,7 @@ abstract class Order implements OrderInterface {
     /**
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
+     *
      * @var State
      */
     protected $state;
@@ -380,7 +381,6 @@ abstract class Order implements OrderInterface {
      */
     protected $stateName;
 
-
     /******************
      * Payment Object *
      *****************/
@@ -388,6 +388,7 @@ abstract class Order implements OrderInterface {
     /**
      * @ORM\ManyToOne(targetEntity="PaymentMethod")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
+     *
      * @var PaymentMethod
      */
     protected $paymentMethod;
@@ -411,11 +412,10 @@ abstract class Order implements OrderInterface {
     protected $paymentMethodFee;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(type="boolean")
      */
     protected $paymentMethodFeeInclVat;
-
 
     /*******************
      * Shipping Object *
@@ -424,6 +424,7 @@ abstract class Order implements OrderInterface {
     /**
      * @ORM\ManyToOne(targetEntity="ShippingMethod")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
+     *
      * @var ShippingMethod
      */
     protected $shippingMethod;
@@ -447,11 +448,10 @@ abstract class Order implements OrderInterface {
     protected $shippingMethodFee;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(type="boolean")
      */
     protected $shippingMethodFeeInclVat;
-
 
     /******************
      * Invoice Object *
@@ -491,11 +491,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $id
+     *
      * @return Order
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -509,11 +511,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $comment
+     *
      * @return Order
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -527,11 +531,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerComment
+     *
      * @return Order
      */
     public function setCustomerComment($customerComment)
     {
         $this->customerComment = $customerComment;
+
         return $this;
     }
 
@@ -545,11 +551,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param \DateTime $createdDate
+     *
      * @return Order
      */
     public function setCreatedDate($createdDate)
     {
         $this->createdDate = $createdDate;
+
         return $this;
     }
 
@@ -563,11 +571,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $currencyCode
+     *
      * @return Order
      */
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
         return $this;
     }
 
@@ -581,11 +591,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $externalId
+     *
      * @return Order
      */
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+
         return $this;
     }
 
@@ -599,11 +611,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param Site $site
+     *
      * @return Order
      */
     public function setSite($site)
     {
         $this->site = $site;
+
         return $this;
     }
 
@@ -617,11 +631,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $totalPrice
+     *
      * @return Order
      */
     public function setTotalPrice($totalPrice)
     {
         $this->totalPrice = $totalPrice;
+
         return $this;
     }
 
@@ -635,11 +651,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $vatPercent
+     *
      * @return Order
      */
     public function setVatPercent($vatPercent)
     {
         $this->vatPercent = $vatPercent;
+
         return $this;
     }
 
@@ -653,11 +671,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $totalWeight
+     *
      * @return Order
      */
     public function setTotalWeight($totalWeight)
     {
         $this->totalWeight = $totalWeight;
+
         return $this;
     }
 
@@ -671,11 +691,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $referrer
+     *
      * @return Order
      */
     public function setReferrer($referrer)
     {
         $this->referrer = $referrer;
+
         return $this;
     }
 
@@ -689,11 +711,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $referenceNumber
+     *
      * @return Order
      */
     public function setReferenceNumber($referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
+
         return $this;
     }
 
@@ -707,11 +731,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $transactionNumber
+     *
      * @return Order
      */
     public function setTransactionNumber($transactionNumber)
     {
         $this->transactionNumber = $transactionNumber;
+
         return $this;
     }
 
@@ -725,11 +751,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $trackingNumber
+     *
      * @return Order
      */
     public function setTrackingNumber($trackingNumber)
     {
         $this->trackingNumber = $trackingNumber;
+
         return $this;
     }
 
@@ -743,11 +771,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $ip
+     *
      * @return Order
      */
     public function setIp($ip)
     {
         $this->ip = $ip;
+
         return $this;
     }
 
@@ -761,16 +791,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $salesDiscount
+     *
      * @return Order
      */
     public function setSalesDiscount($salesDiscount)
     {
         $this->salesDiscount = $salesDiscount;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isModified()
     {
@@ -778,12 +810,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $modified
+     * @param bool $modified
+     *
      * @return Order
      */
     public function setModified($modified)
     {
         $this->modified = $modified;
+
         return $this;
     }
 
@@ -797,16 +831,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param \DateTime $modifiedDate
+     *
      * @return Order
      */
     public function setModifiedDate($modifiedDate)
     {
         $this->modifiedDate = $modifiedDate;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIncomplete()
     {
@@ -814,12 +850,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $incomplete
+     * @param bool $incomplete
+     *
      * @return Order
      */
     public function setIncomplete($incomplete)
     {
         $this->incomplete = $incomplete;
+
         return $this;
     }
 
@@ -833,11 +871,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $vatRegistrationNumber
+     *
      * @return Order
      */
     public function setVatRegistrationNumber($vatRegistrationNumber)
     {
         $this->vatRegistrationNumber = $vatRegistrationNumber;
+
         return $this;
     }
 
@@ -851,11 +891,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $reservedField1
+     *
      * @return Order
      */
     public function setReservedField1($reservedField1)
     {
         $this->reservedField1 = $reservedField1;
+
         return $this;
     }
 
@@ -869,11 +911,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $reservedField2
+     *
      * @return Order
      */
     public function setReservedField2($reservedField2)
     {
         $this->reservedField2 = $reservedField2;
+
         return $this;
     }
 
@@ -887,11 +931,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $reservedField3
+     *
      * @return Order
      */
     public function setReservedField3($reservedField3)
     {
         $this->reservedField3 = $reservedField3;
+
         return $this;
     }
 
@@ -905,11 +951,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $reservedField4
+     *
      * @return Order
      */
     public function setReservedField4($reservedField4)
     {
         $this->reservedField4 = $reservedField4;
+
         return $this;
     }
 
@@ -923,11 +971,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $reservedField5
+     *
      * @return Order
      */
     public function setReservedField5($reservedField5)
     {
         $this->reservedField5 = $reservedField5;
+
         return $this;
     }
 
@@ -941,11 +991,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $giftCertificateAmount
+     *
      * @return Order
      */
     public function setGiftCertificateAmount($giftCertificateAmount)
     {
         $this->giftCertificateAmount = $giftCertificateAmount;
+
         return $this;
     }
 
@@ -959,11 +1011,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $giftCertificateNumber
+     *
      * @return Order
      */
     public function setGiftCertificateNumber($giftCertificateNumber)
     {
         $this->giftCertificateNumber = $giftCertificateNumber;
+
         return $this;
     }
 
@@ -977,11 +1031,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param mixed $orderLines
+     *
      * @return Order
      */
     public function setOrderLines($orderLines)
     {
         $this->orderLines = $orderLines;
+
         return $this;
     }
 
@@ -995,11 +1051,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $xmlParams
+     *
      * @return Order
      */
     public function setXmlParams($xmlParams)
     {
         $this->xmlParams = $xmlParams;
+
         return $this;
     }
 
@@ -1013,11 +1071,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $customerId
+     *
      * @return Order
      */
     public function setCustomerId($customerId)
     {
         $this->customerId = $customerId;
+
         return $this;
     }
 
@@ -1031,11 +1091,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerName
+     *
      * @return Order
      */
     public function setCustomerName($customerName)
     {
         $this->customerName = $customerName;
+
         return $this;
     }
 
@@ -1049,11 +1111,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerAttention
+     *
      * @return Order
      */
     public function setCustomerAttention($customerAttention)
     {
         $this->customerAttention = $customerAttention;
+
         return $this;
     }
 
@@ -1067,11 +1131,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerAddress
+     *
      * @return Order
      */
     public function setCustomerAddress($customerAddress)
     {
         $this->customerAddress = $customerAddress;
+
         return $this;
     }
 
@@ -1085,11 +1151,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerAddress2
+     *
      * @return Order
      */
     public function setCustomerAddress2($customerAddress2)
     {
         $this->customerAddress2 = $customerAddress2;
+
         return $this;
     }
 
@@ -1103,11 +1171,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerZipCode
+     *
      * @return Order
      */
     public function setCustomerZipCode($customerZipCode)
     {
         $this->customerZipCode = $customerZipCode;
+
         return $this;
     }
 
@@ -1121,11 +1191,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerCity
+     *
      * @return Order
      */
     public function setCustomerCity($customerCity)
     {
         $this->customerCity = $customerCity;
+
         return $this;
     }
 
@@ -1139,11 +1211,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerState
+     *
      * @return Order
      */
     public function setCustomerState($customerState)
     {
         $this->customerState = $customerState;
+
         return $this;
     }
 
@@ -1157,11 +1231,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerCountry
+     *
      * @return Order
      */
     public function setCustomerCountry($customerCountry)
     {
         $this->customerCountry = $customerCountry;
+
         return $this;
     }
 
@@ -1175,11 +1251,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerPhone
+     *
      * @return Order
      */
     public function setCustomerPhone($customerPhone)
     {
         $this->customerPhone = $customerPhone;
+
         return $this;
     }
 
@@ -1193,11 +1271,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerFax
+     *
      * @return Order
      */
     public function setCustomerFax($customerFax)
     {
         $this->customerFax = $customerFax;
+
         return $this;
     }
 
@@ -1211,11 +1291,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerEmail
+     *
      * @return Order
      */
     public function setCustomerEmail($customerEmail)
     {
         $this->customerEmail = $customerEmail;
+
         return $this;
     }
 
@@ -1229,11 +1311,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $customerEan
+     *
      * @return Order
      */
     public function setCustomerEan($customerEan)
     {
         $this->customerEan = $customerEan;
+
         return $this;
     }
 
@@ -1247,11 +1331,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryName
+     *
      * @return Order
      */
     public function setDeliveryName($deliveryName)
     {
         $this->deliveryName = $deliveryName;
+
         return $this;
     }
 
@@ -1265,11 +1351,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryAttention
+     *
      * @return Order
      */
     public function setDeliveryAttention($deliveryAttention)
     {
         $this->deliveryAttention = $deliveryAttention;
+
         return $this;
     }
 
@@ -1283,11 +1371,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryAddress
+     *
      * @return Order
      */
     public function setDeliveryAddress($deliveryAddress)
     {
         $this->deliveryAddress = $deliveryAddress;
+
         return $this;
     }
 
@@ -1301,11 +1391,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryAddress2
+     *
      * @return Order
      */
     public function setDeliveryAddress2($deliveryAddress2)
     {
         $this->deliveryAddress2 = $deliveryAddress2;
+
         return $this;
     }
 
@@ -1319,11 +1411,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryZipCode
+     *
      * @return Order
      */
     public function setDeliveryZipCode($deliveryZipCode)
     {
         $this->deliveryZipCode = $deliveryZipCode;
+
         return $this;
     }
 
@@ -1337,11 +1431,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryCity
+     *
      * @return Order
      */
     public function setDeliveryCity($deliveryCity)
     {
         $this->deliveryCity = $deliveryCity;
+
         return $this;
     }
 
@@ -1355,11 +1451,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryState
+     *
      * @return Order
      */
     public function setDeliveryState($deliveryState)
     {
         $this->deliveryState = $deliveryState;
+
         return $this;
     }
 
@@ -1373,11 +1471,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryCountry
+     *
      * @return Order
      */
     public function setDeliveryCountry($deliveryCountry)
     {
         $this->deliveryCountry = $deliveryCountry;
+
         return $this;
     }
 
@@ -1391,11 +1491,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $deliveryCountryId
+     *
      * @return Order
      */
     public function setDeliveryCountryId($deliveryCountryId)
     {
         $this->deliveryCountryId = $deliveryCountryId;
+
         return $this;
     }
 
@@ -1409,11 +1511,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryPhone
+     *
      * @return Order
      */
     public function setDeliveryPhone($deliveryPhone)
     {
         $this->deliveryPhone = $deliveryPhone;
+
         return $this;
     }
 
@@ -1427,11 +1531,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryFax
+     *
      * @return Order
      */
     public function setDeliveryFax($deliveryFax)
     {
         $this->deliveryFax = $deliveryFax;
+
         return $this;
     }
 
@@ -1445,11 +1551,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryEmail
+     *
      * @return Order
      */
     public function setDeliveryEmail($deliveryEmail)
     {
         $this->deliveryEmail = $deliveryEmail;
+
         return $this;
     }
 
@@ -1463,11 +1571,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $deliveryEan
+     *
      * @return Order
      */
     public function setDeliveryEan($deliveryEan)
     {
         $this->deliveryEan = $deliveryEan;
+
         return $this;
     }
 
@@ -1481,16 +1591,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param State $state
+     *
      * @return Order
      */
     public function setState($state)
     {
         $this->state = $state;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isStateExclStatistics()
     {
@@ -1498,12 +1610,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $stateExclStatistics
+     * @param bool $stateExclStatistics
+     *
      * @return Order
      */
     public function setStateExclStatistics($stateExclStatistics)
     {
         $this->stateExclStatistics = $stateExclStatistics;
+
         return $this;
     }
 
@@ -1517,16 +1631,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $stateId
+     *
      * @return Order
      */
     public function setStateId($stateId)
     {
         $this->stateId = $stateId;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isStateIsDefault()
     {
@@ -1534,12 +1650,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $stateIsDefault
+     * @param bool $stateIsDefault
+     *
      * @return Order
      */
     public function setStateIsDefault($stateIsDefault)
     {
         $this->stateIsDefault = $stateIsDefault;
+
         return $this;
     }
 
@@ -1553,11 +1671,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $stateName
+     *
      * @return Order
      */
     public function setStateName($stateName)
     {
         $this->stateName = $stateName;
+
         return $this;
     }
 
@@ -1571,11 +1691,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param PaymentMethod $paymentMethod
+     *
      * @return Order
      */
     public function setPaymentMethod($paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
+
         return $this;
     }
 
@@ -1589,11 +1711,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $paymentMethodId
+     *
      * @return Order
      */
     public function setPaymentMethodId($paymentMethodId)
     {
         $this->paymentMethodId = $paymentMethodId;
+
         return $this;
     }
 
@@ -1607,11 +1731,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $paymentMethodName
+     *
      * @return Order
      */
     public function setPaymentMethodName($paymentMethodName)
     {
         $this->paymentMethodName = $paymentMethodName;
+
         return $this;
     }
 
@@ -1625,16 +1751,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $paymentMethodFee
+     *
      * @return Order
      */
     public function setPaymentMethodFee($paymentMethodFee)
     {
         $this->paymentMethodFee = $paymentMethodFee;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPaymentMethodFeeInclVat()
     {
@@ -1642,12 +1770,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $paymentMethodFeeInclVat
+     * @param bool $paymentMethodFeeInclVat
+     *
      * @return Order
      */
     public function setPaymentMethodFeeInclVat($paymentMethodFeeInclVat)
     {
         $this->paymentMethodFeeInclVat = $paymentMethodFeeInclVat;
+
         return $this;
     }
 
@@ -1661,11 +1791,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param ShippingMethod $shippingMethod
+     *
      * @return Order
      */
     public function setShippingMethod($shippingMethod)
     {
         $this->shippingMethod = $shippingMethod;
+
         return $this;
     }
 
@@ -1679,11 +1811,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $shippingMethodId
+     *
      * @return Order
      */
     public function setShippingMethodId($shippingMethodId)
     {
         $this->shippingMethodId = $shippingMethodId;
+
         return $this;
     }
 
@@ -1697,11 +1831,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $shippingMethodName
+     *
      * @return Order
      */
     public function setShippingMethodName($shippingMethodName)
     {
         $this->shippingMethodName = $shippingMethodName;
+
         return $this;
     }
 
@@ -1715,16 +1851,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param float $shippingMethodFee
+     *
      * @return Order
      */
     public function setShippingMethodFee($shippingMethodFee)
     {
         $this->shippingMethodFee = $shippingMethodFee;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isShippingMethodFeeInclVat()
     {
@@ -1732,12 +1870,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $shippingMethodFeeInclVat
+     * @param bool $shippingMethodFeeInclVat
+     *
      * @return Order
      */
     public function setShippingMethodFeeInclVat($shippingMethodFeeInclVat)
     {
         $this->shippingMethodFeeInclVat = $shippingMethodFeeInclVat;
+
         return $this;
     }
 
@@ -1751,16 +1891,18 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param \DateTime $invoiceDate
+     *
      * @return Order
      */
     public function setInvoiceDate($invoiceDate)
     {
         $this->invoiceDate = $invoiceDate;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isInvoiceIsPaid()
     {
@@ -1768,12 +1910,14 @@ abstract class Order implements OrderInterface {
     }
 
     /**
-     * @param boolean $invoiceIsPaid
+     * @param bool $invoiceIsPaid
+     *
      * @return Order
      */
     public function setInvoiceIsPaid($invoiceIsPaid)
     {
         $this->invoiceIsPaid = $invoiceIsPaid;
+
         return $this;
     }
 
@@ -1787,11 +1931,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param int $invoiceNumber
+     *
      * @return Order
      */
     public function setInvoiceNumber($invoiceNumber)
     {
         $this->invoiceNumber = $invoiceNumber;
+
         return $this;
     }
 
@@ -1805,11 +1951,13 @@ abstract class Order implements OrderInterface {
 
     /**
      * @param string $invoiceState
+     *
      * @return Order
      */
     public function setInvoiceState($invoiceState)
     {
         $this->invoiceState = $invoiceState;
+
         return $this;
     }
 }

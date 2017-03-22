@@ -1,18 +1,21 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Loevgaard\DandomainFoundationBundle\Manager\SiteManager;
 use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
 use Loevgaard\DandomainFoundationBundle\Model\Order;
 
-class OrderSynchronizer extends Synchronizer {
+class OrderSynchronizer extends Synchronizer
+{
     /** @var string */
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     /** @var string */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
 
-    public function syncOrder($order, $flush = true) {
+    public function syncOrder($order, $flush = true)
+    {
         $result = new Result();
 
         // if $order is numeric we expect it to be an order id, not an id in the database, but an order id from Dandomain
@@ -22,30 +25,29 @@ class OrderSynchronizer extends Synchronizer {
 
         /** @var Order $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'number' => $order->id
+            'number' => $order->id,
         ]);
 
-        if(!$entity) {
+        if (!$entity) {
             /** @var Order $entity */
-            $entity = new $this->entityClassName;
+            $entity = new $this->entityClassName();
         }
 
         // extract created date
         $created = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $created->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
 
-
         // get site / language
         /** @var SiteManager $siteManager */
         $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\Site');
         $site = $siteManager->findSiteByExternalId($order->siteId);
-        if(!$site) {
+        if (!$site) {
             $this->getSiteSynchronizer()->syncSites();
             $site = $siteManager->findSiteByExternalId($order->siteId);
 
-            if(!$site) {
+            if (!$site) {
                 $result
-                    ->addMessage('The site id ' . $order->siteId . ' does not exist anymore')
+                    ->addMessage('The site id '.$order->siteId.' does not exist anymore')
                     ->setError(true)
                 ;
 
@@ -53,19 +55,17 @@ class OrderSynchronizer extends Synchronizer {
             }
         }
 
-
-
         // get order state
         /** @var StateManager $stateManager */
         $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\State');
         $state = $stateManager->findStateByExternalId($order->orderState->id);
-        if(!$state) {
+        if (!$state) {
             $this->getStateSynchronizer()->syncStates();
             $state = $stateManager->findStateByExternalId($order->orderState->id);
 
-            if(!$state) {
+            if (!$state) {
                 $result
-                    ->addMessage('The state id ' . $order->orderState->id . ' does not exist anymore')
+                    ->addMessage('The state id '.$order->orderState->id.' does not exist anymore')
                     ->setError(true)
                 ;
 
@@ -131,15 +131,14 @@ class OrderSynchronizer extends Synchronizer {
 
         //$entity->clearOrderLines();
 
-        if($syncProducts) {
+        if ($syncProducts) {
             $productNumbers = array();
-            foreach($order->orderLines as $orderLine) {
+            foreach ($order->orderLines as $orderLine) {
                 $productNumbers[] = $orderLine->productId;
             }
 
             //$this->syncProductsFromProductNumbers($productNumbers, false, $flush);
         }
-
 
         /*
         foreach($order->orderLines as $orderLine) {
@@ -168,7 +167,7 @@ class OrderSynchronizer extends Synchronizer {
 
         $this->objectManager->persist($entity);
 
-        if($flush) {
+        if ($flush) {
             $this->objectManager->flush();
         }
 

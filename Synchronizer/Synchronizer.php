@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -6,7 +7,8 @@ use Dandomain\Api\Api as DandomainApi;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class Synchronizer implements SynchronizerInterface {
+abstract class Synchronizer implements SynchronizerInterface
+{
     /** @var ObjectManager */
     protected $objectManager;
 
@@ -30,40 +32,42 @@ abstract class Synchronizer implements SynchronizerInterface {
 
     /**
      * @param ObjectManager $objectManager
-     * @param DandomainApi $api
-     * @param string $entityClassName
+     * @param DandomainApi  $api
+     * @param string        $entityClassName
      */
     public function __construct(ObjectManager $objectManager, DandomainApi $api, $entityClassName = null)
     {
-        $this->objectManager    = $objectManager;
-        $this->api              = $api;
-        $this->output           = new NullOutput();
+        $this->objectManager = $objectManager;
+        $this->api = $api;
+        $this->output = new NullOutput();
 
-        if($entityClassName) {
+        if ($entityClassName) {
             $interfaces = class_implements($entityClassName);
-            if(!isset($interfaces[$this->entityInterfaceName])) {
+            if (!isset($interfaces[$this->entityInterfaceName])) {
                 throw new \InvalidArgumentException("Class '$entityClassName' should implement {$this->entityInterfaceName}");
             }
-            $this->entityClassName  = $entityClassName;
+            $this->entityClassName = $entityClassName;
         }
     }
 
     /**
      * @param OutputInterface $output
+     *
      * @return Synchronizer
      */
     public function setOutput($output)
     {
         $this->output = $output;
+
         return $this;
     }
-
 
     /**
      * @return SiteSynchronizer
      */
-    public function getSiteSynchronizer() {
-        if(!$this->siteSynchronizer) {
+    public function getSiteSynchronizer()
+    {
+        if (!$this->siteSynchronizer) {
             $this->siteSynchronizer = new SiteSynchronizer($this->objectManager, $this->api);
         }
 
@@ -73,8 +77,9 @@ abstract class Synchronizer implements SynchronizerInterface {
     /**
      * @return StateSynchronizer
      */
-    public function getStateSynchronizer() {
-        if(!$this->stateSynchronizer) {
+    public function getStateSynchronizer()
+    {
+        if (!$this->stateSynchronizer) {
             $this->stateSynchronizer = new StateSynchronizer($this->objectManager, $this->api);
         }
 
@@ -83,11 +88,13 @@ abstract class Synchronizer implements SynchronizerInterface {
 
     /**
      * @param SiteSynchronizer $siteSynchronizer
+     *
      * @return Synchronizer
      */
     public function setEntityClassName(SiteSynchronizer $siteSynchronizer)
     {
         $this->siteSynchronizer = $siteSynchronizer;
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,7 +9,7 @@ class Result
     /** @var ArrayCollection|string[] */
     protected $messages;
 
-    /** @var bool  */
+    /** @var bool */
     protected $error = false;
 
     public function __construct()
@@ -16,8 +17,10 @@ class Result
         $this->messages = new ArrayCollection();
     }
 
-    public function addMessage($message) {
+    public function addMessage($message)
+    {
         $this->messages->add($message);
+
         return $this;
     }
 
@@ -31,16 +34,18 @@ class Result
 
     /**
      * @param ArrayCollection|\string[] $messages
+     *
      * @return Result
      */
     public function setMessages($messages)
     {
         $this->messages = $messages;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isError()
     {
@@ -48,12 +53,14 @@ class Result
     }
 
     /**
-     * @param boolean $error
+     * @param bool $error
+     *
      * @return Result
      */
     public function setError($error)
     {
         $this->error = $error;
+
         return $this;
     }
 }

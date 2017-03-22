@@ -1,6 +1,7 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
-interface ShippingMethodInterface {
-
+interface ShippingMethodInterface
+{
 }

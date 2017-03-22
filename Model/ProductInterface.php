@@ -1,6 +1,7 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
-interface ProductInterface {
-
+interface ProductInterface
+{
 }

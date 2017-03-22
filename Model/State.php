@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -6,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-class State implements StateInterface {
+class State implements StateInterface
+{
     /**
      * @var int
      */
@@ -19,13 +21,13 @@ class State implements StateInterface {
     protected $externalId;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(type="boolean")
      */
     protected $exclStatistics;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(type="boolean", name="`default`")
      */
     protected $default;
@@ -46,11 +48,13 @@ class State implements StateInterface {
 
     /**
      * @param int $id
+     *
      * @return State
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -64,16 +68,18 @@ class State implements StateInterface {
 
     /**
      * @param int $externalId
+     *
      * @return State
      */
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isExclStatistics()
     {
@@ -81,17 +87,19 @@ class State implements StateInterface {
     }
 
     /**
-     * @param boolean $exclStatistics
+     * @param bool $exclStatistics
+     *
      * @return State
      */
     public function setExclStatistics($exclStatistics)
     {
         $this->exclStatistics = $exclStatistics;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDefault()
     {
@@ -99,12 +107,14 @@ class State implements StateInterface {
     }
 
     /**
-     * @param boolean $default
+     * @param bool $default
+     *
      * @return State
      */
     public function setDefault($default)
     {
         $this->default = $default;
+
         return $this;
     }
 
@@ -118,11 +128,13 @@ class State implements StateInterface {
 
     /**
      * @param string $name
+     *
      * @return State
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 }

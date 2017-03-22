@@ -1,16 +1,19 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
 use Loevgaard\DandomainFoundationBundle\Model\State;
 
-class StateSynchronizer extends Synchronizer {
+class StateSynchronizer extends Synchronizer
+{
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\StateInterface';
 
     /** @var string */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\State';
 
-    public function syncStates($flush = true) {
+    public function syncStates($flush = true)
+    {
         $states = \GuzzleHttp\json_decode($this->api->settings->getSites()->getBody()->getContents());
 
         /** @var StateManager $manager */
@@ -20,8 +23,8 @@ class StateSynchronizer extends Synchronizer {
             /** @var State $entity */
             $entity = $manager->findStateByExternalId($state->id);
 
-            if(!$entity) {
-                $entity = new $this->entityClassName;
+            if (!$entity) {
+                $entity = new $this->entityClassName();
                 $entity->setExternalId($state->id);
                 $this->objectManager->persist($entity);
             }
@@ -32,7 +35,7 @@ class StateSynchronizer extends Synchronizer {
                 ->setName($state->name)
                 ;
 
-            if($flush) {
+            if ($flush) {
                 $this->objectManager->flush();
             }
         }
