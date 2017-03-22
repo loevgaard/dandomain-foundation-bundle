@@ -1,0 +1,6 @@
+services:
+    dandomain_foundation_order_service:
+        class: Loevgaard\DandomainFoundationBundle\Service\OrderService
+        arguments:
+            - "@dandomain.api"
+            - "@doctrine.orm.entity_manager"
