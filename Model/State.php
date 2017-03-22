@@ -9,9 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class State implements StateInterface {
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

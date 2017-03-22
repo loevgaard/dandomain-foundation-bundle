@@ -9,9 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class ShippingMethod implements ShippingMethodInterface {
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 }
