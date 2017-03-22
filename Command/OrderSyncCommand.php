@@ -18,6 +18,6 @@ class OrderSyncCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get('dandomain_foundation_order_service')->orderSync();
+        $this->getContainer()->get('dandomain_foundation.order_service')->orderSync();
     }
 }

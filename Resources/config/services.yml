@@ -1,6 +1,13 @@
 services:
-    dandomain_foundation_order_service:
+    dandomain_foundation.order_service:
         class: Loevgaard\DandomainFoundationBundle\Service\OrderService
         arguments:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
+            - "@dandomain_foundation.order_synchronizer"
+
+    dandomain_foundation.order_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
