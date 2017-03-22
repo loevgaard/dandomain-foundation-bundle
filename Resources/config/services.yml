@@ -11,3 +11,4 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.order_class%"

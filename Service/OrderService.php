@@ -4,6 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
 use Doctrine\ORM\EntityManager;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
 
 class OrderService
 {
@@ -18,15 +19,21 @@ class OrderService
     protected $em;
 
     /**
+     * @var OrderSynchronizer
+     */
+    protected $orderSynchronizer;
+
+    /**
      * Constructor.
      *
      * @param Api           $api
      * @param EntityManager $em
      */
-    public function __construct(Api $api, EntityManager $em)
+    public function __construct(Api $api, EntityManager $em, OrderSynchronizer $orderSynchronizer)
     {
         $this->api = $api;
         $this->em = $em;
+        $this->orderSynchronizer = $orderSynchronizer;
     }
 
     /**
