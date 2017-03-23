@@ -16,70 +16,34 @@ abstract class Site implements SiteInterface
 
     /**
      * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $externalId;
-
-    /**
-     * @var int
+     *
      * @ORM\Column(type="integer")
      */
     protected $countryId;
 
     /**
      * @var string
+     *
      * @ORM\Column(type="string")
      */
     protected $currencyCode;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $externalId;
+
+    /**
      * @var string
+     *
      * @ORM\Column(type="string")
      */
     protected $name;
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     *
-     * @return Site
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExternalId()
-    {
-        return $this->externalId;
-    }
-
-    /**
-     * @param int $externalId
-     *
-     * @return Site
-     */
-    public function setExternalId($externalId)
-    {
-        $this->externalId = $externalId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getCountryId()
     {
@@ -87,9 +51,7 @@ abstract class Site implements SiteInterface
     }
 
     /**
-     * @param int $countryId
-     *
-     * @return Site
+     * {@inheritdoc}
      */
     public function setCountryId($countryId)
     {
@@ -99,7 +61,7 @@ abstract class Site implements SiteInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCurrencyCode()
     {
@@ -107,9 +69,7 @@ abstract class Site implements SiteInterface
     }
 
     /**
-     * @param string $currencyCode
-     *
-     * @return Site
+     * {@inheritdoc}
      */
     public function setCurrencyCode($currencyCode)
     {
@@ -119,7 +79,33 @@ abstract class Site implements SiteInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -127,9 +113,7 @@ abstract class Site implements SiteInterface
     }
 
     /**
-     * @param string $name
-     *
-     * @return Site
+     * {@inheritdoc}
      */
     public function setName($name)
     {

@@ -43,9 +43,7 @@ class State implements StateInterface
     protected $name;
 
     /**
-     * Get default
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getDefault()
     {
@@ -53,11 +51,7 @@ class State implements StateInterface
     }
 
     /**
-     * Set default
-     *
-     * @param boolean $default
-     *
-     * @return State
+     * {@inheritdoc}
      */
     public function setDefault($default)
     {
@@ -67,9 +61,7 @@ class State implements StateInterface
     }
 
     /**
-     * Get exclStatistics
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getExclStatistics()
     {
@@ -77,11 +69,7 @@ class State implements StateInterface
     }
 
     /**
-     * Set exclStatistics
-     *
-     * @param boolean $exclStatistics
-     *
-     * @return State
+     * {@inheritdoc}
      */
     public function setExclStatistics($exclStatistics)
     {
@@ -91,9 +79,7 @@ class State implements StateInterface
     }
 
     /**
-     * Get externalId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -101,11 +87,7 @@ class State implements StateInterface
     }
 
     /**
-     * Set externalId
-     *
-     * @param integer $externalId
-     *
-     * @return State
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
@@ -115,9 +97,7 @@ class State implements StateInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -125,9 +105,7 @@ class State implements StateInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -135,11 +113,7 @@ class State implements StateInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return State
+     * {@inheritdoc}
      */
     public function setName($name)
     {
