@@ -375,30 +375,6 @@ abstract class Order implements OrderInterface
      */
     protected $paymentMethod;
 
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $paymentMethodId;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $paymentMethodName;
-
-    /**
-     * @var float
-     * @ORM\Column(type="decimal")
-     */
-    protected $paymentMethodFee;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    protected $paymentMethodFeeInclVat;
-
     /*******************
      * Shipping Object *
      ******************/

@@ -43,75 +43,19 @@ class State implements StateInterface
     protected $name;
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
+     * Get default
      *
-     * @return State
+     * @return boolean
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExternalId()
-    {
-        return $this->externalId;
-    }
-
-    /**
-     * @param int $externalId
-     *
-     * @return State
-     */
-    public function setExternalId($externalId)
-    {
-        $this->externalId = $externalId;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isExclStatistics()
-    {
-        return $this->exclStatistics;
-    }
-
-    /**
-     * @param bool $exclStatistics
-     *
-     * @return State
-     */
-    public function setExclStatistics($exclStatistics)
-    {
-        $this->exclStatistics = $exclStatistics;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDefault()
+    public function getDefault()
     {
         return $this->default;
     }
 
     /**
-     * @param bool $default
+     * Set default
+     *
+     * @param boolean $default
      *
      * @return State
      */
@@ -123,6 +67,66 @@ class State implements StateInterface
     }
 
     /**
+     * Get exclStatistics
+     *
+     * @return boolean
+     */
+    public function getExclStatistics()
+    {
+        return $this->exclStatistics;
+    }
+
+    /**
+     * Set exclStatistics
+     *
+     * @param boolean $exclStatistics
+     *
+     * @return State
+     */
+    public function setExclStatistics($exclStatistics)
+    {
+        $this->exclStatistics = $exclStatistics;
+
+        return $this;
+    }
+
+    /**
+     * Get externalId
+     *
+     * @return integer
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * Set externalId
+     *
+     * @param integer $externalId
+     *
+     * @return State
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -131,6 +135,8 @@ class State implements StateInterface
     }
 
     /**
+     * Set name
+     *
      * @param string $name
      *
      * @return State
