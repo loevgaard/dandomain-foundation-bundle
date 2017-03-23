@@ -192,6 +192,11 @@ abstract class Order implements OrderInterface
     protected $delivery;
 
     /**
+     * @var Invoice
+     */
+    protected $invoice;
+
+    /**
      * @var PaymentMethod
      */
     protected $paymentMethod;
@@ -205,39 +210,6 @@ abstract class Order implements OrderInterface
      * @var State
      */
     protected $state;
-
-    /******************
-     * Invoice Object *
-     *****************/
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime")
-     */
-    protected $invoiceCreditNoteNumber;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime")
-     */
-    protected $invoiceDate;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    protected $invoiceIsPaid;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $invoiceNumber;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $invoiceState;
 
     /**
      * @return int

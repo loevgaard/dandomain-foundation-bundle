@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Delivery implements DeliveryInterface
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
