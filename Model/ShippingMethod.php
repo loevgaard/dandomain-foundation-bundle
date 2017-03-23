@@ -43,9 +43,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     protected $name;
 
     /**
-     * Get externalId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -53,11 +51,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Set externalId
-     *
-     * @param integer $externalId
-     *
-     * @return ShippingMethod
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
@@ -67,9 +61,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Get fee
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getFee()
     {
@@ -77,11 +69,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Set fee
-     *
-     * @param string $fee
-     *
-     * @return ShippingMethod
+     * {@inheritdoc}
      */
     public function setFee($fee)
     {
@@ -91,9 +79,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Get feeInclVat
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getFeeInclVat()
     {
@@ -101,11 +87,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Set feeInclVat
-     *
-     * @param boolean $feeInclVat
-     *
-     * @return ShippingMethod
+     * {@inheritdoc}
      */
     public function setFeeInclVat($feeInclVat)
     {
@@ -115,9 +97,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -125,9 +105,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -135,11 +113,7 @@ abstract class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return ShippingMethod
+     * {@inheritdoc}
      */
     public function setName($name)
     {
