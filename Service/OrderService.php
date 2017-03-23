@@ -4,6 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
 use Doctrine\ORM\EntityManager;
+use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
 
 class OrderService
@@ -41,5 +42,9 @@ class OrderService
      */
     public function orderSync()
     {
+        $from = new \DateTime('2000-01-01');
+        $to = new \DateTime();
+        $orders = GuzzleHttp\json_decode($this->api->order->getOrders($from, $to)->getBody()->getContents());
+        var_dump($orders);
     }
 }

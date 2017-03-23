@@ -345,6 +345,12 @@ abstract class Order implements OrderInterface
      */
     protected $deliveryEan;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $deliveryCvr;
+
     /**********************
      * Order State Object *
      *********************/
@@ -456,6 +462,11 @@ abstract class Order implements OrderInterface
     /******************
      * Invoice Object *
      *****************/
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $invoiceCreditNoteNumber;
 
     /**
      * @var \DateTime
