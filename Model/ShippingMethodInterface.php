@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ShippingMethodInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return ShippingMethodInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get fee
+     * Get fee.
      *
      * @return string
      */
     public function getFee();
 
     /**
-     * Set fee
+     * Set fee.
      *
      * @param string $fee
      *
@@ -37,37 +37,37 @@ interface ShippingMethodInterface
     public function setFee($fee);
 
     /**
-     * Get feeInclVat
+     * Get feeInclVat.
      *
-     * @return boolean
+     * @return bool
      */
     public function getFeeInclVat();
 
     /**
-     * Set feeInclVat
+     * Set feeInclVat.
      *
-     * @param boolean $feeInclVat
+     * @param bool $feeInclVat
      *
      * @return ShippingMethodInterface
      */
     public function setFeeInclVat($feeInclVat);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *

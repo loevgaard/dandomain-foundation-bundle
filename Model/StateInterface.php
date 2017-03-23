@@ -5,69 +5,69 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface StateInterface
 {
     /**
-     * Get default
+     * Get default.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDefault();
 
     /**
-     * Set default
+     * Set default.
      *
-     * @param boolean $default
+     * @param bool $default
      *
      * @return StateInterface
      */
     public function setDefault($default);
 
     /**
-     * Get exclStatistics
+     * Get exclStatistics.
      *
-     * @return boolean
+     * @return bool
      */
     public function getExclStatistics();
 
     /**
-     * Set exclStatistics
+     * Set exclStatistics.
      *
-     * @param boolean $exclStatistics
+     * @param bool $exclStatistics
      *
      * @return StateInterface
      */
     public function setExclStatistics($exclStatistics);
 
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return StateInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *

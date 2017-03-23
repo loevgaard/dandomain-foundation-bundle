@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface OrderInterface
 {
     /**
-     * Get comment
+     * Get comment.
      *
      * @return string
      */
     public function getComment();
 
     /**
-     * Set comment
+     * Set comment.
      *
      * @param string $comment
      *
@@ -21,14 +21,14 @@ interface OrderInterface
     public function setComment($comment);
 
     /**
-     * Get createdDate
+     * Get createdDate.
      *
      * @return \DateTime
      */
     public function getCreatedDate();
 
     /**
-     * Set createdDate
+     * Set createdDate.
      *
      * @param \DateTime $createdDate
      *
@@ -37,14 +37,14 @@ interface OrderInterface
     public function setCreatedDate($createdDate);
 
     /**
-     * Get currencyCode
+     * Get currencyCode.
      *
      * @return string
      */
     public function getCurrencyCode();
 
     /**
-     * Set currencyCode
+     * Set currencyCode.
      *
      * @param string $currencyCode
      *
@@ -53,14 +53,14 @@ interface OrderInterface
     public function setCurrencyCode($currencyCode);
 
     /**
-     * Get customer
+     * Get customer.
      *
      * @return CustomerInterface
      */
     public function getCustomer();
 
     /**
-     * Set customer
+     * Set customer.
      *
      * @param CustomerInterface $customer
      *
@@ -69,14 +69,14 @@ interface OrderInterface
     public function setCustomer(CustomerInterface $customer = null);
 
     /**
-     * Get customerComment
+     * Get customerComment.
      *
      * @return string
      */
     public function getCustomerComment();
 
     /**
-     * Set customerComment
+     * Set customerComment.
      *
      * @param string $customerComment
      *
@@ -85,14 +85,14 @@ interface OrderInterface
     public function setCustomerComment($customerComment);
 
     /**
-     * Get delivery
+     * Get delivery.
      *
      * @return DeliveryInterface
      */
     public function getDelivery();
 
     /**
-     * Set delivery
+     * Set delivery.
      *
      * @param DeliveryInterface $delivery
      *
@@ -101,30 +101,30 @@ interface OrderInterface
     public function setDelivery(DeliveryInterface $delivery = null);
 
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return OrderInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get giftCertificateAmount
+     * Get giftCertificateAmount.
      *
      * @return string
      */
     public function getGiftCertificateAmount();
 
     /**
-     * Set giftCertificateAmount
+     * Set giftCertificateAmount.
      *
      * @param string $giftCertificateAmount
      *
@@ -133,53 +133,53 @@ interface OrderInterface
     public function setGiftCertificateAmount($giftCertificateAmount);
 
     /**
-     * Get giftCertificateNumber
+     * Get giftCertificateNumber.
      *
-     * @return integer
+     * @return int
      */
     public function getGiftCertificateNumber();
 
     /**
-     * Set giftCertificateNumber
+     * Set giftCertificateNumber.
      *
-     * @param integer $giftCertificateNumber
+     * @param int $giftCertificateNumber
      *
      * @return OrderInterface
      */
     public function setGiftCertificateNumber($giftCertificateNumber);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get incomplete
+     * Get incomplete.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIncomplete();
 
     /**
-     * Set incomplete
+     * Set incomplete.
      *
-     * @param boolean $incomplete
+     * @param bool $incomplete
      *
      * @return OrderInterface
      */
     public function setIncomplete($incomplete);
 
     /**
-     * Get invoice
+     * Get invoice.
      *
      * @return InvoiceInterface
      */
     public function getInvoice();
 
     /**
-     * Set invoice
+     * Set invoice.
      *
      * @param InvoiceInterface $invoice
      *
@@ -188,14 +188,14 @@ interface OrderInterface
     public function setInvoice(InvoiceInterface $invoice = null);
 
     /**
-     * Get ip
+     * Get ip.
      *
      * @return string
      */
     public function getIp();
 
     /**
-     * Set ip
+     * Set ip.
      *
      * @param string $ip
      *
@@ -204,30 +204,30 @@ interface OrderInterface
     public function setIp($ip);
 
     /**
-     * Get modified
+     * Get modified.
      *
-     * @return boolean
+     * @return bool
      */
     public function getModified();
 
     /**
-     * Set modified
+     * Set modified.
      *
-     * @param boolean $modified
+     * @param bool $modified
      *
      * @return OrderInterface
      */
     public function setModified($modified);
 
     /**
-     * Get modifiedDate
+     * Get modifiedDate.
      *
      * @return \DateTime
      */
     public function getModifiedDate();
 
     /**
-     * Set modifiedDate
+     * Set modifiedDate.
      *
      * @param \DateTime $modifiedDate
      *
@@ -236,7 +236,7 @@ interface OrderInterface
     public function setModifiedDate($modifiedDate);
 
     /**
-     * Add orderLine
+     * Add orderLine.
      *
      * @param OrderLineInterface $orderLine
      *
@@ -245,28 +245,28 @@ interface OrderInterface
     public function addOrderLine(OrderLineInterface $orderLine);
 
     /**
-     * Get orderLines
+     * Get orderLines.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getOrderLines();
 
     /**
-     * Remove orderLine
+     * Remove orderLine.
      *
      * @param OrderLineInterface $orderLine
      */
     public function removeOrderLine(OrderLineInterface $orderLine);
 
     /**
-     * Get paymentMethod
+     * Get paymentMethod.
      *
      * @return PaymentMethodInterface
      */
     public function getPaymentMethod();
 
     /**
-     * Set paymentMethod
+     * Set paymentMethod.
      *
      * @param PaymentMethodInterface $paymentMethod
      *
@@ -275,14 +275,14 @@ interface OrderInterface
     public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null);
 
     /**
-     * Get referenceNumber
+     * Get referenceNumber.
      *
      * @return string
      */
     public function getReferenceNumber();
 
     /**
-     * Set referenceNumber
+     * Set referenceNumber.
      *
      * @param string $referenceNumber
      *
@@ -291,14 +291,14 @@ interface OrderInterface
     public function setReferenceNumber($referenceNumber);
 
     /**
-     * Get referrer
+     * Get referrer.
      *
      * @return string
      */
     public function getReferrer();
 
     /**
-     * Set referrer
+     * Set referrer.
      *
      * @param string $referrer
      *
@@ -307,14 +307,14 @@ interface OrderInterface
     public function setReferrer($referrer);
 
     /**
-     * Get reservedField1
+     * Get reservedField1.
      *
      * @return string
      */
     public function getReservedField1();
 
     /**
-     * Set reservedField1
+     * Set reservedField1.
      *
      * @param string $reservedField1
      *
@@ -323,14 +323,14 @@ interface OrderInterface
     public function setReservedField1($reservedField1);
 
     /**
-     * Get reservedField2
+     * Get reservedField2.
      *
      * @return string
      */
     public function getReservedField2();
 
     /**
-     * Set reservedField2
+     * Set reservedField2.
      *
      * @param string $reservedField2
      *
@@ -339,14 +339,14 @@ interface OrderInterface
     public function setReservedField2($reservedField2);
 
     /**
-     * Get reservedField3
+     * Get reservedField3.
      *
      * @return string
      */
     public function getReservedField3();
 
     /**
-     * Set reservedField3
+     * Set reservedField3.
      *
      * @param string $reservedField3
      *
@@ -355,14 +355,14 @@ interface OrderInterface
     public function setReservedField3($reservedField3);
 
     /**
-     * Get reservedField4
+     * Get reservedField4.
      *
      * @return string
      */
     public function getReservedField4();
 
     /**
-     * Set reservedField4
+     * Set reservedField4.
      *
      * @param string $reservedField4
      *
@@ -371,14 +371,14 @@ interface OrderInterface
     public function setReservedField4($reservedField4);
 
     /**
-     * Get reservedField5
+     * Get reservedField5.
      *
      * @return string
      */
     public function getReservedField5();
 
     /**
-     * Set reservedField5
+     * Set reservedField5.
      *
      * @param string $reservedField5
      *
@@ -387,14 +387,14 @@ interface OrderInterface
     public function setReservedField5($reservedField5);
 
     /**
-     * Get salesDiscount
+     * Get salesDiscount.
      *
      * @return string
      */
     public function getSalesDiscount();
 
     /**
-     * Set salesDiscount
+     * Set salesDiscount.
      *
      * @param string $salesDiscount
      *
@@ -403,14 +403,14 @@ interface OrderInterface
     public function setSalesDiscount($salesDiscount);
 
     /**
-     * Get shippingMethod
+     * Get shippingMethod.
      *
      * @return ShippingMethodInterface
      */
     public function getShippingMethod();
 
     /**
-     * Set shippingMethod
+     * Set shippingMethod.
      *
      * @param ShippingMethodInterface $shippingMethod
      *
@@ -419,14 +419,14 @@ interface OrderInterface
     public function setShippingMethod(ShippingMethodInterface $shippingMethod = null);
 
     /**
-     * Get site
+     * Get site.
      *
      * @return SiteInterface
      */
     public function getSite();
 
     /**
-     * Set site
+     * Set site.
      *
      * @param SiteInterface $site
      *
@@ -435,14 +435,14 @@ interface OrderInterface
     public function setSite(SiteInterface $site = null);
 
     /**
-     * Get state
+     * Get state.
      *
      * @return StateInterface
      */
     public function getState();
 
     /**
-     * Set state
+     * Set state.
      *
      * @param StateInterface $state
      *
@@ -451,14 +451,14 @@ interface OrderInterface
     public function setState(StateInterface $state = null);
 
     /**
-     * Get totalPrice
+     * Get totalPrice.
      *
      * @return string
      */
     public function getTotalPrice();
 
     /**
-     * Set totalPrice
+     * Set totalPrice.
      *
      * @param string $totalPrice
      *
@@ -467,14 +467,14 @@ interface OrderInterface
     public function setTotalPrice($totalPrice);
 
     /**
-     * Get totalWeight
+     * Get totalWeight.
      *
      * @return string
      */
     public function getTotalWeight();
 
     /**
-     * Set totalWeight
+     * Set totalWeight.
      *
      * @param string $totalWeight
      *
@@ -483,14 +483,14 @@ interface OrderInterface
     public function setTotalWeight($totalWeight);
 
     /**
-     * Get trackingNumber
+     * Get trackingNumber.
      *
      * @return string
      */
     public function getTrackingNumber();
 
     /**
-     * Set trackingNumber
+     * Set trackingNumber.
      *
      * @param string $trackingNumber
      *
@@ -499,14 +499,14 @@ interface OrderInterface
     public function setTrackingNumber($trackingNumber);
 
     /**
-     * Get transactionNumber
+     * Get transactionNumber.
      *
      * @return string
      */
     public function getTransactionNumber();
 
     /**
-     * Set transactionNumber
+     * Set transactionNumber.
      *
      * @param string $transactionNumber
      *
@@ -515,14 +515,14 @@ interface OrderInterface
     public function setTransactionNumber($transactionNumber);
 
     /**
-     * Get vatPct
+     * Get vatPct.
      *
      * @return string
      */
     public function getVatPct();
 
     /**
-     * Set vatPct
+     * Set vatPct.
      *
      * @param string $vatPct
      *
@@ -531,14 +531,14 @@ interface OrderInterface
     public function setVatPct($vatPct);
 
     /**
-     * Get vatRegNumber
+     * Get vatRegNumber.
      *
      * @return string
      */
     public function getVatRegNumber();
 
     /**
-     * Set vatRegNumber
+     * Set vatRegNumber.
      *
      * @param string $vatRegNumber
      *
@@ -547,14 +547,14 @@ interface OrderInterface
     public function setVatRegNumber($vatRegNumber);
 
     /**
-     * Get xmlParams
+     * Get xmlParams.
      *
      * @return string
      */
     public function getXmlParams();
 
     /**
-     * Set xmlParams
+     * Set xmlParams.
      *
      * @param string $xmlParams
      *

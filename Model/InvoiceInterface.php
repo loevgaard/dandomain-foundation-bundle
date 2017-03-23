@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface InvoiceInterface
 {
     /**
-     * Get creditNoteNumber
+     * Get creditNoteNumber.
      *
      * @return string
      */
     public function getCreditNoteNumber();
 
     /**
-     * Set creditNoteNumber
+     * Set creditNoteNumber.
      *
      * @param string $creditNoteNumber
      *
@@ -21,14 +21,14 @@ interface InvoiceInterface
     public function setCreditNoteNumber($creditNoteNumber);
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
     public function getDate();
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
      *
@@ -37,53 +37,53 @@ interface InvoiceInterface
     public function setDate($date);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get isPaid
+     * Get isPaid.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsPaid();
 
     /**
-     * Set isPaid
+     * Set isPaid.
      *
-     * @param boolean $isPaid
+     * @param bool $isPaid
      *
      * @return InvoiceInterface
      */
     public function setIsPaid($isPaid);
 
     /**
-     * Get number
+     * Get number.
      *
-     * @return integer
+     * @return int
      */
     public function getNumber();
 
     /**
-     * Set number
+     * Set number.
      *
-     * @param integer $number
+     * @param int $number
      *
      * @return InvoiceInterface
      */
     public function setNumber($number);
 
     /**
-     * Get state
+     * Get state.
      *
      * @return string
      */
     public function getState();
 
     /**
-     * Set state
+     * Set state.
      *
      * @param string $state
      *

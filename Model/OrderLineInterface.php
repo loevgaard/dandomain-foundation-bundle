@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface OrderLineInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return OrderLineInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get fileUrl
+     * Get fileUrl.
      *
      * @return string
      */
     public function getFileUrl();
 
     /**
-     * Set fileUrl
+     * Set fileUrl.
      *
      * @param string $fileUrl
      *
@@ -37,21 +37,21 @@ interface OrderLineInterface
     public function setFileUrl($fileUrl);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get order
+     * Get order.
      *
      * @return OrderInterface
      */
     public function getOrder();
 
     /**
-     * Set order
+     * Set order.
      *
      * @param OrderInterface $order
      *
@@ -60,30 +60,30 @@ interface OrderLineInterface
     public function setOrder(OrderInterface $order = null);
 
     /**
-     * Get productId
+     * Get productId.
      *
-     * @return integer
+     * @return int
      */
     public function getProductId();
 
     /**
-     * Set productId
+     * Set productId.
      *
-     * @param integer $productId
+     * @param int $productId
      *
      * @return OrderLineInterface
      */
     public function setProductId($productId);
 
     /**
-     * Get productName
+     * Get productName.
      *
      * @return string
      */
     public function getProductName();
 
     /**
-     * Set productName
+     * Set productName.
      *
      * @param string $productName
      *
@@ -92,30 +92,30 @@ interface OrderLineInterface
     public function setProductName($productName);
 
     /**
-     * Get quantity
+     * Get quantity.
      *
-     * @return integer
+     * @return int
      */
     public function getQuantity();
 
     /**
-     * Set quantity
+     * Set quantity.
      *
-     * @param integer $quantity
+     * @param int $quantity
      *
      * @return OrderLineInterface
      */
     public function setQuantity($quantity);
 
     /**
-     * Get totalPrice
+     * Get totalPrice.
      *
      * @return string
      */
     public function getTotalPrice();
 
     /**
-     * Set totalPrice
+     * Set totalPrice.
      *
      * @param string $totalPrice
      *
@@ -124,14 +124,14 @@ interface OrderLineInterface
     public function setTotalPrice($totalPrice);
 
     /**
-     * Get unitPrice
+     * Get unitPrice.
      *
      * @return string
      */
     public function getUnitPrice();
 
     /**
-     * Set unitPrice
+     * Set unitPrice.
      *
      * @param string $unitPrice
      *
@@ -140,14 +140,14 @@ interface OrderLineInterface
     public function setUnitPrice($unitPrice);
 
     /**
-     * Get vatPct
+     * Get vatPct.
      *
      * @return string
      */
     public function getVatPct();
 
     /**
-     * Set vatPct
+     * Set vatPct.
      *
      * @param string $vatPct
      *
@@ -156,14 +156,14 @@ interface OrderLineInterface
     public function setVatPct($vatPct);
 
     /**
-     * Get variant
+     * Get variant.
      *
      * @return string
      */
     public function getVariant();
 
     /**
-     * Set variant
+     * Set variant.
      *
      * @param string $variant
      *
@@ -172,14 +172,14 @@ interface OrderLineInterface
     public function setVariant($variant);
 
     /**
-     * Get xmlParams
+     * Get xmlParams.
      *
      * @return string
      */
     public function getXmlParams();
 
     /**
-     * Set xmlParams
+     * Set xmlParams.
      *
      * @param string $xmlParams
      *

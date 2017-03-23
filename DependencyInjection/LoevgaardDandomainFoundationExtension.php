@@ -16,7 +16,7 @@ class LoevgaardDandomainFoundationExtension extends Extension
 
         $container->setParameter('loevgaard_dandomain_foundation.order_class', $config['order_class']);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 }

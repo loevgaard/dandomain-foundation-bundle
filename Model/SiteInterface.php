@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface SiteInterface
 {
     /**
-     * Get countryId
+     * Get countryId.
      *
-     * @return integer
+     * @return int
      */
     public function getCountryId();
 
     /**
-     * Set countryId
+     * Set countryId.
      *
-     * @param integer $countryId
+     * @param int $countryId
      *
      * @return SiteInterface
      */
     public function setCountryId($countryId);
 
     /**
-     * Get currencyCode
+     * Get currencyCode.
      *
      * @return string
      */
     public function getCurrencyCode();
 
     /**
-     * Set currencyCode
+     * Set currencyCode.
      *
      * @param string $currencyCode
      *
@@ -37,37 +37,37 @@ interface SiteInterface
     public function setCurrencyCode($currencyCode);
 
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return SiteInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
