@@ -363,30 +363,6 @@ abstract class Order implements OrderInterface
      */
     protected $state;
 
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    protected $stateExclStatistics;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $stateId;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    protected $stateIsDefault;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $stateName;
-
     /******************
      * Payment Object *
      *****************/
@@ -434,30 +410,6 @@ abstract class Order implements OrderInterface
      * @var ShippingMethod
      */
     protected $shippingMethod;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $shippingMethodId;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $shippingMethodName;
-
-    /**
-     * @var float
-     * @ORM\Column(type="decimal")
-     */
-    protected $shippingMethodFee;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    protected $shippingMethodFeeInclVat;
 
     /******************
      * Invoice Object *
