@@ -1,5 +1,6 @@
 # dandomain-foundation
 
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -294,3 +295,4 @@ class State extends BaseState
      */
     protected $id;
 }
+```
