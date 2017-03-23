@@ -186,82 +186,12 @@ abstract class Order implements OrderInterface
      ******************/
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
+     * @var Customer
+     *
+     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Customer")
      */
-    protected $customerId;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerName;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $customerAttention;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerAddress;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $customerAddress2;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerZipCode;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerCity;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $customerState;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerCountry;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerPhone;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $customerFax;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $customerEmail;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $customerEan;
+    protected $customer;
 
     /*******************
      * Delivery object *
