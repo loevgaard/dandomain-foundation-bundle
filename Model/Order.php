@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,9 @@ abstract class Order implements OrderInterface
      */
     protected $invoice;
 
-    // @todo should be a collection
+    /**
+     * @var ArrayCollection
+     */
     protected $orderLines;
 
     /**
@@ -88,13 +91,6 @@ abstract class Order implements OrderInterface
     protected $externalId;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     */
-    protected $incomplete;
-
-    /**
      * @var float
      *
      * @ORM\Column(type="decimal")
@@ -107,6 +103,13 @@ abstract class Order implements OrderInterface
      * @ORM\Column(type="integer")
      */
     protected $giftCertificateNumber;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $incomplete;
 
     /**
      * @var string
@@ -214,18 +217,18 @@ abstract class Order implements OrderInterface
     protected $transactionNumber;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $vatPercent;
+    protected $vatPct;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $vatRegistrationNumber;
+    protected $vatRegNumber;
 
     /**
      * @var string
