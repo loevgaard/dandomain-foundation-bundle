@@ -181,141 +181,30 @@ abstract class Order implements OrderInterface
      */
     protected $xmlParams;
 
-    /*******************
-     * Customer object *
-     ******************/
-
     /**
      * @var Customer
-     *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Customer")
      */
     protected $customer;
 
-    /*******************
-     * Delivery object *
-     ******************/
-
     /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @var Delivery
      */
-    protected $deliveryName;
+    protected $delivery;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryAttention;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryAddress;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryAddress2;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryZipCode;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryCity;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryState;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryCountry;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $deliveryCountryId;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryPhone;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryFax;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryEmail;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryEan;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $deliveryCvr;
-
-    /**********************
-     * Order State Object *
-     *********************/
-
-    /**
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
-     *
-     * @var State
-     */
-    protected $state;
-
-    /******************
-     * Payment Object *
-     *****************/
-
-    /**
-     * @ORM\ManyToOne(targetEntity="PaymentMethod")
-     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
-     *
      * @var PaymentMethod
      */
     protected $paymentMethod;
 
-    /*******************
-     * Shipping Object *
-     ******************/
-
     /**
-     * @ORM\ManyToOne(targetEntity="ShippingMethod")
-     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
-     *
      * @var ShippingMethod
      */
     protected $shippingMethod;
+
+    /**
+     * @var State
+     */
+    protected $state;
 
     /******************
      * Invoice Object *
