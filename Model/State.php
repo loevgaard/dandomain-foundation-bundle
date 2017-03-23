@@ -17,48 +17,30 @@ class State implements StateInterface
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", name="`default`")
-     */
-    protected $default;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
     protected $exclStatistics;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $externalId;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isDefault;
+
+    /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $name;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefault()
-    {
-        return $this->default;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefault($default)
-    {
-        $this->default = $default;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -102,6 +84,24 @@ class State implements StateInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIsDefault()
+    {
+        return $this->isDefault;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->isDefault = $isDefault;
+
+        return $this;
     }
 
     /**

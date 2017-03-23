@@ -17,28 +17,28 @@ abstract class PaymentMethod implements PaymentMethodInterface
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $externalId;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(nullable=true, type="decimal")
      */
     protected $fee;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
     protected $feeInclVat;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $name;
 

@@ -58,182 +58,182 @@ abstract class Order implements OrderInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(nullable=true, type="text")
      */
     protected $comment;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(nullable=true, type="datetime")
      */
     protected $createdDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $currencyCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(nullable=true, type="text")
      */
     protected $customerComment;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $externalId;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(nullable=true, type="decimal")
      */
     protected $giftCertificateAmount;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $giftCertificateNumber;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
     protected $incomplete;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $ip;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
     protected $modified;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(nullable=true, type="datetime")
      */
     protected $modifiedDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $referenceNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $referrer;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $reservedField1;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $reservedField2;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $reservedField3;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $reservedField4;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $reservedField5;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(nullable=true, type="decimal")
      */
     protected $salesDiscount;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(nullable=true, type="decimal")
      */
     protected $totalPrice;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(nullable=true, type="decimal")
      */
     protected $totalWeight;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $trackingNumber;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $transactionNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $vatPct;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $vatRegNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(nullable=true, type="text")
      */
     protected $xmlParams;
 

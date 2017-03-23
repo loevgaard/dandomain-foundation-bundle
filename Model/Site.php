@@ -17,28 +17,28 @@ abstract class Site implements SiteInterface
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $countryId;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $currencyCode;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $externalId;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $name;
 

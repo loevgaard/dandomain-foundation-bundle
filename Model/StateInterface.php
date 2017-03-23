@@ -5,22 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface StateInterface
 {
     /**
-     * Get default.
-     *
-     * @return bool
-     */
-    public function getDefault();
-
-    /**
-     * Set default.
-     *
-     * @param bool $default
-     *
-     * @return StateInterface
-     */
-    public function setDefault($default);
-
-    /**
      * Get exclStatistics.
      *
      * @return bool
@@ -58,6 +42,22 @@ interface StateInterface
      * @return int
      */
     public function getId();
+
+    /**
+     * Get isDefault.
+     *
+     * @return bool
+     */
+    public function getIsDefault();
+
+    /**
+     * Set isDefault.
+     *
+     * @param bool $isDefault
+     *
+     * @return StateInterface
+     */
+    public function setIsDefault($isDefault);
 
     /**
      * Get name.

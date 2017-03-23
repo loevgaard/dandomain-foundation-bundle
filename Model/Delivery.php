@@ -17,98 +17,98 @@ abstract class Delivery implements DeliveryInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $attention;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $address2;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $country;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $countryId;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $cvr;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $ean;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $fax;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $zipCode;
 

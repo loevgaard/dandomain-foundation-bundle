@@ -71,7 +71,7 @@ abstract class OrderLine implements OrderLineInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $vatPct;
 

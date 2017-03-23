@@ -17,35 +17,35 @@ abstract class Invoice implements InvoiceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $creditNoteNumber;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(nullable=true, type="datetime")
      */
     protected $date;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
     protected $isPaid;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $number;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $state;
 
