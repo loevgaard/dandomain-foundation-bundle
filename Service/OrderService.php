@@ -45,6 +45,8 @@ class OrderService
         $from = new \DateTime('2000-01-01');
         $to = new \DateTime();
         $orders = GuzzleHttp\json_decode($this->api->order->getOrders($from, $to)->getBody()->getContents());
-        var_dump($orders);
+        foreach ($orders as $order) {
+            var_dump($order);
+        }
     }
 }

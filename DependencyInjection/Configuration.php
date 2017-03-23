@@ -14,7 +14,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('customer_class')->end()
+                ->scalarNode('delivery_class')->end()
+                ->scalarNode('invoice_class')->end()
                 ->scalarNode('order_class')->end()
+                ->scalarNode('order_line_class')->end()
+                ->scalarNode('payment_method_class')->end()
+                ->scalarNode('shipping_method_class')->end()
+                ->scalarNode('site_class')->end()
+                ->scalarNode('state_class')->end()
             ->end()
         ;
 
