@@ -8,28 +8,29 @@ use Loevgaard\DandomainFoundationBundle\Model\Order;
 
 class OrderSynchronizer extends Synchronizer
 {
-    /** @var string */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
-
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
+
+    /**
+     * @var string
+     */
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     public function syncOrder($order, $flush = true)
     {
         $result = new Result();
 
-        // if $order is numeric we expect it to be an order id, not an id in the database, but an order id from Dandomain
         if (is_numeric($order)) {
             $order = \GuzzleHttp\json_decode($this->api->order->getOrder($order)->getBody()->getContents());
         }
 
-        /** @var Order $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'number' => $order->id,
+            'externalId' => $order->id,
         ]);
 
         if (!$entity) {
-            /** @var Order $entity */
             $entity = new $this->entityClassName();
         }
 

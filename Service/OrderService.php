@@ -42,11 +42,12 @@ class OrderService
      */
     public function orderSync()
     {
-        $from = new \DateTime('2000-01-01');
+        $from = new \DateTime('20017-01-01');
         $to = new \DateTime();
         $orders = GuzzleHttp\json_decode($this->api->order->getOrders($from, $to)->getBody()->getContents());
+
         foreach ($orders as $order) {
-            var_dump($order);
+            $this->orderSynchronizer->syncOrder($order, true);
         }
     }
 }
