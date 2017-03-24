@@ -171,7 +171,7 @@ class OrderSynchronizer extends Synchronizer
         $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, true);
         $entity->setCustomer($customer);
 
-        $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, true);
+        $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, true, $entity->getDelivery());
         $entity->setDelivery($delivery);
 
 /*

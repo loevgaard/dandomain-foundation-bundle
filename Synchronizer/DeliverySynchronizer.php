@@ -21,12 +21,19 @@ class DeliverySynchronizer extends Synchronizer
      *
      * @param array $delivery
      * @param bool  $flush
+     * @param DeliveryInterface  $deliveryEntity
      *
      * @return DeliveryInterface
      */
-    public function syncDelivery($delivery, $flush = true)
+    public function syncDelivery($delivery, $flush = true, $deliveryEntity = null)
     {
-        $entity = new $this->entityClassName();
+        if (null === $deliveryEntity) {
+            $entity = new $this->entityClassName();
+        } else {
+            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                'id' => $deliveryEntity->getId(),
+            ]);
+        }
 
         $entity
             ->setAddress($delivery->address)
