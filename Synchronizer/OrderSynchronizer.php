@@ -9,6 +9,11 @@ use Loevgaard\DandomainFoundationBundle\Model\Order;
 class OrderSynchronizer extends Synchronizer
 {
     /**
+     * @var CustomerSynchronizer
+     */
+    protected $customerSynchronizer;
+
+    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
@@ -18,9 +23,23 @@ class OrderSynchronizer extends Synchronizer
      */
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
+    /**
+     * Set CustomerSynchronizer.
+     *
+     * @param CustomerSynchronizer $customerSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setCustomerSynchronizer(CustomerSynchronizer $customerSynchronizer)
+    {
+        $this->customerSynchronizer = $customerSynchronizer;
+
+        return $this;
+    }
+
     public function syncOrder($order, $flush = true)
     {
-        $result = new Result();
+//        $result = new Result();
 
         if (is_numeric($order)) {
             $order = \GuzzleHttp\json_decode($this->api->order->getOrder($order)->getBody()->getContents());
@@ -123,6 +142,8 @@ class OrderSynchronizer extends Synchronizer
         if (null !== $modifiedDate) {
             $entity->setModifiedDate($modifiedDate);
         }
+        $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, true);
+        $entity->setCustomer($customer);
 
 /*
         if ($syncProducts) {
@@ -165,6 +186,7 @@ class OrderSynchronizer extends Synchronizer
             $this->objectManager->flush();
         }
 
-        return $result;
+        return $entity;
+//        return $result;
     }
 }
