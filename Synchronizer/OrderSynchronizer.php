@@ -37,6 +37,11 @@ class OrderSynchronizer extends Synchronizer
     protected $paymentMethodSynchronizer;
 
     /**
+     * @var ShippingMethodSynchronizer
+     */
+    protected $shippingMethodSynchronizer;
+
+    /**
      * Set CustomerSynchronizer.
      *
      * @param CustomerSynchronizer $customerSynchronizer
@@ -88,6 +93,20 @@ class OrderSynchronizer extends Synchronizer
     public function setPaymentMethodSynchronizer(PaymentMethodSynchronizer $paymentMethodSynchronizer)
     {
         $this->paymentMethodSynchronizer = $paymentMethodSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ShippingMethodSynchronizer.
+     *
+     * @param ShippingMethodSynchronizer $shippingMethodSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setShippingMethodSynchronizer(ShippingMethodSynchronizer $shippingMethodSynchronizer)
+    {
+        $this->shippingMethodSynchronizer = $shippingMethodSynchronizer;
 
         return $this;
     }
@@ -151,20 +170,6 @@ class OrderSynchronizer extends Synchronizer
             }
         }
 */
-        /*
-        // get payment method
-        $paymentMethod = $this->objectManager->getRepository('EhandelCoreBundle:PaymentMethod')->findOneBy(array('externalId' => (int)$order->paymentInfo->id));
-        if(!$paymentMethod) {
-            $this->syncPaymentMethods();
-        }
-
-        // get shipping method
-        $shippingMethod = $this->objectManager->getRepository('EhandelCoreBundle:ShippingMethod')->findOneBy(array('externalId' => (int)$order->shippingInfo->id));
-        if(!$shippingMethod) {
-            $this->syncShippingMethods();
-        }
-        */
-
         $createdDate = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
 
@@ -218,6 +223,9 @@ class OrderSynchronizer extends Synchronizer
 
         $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, true, $entity->getPaymentMethod());
         $entity->setPaymentMethod($paymentMethod);
+
+        $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, true, $entity->getShippingMethod());
+        $entity->setShippingMethod($shippingMethod);
 
 /*
         if ($syncProducts) {

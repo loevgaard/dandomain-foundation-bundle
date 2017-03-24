@@ -34,7 +34,7 @@ class CustomerSynchronizer extends Synchronizer
             'externalId' => $customer->id,
         ]);
 
-        if (!$entity) {
+        if (!($entity)) {
             $entity = new $this->entityClassName();
         }
 

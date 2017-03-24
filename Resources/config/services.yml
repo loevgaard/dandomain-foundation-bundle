@@ -38,6 +38,7 @@ services:
             - [setDeliverySynchronizer, ["@dandomain_foundation.delivery_synchronizer"]]
             - [setInvoiceSynchronizer, ["@dandomain_foundation.invoice_synchronizer"]]
             - [setPaymentMethodSynchronizer, ["@dandomain_foundation.payment_method_synchronizer"]]
+            - [setShippingMethodSynchronizer, ["@dandomain_foundation.shipping_method_synchronizer"]]
 
     dandomain_foundation.payment_method_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\PaymentMethodSynchronizer
@@ -45,3 +46,10 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.payment_method_class%"
+
+    dandomain_foundation.shipping_method_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\ShippingMethodSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.shipping_method_class%"

@@ -35,7 +35,7 @@ class PaymentMethodSynchronizer extends Synchronizer
             'externalId' => $paymentMethod->id,
         ]);
 
-        if (!$entity) {
+        if (!($entity)) {
             $entity = new $this->entityClassName();
         }
 
