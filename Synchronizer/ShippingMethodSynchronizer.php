@@ -21,11 +21,10 @@ class ShippingMethodSynchronizer extends Synchronizer
      *
      * @param array $shippingMethod
      * @param bool  $flush
-     * @param ShippingMethodInterface  $shippingMethodEntity
      *
      * @return ShippingMethodInterface
      */
-    public function syncShippingMethod($shippingMethod, $flush = true, $shippingMethodEntity = null)
+    public function syncShippingMethod($shippingMethod, $flush = true)
     {
         if (is_numeric($shippingMethod)) {
             $shippingMethod = \GuzzleHttp\json_decode($this->api->settings->getShippingMethods($shippingMethod)->getBody()->getContents());

@@ -2,42 +2,51 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
-use Loevgaard\DandomainFoundationBundle\Model\State;
+use Loevgaard\DandomainFoundationBundle\Model\StateInterface;
 
 class StateSynchronizer extends Synchronizer
 {
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\StateInterface';
-
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\State';
 
-    public function syncStates($flush = true)
+    /**
+     * @var string
+     */
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\StateInterface';
+
+    /**
+     * Synchronizes State.
+     *
+     * @param array $state
+     * @param bool  $flush
+     *
+     * @return StateInterface
+     */
+    public function syncState($state, $flush = true)
     {
-        $states = \GuzzleHttp\json_decode($this->api->settings->getSites()->getBody()->getContents());
+        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+            'externalId' => $state->id,
+        ]);
 
-        /** @var StateManager $manager */
-        $manager = $this->objectManager->getRepository($this->entityClassName);
-
-        foreach ($states as $state) {
-            /** @var State $entity */
-            $entity = $manager->findStateByExternalId($state->id);
-
-            if (!$entity) {
-                $entity = new $this->entityClassName();
-                $entity->setExternalId($state->id);
-                $this->objectManager->persist($entity);
-            }
-
-            $entity
-                ->setExclStatistics($state->exclStatistics)
-                ->setDefault($state->isDefault)
-                ->setName($state->name)
-                ;
-
-            if ($flush) {
-                $this->objectManager->flush();
-            }
+        if (!($entity)) {
+            $entity = new $this->entityClassName();
         }
+
+        $entity
+            ->setExternalId($state->id)
+            ->setExclStatistics($state->exclStatistics)
+            ->setIsDefault($state->isDefault)
+            ->setName($state->name)
+        ;
+
+        $this->objectManager->persist($entity);
+
+        if (true === $flush) {
+            $this->objectManager->flush();
+        }
+
+        return $entity;
     }
 }

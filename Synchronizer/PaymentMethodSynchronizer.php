@@ -21,11 +21,10 @@ class PaymentMethodSynchronizer extends Synchronizer
      *
      * @param array $paymentMethod
      * @param bool  $flush
-     * @param PaymentMethodInterface  $paymentMethodEntity
      *
      * @return PaymentMethodInterface
      */
-    public function syncPaymentMethod($paymentMethod, $flush = true, $paymentMethodEntity = null)
+    public function syncPaymentMethod($paymentMethod, $flush = true)
     {
         if (is_numeric($paymentMethod)) {
             $paymentMethod = \GuzzleHttp\json_decode($this->api->settings->getPaymentMethods($paymentMethod)->getBody()->getContents());

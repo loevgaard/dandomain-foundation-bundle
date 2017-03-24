@@ -47,6 +47,11 @@ class OrderSynchronizer extends Synchronizer
     protected $siteSynchronizer;
 
     /**
+     * @var StateSynchronizer
+     */
+    protected $stateSynchronizer;
+
+    /**
      * Set CustomerSynchronizer.
      *
      * @param CustomerSynchronizer $customerSynchronizer
@@ -131,6 +136,20 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
+     * Set StateSynchronizer.
+     *
+     * @param StateSynchronizer $stateSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setStateSynchronizer(StateSynchronizer $stateSynchronizer)
+    {
+        $this->stateSynchronizer = $stateSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Synchronizes Order.
      *
      * @param array $order
@@ -148,27 +167,10 @@ class OrderSynchronizer extends Synchronizer
             'externalId' => $order->id,
         ]);
 
-        if (!$entity) {
+        if (!($entity)) {
             $entity = new $this->entityClassName();
         }
-/*
-        // get order state
-        $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\State');
-        $state = $stateManager->findStateByExternalId($order->orderState->id);
-        if (!$state) {
-            $this->getStateSynchronizer()->syncStates();
-            $state = $stateManager->findStateByExternalId($order->orderState->id);
 
-            if (!$state) {
-                $result
-                    ->addMessage('The state id '.$order->orderState->id.' does not exist anymore')
-                    ->setError(true)
-                ;
-
-                return $result;
-            }
-        }
-*/
         $createdDate = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
 
@@ -220,14 +222,17 @@ class OrderSynchronizer extends Synchronizer
         $invoice = $this->invoiceSynchronizer->syncInvoice($order->invoiceInfo, $flush, $entity->getInvoice());
         $entity->setInvoice($invoice);
 
-        $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, $flush, $entity->getPaymentMethod());
+        $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, $flush);
         $entity->setPaymentMethod($paymentMethod);
 
-        $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, $flush, $entity->getShippingMethod());
+        $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, $flush);
         $entity->setShippingMethod($shippingMethod);
 
         $site = $this->siteSynchronizer->syncSite($order->siteId, false);
         $entity->setSite($site);
+
+        $state = $this->stateSynchronizer->syncState($order->orderState, $flush);
+        $entity->setState($state);
 
 /*
         if ($syncProducts) {
