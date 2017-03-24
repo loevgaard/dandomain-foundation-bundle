@@ -42,6 +42,11 @@ class OrderSynchronizer extends Synchronizer
     protected $shippingMethodSynchronizer;
 
     /**
+     * @var SiteSynchronizer
+     */
+    protected $siteSynchronizer;
+
+    /**
      * Set CustomerSynchronizer.
      *
      * @param CustomerSynchronizer $customerSynchronizer
@@ -112,6 +117,20 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
+     * Set SiteSynchronizer.
+     *
+     * @param SiteSynchronizer $siteSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setSiteSynchronizer(SiteSynchronizer $siteSynchronizer)
+    {
+        $this->siteSynchronizer = $siteSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Synchronizes Order.
      *
      * @param array $order
@@ -132,25 +151,7 @@ class OrderSynchronizer extends Synchronizer
         if (!$entity) {
             $entity = new $this->entityClassName();
         }
-
 /*
-        // get site / language
-        $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\Site');
-        $site = $siteManager->findSiteByExternalId($order->siteId);
-        if (!$site) {
-            $this->getSiteSynchronizer()->syncSites();
-            $site = $siteManager->findSiteByExternalId($order->siteId);
-
-            if (!$site) {
-                $result
-                    ->addMessage('The site id '.$order->siteId.' does not exist anymore')
-                    ->setError(true)
-                ;
-
-                return $result;
-            }
-        }
-
         // get order state
         $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\State');
         $state = $stateManager->findStateByExternalId($order->orderState->id);
@@ -224,6 +225,9 @@ class OrderSynchronizer extends Synchronizer
 
         $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, $flush, $entity->getShippingMethod());
         $entity->setShippingMethod($shippingMethod);
+
+        $site = $this->siteSynchronizer->syncSite($order->siteId, false);
+        $entity->setSite($site);
 
 /*
         if ($syncProducts) {

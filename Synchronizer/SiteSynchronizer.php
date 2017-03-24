@@ -27,28 +27,30 @@ class SiteSynchronizer extends Synchronizer
     public function syncSite($site, $flush = true)
     {
         if (is_numeric($site)) {
-            $site = \GuzzleHttp\json_decode($this->api->site->getSite($site)->getBody()->getContents());
-        }
+            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                'externalId' => $site,
+            ]);
+        } else {
+            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                'externalId' => $site->id,
+            ]);
 
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $site->id,
-        ]);
+            if (!($entity)) {
+                $entity = new $this->entityClassName();
+            }
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-        }
+            $entity
+                ->setExternalId($site->id)
+                ->setCountryId($site->countryId)
+                ->setCurrencyCode($site->currencyCode)
+                ->setName($site->name)
+            ;
 
-        $entity
-            ->setExternalId($site->id)
-            ->setCountryId($site->countryId)
-            ->setCurrencyCode($site->currencyCode)
-            ->setName($site->name)
-        ;
+            $this->objectManager->persist($entity);
 
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush();
+            if (true === $flush) {
+                $this->objectManager->flush();
+            }
         }
 
         return $entity;

@@ -39,6 +39,7 @@ services:
             - [setInvoiceSynchronizer, ["@dandomain_foundation.invoice_synchronizer"]]
             - [setPaymentMethodSynchronizer, ["@dandomain_foundation.payment_method_synchronizer"]]
             - [setShippingMethodSynchronizer, ["@dandomain_foundation.shipping_method_synchronizer"]]
+            - [setSiteSynchronizer, ["@dandomain_foundation.site_synchronizer"]]
 
     dandomain_foundation.payment_method_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\PaymentMethodSynchronizer
