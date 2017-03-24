@@ -29,6 +29,7 @@ class OrderService
      *
      * @param Api           $api
      * @param EntityManager $em
+     * @param OrderSynchronizer $orderSynchronizer
      */
     public function __construct(Api $api, EntityManager $em, OrderSynchronizer $orderSynchronizer)
     {

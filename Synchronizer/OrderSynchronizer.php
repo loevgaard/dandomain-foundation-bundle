@@ -121,8 +121,6 @@ class OrderSynchronizer extends Synchronizer
      */
     public function syncOrder($order, $flush = true)
     {
-        //        $result = new Result();
-
         if (is_numeric($order)) {
             $order = \GuzzleHttp\json_decode($this->api->order->getOrder($order)->getBody()->getContents());
         }
@@ -212,19 +210,19 @@ class OrderSynchronizer extends Synchronizer
             $entity->setModifiedDate($modifiedDate);
         }
 
-        $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, true);
+        $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, $flush);
         $entity->setCustomer($customer);
 
-        $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, true, $entity->getDelivery());
+        $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, $flush, $entity->getDelivery());
         $entity->setDelivery($delivery);
 
-        $invoice = $this->invoiceSynchronizer->syncInvoice($order->invoiceInfo, true, $entity->getInvoice());
+        $invoice = $this->invoiceSynchronizer->syncInvoice($order->invoiceInfo, $flush, $entity->getInvoice());
         $entity->setInvoice($invoice);
 
-        $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, true, $entity->getPaymentMethod());
+        $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, $flush, $entity->getPaymentMethod());
         $entity->setPaymentMethod($paymentMethod);
 
-        $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, true, $entity->getShippingMethod());
+        $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, $flush, $entity->getShippingMethod());
         $entity->setShippingMethod($shippingMethod);
 
 /*
@@ -269,6 +267,5 @@ class OrderSynchronizer extends Synchronizer
         }
 
         return $entity;
-//        return $result;
     }
 }

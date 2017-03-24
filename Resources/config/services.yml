@@ -53,3 +53,17 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.shipping_method_class%"
+
+    dandomain_foundation.site_service:
+        class: Loevgaard\DandomainFoundationBundle\Service\SiteService
+        arguments:
+            - "@dandomain.api"
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain_foundation.site_synchronizer"
+
+    dandomain_foundation.site_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.site_class%"
