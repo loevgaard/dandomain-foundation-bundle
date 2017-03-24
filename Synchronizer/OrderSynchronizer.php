@@ -2,9 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Manager\SiteManager;
-use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
-use Loevgaard\DandomainFoundationBundle\Model\Order;
+use Loevgaard\DandomainFoundationBundle\Model\OrderInterface;
 
 class OrderSynchronizer extends Synchronizer
 {
@@ -17,11 +15,6 @@ class OrderSynchronizer extends Synchronizer
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
-
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     /**
      * Set CustomerSynchronizer.
@@ -37,9 +30,17 @@ class OrderSynchronizer extends Synchronizer
         return $this;
     }
 
+    /**
+     * Synchronizes Order.
+     *
+     * @param array $order
+     * @param bool  $flush
+     *
+     * @return OrderInterface
+     */
     public function syncOrder($order, $flush = true)
     {
-//        $result = new Result();
+        //        $result = new Result();
 
         if (is_numeric($order)) {
             $order = \GuzzleHttp\json_decode($this->api->order->getOrder($order)->getBody()->getContents());
@@ -142,6 +143,7 @@ class OrderSynchronizer extends Synchronizer
         if (null !== $modifiedDate) {
             $entity->setModifiedDate($modifiedDate);
         }
+
         $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, true);
         $entity->setCustomer($customer);
 

@@ -2,9 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Manager\SiteManager;
-use Loevgaard\DandomainFoundationBundle\Manager\StateManager;
-use Loevgaard\DandomainFoundationBundle\Model\Order;
+use Loevgaard\DandomainFoundationBundle\Model\CustomerInterface;
 
 class CustomerSynchronizer extends Synchronizer
 {
@@ -14,10 +12,13 @@ class CustomerSynchronizer extends Synchronizer
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Customer';
 
     /**
-     * @var string
+     * Synchronizes Customer.
+     *
+     * @param array $customer
+     * @param bool  $flush
+     *
+     * @return CustomerInterface
      */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\CustomerInterface';
-
     public function syncCustomer($customer, $flush = true)
     {
         if (is_numeric($customer)) {
