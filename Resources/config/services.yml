@@ -37,3 +37,11 @@ services:
             - [setCustomerSynchronizer, ["@dandomain_foundation.customer_synchronizer"]]
             - [setDeliverySynchronizer, ["@dandomain_foundation.delivery_synchronizer"]]
             - [setInvoiceSynchronizer, ["@dandomain_foundation.invoice_synchronizer"]]
+            - [setPaymentMethodSynchronizer, ["@dandomain_foundation.payment_method_synchronizer"]]
+
+    dandomain_foundation.payment_method_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\PaymentMethodSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.payment_method_class%"

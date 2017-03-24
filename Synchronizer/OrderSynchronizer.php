@@ -32,6 +32,11 @@ class OrderSynchronizer extends Synchronizer
     protected $invoiceSynchronizer;
 
     /**
+     * @var PaymentMethodSynchronizer
+     */
+    protected $paymentMethodSynchronizer;
+
+    /**
      * Set CustomerSynchronizer.
      *
      * @param CustomerSynchronizer $customerSynchronizer
@@ -69,6 +74,20 @@ class OrderSynchronizer extends Synchronizer
     public function setInvoiceSynchronizer(InvoiceSynchronizer $invoiceSynchronizer)
     {
         $this->invoiceSynchronizer = $invoiceSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set PaymentMethodSynchronizer.
+     *
+     * @param PaymentMethodSynchronizer $paymentMethodSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setPaymentMethodSynchronizer(PaymentMethodSynchronizer $paymentMethodSynchronizer)
+    {
+        $this->paymentMethodSynchronizer = $paymentMethodSynchronizer;
 
         return $this;
     }
@@ -196,6 +215,9 @@ class OrderSynchronizer extends Synchronizer
 
         $invoice = $this->invoiceSynchronizer->syncInvoice($order->invoiceInfo, true, $entity->getInvoice());
         $entity->setInvoice($invoice);
+
+        $paymentMethod = $this->paymentMethodSynchronizer->syncPaymentMethod($order->paymentInfo, true, $entity->getPaymentMethod());
+        $entity->setPaymentMethod($paymentMethod);
 
 /*
         if ($syncProducts) {
