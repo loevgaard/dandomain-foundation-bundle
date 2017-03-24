@@ -6,6 +6,13 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.customer_class%"
 
+    dandomain_foundation.delivery_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\DeliverySynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.delivery_class%"
+
     dandomain_foundation.order_service:
         class: Loevgaard\DandomainFoundationBundle\Service\OrderService
         arguments:
@@ -21,3 +28,4 @@ services:
             - "%loevgaard_dandomain_foundation.order_class%"
         calls:
             - [setCustomerSynchronizer, ["@dandomain_foundation.customer_synchronizer"]]
+            - [setDeliverySynchronizer, ["@dandomain_foundation.delivery_synchronizer"]]

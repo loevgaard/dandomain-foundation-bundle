@@ -5,22 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface DeliveryInterface
 {
     /**
-     * Get attention.
-     *
-     * @return string
-     */
-    public function getAttention();
-
-    /**
-     * Set attention.
-     *
-     * @param string $attention
-     *
-     * @return DeliveryInterface
-     */
-    public function setAttention($attention);
-
-    /**
      * Get address.
      *
      * @return string
@@ -51,6 +35,22 @@ interface DeliveryInterface
      * @return DeliveryInterface
      */
     public function setAddress2($address2);
+
+    /**
+     * Get attention.
+     *
+     * @return string
+     */
+    public function getAttention();
+
+    /**
+     * Set attention.
+     *
+     * @param string $attention
+     *
+     * @return DeliveryInterface
+     */
+    public function setAttention($attention);
 
     /**
      * Get city.

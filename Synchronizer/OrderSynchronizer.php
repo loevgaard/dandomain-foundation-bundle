@@ -12,9 +12,19 @@ class OrderSynchronizer extends Synchronizer
     protected $customerSynchronizer;
 
     /**
+     * @var DeliverySynchronizer
+     */
+    protected $deliverySynchronizer;
+
+    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Order';
+
+    /**
+     * @var string
+     */
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     /**
      * Set CustomerSynchronizer.
@@ -26,6 +36,20 @@ class OrderSynchronizer extends Synchronizer
     public function setCustomerSynchronizer(CustomerSynchronizer $customerSynchronizer)
     {
         $this->customerSynchronizer = $customerSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set DeliverySynchronizer.
+     *
+     * @param DeliverySynchronizer $deliverySynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setDeliverySynchronizer(DeliverySynchronizer $deliverySynchronizer)
+    {
+        $this->deliverySynchronizer = $deliverySynchronizer;
 
         return $this;
     }
@@ -147,6 +171,9 @@ class OrderSynchronizer extends Synchronizer
         $customer = $this->customerSynchronizer->syncCustomer($order->customerInfo, true);
         $entity->setCustomer($customer);
 
+        $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, true);
+        $entity->setDelivery($delivery);
+
 /*
         if ($syncProducts) {
             $productNumbers = array();
@@ -184,7 +211,7 @@ class OrderSynchronizer extends Synchronizer
 
         $this->objectManager->persist($entity);
 
-        if ($flush) {
+        if (true === $flush) {
             $this->objectManager->flush();
         }
 

@@ -19,13 +19,6 @@ abstract class Delivery implements DeliveryInterface
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $attention;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
     protected $address;
 
     /**
@@ -34,6 +27,13 @@ abstract class Delivery implements DeliveryInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $address2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $attention;
 
     /**
      * @var string
@@ -115,24 +115,6 @@ abstract class Delivery implements DeliveryInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttention()
-    {
-        return $this->attention;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAttention($attention)
-    {
-        $this->attention = $attention;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAddress()
     {
         return $this->address;
@@ -162,6 +144,24 @@ abstract class Delivery implements DeliveryInterface
     public function setAddress2($address2)
     {
         $this->address2 = $address2;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttention()
+    {
+        return $this->attention;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAttention($attention)
+    {
+        $this->attention = $attention;
 
         return $this;
     }

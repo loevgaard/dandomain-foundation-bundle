@@ -12,6 +12,11 @@ class CustomerSynchronizer extends Synchronizer
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Customer';
 
     /**
+     * @var string
+     */
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\CustomerInterface';
+
+    /**
      * Synchronizes Customer.
      *
      * @param array $customer
@@ -51,7 +56,7 @@ class CustomerSynchronizer extends Synchronizer
 
         $this->objectManager->persist($entity);
 
-        if ($flush) {
+        if (true === $flush) {
             $this->objectManager->flush();
         }
 
