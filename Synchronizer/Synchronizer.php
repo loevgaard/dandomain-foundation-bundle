@@ -9,25 +9,39 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Synchronizer implements SynchronizerInterface
 {
-    /** @var ObjectManager */
+    /**
+     * @var ObjectManager
+     */
     protected $objectManager;
 
-    /** @var DandomainApi */
+    /**
+     *@var DandomainApi
+     */
     protected $api;
 
-    /** @var OutputInterface */
+    /**
+     * @var OutputInterface
+     */
     protected $output;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $entityInterfaceName;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $entityClassName;
 
-    /** @var SiteSynchronizer */
+    /**
+     * @var SiteSynchronizer
+     */
     protected $siteSynchronizer;
 
-    /** @var StateSynchronizer */
+    /**
+     * @var StateSynchronizer
+     */
     protected $stateSynchronizer;
 
     /**

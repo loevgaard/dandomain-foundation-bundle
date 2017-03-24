@@ -37,9 +37,8 @@ class OrderSynchronizer extends Synchronizer
         // extract created date
         $created = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $created->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
-
+/*
         // get site / language
-        /** @var SiteManager $siteManager */
         $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\Site');
         $site = $siteManager->findSiteByExternalId($order->siteId);
         if (!$site) {
@@ -57,7 +56,6 @@ class OrderSynchronizer extends Synchronizer
         }
 
         // get order state
-        /** @var StateManager $stateManager */
         $stateManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\State');
         $state = $stateManager->findStateByExternalId($order->orderState->id);
         if (!$state) {
@@ -73,7 +71,7 @@ class OrderSynchronizer extends Synchronizer
                 return $result;
             }
         }
-
+*/
         /*
         // get payment method
         $paymentMethod = $this->objectManager->getRepository('EhandelCoreBundle:PaymentMethod')->findOneBy(array('externalId' => (int)$order->paymentInfo->id));
