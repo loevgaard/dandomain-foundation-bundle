@@ -85,8 +85,12 @@ class OrderSynchronizer extends Synchronizer
 
         $createdDate = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
-        $modifiedDate = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
-        $modifiedDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        if ($order->modifiedDate) {
+            $modifiedDate = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
+            $modifiedDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $modifiedDate = null;
+        }
 
         $entity
             ->setExternalId($order->id)
@@ -99,7 +103,6 @@ class OrderSynchronizer extends Synchronizer
             ->setIncomplete($order->incomplete)
             ->setIp($order->ip)
             ->setModified($order->modified)
-            ->setModifiedDate($modifiedDate)
             ->setReferenceNumber($order->referenceNumber)
             ->setReferrer($order->referrer)
             ->setReservedField1($order->reservedField1)
@@ -116,6 +119,11 @@ class OrderSynchronizer extends Synchronizer
             ->setVatRegNumber($order->vatRegNumber)
             ->setXmlParams($order->xmlParams)
         ;
+
+        if (null !== $modifiedDate) {
+            $entity->setModifiedDate($modifiedDate);
+        }
+
 /*
         if ($syncProducts) {
             $productNumbers = array();
