@@ -228,7 +228,7 @@ class OrderSynchronizer extends Synchronizer
         $shippingMethod = $this->shippingMethodSynchronizer->syncShippingMethod($order->shippingInfo, $flush);
         $entity->setShippingMethod($shippingMethod);
 
-        $site = $this->siteSynchronizer->syncSite($order->siteId, false);
+        $site = $this->siteSynchronizer->syncSite($order->siteId, $flush);
         $entity->setSite($site);
 
         $state = $this->stateSynchronizer->syncState($order->orderState, $flush);

@@ -19,9 +19,9 @@ class DeliverySynchronizer extends Synchronizer
     /**
      * Synchronizes Delivery.
      *
-     * @param array $delivery
-     * @param bool  $flush
-     * @param DeliveryInterface  $deliveryEntity
+     * @param array             $delivery
+     * @param bool              $flush
+     * @param DeliveryInterface $deliveryEntity
      *
      * @return DeliveryInterface
      */

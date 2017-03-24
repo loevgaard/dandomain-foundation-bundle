@@ -27,8 +27,8 @@ class SiteService
     /**
      * Constructor.
      *
-     * @param Api           $api
-     * @param EntityManager $em
+     * @param Api              $api
+     * @param EntityManager    $em
      * @param SiteSynchronizer $siteSynchronizer
      */
     public function __construct(Api $api, EntityManager $em, SiteSynchronizer $siteSynchronizer)

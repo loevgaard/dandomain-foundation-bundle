@@ -19,9 +19,9 @@ class InvoiceSynchronizer extends Synchronizer
     /**
      * Synchronizes Invoice.
      *
-     * @param array $invoice
-     * @param bool  $flush
-     * @param InvoiceInterface  $invoiceEntity
+     * @param array            $invoice
+     * @param bool             $flush
+     * @param InvoiceInterface $invoiceEntity
      *
      * @return InvoiceInterface
      */
