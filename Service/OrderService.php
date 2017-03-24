@@ -48,6 +48,7 @@ class OrderService
 
         foreach ($orders as $order) {
             $this->orderSynchronizer->syncOrder($order, true);
+            throw new \Exception('aaa');
         }
     }
 }

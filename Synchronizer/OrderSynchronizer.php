@@ -34,9 +34,6 @@ class OrderSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
-        // extract created date
-        $created = \Dandomain\Api\jsonDateToDate($order->createdDate);
-        $created->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
 /*
         // get site / language
         $siteManager = $this->objectManager->getRepository('Loevgaard\DandomainFoundationBundle\Model\Site');
@@ -86,25 +83,48 @@ class OrderSynchronizer extends Synchronizer
         }
         */
 
+        $createdDate = \Dandomain\Api\jsonDateToDate($order->createdDate);
+        $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        $modifiedDate = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
+        $modifiedDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+
         $entity
             ->setExternalId($order->id)
+            ->setComment($order->comment)
+            ->setCreatedDate($createdDate)
+            ->setCurrencyCode($order->currencyCode)
+            ->setCustomerComment($order->customerComment)
+            ->setGiftCertificateAmount($order->giftCertificateAmount)
+            ->setGiftCertificateNumber($order->giftCertificateNumber)
+            ->setIncomplete($order->incomplete)
+            ->setIp($order->ip)
+            ->setModified($order->modified)
+            ->setModifiedDate($modifiedDate)
+            ->setReferenceNumber($order->referenceNumber)
+            ->setReferrer($order->referrer)
+            ->setReservedField1($order->reservedField1)
+            ->setReservedField2($order->reservedField2)
+            ->setReservedField3($order->reservedField3)
+            ->setReservedField4($order->reservedField4)
+            ->setReservedField5($order->reservedField5)
+/*
             //->setLanguage($language)
             //->setOrderState($orderState)
             ->setCurrencyCode($order->currencyCode)
             ->setTotalPrice($order->totalPrice)
-            ->setVat($order->vatPct)
-            ->setDate($created)
+            ->setVatPct($order->vatPct)
+            ->setCreatedDate($created)
             ->setTrackingNumber($order->trackingNumber)
             ->setTransactionNumber($order->transactionNumber)
             //->setShippingMethod($shippingMethod)
-            ->setShippingMethodId($order->shippingInfo->id)
-            ->setShippingMethodName($order->shippingInfo->name)
-            ->setShippingMethodFee($order->shippingInfo->fee)
+            //->setShippingMethodId($order->shippingInfo->id)
+            //->setShippingMethodName($order->shippingInfo->name)
+            //->setShippingMethodFee($order->shippingInfo->fee)
             //->setPaymentMethod($paymentMethod)
-            ->setPaymentMethodId($order->paymentInfo->id)
-            ->setPaymentMethodName($order->paymentInfo->name)
-            ->setPaymentMethodFee($order->paymentInfo->fee)
-            ->setReferrer($order->referrer)
+            //->setPaymentMethodId($order->paymentInfo->id)
+            //->setPaymentMethodName($order->paymentInfo->name)
+            //->setPaymentMethodFee($order->paymentInfo->fee)
+            //->setReferrer($order->referrer)
             ->setIpAddress($order->ip)
             ->setGiftCertificatePurchaseAmount($order->giftCertificateAmount)
 
@@ -126,6 +146,7 @@ class OrderSynchronizer extends Synchronizer
             ->setDeliveryCountry($order->deliveryInfo->country)
             ->setDeliveryPhone($order->deliveryInfo->phone)
             ->setDeliveryEmail($order->deliveryInfo->email)
+*/
         ;
 
         //$entity->clearOrderLines();
