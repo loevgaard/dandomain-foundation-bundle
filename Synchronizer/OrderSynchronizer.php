@@ -107,50 +107,16 @@ class OrderSynchronizer extends Synchronizer
             ->setReservedField3($order->reservedField3)
             ->setReservedField4($order->reservedField4)
             ->setReservedField5($order->reservedField5)
-/*
-            //->setLanguage($language)
-            //->setOrderState($orderState)
-            ->setCurrencyCode($order->currencyCode)
+            ->setSalesDiscount($order->salesDiscount)
             ->setTotalPrice($order->totalPrice)
-            ->setVatPct($order->vatPct)
-            ->setCreatedDate($created)
+            ->setTotalWeight($order->totalWeight)
             ->setTrackingNumber($order->trackingNumber)
             ->setTransactionNumber($order->transactionNumber)
-            //->setShippingMethod($shippingMethod)
-            //->setShippingMethodId($order->shippingInfo->id)
-            //->setShippingMethodName($order->shippingInfo->name)
-            //->setShippingMethodFee($order->shippingInfo->fee)
-            //->setPaymentMethod($paymentMethod)
-            //->setPaymentMethodId($order->paymentInfo->id)
-            //->setPaymentMethodName($order->paymentInfo->name)
-            //->setPaymentMethodFee($order->paymentInfo->fee)
-            //->setReferrer($order->referrer)
-            ->setIpAddress($order->ip)
-            ->setGiftCertificatePurchaseAmount($order->giftCertificateAmount)
-
-            // customer fields
-            ->setCustomerId($order->customerInfo->id)
-            ->setCustomerName($order->customerInfo->attention)
-            ->setCustomerAddress($order->customerInfo->address)
-            ->setCustomerZipCode($order->customerInfo->zipCode)
-            ->setCustomerCity($order->customerInfo->city)
-            ->setCustomerCountry($order->customerInfo->country)
-            ->setCustomerPhone($order->customerInfo->phone)
-            ->setCustomerEmail($order->customerInfo->email)
-
-            // delivery fields
-            ->setDeliveryName($order->deliveryInfo->attention)
-            ->setDeliveryAddress($order->deliveryInfo->address)
-            ->setDeliveryZipCode($order->deliveryInfo->zipCode)
-            ->setDeliveryCity($order->deliveryInfo->city)
-            ->setDeliveryCountry($order->deliveryInfo->country)
-            ->setDeliveryPhone($order->deliveryInfo->phone)
-            ->setDeliveryEmail($order->deliveryInfo->email)
-*/
+            ->setVatPct($order->vatPct)
+            ->setVatRegNumber($order->vatRegNumber)
+            ->setXmlParams($order->xmlParams)
         ;
-
-        //$entity->clearOrderLines();
-
+/*
         if ($syncProducts) {
             $productNumbers = array();
             foreach ($order->orderLines as $orderLine) {
@@ -159,7 +125,7 @@ class OrderSynchronizer extends Synchronizer
 
             //$this->syncProductsFromProductNumbers($productNumbers, false, $flush);
         }
-
+*/
         /*
         foreach($order->orderLines as $orderLine) {
             $product = $this->objectManager->getRepository('EhandelCoreBundle:Product')->findOneBy(array('productNumber' => (string)$orderLine->productId));
