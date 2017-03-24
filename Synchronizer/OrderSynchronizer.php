@@ -27,6 +27,11 @@ class OrderSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderInterface';
 
     /**
+     * @var InvoiceSynchronizer
+     */
+    protected $invoiceSynchronizer;
+
+    /**
      * Set CustomerSynchronizer.
      *
      * @param CustomerSynchronizer $customerSynchronizer
@@ -50,6 +55,20 @@ class OrderSynchronizer extends Synchronizer
     public function setDeliverySynchronizer(DeliverySynchronizer $deliverySynchronizer)
     {
         $this->deliverySynchronizer = $deliverySynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set InvoiceSynchronizer.
+     *
+     * @param InvoiceSynchronizer $invoiceSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setInvoiceSynchronizer(InvoiceSynchronizer $invoiceSynchronizer)
+    {
+        $this->invoiceSynchronizer = $invoiceSynchronizer;
 
         return $this;
     }
@@ -129,6 +148,7 @@ class OrderSynchronizer extends Synchronizer
 
         $createdDate = \Dandomain\Api\jsonDateToDate($order->createdDate);
         $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+
         if ($order->modifiedDate) {
             $modifiedDate = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
             $modifiedDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
@@ -173,6 +193,9 @@ class OrderSynchronizer extends Synchronizer
 
         $delivery = $this->deliverySynchronizer->syncDelivery($order->deliveryInfo, true, $entity->getDelivery());
         $entity->setDelivery($delivery);
+
+        $invoice = $this->invoiceSynchronizer->syncInvoice($order->invoiceInfo, true, $entity->getInvoice());
+        $entity->setInvoice($invoice);
 
 /*
         if ($syncProducts) {
