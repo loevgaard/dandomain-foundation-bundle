@@ -32,6 +32,11 @@ class OrderSynchronizer extends Synchronizer
     protected $invoiceSynchronizer;
 
     /**
+     * @var OrderLineSynchronizer
+     */
+    protected $orderLineSynchronizer;
+
+    /**
      * @var PaymentMethodSynchronizer
      */
     protected $paymentMethodSynchronizer;
@@ -89,6 +94,20 @@ class OrderSynchronizer extends Synchronizer
     public function setInvoiceSynchronizer(InvoiceSynchronizer $invoiceSynchronizer)
     {
         $this->invoiceSynchronizer = $invoiceSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set OrderLineSynchronizer.
+     *
+     * @param OrderLineSynchronizer $orderLineSynchronizer
+     *
+     * @return OrderSynchronizer
+     */
+    public function setOrderLineSynchronizer(OrderLineSynchronizer $orderLineSynchronizer)
+    {
+        $this->orderLineSynchronizer = $orderLineSynchronizer;
 
         return $this;
     }
@@ -234,45 +253,15 @@ class OrderSynchronizer extends Synchronizer
         $state = $this->stateSynchronizer->syncState($order->orderState, $flush);
         $entity->setState($state);
 
-/*
-        if ($syncProducts) {
-            $productNumbers = array();
-            foreach ($order->orderLines as $orderLine) {
-                $productNumbers[] = $orderLine->productId;
-            }
-
-            //$this->syncProductsFromProductNumbers($productNumbers, false, $flush);
-        }
-*/
-        /*
-        foreach($order->orderLines as $orderLine) {
-            $product = $this->objectManager->getRepository('EhandelCoreBundle:Product')->findOneBy(array('productNumber' => (string)$orderLine->productId));
-
-            $orderLineEntity = new OrderLine();
-            $orderLineEntity->setAmount($orderLine->quantity)
-                ->setProductNumber($orderLine->productId)
-                ->setUnitPrice($orderLine->unitPrice)
-                ->setTotalPrice($orderLine->totalPrice)
-                ->setProductName($orderLine->productName)
-                ->setVat((int)$orderLine->vatPct)
-            ;
-            if($product) {
-                $orderLineEntity->setProduct($product)
-                    ->setLocationNumber($product->getLocationNumber())
-                    ->setLocationNumberSortColumn($product->getLocationNumberSortColumn())
-                    ->setLocationNumberSortRow($product->getLocationNumberSortRow())
-                    ->setImage($product->getImage())
-                    ->setLeftInStock($product->getStock())
-                ;
-            }
-            $entity->addOrderLine($orderLineEntity);
-        }
-        */
-
         $this->objectManager->persist($entity);
 
         if (true === $flush) {
             $this->objectManager->flush();
+        }
+
+        foreach($order->orderLines as $orderLineData) {
+            $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $flush, $entity);
+            $entity->addOrderLine($orderLine);
         }
 
         return $entity;
