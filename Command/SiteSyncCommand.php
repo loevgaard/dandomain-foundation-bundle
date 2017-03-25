@@ -3,11 +3,14 @@
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SiteSyncCommand extends ContainerAwareCommand
 {
+    use LockableTrait;
+
     protected function configure()
     {
         $this
@@ -18,6 +21,14 @@ class SiteSyncCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!($this->lock())) {
+            $output->writeln('The command is already running in another process.');
+
+            return 0;
+        }
+
         $this->getContainer()->get('dandomain_foundation.site_service')->siteSync();
+
+        $this->release();
     }
 }

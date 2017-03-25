@@ -40,12 +40,21 @@ class OrderService
 
     /**
      * Synchronizates orders.
+     *
+     * @param string               $end
+     * @param string     $start
      */
-    public function orderSync()
+    public function orderSync($end = null, $start = null)
     {
-        $from = new \DateTime('2017-03-01');
-        $to = new \DateTime();
-        $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($from, $to)->getBody()->getContents());
+        if (null !== $end) {
+            $end = new \DateTime();
+        }
+        if (null !== $start) {
+            $start = new \DateTime($start);
+        }
+var_dump($start);
+var_dump($end);
+        $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($start, $end)->getBody()->getContents());
 var_dump(count($orders));
         foreach ($orders as $order) {
             $this->orderSynchronizer->syncOrder($order, true);
