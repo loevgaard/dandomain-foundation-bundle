@@ -43,10 +43,10 @@ class OrderService
      */
     public function orderSync()
     {
-        $from = new \DateTime('20017-01-01');
+        $from = new \DateTime('2017-03-01');
         $to = new \DateTime();
-        $orders = GuzzleHttp\json_decode($this->api->order->getOrders($from, $to)->getBody()->getContents());
-
+        $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($from, $to)->getBody()->getContents());
+var_dump(count($orders));
         foreach ($orders as $order) {
             $this->orderSynchronizer->syncOrder($order, true);
             throw new \Exception('aaa');
