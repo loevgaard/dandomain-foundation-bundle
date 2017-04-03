@@ -26,6 +26,7 @@ services:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
             - "@dandomain_foundation.order_synchronizer"
+            - "@kernel"
 
     dandomain_foundation.order_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer

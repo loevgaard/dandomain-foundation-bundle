@@ -6,23 +6,34 @@ use Dandomain\Api\Api;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
+use AppKernel;
 
 class OrderService
 {
     /**
      * @var Api
      */
-    protected $api;
+    private $api;
 
     /**
      * @var EntityManager
      */
-    protected $em;
+    private $em;
+
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
 
     /**
      * @var OrderSynchronizer
      */
-    protected $orderSynchronizer;
+    private $orderSynchronizer;
+
+    /**
+     * @var string
+     */
+    protected $settingsFile;
 
     /**
      * Constructor.
@@ -31,42 +42,51 @@ class OrderService
      * @param EntityManager     $em
      * @param OrderSynchronizer $orderSynchronizer
      */
-    public function __construct(Api $api, EntityManager $em, OrderSynchronizer $orderSynchronizer)
+    public function __construct(Api $api, EntityManager $em, OrderSynchronizer $orderSynchronizer, AppKernel $kernel)
     {
         $this->api = $api;
         $this->em = $em;
+        $this->kernel = $kernel;
         $this->orderSynchronizer = $orderSynchronizer;
+        $this->settingsFile = $kernel->getCacheDir().'/dandomain-foundation-order-sync.cache';
     }
 
     /**
      * Synchronizates orders.
      *
-     * @param string $end
-     * @param string $start
+     * @param string               $end
+     * @param string     $start
      */
     public function orderSync($end = null, $start = null)
     {
-        if (null !== $end) {
-            $end = new \DateTime();
-        }
+        $settings = unserialize(@file_get_contents($this->settingsFile));
+
         if (null !== $start) {
             $start = new \DateTime($start);
-        }
-
-        if (null === $end) {
+            $start->setTime(0, 0, 0);
+        } elseif (($settings) and array_key_exists('end', $settings)) {
+            $start = $settings['end'];
+        } else {
         
         }
-        //$start->setTime(0, 0, 0);
-        //$end->setTime(23, 59, 59);
+
+
+        if (null !== $end) {
+            $end = new \DateTime($end);
+        } elseif ($start instanceof \DateTime) {
+            $end = clone($start);
+            $end = $end->add(new \DateInterval('P7D'));
+        }
+
 var_dump($start);
 var_dump($end);
-/*
         $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($start, $end)->getBody()->getContents());
 var_dump(count($orders));
+        file_put_contents($this->settingsFile, serialize(['end' => $end, 'start' => $start]));
         foreach ($orders as $order) {
             $this->orderSynchronizer->syncOrder($order, true);
             throw new \Exception('aaa');
         }
-*/
+        file_put_contents($this->settingsFile, serialize(['end' => $end, 'start' => $start]));
     }
 }
