@@ -70,12 +70,11 @@ class OrderService
         
         }
 
-
         if (null !== $end) {
             $end = new \DateTime($end);
         } elseif ($start instanceof \DateTime) {
             $end = clone($start);
-            $end = $end->add(new \DateInterval('P7D'));
+            $end = $end->add(new \DateInterval('PT15M'));
         }
 
 var_dump($start);
