@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('customer_class')->end()
                 ->scalarNode('delivery_class')->end()
                 ->scalarNode('invoice_class')->end()
+                ->scalarNode('manufacturer_class')->end()
                 ->scalarNode('order_class')->end()
                 ->scalarNode('order_line_class')->end()
                 ->scalarNode('payment_method_class')->end()
