@@ -20,6 +20,20 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.invoice_class%"
 
+    dandomain_foundation.manufacturer_service:
+        class: Loevgaard\DandomainFoundationBundle\Service\ManufacturerService
+        arguments:
+            - "@dandomain.api"
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain_foundation.manufacturer_synchronizer"
+
+    dandomain_foundation.manufacturer_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.manufacturer_class%"
+
     dandomain_foundation.order_service:
         class: Loevgaard\DandomainFoundationBundle\Service\OrderService
         arguments:
