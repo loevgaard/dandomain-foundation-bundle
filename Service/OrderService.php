@@ -67,7 +67,8 @@ class OrderService
         } elseif (($settings) and array_key_exists('end', $settings)) {
             $start = $settings['end'];
         } else {
-        
+            $start = new \DateTime('2000-01-01');
+            $start->setTime(0, 0, 0);
         }
 
         if (null !== $end) {
@@ -77,15 +78,20 @@ class OrderService
             $end = $end->add(new \DateInterval('PT15M'));
         }
 
-var_dump($start);
-var_dump($end);
-        $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($start, $end)->getBody()->getContents());
-var_dump(count($orders));
-        file_put_contents($this->settingsFile, serialize(['end' => $end, 'start' => $start]));
-        foreach ($orders as $order) {
-            $this->orderSynchronizer->syncOrder($order, true);
-            throw new \Exception('aaa');
-        }
-        file_put_contents($this->settingsFile, serialize(['end' => $end, 'start' => $start]));
+        do {
+            $now = new \DateTime('NOW');
+            if ($start > $now) {
+                break;
+            }
+            $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($start, $end)->getBody()->getContents());
+
+            foreach ($orders as $order) {
+                $this->orderSynchronizer->syncOrder($order, true);
+            }
+            file_put_contents($this->settingsFile, serialize(['end' => $end, 'start' => $start]));
+            $start = clone($end);
+            $end = clone($start);
+            $end = $end->add(new \DateInterval('PT15M'));
+        } while (true);
     }
 }
