@@ -54,8 +54,8 @@ class OrderService
     /**
      * Synchronizates orders.
      *
-     * @param string               $end
-     * @param string     $start
+     * @param string $end
+     * @param string $start
      */
     public function orderSync($end = null, $start = null)
     {
@@ -71,14 +71,14 @@ class OrderService
             $start->setTime(0, 0, 0);
         }
 
-        $startStep = clone($start);
+        $startStep = clone $start;
 
         if (null !== $end) {
             $end = new \DateTime($end);
         }
 
         if ($startStep instanceof \DateTime) {
-            $endStep = clone($startStep);
+            $endStep = clone $startStep;
             $endStep = $endStep->add(new \DateInterval('PT15M'));
         }
 
@@ -98,8 +98,8 @@ class OrderService
             }
 
             file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
-            $startStep = clone($endStep);
-            $endStep = clone($startStep);
+            $startStep = clone $endStep;
+            $endStep = clone $startStep;
             $endStep = $endStep->add(new \DateInterval('PT15M'));
         } while (true);
     }

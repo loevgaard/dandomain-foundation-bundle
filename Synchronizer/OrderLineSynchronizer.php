@@ -20,13 +20,13 @@ class OrderLineSynchronizer extends Synchronizer
     /**
      * Synchronizes OrderLine.
      *
-     * @param array $orderLine
-     * @param bool  $flush
+     * @param array          $orderLine
      * @param OrderInterface $order
+     * @param bool           $flush
      *
      * @return OrderLineInterface
      */
-    public function syncOrderLine($orderLine, $flush = true, OrderInterface $order)
+    public function syncOrderLine($orderLine, OrderInterface $order, $flush = true)
     {
         if (is_numeric($orderLine)) {
             $orderLine = \GuzzleHttp\json_decode($this->api->orderLine->getOrderLine($orderLine)->getBody()->getContents());
