@@ -33,7 +33,7 @@ class OrderSyncCommand extends ContainerAwareCommand
         $end = $input->getOption('end');
         $start = $input->getOption('start');
 
-        $this->getContainer()->get('dandomain_foundation.order_service')->orderSync($end, $start);
+        $this->getContainer()->get('loevgaard_dandomain_foundation.order_service')->orderSync($end, $start);
 
         $this->release();
     }
