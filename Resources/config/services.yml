@@ -1,41 +1,58 @@
+parameters:
+    loevgaard_dandomain_foundation.customer_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\CustomerSynchronizer"
+    loevgaard_dandomain_foundation.delivery_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\DeliverySynchronizer"
+    loevgaard_dandomain_foundation.invoice_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\InvoiceSynchronizer"
+    loevgaard_dandomain_foundation.manufacturer_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\ManufacturerService"
+    loevgaard_dandomain_foundation.manufacturer_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ManufacturerSynchronizer"
+    loevgaard_dandomain_foundation.order_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\OrderService"
+    loevgaard_dandomain_foundation.order_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\OrderSynchronizer"
+    loevgaard_dandomain_foundation.order_line_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\OrderLineSynchronizer"
+    loevgaard_dandomain_foundation.payment_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PaymentMethodSynchronizer"
+    loevgaard_dandomain_foundation.period_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\PeriodService"
+    loevgaard_dandomain_foundation.period_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PeriodSynchronizer"
+    loevgaard_dandomain_foundation.shipping_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ShippingMethodSynchronizer"
+    loevgaard_dandomain_foundation.site_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\SiteService"
+    loevgaard_dandomain_foundation.site_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSynchronizer"
+    loevgaard_dandomain_foundation.state_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\StateSynchronizer"
+
 services:
     dandomain_foundation.customer_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\CustomerSynchronizer
+        class: "%loevgaard_dandomain_foundation.customer_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.customer_class%"
 
     dandomain_foundation.delivery_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\DeliverySynchronizer
+        class: "%loevgaard_dandomain_foundation.delivery_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.delivery_class%"
 
     dandomain_foundation.invoice_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\InvoiceSynchronizer
+        class: "%loevgaard_dandomain_foundation.invoice_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.invoice_class%"
 
     dandomain_foundation.manufacturer_service:
-        class: Loevgaard\DandomainFoundationBundle\Service\ManufacturerService
+        class: "%loevgaard_dandomain_foundation.manufacturer_service_class%"
         arguments:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
             - "@dandomain_foundation.manufacturer_synchronizer"
 
     dandomain_foundation.manufacturer_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer
+        class: "%loevgaard_dandomain_foundation.manufacturer_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.manufacturer_class%"
 
     dandomain_foundation.order_service:
-        class: Loevgaard\DandomainFoundationBundle\Service\OrderService
+        class: "%loevgaard_dandomain_foundation.order_service_class%"
         arguments:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
@@ -43,7 +60,7 @@ services:
             - "@kernel"
 
     dandomain_foundation.order_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer
+        class: "%loevgaard_dandomain_foundation.order_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
@@ -59,56 +76,56 @@ services:
             - [setStateSynchronizer, ["@dandomain_foundation.state_synchronizer"]]
 
     dandomain_foundation.order_line_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\OrderLineSynchronizer
+        class: "%loevgaard_dandomain_foundation.order_line_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.order_line_class%"
 
     dandomain_foundation.payment_method_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\PaymentMethodSynchronizer
+        class: "%loevgaard_dandomain_foundation.payment_method_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.payment_method_class%"
 
     dandomain_foundation.period_service:
-        class: Loevgaard\DandomainFoundationBundle\Service\PeriodService
+        class: "%loevgaard_dandomain_foundation.period_service_class%"
         arguments:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
             - "@dandomain_foundation.period_synchronizer"
 
     dandomain_foundation.period_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer
+        class: "%loevgaard_dandomain_foundation.period_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.period_class%"
 
     dandomain_foundation.shipping_method_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\ShippingMethodSynchronizer
+        class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.shipping_method_class%"
 
     dandomain_foundation.site_service:
-        class: Loevgaard\DandomainFoundationBundle\Service\SiteService
+        class: "%loevgaard_dandomain_foundation.site_service_class%"
         arguments:
             - "@dandomain.api"
             - "@doctrine.orm.entity_manager"
             - "@dandomain_foundation.site_synchronizer"
 
     dandomain_foundation.site_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizer
+        class: "%loevgaard_dandomain_foundation.site_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.site_class%"
 
     dandomain_foundation.state_synchronizer:
-        class: Loevgaard\DandomainFoundationBundle\Synchronizer\StateSynchronizer
+        class: "%loevgaard_dandomain_foundation.state_synchronizer_class%"
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
