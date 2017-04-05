@@ -27,7 +27,7 @@ class Order extends BaseOrder
     /**
      * @var Customer
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Customer")
      */
     protected $customer;
@@ -35,7 +35,7 @@ class Order extends BaseOrder
     /**
      * @var Delivery
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Delivery")
      */
     protected $delivery;
@@ -43,7 +43,7 @@ class Order extends BaseOrder
     /**
      * @var Invoice
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Invoice")
      */
     protected $invoice;
@@ -51,14 +51,14 @@ class Order extends BaseOrder
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(mappedBy="order", targetEntity="OrderLine")
+     * @ORM\OneToMany(mappedBy="order", onDelete="SET NULL", targetEntity="OrderLine")
      */
     protected $orderLines;
 
     /**
      * @var PaymentMethod
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="PaymentMethod")
      */
     protected $paymentMethod;
@@ -66,7 +66,7 @@ class Order extends BaseOrder
     /**
      * @var ShippingMethod
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="ShippingMethod")
      */
     protected $shippingMethod;
@@ -74,7 +74,7 @@ class Order extends BaseOrder
     /**
      * @var Site
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Site")
      */
     protected $site;
@@ -82,7 +82,7 @@ class Order extends BaseOrder
     /**
      * @var State
      *
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="State")
      */
     protected $state;
@@ -174,6 +174,30 @@ class Invoice extends BaseInvoice
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Manufacturer as BaseManufacturer;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table
+ **/
+class Manufacturer extends BaseManufacturer
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\OrderLine as BaseOrderLine;
 
 /**
@@ -194,7 +218,7 @@ class OrderLine extends BaseOrderLine
     /**
      * @var Order
      *
-     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="order_id", onDelete="SET NULL", referencedColumnName="id")
      * @ORM\ManyToOne(inversedBy="orderLines", targetEntity="Order")
      */
     protected $order;
@@ -224,6 +248,29 @@ class PaymentMethod extends BasePaymentMethod
     protected $id;
 }
 
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Period as BasePeriod;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table
+ **/
+class Period extends BasePeriod
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
 
 <?php
 
