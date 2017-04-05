@@ -72,6 +72,20 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.payment_method_class%"
 
+    dandomain_foundation.period_service:
+        class: Loevgaard\DandomainFoundationBundle\Service\PeriodService
+        arguments:
+            - "@dandomain.api"
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain_foundation.period_synchronizer"
+
+    dandomain_foundation.period_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.period_class%"
+
     dandomain_foundation.shipping_method_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\ShippingMethodSynchronizer
         arguments:
