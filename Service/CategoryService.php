@@ -39,6 +39,11 @@ class CategoryService
 
         foreach ($categories as $category) {
             $this->categorySynchronizer->syncCategory($category, true);
+
+            $subCategories = \GuzzleHttp\json_decode($this->api->productData->getDataSubCategories((int) $category->number)->getBody()->getContents());
+            foreach ($subCategories as $subCategory) {
+                $this->categorySynchronizer->syncCategory($subCategory, true);
+            }
         }
     }
 }
