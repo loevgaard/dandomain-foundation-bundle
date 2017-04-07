@@ -102,6 +102,30 @@ class Order extends BaseOrder
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Category as BaseCategory;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ **/
+class Category extends BaseCategory
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Customer as BaseCustomer;
 
 /**
@@ -342,4 +366,21 @@ class State extends BaseState
      */
     protected $id;
 }
+```
+
+```yaml
+loevgaard_dandomain_foundation:
+    category_class: AppBundle\Entity\Category
+    customer_class: AppBundle\Entity\Customer
+    default_site_id: "%default_site_id%"
+    delivery_class: AppBundle\Entity\DeliveryInfo
+    invoice_class: AppBundle\Entity\Invoice
+    manufacturer_class: AppBundle\Entity\Brand
+    order_class: AppBundle\Entity\Order
+    order_line_class: AppBundle\Entity\OrderLine
+    payment_method_class: AppBundle\Entity\PaymentMethod
+    period_class: AppBundle\Entity\Period
+    shipping_method_class: AppBundle\Entity\ShippingMethod
+    site_class: AppBundle\Entity\Site
+    state_class: AppBundle\Entity\State
 ```
