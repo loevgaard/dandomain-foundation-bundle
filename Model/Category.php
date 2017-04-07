@@ -31,9 +31,9 @@ abstract class Category implements CategoryInterface
     protected $createdDate;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="integer")
      */
     protected $customInfoLayout;
 
@@ -42,8 +42,63 @@ abstract class Category implements CategoryInterface
      *
      * @ORM\Column(nullable=true, type="integer")
      */
+    protected $customListLayout;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $defaultParentId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(nullable=true, type="datetime")
+     */
+    protected $editedDate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
     protected $externalId;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $infoLayout;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $internalId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $listLayout;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $modified;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $number;
 
 
     /**
@@ -82,22 +137,6 @@ abstract class Category implements CategoryInterface
     protected $url;
 
 /*
-  public $customListLayout =>
-  int(0)
-  public $defaultParentId =>
-  NULL
-  public $editedDate =>
-  string(26) "/Date(1476949782000+0200)/"
-  public $infoLayout =>
-  int(0)
-  public $internalId =>
-  int(3)
-  public $listLayout =>
-  int(0)
-  public $modified =>
-  bool(true)
-  public $number =>
-  string(1) "1"
   public $parentIdList =>
   array(1) {
     [0] =>
