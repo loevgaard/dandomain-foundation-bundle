@@ -100,96 +100,129 @@ abstract class Category implements CategoryInterface
      */
     protected $number;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $parentIdList;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $segmentIdList;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $textKeywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $textCategoryNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="text")
+     */
+    protected $textDescription;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $textExternalId;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="hidden", type="boolean")
+     * @ORM\Column(nullable=true, type="boolean")
      */
-    protected $hidden;
+    protected $textHidden;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $textHiddenMobile;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
-    protected $metaDescription;
+    protected $textIcon;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
-    protected $name;
+    protected $textImage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
-    protected $title;
+    protected $textLink;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url", nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="string")
      */
-    protected $url;
+    protected $textMetaDescription;
 
-/*
-  public $parentIdList =>
-  array(1) {
-    [0] =>
-    string(1) "0"
-  }
-  public $segmentIdList =>
-  array(0) {
-  }
-  public $texts =>
-  array(1) {
-    [0] =>
-    class stdClass#619 (16) {
-      public $Keywords =>
-      string(0) ""
-      public $categoryNumber =>
-      string(1) "1"
-      public $description =>
-      string(67) "<html>
-<head>
-        <title></title>
-</head>
-<body></body>
-</html>
-"
-      public $hidden =>
-      bool(false)
-      public $hiddenMobile =>
-      bool(false)
-      public $icon =>
-      string(0) ""
-      public $id =>
-      int(809)
-      public $image =>
-      string(0) ""
-      public $link =>
-      NULL
-      public $metaDescription =>
-      string(0) ""
-      public $name =>
-      string(10) "Kategorier"
-      public $siteId =>
-      int(26)
-      public $sortOrder =>
-      int(1)
-      public $string =>
-      string(0) ""
-      public $title =>
-      string(0) ""
-      public $urlname =>
-      string(0) ""
-    }
-  }
-}
-*/
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $textName;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $textSiteId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $textSortOrder;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $textString;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $textTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $urlname;
 }
