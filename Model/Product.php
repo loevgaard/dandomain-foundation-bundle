@@ -20,11 +20,23 @@ abstract class Product implements ProductInterface
     protected $categories;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $manufacturers;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
     protected $barCodeNumber;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $categoryIdList;
 
     /**
      * @var string
@@ -102,6 +114,58 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $googleFeedCategory;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isGiftCertificate;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isModified;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isRateVariants;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isReviewVariants;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $isVariantMaster;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $locationNumber;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $manufacturereIdList;
+
+
+
 
 
 }
