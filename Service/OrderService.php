@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
 use AppKernel;
@@ -14,11 +13,6 @@ class OrderService
      * @var Api
      */
     private $api;
-
-    /**
-     * @var EntityManager
-     */
-    private $em;
 
     /**
      * @var AppKernel
@@ -39,13 +33,12 @@ class OrderService
      * Constructor.
      *
      * @param Api               $api
-     * @param EntityManager     $em
      * @param OrderSynchronizer $orderSynchronizer
+     * @param AppKernel         $kernel
      */
-    public function __construct(Api $api, EntityManager $em, OrderSynchronizer $orderSynchronizer, AppKernel $kernel)
+    public function __construct(Api $api, OrderSynchronizer $orderSynchronizer, AppKernel $kernel)
     {
         $this->api = $api;
-        $this->em = $em;
         $this->kernel = $kernel;
         $this->orderSynchronizer = $orderSynchronizer;
         $this->settingsFile = $kernel->getCacheDir().'/dandomain-foundation-order-sync.cache';

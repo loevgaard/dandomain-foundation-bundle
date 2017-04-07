@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer;
 
@@ -15,11 +14,6 @@ class PeriodService
     protected $api;
 
     /**
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * @var PeriodSynchronizer
      */
     protected $periodSynchronizer;
@@ -28,13 +22,11 @@ class PeriodService
      * Constructor.
      *
      * @param Api                $api
-     * @param EntityManager      $em
      * @param PeriodSynchronizer $periodSynchronizer
      */
-    public function __construct(Api $api, EntityManager $em, PeriodSynchronizer $periodSynchronizer)
+    public function __construct(Api $api, PeriodSynchronizer $periodSynchronizer)
     {
         $this->api = $api;
-        $this->em = $em;
         $this->periodSynchronizer = $periodSynchronizer;
     }
 

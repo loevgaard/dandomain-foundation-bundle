@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizer;
 
@@ -15,11 +14,6 @@ class SiteService
     protected $api;
 
     /**
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * @var SiteSynchronizer
      */
     protected $siteSynchronizer;
@@ -28,13 +22,11 @@ class SiteService
      * Constructor.
      *
      * @param Api              $api
-     * @param EntityManager    $em
      * @param SiteSynchronizer $siteSynchronizer
      */
-    public function __construct(Api $api, EntityManager $em, SiteSynchronizer $siteSynchronizer)
+    public function __construct(Api $api, SiteSynchronizer $siteSynchronizer)
     {
         $this->api = $api;
-        $this->em = $em;
         $this->siteSynchronizer = $siteSynchronizer;
     }
 

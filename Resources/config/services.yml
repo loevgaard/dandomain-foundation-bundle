@@ -41,7 +41,6 @@ services:
         class: "%loevgaard_dandomain_foundation.manufacturer_service_class%"
         arguments:
             - "@dandomain.api"
-            - "@doctrine.orm.entity_manager"
             - "@loevgaard_dandomain_foundation.manufacturer_synchronizer"
 
     loevgaard_dandomain_foundation.manufacturer_synchronizer:
@@ -55,7 +54,6 @@ services:
         class: "%loevgaard_dandomain_foundation.order_service_class%"
         arguments:
             - "@dandomain.api"
-            - "@doctrine.orm.entity_manager"
             - "@loevgaard_dandomain_foundation.order_synchronizer"
             - "@kernel"
 
@@ -93,7 +91,6 @@ services:
         class: "%loevgaard_dandomain_foundation.period_service_class%"
         arguments:
             - "@dandomain.api"
-            - "@doctrine.orm.entity_manager"
             - "@loevgaard_dandomain_foundation.period_synchronizer"
 
     loevgaard_dandomain_foundation.period_synchronizer:
@@ -114,7 +111,6 @@ services:
         class: "%loevgaard_dandomain_foundation.site_service_class%"
         arguments:
             - "@dandomain.api"
-            - "@doctrine.orm.entity_manager"
             - "@loevgaard_dandomain_foundation.site_synchronizer"
 
     loevgaard_dandomain_foundation.site_synchronizer:

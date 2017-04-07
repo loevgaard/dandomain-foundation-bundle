@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer;
 
@@ -15,11 +14,6 @@ class ManufacturerService
     protected $api;
 
     /**
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * @var ManufacturerSynchronizer
      */
     protected $manufacturerSynchronizer;
@@ -27,14 +21,12 @@ class ManufacturerService
     /**
      * Constructor.
      *
-     * @param Api              $api
-     * @param EntityManager    $em
+     * @param Api                      $api
      * @param ManufacturerSynchronizer $manufacturerSynchronizer
      */
-    public function __construct(Api $api, EntityManager $em, ManufacturerSynchronizer $manufacturerSynchronizer)
+    public function __construct(Api $api, ManufacturerSynchronizer $manufacturerSynchronizer)
     {
         $this->api = $api;
-        $this->em = $em;
         $this->manufacturerSynchronizer = $manufacturerSynchronizer;
     }
 

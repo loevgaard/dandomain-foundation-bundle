@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizer;
 
@@ -15,11 +14,6 @@ class CategoryService
     protected $api;
 
     /**
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * @var CategorySynchronizer
      */
     protected $categorySynchronizer;
@@ -28,13 +22,11 @@ class CategoryService
      * Constructor.
      *
      * @param Api                  $api
-     * @param EntityManager        $em
      * @param CategorySynchronizer $categorySynchronizer
      */
-    public function __construct(Api $api, EntityManager $em, CategorySynchronizer $categorySynchronizer)
+    public function __construct(Api $api, CategorySynchronizer $categorySynchronizer)
     {
         $this->api = $api;
-        $this->em = $em;
         $this->categorySynchronizer = $categorySynchronizer;
     }
 
