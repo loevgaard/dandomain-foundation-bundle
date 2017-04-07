@@ -33,7 +33,7 @@ class CategorySynchronizer extends Synchronizer
      */
     public function __construct(EntityManager $em, Api $api, $entityClassName, $defaultSiteId)
     {
-        parent::__construct($em, $api, $entityClassName = null)
+        parent::__construct($em, $api, $entityClassName);
         $this->defaultSiteId = $defaultSiteId;
     }
 
@@ -65,7 +65,7 @@ class CategorySynchronizer extends Synchronizer
         }
 
         if (null !== $actualTexts) {
-            continue;
+            return;
         }
 
         $entity
