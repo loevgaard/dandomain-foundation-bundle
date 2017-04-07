@@ -236,20 +236,20 @@ interface CategoryInterface
     public function setTextKeywords($textKeywords);
 
     /**
-     * Get textCategoryInterfaceNumber
+     * Get textCategoryNumber
      *
      * @return string
      */
-    public function getTextCategoryInterfaceNumber();
+    public function getTextCategoryNumber();
 
     /**
-     * Set textCategoryInterfaceNumber
+     * Set textCategoryNumber
      *
-     * @param string $textCategoryInterfaceNumber
+     * @param string $textCategoryNumber
      *
      * @return CategoryInterface
      */
-    public function setTextCategoryInterfaceNumber($textCategoryInterfaceNumber);
+    public function setTextCategoryNumber($textCategoryNumber);
 
     /**
      * Get textDescription
