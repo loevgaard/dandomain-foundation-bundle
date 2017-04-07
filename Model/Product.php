@@ -27,6 +27,11 @@ abstract class Product implements ProductInterface
     /**
      * @var ArrayCollection
      */
+    protected $prices;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $segments;
 
     /**
@@ -190,6 +195,13 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="integer")
      */
     protected $maxBuyAmount;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $medias;
 
     /**
      * @var int
