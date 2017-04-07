@@ -25,6 +25,26 @@ abstract class Product implements ProductInterface
     protected $manufacturers;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $segments;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $siteSettings;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $variantGroups;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $variants;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
@@ -199,5 +219,101 @@ abstract class Product implements ProductInterface
      */
     protected $picture;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $productType;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $salesCount;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $segmentIdList;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $sortOrder;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $stockCount;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $stockLimit;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $typeId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(nullable=true, type="datetime")
+     */
+    protected $updated;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $updatedBy;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $variantGroupIdList;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $variantIdList;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $variantMasterId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $vendorNumber;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $weight;
 }
