@@ -64,17 +64,54 @@ class CategorySynchronizer extends Synchronizer
             $actualTexts = $text;
         }
 
-        if (null !== $actualTexts) {
+        if (null === $actualTexts) {
             return;
         }
 
+        if ($category->createdDate) {
+            $createdDate = \Dandomain\Api\jsonDateToDate($category->createdDate);
+            $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $createdDate = null;
+        }
+
+        if ($category->editedDate) {
+            $editedDate = \Dandomain\Api\jsonDateToDate($category->editedDate);
+            $editedDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $editedDate = null;
+        }
+
         $entity
+            ->setB2bGroupId($category->b2BGroupId)
+            ->setCreatedDate($createdDate)
+            ->setCustomInfoLayout($category->customInfoLayout)
+            ->setCustomListLayout($category->customListLayout)
+            ->setDefaultParentId($category->defaultParentId)
+            ->setEditedDate($editedDate)
             ->setExternalId($category->number)
-            ->setName($actualTexts->name)
-            ->setDescription($actualTexts->description)
-            ->setTitle($actualTexts->title)
-            ->setMetaDescription($actualTexts->metaDescription)
-            ->setHidden($actualTexts->hidden)
+            ->setInfoLayout($category->infoLayout)
+            ->setInternalId($category->internalId)
+            ->setListLayout($category->listLayout)
+            ->setModified($category->modified)
+            ->setParentIdList($category->parentIdList)
+            ->setSegmentIdList($category->segmentIdList)
+            ->setTextKeywords($actualTexts->Keywords)
+            ->setTextCategoryNumber($actualTexts->categoryNumber)
+            ->setTextDescription($actualTexts->description)
+            ->setTextExternalId($actualTexts->id)
+            ->setTextHidden($actualTexts->hidden)
+            ->setTextHiddenMobile($actualTexts->hiddenMobile)
+            ->setTextIcon($actualTexts->icon)
+            ->setTextImage($actualTexts->image)
+            ->setTextLink($actualTexts->link)
+            ->setTextMetaDescription($actualTexts->metaDescription)
+            ->setTextName($actualTexts->name)
+            ->setTextSiteId($actualTexts->siteId)
+            ->setTextSortOrder($actualTexts->sortOrder)
+            ->setTextString($actualTexts->string)
+            ->setTextTitle($actualTexts->title)
+            ->setTextUrlname($actualTexts->urlname)
         ;
 
         $this->objectManager->persist($entity);
