@@ -373,9 +373,9 @@ loevgaard_dandomain_foundation:
     category_class: AppBundle\Entity\Category
     customer_class: AppBundle\Entity\Customer
     default_site_id: "%default_site_id%"
-    delivery_class: AppBundle\Entity\DeliveryInfo
+    delivery_class: AppBundle\Entity\Delivery
     invoice_class: AppBundle\Entity\Invoice
-    manufacturer_class: AppBundle\Entity\Brand
+    manufacturer_class: AppBundle\Entity\Manufacturer
     order_class: AppBundle\Entity\Order
     order_line_class: AppBundle\Entity\OrderLine
     payment_method_class: AppBundle\Entity\PaymentMethod
