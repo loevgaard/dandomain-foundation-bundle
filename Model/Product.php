@@ -164,8 +164,40 @@ abstract class Product implements ProductInterface
      */
     protected $manufacturereIdList;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $maxBuyAmount;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $minBuyAmount;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $minBuyAmountB2B;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $number;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $picture;
 
 
 }
