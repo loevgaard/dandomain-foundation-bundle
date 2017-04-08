@@ -16,7 +16,7 @@ interface VariantInterface
      *
      * @param integer $externalId
      *
-     * @return Variant
+     * @return VariantInterface
      */
     public function setExternalId($externalId);
 
@@ -39,7 +39,7 @@ interface VariantInterface
      *
      * @param integer $sortOrder
      *
-     * @return Variant
+     * @return VariantInterface
      */
     public function setSortOrder($sortOrder);
 
@@ -55,7 +55,7 @@ interface VariantInterface
      *
      * @param string $text
      *
-     * @return Variant
+     * @return VariantInterface
      */
     public function setText($text);
 }

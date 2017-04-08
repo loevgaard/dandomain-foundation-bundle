@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Order as BaseOrder;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Order extends BaseOrder
 {
     /**
@@ -107,7 +107,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Category as BaseCategory;
 /**
  * @ORM\Entity()
  * @ORM\Table()
- **/
+ */
 class Category extends BaseCategory
 {
     /**
@@ -129,9 +129,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Customer as BaseCustomer;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Customer extends BaseCustomer
 {
     /**
@@ -153,9 +153,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Delivery as BaseDelivery;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Delivery extends BaseDelivery
 {
     /**
@@ -177,9 +177,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Invoice as BaseInvoice;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Invoice extends BaseInvoice
 {
     /**
@@ -201,9 +201,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Manufacturer as BaseManufacturer;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Manufacturer extends BaseManufacturer
 {
     /**
@@ -225,9 +225,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\OrderLine as BaseOrderLine;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class OrderLine extends BaseOrderLine
 {
     /**
@@ -257,9 +257,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\PaymentMethod as BasePaymentMethod;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class PaymentMethod extends BasePaymentMethod
 {
     /**
@@ -281,9 +281,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Period as BasePeriod;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Period extends BasePeriod
 {
     /**
@@ -296,6 +296,31 @@ class Period extends BasePeriod
     protected $id;
 }
 
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Price as BasePrice;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class Price extends BasePrice
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
+
+
 <?php
 
 namespace AppBundle\Entity;
@@ -304,9 +329,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\ShippingMethod as BaseShippingMethod;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class ShippingMethod extends BaseShippingMethod
 {
     /**
@@ -328,9 +353,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Site as BaseSite;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Site extends BaseSite
 {
     /**
@@ -352,9 +377,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\State as BaseState;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class State extends BaseState
 {
     /**
@@ -376,9 +401,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Variant as BaseVariant;
 
 /**
- * @ORM\Entity
- * @ORM\Table
- **/
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
 class Variant extends BaseVariant
 {
     /**
@@ -404,6 +429,7 @@ loevgaard_dandomain_foundation:
     order_line_class: AppBundle\Entity\OrderLine
     payment_method_class: AppBundle\Entity\PaymentMethod
     period_class: AppBundle\Entity\Period
+    price_class: AppBundle\Entity\Price
     shipping_method_class: AppBundle\Entity\ShippingMethod
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State
