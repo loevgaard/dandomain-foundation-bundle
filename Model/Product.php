@@ -232,6 +232,13 @@ abstract class Product implements ProductInterface
     protected $picture;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $productRelations;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
@@ -251,6 +258,13 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="array")
      */
     protected $segmentIdList;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(nullable=true, type="array")
+     */
+    protected $siteSettings;
 
     /**
      * @var int
