@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('shipping_method_class')->end()
                 ->scalarNode('site_class')->end()
                 ->scalarNode('state_class')->end()
+                ->scalarNode('variant_class')->end()
             ->end()
         ;
 

@@ -366,6 +366,30 @@ class State extends BaseState
      */
     protected $id;
 }
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Variant as BaseVariant;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table
+ **/
+class Variant extends BaseVariant
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
 ```
 
 ```yaml
@@ -383,4 +407,5 @@ loevgaard_dandomain_foundation:
     shipping_method_class: AppBundle\Entity\ShippingMethod
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State
+    variant_class: AppBundle\Entity\Variant
 ```
