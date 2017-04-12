@@ -673,6 +673,34 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addManufacturer(ManufacturerInterface $manufacturer)
+    {
+        $this->manufacturers[] = $manufacturer;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getManufacturers()
+    {
+        return $this->manufacturers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeManufacturer(ManufacturerInterface $manufacturer)
+    {
+        $this->manufacturers->removeElement($manufacturer);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getManufacturereIdList()
     {
         return $this->manufacturereIdList;
@@ -1041,19 +1069,19 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setVendorNumber($vendorNumber)
     {
         $this->vendorNumber = $vendorNumber;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWeight()
+    {
+        return $this->weight;
     }
 
     /**
