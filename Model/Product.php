@@ -37,11 +37,6 @@ abstract class Product implements ProductInterface
     /**
      * @var ArrayCollection
      */
-    protected $siteSettings;
-
-    /**
-     * @var ArrayCollection
-     */
     protected $variantGroups;
 
     /**

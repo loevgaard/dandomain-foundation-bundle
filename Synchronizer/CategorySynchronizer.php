@@ -11,7 +11,7 @@ class CategorySynchronizer extends Synchronizer
     /**
      * @var string
      */
-    protected $defaultSiteId = 'Loevgaard\\DandomainFoundationBundle\\Model\\CategoryInterface';
+    protected $defaultSiteId = 23;
 
     /**
      * @var string
