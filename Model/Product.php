@@ -339,18 +339,7 @@ abstract class Product implements ProductInterface
     protected $weight;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     * @ORM\Id
-     */
-    protected $id;
-
-    /**
-     * Get barCodeNumber
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getBarCodeNumber()
     {
@@ -358,11 +347,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set barCodeNumber
-     *
-     * @param string $barCodeNumber
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setBarCodeNumber($barCodeNumber)
     {
@@ -372,9 +357,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get categoryIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getCategoryIdList()
     {
@@ -382,11 +365,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set categoryIdList
-     *
-     * @param array $categoryIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setCategoryIdList($categoryIdList)
     {
@@ -396,9 +375,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get comments
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getComments()
     {
@@ -406,11 +383,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set comments
-     *
-     * @param string $comments
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setComments($comments)
     {
@@ -420,9 +393,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get costPrice
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCostPrice()
     {
@@ -430,11 +401,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set costPrice
-     *
-     * @param string $costPrice
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setCostPrice($costPrice)
     {
@@ -444,9 +411,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get created
-     *
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreated()
     {
@@ -454,11 +419,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setCreated($created)
     {
@@ -468,9 +429,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get defaultCategoryId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getDefaultCategoryId()
     {
@@ -478,11 +437,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set defaultCategoryId
-     *
-     * @param integer $defaultCategoryId
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setDefaultCategoryId($defaultCategoryId)
     {
@@ -492,9 +447,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get disabledVariantIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getDisabledVariantIdList()
     {
@@ -502,11 +455,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set disabledVariantIdList
-     *
-     * @param array $disabledVariantIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setDisabledVariantIdList($disabledVariantIdList)
     {
@@ -516,9 +465,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get disabledVariants
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getDisabledVariants()
     {
@@ -526,11 +473,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set disabledVariants
-     *
-     * @param array $disabledVariants
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setDisabledVariants($disabledVariants)
     {
@@ -540,9 +483,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get edbPriserProductNumber
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getEdbPriserProductNumber()
     {
@@ -550,11 +491,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set edbPriserProductNumber
-     *
-     * @param string $edbPriserProductNumber
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setEdbPriserProductNumber($edbPriserProductNumber)
     {
@@ -564,9 +501,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get externalId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -574,11 +509,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set externalId
-     *
-     * @param integer $externalId
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
@@ -588,9 +519,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get fileSaleLink
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getFileSaleLink()
     {
@@ -598,11 +527,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set fileSaleLink
-     *
-     * @param string $fileSaleLink
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setFileSaleLink($fileSaleLink)
     {
@@ -612,9 +537,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get googleFeedCategory
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getGoogleFeedCategory()
     {
@@ -622,11 +545,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set googleFeedCategory
-     *
-     * @param string $googleFeedCategory
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setGoogleFeedCategory($googleFeedCategory)
     {
@@ -636,9 +555,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -646,9 +563,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get isGiftCertificate
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getIsGiftCertificate()
     {
@@ -656,11 +571,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set isGiftCertificate
-     *
-     * @param boolean $isGiftCertificate
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setIsGiftCertificate($isGiftCertificate)
     {
@@ -670,9 +581,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get isModified
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getIsModified()
     {
@@ -680,11 +589,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set isModified
-     *
-     * @param boolean $isModified
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setIsModified($isModified)
     {
@@ -694,9 +599,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get isRateVariants
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getIsRateVariants()
     {
@@ -704,11 +607,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set isRateVariants
-     *
-     * @param boolean $isRateVariants
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setIsRateVariants($isRateVariants)
     {
@@ -718,9 +617,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get isReviewVariants
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getIsReviewVariants()
     {
@@ -728,11 +625,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set isReviewVariants
-     *
-     * @param boolean $isReviewVariants
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setIsReviewVariants($isReviewVariants)
     {
@@ -742,9 +635,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get isVariantMaster
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getIsVariantMaster()
     {
@@ -752,11 +643,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set isVariantMaster
-     *
-     * @param boolean $isVariantMaster
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setIsVariantMaster($isVariantMaster)
     {
@@ -766,9 +653,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get locationNumber
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getLocationNumber()
     {
@@ -776,11 +661,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set locationNumber
-     *
-     * @param string $locationNumber
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setLocationNumber($locationNumber)
     {
@@ -790,9 +671,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get manufacturereIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getManufacturereIdList()
     {
@@ -800,11 +679,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set manufacturereIdList
-     *
-     * @param array $manufacturereIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setManufacturereIdList($manufacturereIdList)
     {
@@ -814,9 +689,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get maxBuyAmount
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getMaxBuyAmount()
     {
@@ -824,11 +697,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set maxBuyAmount
-     *
-     * @param integer $maxBuyAmount
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setMaxBuyAmount($maxBuyAmount)
     {
@@ -838,9 +707,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get medias
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getMedias()
     {
@@ -848,11 +715,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set medias
-     *
-     * @param array $medias
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setMedias($medias)
     {
@@ -862,9 +725,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get minBuyAmount
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getMinBuyAmount()
     {
@@ -872,11 +733,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set minBuyAmount
-     *
-     * @param integer $minBuyAmount
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setMinBuyAmount($minBuyAmount)
     {
@@ -886,9 +743,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get minBuyAmountB2B
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getMinBuyAmountB2B()
     {
@@ -896,11 +751,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set minBuyAmountB2B
-     *
-     * @param integer $minBuyAmountB2B
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setMinBuyAmountB2B($minBuyAmountB2B)
     {
@@ -910,9 +761,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get number
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getNumber()
     {
@@ -920,11 +769,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set number
-     *
-     * @param string $number
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setNumber($number)
     {
@@ -934,9 +779,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get picture
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getPicture()
     {
@@ -944,11 +787,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set picture
-     *
-     * @param string $picture
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setPicture($picture)
     {
@@ -958,9 +797,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get productRelations
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getProductRelations()
     {
@@ -968,11 +805,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set productRelations
-     *
-     * @param array $productRelations
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setProductRelations($productRelations)
     {
@@ -982,9 +815,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get productType
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getProductType()
     {
@@ -992,11 +823,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set productType
-     *
-     * @param string $productType
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setProductType($productType)
     {
@@ -1006,9 +833,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get salesCount
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getSalesCount()
     {
@@ -1016,11 +841,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set salesCount
-     *
-     * @param integer $salesCount
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setSalesCount($salesCount)
     {
@@ -1030,9 +851,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get segmentIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getSegmentIdList()
     {
@@ -1040,11 +859,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set segmentIdList
-     *
-     * @param array $segmentIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setSegmentIdList($segmentIdList)
     {
@@ -1054,9 +869,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get siteSettings
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getSiteSettings()
     {
@@ -1064,11 +877,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set siteSettings
-     *
-     * @param array $siteSettings
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setSiteSettings($siteSettings)
     {
@@ -1078,9 +887,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get sortOrder
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getSortOrder()
     {
@@ -1088,11 +895,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set sortOrder
-     *
-     * @param integer $sortOrder
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setSortOrder($sortOrder)
     {
@@ -1102,9 +905,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get stockCount
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getStockCount()
     {
@@ -1112,11 +913,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set stockCount
-     *
-     * @param integer $stockCount
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setStockCount($stockCount)
     {
@@ -1126,9 +923,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get stockLimit
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getStockLimit()
     {
@@ -1136,11 +931,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set stockLimit
-     *
-     * @param integer $stockLimit
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setStockLimit($stockLimit)
     {
@@ -1150,9 +941,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get typeId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getTypeId()
     {
@@ -1160,11 +949,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set typeId
-     *
-     * @param integer $typeId
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setTypeId($typeId)
     {
@@ -1174,9 +959,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get updated
-     *
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getUpdated()
     {
@@ -1184,11 +967,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setUpdated($updated)
     {
@@ -1198,9 +977,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get variantGroupIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getVariantGroupIdList()
     {
@@ -1208,11 +985,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set variantGroupIdList
-     *
-     * @param array $variantGroupIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setVariantGroupIdList($variantGroupIdList)
     {
@@ -1222,9 +995,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get variantIdList
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getVariantIdList()
     {
@@ -1232,11 +1003,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set variantIdList
-     *
-     * @param array $variantIdList
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setVariantIdList($variantIdList)
     {
@@ -1246,9 +1013,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get variantMasterId
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getVariantMasterId()
     {
@@ -1256,11 +1021,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set variantMasterId
-     *
-     * @param integer $variantMasterId
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setVariantMasterId($variantMasterId)
     {
@@ -1270,9 +1031,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get vendorNumber
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getVendorNumber()
     {
@@ -1280,9 +1039,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Get weight
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -1290,11 +1047,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set vendorNumber
-     *
-     * @param string $vendorNumber
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setVendorNumber($vendorNumber)
     {
@@ -1304,11 +1057,7 @@ abstract class Product implements ProductInterface
     }
 
     /**
-     * Set weight
-     *
-     * @param integer $weight
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setWeight($weight)
     {
