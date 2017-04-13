@@ -108,6 +108,31 @@ interface PriceInterface
     public function setPeriodId($periodId);
 
     /**
+     * Add product
+     *
+     * @param ProductInterface $product
+     *
+     * @return PriceInterface
+     */
+    public function addProduct(ProductInterface $product);
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts();
+
+    /**
+     * Remove product
+     *
+     * @param ProductInterface $product
+     *
+     * @return PriceInterface
+     */
+    public function removeProduct(ProductInterface $product);
+
+    /**
      * Get specialOfferPrice
      *
      * @return string
