@@ -101,6 +101,7 @@ class Order extends BaseOrder
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Category as BaseCategory;
 
@@ -118,6 +119,21 @@ class Category extends BaseCategory
      * @ORM\Id
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="categories", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
 
 
@@ -197,6 +213,7 @@ class Invoice extends BaseInvoice
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Manufacturer as BaseManufacturer;
 
@@ -214,6 +231,21 @@ class Manufacturer extends BaseManufacturer
      * @ORM\Id
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="manufacturers", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
 
 
@@ -301,6 +333,7 @@ class Period extends BasePeriod
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Price as BasePrice;
 
@@ -318,6 +351,21 @@ class Price extends BasePrice
      * @ORM\Id
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="prices", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
 
 
@@ -397,6 +445,7 @@ class State extends BaseState
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Variant as BaseVariant;
 
@@ -414,6 +463,21 @@ class Variant extends BaseVariant
      * @ORM\Id
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="variants", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
 
 
@@ -421,6 +485,7 @@ class Variant extends BaseVariant
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\VariantGroup as BaseVariantGroup;
 
