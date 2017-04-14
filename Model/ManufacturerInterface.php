@@ -74,4 +74,29 @@ interface ManufacturerInterface
      * @return ManufacturerInterface
      */
     public function setName($name);
+
+    /**
+     * Add product.
+     *
+     * @param ProductInterface $product
+     *
+     * @return ManufacturerInterface
+     */
+    public function addProduct(ProductInterface $product);
+
+    /**
+     * Get products.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts();
+
+    /**
+     * Remove product.
+     *
+     * @param ProductInterface $product
+     *
+     * @return ManufacturerInterface
+     */
+    public function removeProduct(ProductInterface $product);
 }

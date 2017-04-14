@@ -121,4 +121,30 @@ abstract class Manufacturer implements ManufacturerInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProduct(ProductInterface $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProduct(ProductInterface $product)
+    {
+        $this->products->removeElement($product);
+    }
 }
