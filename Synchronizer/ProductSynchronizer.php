@@ -2,34 +2,52 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Dandomain\Api\Api as DandomainApi;
-use Doctrine\Common\Persistence\ObjectManager;
+use Loevgaard\DandomainFoundationBundle\Model\ProductInterface;
 
-class ProductSynchronizer implements SynchronizerInterface
+class ProductSynchronizer extends Synchronizer
 {
-    /** @var ObjectManager */
-    protected $objectManager;
+    /**
+     * @var string
+     */
+    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Product';
 
-    /** @var DandomainApi */
-    protected $api;
+    /**
+     * @var string
+     */
+    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductInterface';
 
-    /** @var string */
-    protected $entityClassName = 'Loevgaard\\Model\\Product';
-
-    public function __construct(ObjectManager $objectManager, DandomainApi $api, $entityClassName = null)
+    /**
+     * Synchronizes Product.
+     *
+     * @param array $product
+     * @param bool  $flush
+     *
+     * @return ProductInterface
+     */
+    public function syncProduct($product, $flush = true)
     {
-        $this->objectManager = $objectManager;
-        $this->api = $api;
+        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+            'externalId' => $product->id,
+        ]);
 
-        if ($entityClassName) {
-            $interfaces = class_implements($entityClassName);
-            if (!isset($interfaces['Loevgaard\\Model\\ProductInterface'])) {
-                throw new \InvalidArgumentException("Class '$entityClassName' should implement {$this->entityClassName}");
-            }
+        if (!($entity)) {
+            $entity = new $this->entityClassName();
         }
-    }
 
-    protected function syncProduct($product, $flush = true)
-    {
+        $entity
+            ->setDisabled($product->disabled ? true : false)
+            ->setExternalId($product->id)
+            ->setEndDate(\Dandomain\Api\jsonDateToDate($product->endDate))
+            ->setStartDate(\Dandomain\Api\jsonDateToDate($product->startDate))
+            ->setTitle($product->title)
+        ;
+
+        $this->objectManager->persist($entity);
+
+        if (true === $flush) {
+            $this->objectManager->flush();
+        }
+
+        return $entity;
     }
 }
