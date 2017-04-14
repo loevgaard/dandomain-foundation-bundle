@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('payment_method_class')->end()
                 ->scalarNode('period_class')->end()
                 ->scalarNode('price_class')->end()
+                ->scalarNode('segment_class')->end()
                 ->scalarNode('shipping_method_class')->end()
                 ->scalarNode('site_class')->end()
                 ->scalarNode('state_class')->end()

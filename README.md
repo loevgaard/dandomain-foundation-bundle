@@ -419,6 +419,14 @@ class Product extends BaseProduct
     /**
      * @var ArrayCollection
      *
+     * @ORM\JoinTable(name="product_segment")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Segment")
+     */
+    protected $segments;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\JoinTable(name="product_variant")
      * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Variant")
      */
@@ -431,6 +439,46 @@ class Product extends BaseProduct
      * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="VariantGroup")
      */
     protected $variantGroups;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Segment as BaseSegment;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ **/
+class Segment extends BaseSegment
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="segments", targetEntity="Product")
+     */
+    protected $products;
 
     /**
      * Constructor.
@@ -607,6 +655,7 @@ loevgaard_dandomain_foundation:
     payment_method_class: AppBundle\Entity\PaymentMethod
     period_class: AppBundle\Entity\Period
     price_class: AppBundle\Entity\Price
+    segment_class: AppBundle\Entity\Segment
     shipping_method_class: AppBundle\Entity\ShippingMethod
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State

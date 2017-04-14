@@ -347,6 +347,7 @@ abstract class Product implements ProductInterface
         $this->categories = new ArrayCollection();
         $this->manufacturers = new ArrayCollection();
         $this->prices = new ArrayCollection();
+        $this->segments = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->variantGroups = new ArrayCollection();
     }
@@ -943,6 +944,34 @@ abstract class Product implements ProductInterface
     public function setSalesCount($salesCount)
     {
         $this->salesCount = $salesCount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSegment(SegmentInterface $segment)
+    {
+        $this->segments[] = $segment;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSegments()
+    {
+        return $this->segments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSegment(SegmentInterface $segment)
+    {
+        $this->segments->removeElement($segment);
 
         return $this;
     }

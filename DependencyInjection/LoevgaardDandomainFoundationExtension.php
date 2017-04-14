@@ -25,6 +25,7 @@ class LoevgaardDandomainFoundationExtension extends Extension
         $container->setParameter('loevgaard_dandomain_foundation.payment_method_class', $config['payment_method_class']);
         $container->setParameter('loevgaard_dandomain_foundation.period_class', $config['period_class']);
         $container->setParameter('loevgaard_dandomain_foundation.price_class', $config['price_class']);
+        $container->setParameter('loevgaard_dandomain_foundation.segment_class', $config['segment_class']);
         $container->setParameter('loevgaard_dandomain_foundation.shipping_method_class', $config['shipping_method_class']);
         $container->setParameter('loevgaard_dandomain_foundation.site_class', $config['site_class']);
         $container->setParameter('loevgaard_dandomain_foundation.state_class', $config['state_class']);

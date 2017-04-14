@@ -535,6 +535,31 @@ interface ProductInterface
     public function setSalesCount($salesCount);
 
     /**
+     * Add segment
+     *
+     * @param SegmentInterface $segment
+     *
+     * @return ProductInterface
+     */
+    public function addSegment(SegmentInterface $segment);
+
+    /**
+     * Get segments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSegments();
+
+    /**
+     * Remove segment
+     *
+     * @param SegmentInterface $segment
+     *
+     * @return ProductInterface
+     */
+    public function removeSegment(SegmentInterface $segment);
+
+    /**
      * Get segmentIdList
      *
      * @return array
