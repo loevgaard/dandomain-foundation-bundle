@@ -204,6 +204,31 @@ interface CategoryInterface
     public function setParentIdList($parentIdList);
 
     /**
+     * Add product
+     *
+     * @param ProductInterface $product
+     *
+     * @return CategoryInterface
+     */
+    public function addProduct(ProductInterface $product);
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts();
+
+    /**
+     * Remove product
+     *
+     * @param ProductInterface $product
+     *
+     * @return CategoryInterface
+     */
+    public function removeProduct(ProductInterface $product);
+
+    /**
      * Get segmentIdList
      *
      * @return array

@@ -92,6 +92,22 @@ interface PriceInterface
     public function setIsoCode($isoCode);
 
     /**
+     * Get period.
+     *
+     * @return PeriodInterface
+     */
+    public function getPeriod();
+
+    /**
+     * Set period.
+     *
+     * @param PeriodInterface $period
+     *
+     * @return PriceInterface
+     */
+    public function setPeriod(PeriodInterface $period = null);
+
+    /**
      * Get periodId
      *
      * @return integer
