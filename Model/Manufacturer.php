@@ -15,6 +15,11 @@ abstract class Manufacturer implements ManufacturerInterface
     protected $id;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $products;
+
+    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="string")
