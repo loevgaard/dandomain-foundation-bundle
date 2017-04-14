@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface SegmentInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
      * @param string $externalId
      *
@@ -21,14 +21,14 @@ interface SegmentInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      *
@@ -37,14 +37,14 @@ interface SegmentInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
 
     /**
-     * Remove product
+     * Remove product.
      *
      * @param ProductInterface $product
      *
@@ -53,14 +53,14 @@ interface SegmentInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get segmentOptions
+     * Get segmentOptions.
      *
      * @return array
      */
     public function getSegmentOptions();
 
     /**
-     * Set segmentOptions
+     * Set segmentOptions.
      *
      * @param array $segmentOptions
      *

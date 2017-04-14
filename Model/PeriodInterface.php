@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface PeriodInterface
 {
     /**
-     * Get disabled
+     * Get disabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDisabled();
 
     /**
-     * Set disabled
+     * Set disabled.
      *
-     * @param boolean $disabled
+     * @param bool $disabled
      *
      * @return PeriodInterface
      */
     public function setDisabled($disabled);
 
     /**
-     * Get endDate
+     * Get endDate.
      *
      * @return \DateTime
      */
     public function getEndDate();
 
     /**
-     * Set endDate
+     * Set endDate.
      *
      * @param \DateTime $endDate
      *
@@ -37,14 +37,14 @@ interface PeriodInterface
     public function setEndDate($endDate);
 
     /**
-     * Get externalId
+     * Get externalId.
      *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
      * @param string $externalId
      *
@@ -53,21 +53,21 @@ interface PeriodInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get startDate
+     * Get startDate.
      *
      * @return \DateTime
      */
     public function getStartDate();
 
     /**
-     * Set startDate
+     * Set startDate.
      *
      * @param \DateTime $startDate
      *
@@ -76,14 +76,14 @@ interface PeriodInterface
     public function setStartDate($startDate);
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
     public function getTitle();
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *

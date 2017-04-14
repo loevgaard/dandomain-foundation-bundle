@@ -5,7 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Doctrine\Common\Persistence\ObjectManager;
 use Dandomain\Api\Api as DandomainApi;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Synchronizer
 {

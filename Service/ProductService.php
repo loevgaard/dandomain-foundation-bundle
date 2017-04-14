@@ -32,9 +32,9 @@ class ProductService
     /**
      * Constructor.
      *
-     * @param Api               $api
+     * @param Api                 $api
      * @param ProductSynchronizer $productSynchronizer
-     * @param AppKernel         $kernel
+     * @param AppKernel           $kernel
      */
     public function __construct(Api $api, ProductSynchronizer $productSynchronizer, AppKernel $kernel)
     {
@@ -83,7 +83,7 @@ class ProductService
             if (($end instanceof \DateTime) and ($end < $endStep)) {
                 break;
             }
-throw new \Exception('aa');
+            throw new \Exception('aa');
             $products = GuzzleHttp\json_decode($this->api->product->getProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
             foreach ($products as $product) {

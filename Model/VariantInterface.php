@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface VariantInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return VariantInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      *
@@ -37,14 +37,14 @@ interface VariantInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
 
     /**
-     * Remove product
+     * Remove product.
      *
      * @param ProductInterface $product
      *
@@ -53,30 +53,30 @@ interface VariantInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get sortOrder
+     * Get sortOrder.
      *
-     * @return integer
+     * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder
+     * Set sortOrder.
      *
-     * @param integer $sortOrder
+     * @param int $sortOrder
      *
      * @return VariantInterface
      */
     public function setSortOrder($sortOrder);
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
     public function getText();
 
     /**
-     * Set text
+     * Set text.
      *
      * @param string $text
      *

@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface CategoryInterface
 {
     /**
-     * Get b2bGroupId
+     * Get b2bGroupId.
      *
      * @return string
      */
     public function getB2bGroupId();
 
     /**
-     * Set b2bGroupId
+     * Set b2bGroupId.
      *
      * @param string $b2bGroupId
      *
@@ -21,14 +21,14 @@ interface CategoryInterface
     public function setB2bGroupId($b2bGroupId);
 
     /**
-     * Get createdDate
+     * Get createdDate.
      *
      * @return \DateTime
      */
     public function getCreatedDate();
 
     /**
-     * Set createdDate
+     * Set createdDate.
      *
      * @param \DateTime $createdDate
      *
@@ -37,62 +37,62 @@ interface CategoryInterface
     public function setCreatedDate($createdDate);
 
     /**
-     * Get customInfoLayout
+     * Get customInfoLayout.
      *
-     * @return integer
+     * @return int
      */
     public function getCustomInfoLayout();
 
     /**
-     * Set customInfoLayout
+     * Set customInfoLayout.
      *
-     * @param integer $customInfoLayout
+     * @param int $customInfoLayout
      *
      * @return CategoryInterface
      */
     public function setCustomInfoLayout($customInfoLayout);
 
     /**
-     * Get customListLayout
+     * Get customListLayout.
      *
-     * @return integer
+     * @return int
      */
     public function getCustomListLayout();
 
     /**
-     * Set customListLayout
+     * Set customListLayout.
      *
-     * @param integer $customListLayout
+     * @param int $customListLayout
      *
      * @return CategoryInterface
      */
     public function setCustomListLayout($customListLayout);
 
     /**
-     * Get defaultParentId
+     * Get defaultParentId.
      *
-     * @return integer
+     * @return int
      */
     public function getDefaultParentId();
 
     /**
-     * Set defaultParentId
+     * Set defaultParentId.
      *
-     * @param integer $defaultParentId
+     * @param int $defaultParentId
      *
      * @return CategoryInterface
      */
     public function setDefaultParentId($defaultParentId);
 
     /**
-     * Get editedDate
+     * Get editedDate.
      *
      * @return \DateTime
      */
     public function getEditedDate();
 
     /**
-     * Set editedDate
+     * Set editedDate.
      *
      * @param \DateTime $editedDate
      *
@@ -101,101 +101,101 @@ interface CategoryInterface
     public function setEditedDate($editedDate);
 
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return CategoryInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get infoLayout
+     * Get infoLayout.
      *
-     * @return integer
+     * @return int
      */
     public function getInfoLayout();
 
     /**
-     * Set infoLayout
+     * Set infoLayout.
      *
-     * @param integer $infoLayout
+     * @param int $infoLayout
      *
      * @return CategoryInterface
      */
     public function setInfoLayout($infoLayout);
 
     /**
-     * Get internalId
+     * Get internalId.
      *
-     * @return integer
+     * @return int
      */
     public function getInternalId();
 
     /**
-     * Set internalId
+     * Set internalId.
      *
-     * @param integer $internalId
+     * @param int $internalId
      *
      * @return CategoryInterface
      */
     public function setInternalId($internalId);
 
     /**
-     * Get listLayout
+     * Get listLayout.
      *
-     * @return integer
+     * @return int
      */
     public function getListLayout();
 
     /**
-     * Set listLayout
+     * Set listLayout.
      *
-     * @param integer $listLayout
+     * @param int $listLayout
      *
      * @return CategoryInterface
      */
     public function setListLayout($listLayout);
 
     /**
-     * Get modified
+     * Get modified.
      *
-     * @return boolean
+     * @return bool
      */
     public function getModified();
 
     /**
-     * Set modified
+     * Set modified.
      *
-     * @param boolean $modified
+     * @param bool $modified
      *
      * @return CategoryInterface
      */
     public function setModified($modified);
 
     /**
-     * Get parentIdList
+     * Get parentIdList.
      *
      * @return array
      */
     public function getParentIdList();
 
     /**
-     * Set parentIdList
+     * Set parentIdList.
      *
      * @param array $parentIdList
      *
@@ -204,7 +204,7 @@ interface CategoryInterface
     public function setParentIdList($parentIdList);
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      *
@@ -213,14 +213,14 @@ interface CategoryInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
 
     /**
-     * Remove product
+     * Remove product.
      *
      * @param ProductInterface $product
      *
@@ -229,14 +229,14 @@ interface CategoryInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get segmentIdList
+     * Get segmentIdList.
      *
      * @return array
      */
     public function getSegmentIdList();
 
     /**
-     * Set segmentIdList
+     * Set segmentIdList.
      *
      * @param array $segmentIdList
      *
@@ -245,14 +245,14 @@ interface CategoryInterface
     public function setSegmentIdList($segmentIdList);
 
     /**
-     * Get textKeywords
+     * Get textKeywords.
      *
      * @return string
      */
     public function getTextKeywords();
 
     /**
-     * Set textKeywords
+     * Set textKeywords.
      *
      * @param string $textKeywords
      *
@@ -261,14 +261,14 @@ interface CategoryInterface
     public function setTextKeywords($textKeywords);
 
     /**
-     * Get textCategoryNumber
+     * Get textCategoryNumber.
      *
      * @return string
      */
     public function getTextCategoryNumber();
 
     /**
-     * Set textCategoryNumber
+     * Set textCategoryNumber.
      *
      * @param string $textCategoryNumber
      *
@@ -277,14 +277,14 @@ interface CategoryInterface
     public function setTextCategoryNumber($textCategoryNumber);
 
     /**
-     * Get textDescription
+     * Get textDescription.
      *
      * @return string
      */
     public function getTextDescription();
 
     /**
-     * Set textDescription
+     * Set textDescription.
      *
      * @param string $textDescription
      *
@@ -293,62 +293,62 @@ interface CategoryInterface
     public function setTextDescription($textDescription);
 
     /**
-     * Get textExternalId
+     * Get textExternalId.
      *
-     * @return integer
+     * @return int
      */
     public function getTextExternalId();
 
     /**
-     * Set textExternalId
+     * Set textExternalId.
      *
-     * @param integer $textExternalId
+     * @param int $textExternalId
      *
      * @return CategoryInterface
      */
     public function setTextExternalId($textExternalId);
 
     /**
-     * Get textHidden
+     * Get textHidden.
      *
-     * @return boolean
+     * @return bool
      */
     public function getTextHidden();
 
     /**
-     * Set textHidden
+     * Set textHidden.
      *
-     * @param boolean $textHidden
+     * @param bool $textHidden
      *
      * @return CategoryInterface
      */
     public function setTextHidden($textHidden);
 
     /**
-     * Get textHiddenMobile
+     * Get textHiddenMobile.
      *
-     * @return boolean
+     * @return bool
      */
     public function getTextHiddenMobile();
 
     /**
-     * Set textHiddenMobile
+     * Set textHiddenMobile.
      *
-     * @param boolean $textHiddenMobile
+     * @param bool $textHiddenMobile
      *
      * @return CategoryInterface
      */
     public function setTextHiddenMobile($textHiddenMobile);
 
     /**
-     * Get textIcon
+     * Get textIcon.
      *
      * @return string
      */
     public function getTextIcon();
 
     /**
-     * Set textIcon
+     * Set textIcon.
      *
      * @param string $textIcon
      *
@@ -357,14 +357,14 @@ interface CategoryInterface
     public function setTextIcon($textIcon);
 
     /**
-     * Get textImage
+     * Get textImage.
      *
      * @return string
      */
     public function getTextImage();
 
     /**
-     * Set textImage
+     * Set textImage.
      *
      * @param string $textImage
      *
@@ -373,14 +373,14 @@ interface CategoryInterface
     public function setTextImage($textImage);
 
     /**
-     * Get textLink
+     * Get textLink.
      *
      * @return string
      */
     public function getTextLink();
 
     /**
-     * Set textLink
+     * Set textLink.
      *
      * @param string $textLink
      *
@@ -389,14 +389,14 @@ interface CategoryInterface
     public function setTextLink($textLink);
 
     /**
-     * Get textMetaDescription
+     * Get textMetaDescription.
      *
      * @return string
      */
     public function getTextMetaDescription();
 
     /**
-     * Set textMetaDescription
+     * Set textMetaDescription.
      *
      * @param string $textMetaDescription
      *
@@ -405,14 +405,14 @@ interface CategoryInterface
     public function setTextMetaDescription($textMetaDescription);
 
     /**
-     * Get textName
+     * Get textName.
      *
      * @return string
      */
     public function getTextName();
 
     /**
-     * Set textName
+     * Set textName.
      *
      * @param string $textName
      *
@@ -421,46 +421,46 @@ interface CategoryInterface
     public function setTextName($textName);
 
     /**
-     * Get textSiteId
+     * Get textSiteId.
      *
-     * @return integer
+     * @return int
      */
     public function getTextSiteId();
 
     /**
-     * Set textSiteId
+     * Set textSiteId.
      *
-     * @param integer $textSiteId
+     * @param int $textSiteId
      *
      * @return CategoryInterface
      */
     public function setTextSiteId($textSiteId);
 
     /**
-     * Get textSortOrder
+     * Get textSortOrder.
      *
-     * @return integer
+     * @return int
      */
     public function getTextSortOrder();
 
     /**
-     * Set textSortOrder
+     * Set textSortOrder.
      *
-     * @param integer $textSortOrder
+     * @param int $textSortOrder
      *
      * @return CategoryInterface
      */
     public function setTextSortOrder($textSortOrder);
 
     /**
-     * Get textString
+     * Get textString.
      *
      * @return string
      */
     public function getTextString();
 
     /**
-     * Set textString
+     * Set textString.
      *
      * @param string $textString
      *
@@ -469,14 +469,14 @@ interface CategoryInterface
     public function setTextString($textString);
 
     /**
-     * Get textTitle
+     * Get textTitle.
      *
      * @return string
      */
     public function getTextTitle();
 
     /**
-     * Set textTitle
+     * Set textTitle.
      *
      * @param string $textTitle
      *
@@ -485,14 +485,14 @@ interface CategoryInterface
     public function setTextTitle($textTitle);
 
     /**
-     * Get textUrlname
+     * Get textUrlname.
      *
      * @return string
      */
     public function getTextUrlname();
 
     /**
-     * Set textUrlname
+     * Set textUrlname.
      *
      * @param string $textUrlname
      *

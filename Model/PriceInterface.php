@@ -5,46 +5,46 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface PriceInterface
 {
     /**
-     * Get amount
+     * Get amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
-     * Set amount
+     * Set amount.
      *
-     * @param integer $amount
+     * @param int $amount
      *
      * @return PriceInterface
      */
     public function setAmount($amount);
 
     /**
-     * Get avance
+     * Get avance.
      *
-     * @return integer
+     * @return int
      */
     public function getAvance();
 
     /**
-     * Set avance
+     * Set avance.
      *
-     * @param integer $avance
+     * @param int $avance
      *
      * @return PriceInterface
      */
     public function setAvance($avance);
 
     /**
-     * Get b2bGroupId
+     * Get b2bGroupId.
      *
      * @return string
      */
     public function getB2bGroupId();
 
     /**
-     * Set b2bGroupId
+     * Set b2bGroupId.
      *
      * @param string $b2bGroupId
      *
@@ -53,14 +53,14 @@ interface PriceInterface
     public function setB2bGroupId($b2bGroupId);
 
     /**
-     * Get currencyCode
+     * Get currencyCode.
      *
      * @return string
      */
     public function getCurrencyCode();
 
     /**
-     * Set currencyCode
+     * Set currencyCode.
      *
      * @param string $currencyCode
      *
@@ -69,23 +69,23 @@ interface PriceInterface
     public function setCurrencyCode($currencyCode);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get isoCode
+     * Get isoCode.
      *
-     * @return integer
+     * @return int
      */
     public function getIsoCode();
 
     /**
-     * Set isoCode
+     * Set isoCode.
      *
-     * @param integer $isoCode
+     * @param int $isoCode
      *
      * @return PriceInterface
      */
@@ -108,23 +108,23 @@ interface PriceInterface
     public function setPeriod(PeriodInterface $period = null);
 
     /**
-     * Get periodId
+     * Get periodId.
      *
-     * @return integer
+     * @return int
      */
     public function getPeriodId();
 
     /**
-     * Set periodId
+     * Set periodId.
      *
-     * @param integer $periodId
+     * @param int $periodId
      *
      * @return PriceInterface
      */
     public function setPeriodId($periodId);
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      *
@@ -133,14 +133,14 @@ interface PriceInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
 
     /**
-     * Remove product
+     * Remove product.
      *
      * @param ProductInterface $product
      *
@@ -149,14 +149,14 @@ interface PriceInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get specialOfferPrice
+     * Get specialOfferPrice.
      *
      * @return string
      */
     public function getSpecialOfferPrice();
 
     /**
-     * Set specialOfferPrice
+     * Set specialOfferPrice.
      *
      * @param string $specialOfferPrice
      *
@@ -165,14 +165,14 @@ interface PriceInterface
     public function setSpecialOfferPrice($specialOfferPrice);
 
     /**
-     * Get unitPrice
+     * Get unitPrice.
      *
      * @return string
      */
     public function getUnitPrice();
 
     /**
-     * Set unitPrice
+     * Set unitPrice.
      *
      * @param string $unitPrice
      *
