@@ -373,6 +373,79 @@ class Price extends BasePrice
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Product as BaseProduct;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class Product extends BaseProduct
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_category")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Category")
+     */
+    protected $categories;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_brand")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Manufacturer")
+     */
+    protected $manufacturers;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_price")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Price")
+     */
+    protected $prices;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_variant")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Variant")
+     */
+    protected $variants;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_variant_group")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="VariantGroup")
+     */
+    protected $variantGroups;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+
+
+<?php
+
+namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\ShippingMethod as BaseShippingMethod;
 
