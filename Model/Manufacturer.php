@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +47,14 @@ abstract class Manufacturer implements ManufacturerInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $name;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

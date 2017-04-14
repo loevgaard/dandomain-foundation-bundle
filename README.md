@@ -7,102 +7,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Loevgaard\DandomainFoundationBundle\Model\Order as BaseOrder;
-
-/**
- * @ORM\Entity()
- * @ORM\Table()
- */
-class Order extends BaseOrder
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Id
-     */
-    protected $id;
-
-    /**
-     * @var Customer
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Customer")
-     */
-    protected $customer;
-
-    /**
-     * @var Delivery
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Delivery")
-     */
-    protected $delivery;
-
-    /**
-     * @var Invoice
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Invoice")
-     */
-    protected $invoice;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(mappedBy="order", onDelete="SET NULL", targetEntity="OrderLine")
-     */
-    protected $orderLines;
-
-    /**
-     * @var PaymentMethod
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="PaymentMethod")
-     */
-    protected $paymentMethod;
-
-    /**
-     * @var ShippingMethod
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="ShippingMethod")
-     */
-    protected $shippingMethod;
-
-    /**
-     * @var Site
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Site")
-     */
-    protected $site;
-
-    /**
-     * @var State
-     *
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="State")
-     */
-    protected $state;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->orderLines = new ArrayCollection();
-    }
-}
-
-
-<?php
-
-namespace AppBundle\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Category as BaseCategory;
 
 /**
@@ -132,7 +36,7 @@ class Category extends BaseCategory
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        parent::__construct();
     }
 }
 
@@ -244,7 +148,103 @@ class Manufacturer extends BaseManufacturer
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        parent::__construct();
+    }
+}
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Order as BaseOrder;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class Order extends BaseOrder
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var Customer
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Customer")
+     */
+    protected $customer;
+
+    /**
+     * @var Delivery
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Delivery")
+     */
+    protected $delivery;
+
+    /**
+     * @var Invoice
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Invoice")
+     */
+    protected $invoice;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(mappedBy="order", onDelete="SET NULL", targetEntity="OrderLine")
+     */
+    protected $orderLines;
+
+    /**
+     * @var PaymentMethod
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="PaymentMethod")
+     */
+    protected $paymentMethod;
+
+    /**
+     * @var ShippingMethod
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ShippingMethod")
+     */
+    protected $shippingMethod;
+
+    /**
+     * @var Site
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Site")
+     */
+    protected $site;
+
+    /**
+     * @var State
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="State")
+     */
+    protected $state;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
     }
 }
 
@@ -364,7 +364,7 @@ class Price extends BasePrice
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        parent::__construct();
     }
 }
 
@@ -476,7 +476,7 @@ class Variant extends BaseVariant
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        parent::__construct();
     }
 }
 
@@ -516,7 +516,7 @@ class VariantGroup extends BaseVariantGroup
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        parent::__construct();
     }
 }
 ```

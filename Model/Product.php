@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -337,6 +338,18 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="integer")
      */
     protected $weight;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->manufacturers = new ArrayCollection();
+        $this->prices = new ArrayCollection();
+        $this->variants = new ArrayCollection();
+        $this->variantGroups = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

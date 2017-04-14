@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,6 +80,14 @@ abstract class Price implements PriceInterface
      * @ORM\Column(nullable=true, type="decimal")
      */
     protected $unitPrice;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

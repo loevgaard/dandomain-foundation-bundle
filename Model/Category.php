@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -223,6 +224,14 @@ abstract class Category implements CategoryInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $textUrlname;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

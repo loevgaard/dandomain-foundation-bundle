@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +40,14 @@ abstract class Variant implements VariantInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $text;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

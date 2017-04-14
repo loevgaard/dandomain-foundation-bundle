@@ -238,6 +238,14 @@ abstract class Order implements OrderInterface
     protected $xmlParams;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->orderLines = new ArrayCollection();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getComment()
