@@ -415,6 +415,45 @@ class Variant extends BaseVariant
      */
     protected $id;
 }
+
+
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\VariantGroup as BaseVariantGroup;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ **/
+class VariantGroup extends BaseVariantGroup
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="variantGroups", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+}
 ```
 
 ```yaml
@@ -434,4 +473,5 @@ loevgaard_dandomain_foundation:
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State
     variant_class: AppBundle\Entity\Variant
+    variant_group_class: AppBundle\Entity\VariantGroup
 ```

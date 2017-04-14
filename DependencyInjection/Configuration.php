@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('site_class')->end()
                 ->scalarNode('state_class')->end()
                 ->scalarNode('variant_class')->end()
+                ->scalarNode('variant_group_class')->end()
             ->end()
         ;
 
