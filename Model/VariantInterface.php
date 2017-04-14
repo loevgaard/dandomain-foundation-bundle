@@ -28,6 +28,31 @@ interface VariantInterface
     public function getId();
 
     /**
+     * Add product
+     *
+     * @param ProductInterface $product
+     *
+     * @return VariantInterface
+     */
+    public function addProduct(ProductInterface $product);
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts();
+
+    /**
+     * Remove product
+     *
+     * @param ProductInterface $product
+     *
+     * @return VariantInterface
+     */
+    public function removeProduct(ProductInterface $product);
+
+    /**
      * Get sortOrder
      *
      * @return integer

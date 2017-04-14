@@ -15,6 +15,11 @@ abstract class Variant implements VariantInterface
     protected $id;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $products;
+
+    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -59,6 +64,34 @@ abstract class Variant implements VariantInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProduct(ProductInterface $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProduct(ProductInterface $product)
+    {
+        $this->products->removeElement($product);
+
+        return $this;
     }
 
     /**
