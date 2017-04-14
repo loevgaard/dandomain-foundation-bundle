@@ -461,7 +461,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Segment as BaseSegment;
 /**
  * @ORM\Entity()
  * @ORM\Table()
- **/
+ */
 class Segment extends BaseSegment
 {
     /**
