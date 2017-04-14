@@ -7,7 +7,7 @@ use Dandomain\Api\Api as DandomainApi;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class Synchronizer implements SynchronizerInterface
+abstract class Synchronizer
 {
     /**
      * @var ObjectManager
@@ -20,11 +20,6 @@ abstract class Synchronizer implements SynchronizerInterface
     protected $api;
 
     /**
-     * @var OutputInterface
-     */
-    protected $output;
-
-    /**
      * @var string
      */
     protected $entityInterfaceName;
@@ -33,16 +28,6 @@ abstract class Synchronizer implements SynchronizerInterface
      * @var string
      */
     protected $entityClassName;
-
-    /**
-     * @var SiteSynchronizer
-     */
-    protected $siteSynchronizer;
-
-    /**
-     * @var StateSynchronizer
-     */
-    protected $stateSynchronizer;
 
     /**
      * @param ObjectManager $objectManager
@@ -62,53 +47,5 @@ abstract class Synchronizer implements SynchronizerInterface
             }
             $this->entityClassName = $entityClassName;
         }
-    }
-
-    /**
-     * @param OutputInterface $output
-     *
-     * @return Synchronizer
-     */
-    public function setOutput($output)
-    {
-        $this->output = $output;
-
-        return $this;
-    }
-
-    /**
-     * @return SiteSynchronizer
-     */
-    public function getSiteSynchronizer()
-    {
-        if (!$this->siteSynchronizer) {
-            $this->siteSynchronizer = new SiteSynchronizer($this->objectManager, $this->api);
-        }
-
-        return $this->siteSynchronizer;
-    }
-
-    /**
-     * @return StateSynchronizer
-     */
-    public function getStateSynchronizer()
-    {
-        if (!$this->stateSynchronizer) {
-            $this->stateSynchronizer = new StateSynchronizer($this->objectManager, $this->api);
-        }
-
-        return $this->stateSynchronizer;
-    }
-
-    /**
-     * @param SiteSynchronizer $siteSynchronizer
-     *
-     * @return Synchronizer
-     */
-    public function setEntityClassName(SiteSynchronizer $siteSynchronizer)
-    {
-        $this->siteSynchronizer = $siteSynchronizer;
-
-        return $this;
     }
 }
