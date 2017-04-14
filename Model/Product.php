@@ -359,6 +359,34 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addCategory(CategoryInterface $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCategory(CategoryInterface $category)
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCategoryIdList()
     {
         return $this->categoryIdList;
@@ -827,6 +855,34 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addPrice(PriceInterface $price)
+    {
+        $this->prices[] = $price;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePrice(PriceInterface $price)
+    {
+        $this->prices->removeElement($price);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getProductRelations()
     {
         return $this->productRelations;
@@ -1000,6 +1056,62 @@ abstract class Product implements ProductInterface
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariant(VariantInterface $variant)
+    {
+        $this->variants[] = $variant;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariants()
+    {
+        return $this->variants;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariant(VariantInterface $variant)
+    {
+        $this->variants->removeElement($variant);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariantGroup(VariantGroupInterface $variantGroup)
+    {
+        $this->variantGroups[] = $variantGroup;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariantGroups()
+    {
+        return $this->variantGroups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariantGroup(VariantGroupInterface $variantGroup)
+    {
+        $this->variantGroups->removeElement($variantGroup);
 
         return $this;
     }

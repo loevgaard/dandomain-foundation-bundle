@@ -21,6 +21,31 @@ interface ProductInterface
     public function setBarCodeNumber($barCodeNumber);
 
     /**
+     * Add category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return ProductInterface
+     */
+    public function addCategory(CategoryInterface $category);
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories();
+
+    /**
+     * Remove category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return ProductInterface
+     */
+    public function removeCategory(CategoryInterface $category);
+
+    /**
      * Get categoryIdList
      *
      * @return array
@@ -437,6 +462,31 @@ interface ProductInterface
     public function setPicture($picture);
 
     /**
+     * Add price
+     *
+     * @param PriceInterface $price
+     *
+     * @return ProductInterface
+     */
+    public function addPrice(PriceInterface $price);
+
+    /**
+     * Get prices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrices();
+
+    /**
+     * Remove price
+     *
+     * @param PriceInterface $price
+     *
+     * @return ProductInterface
+     */
+    public function removePrice(PriceInterface $price);
+
+    /**
      * Get productRelations
      *
      * @return array
@@ -595,6 +645,56 @@ interface ProductInterface
      * @return ProductInterface
      */
     public function setUpdated($updated);
+
+    /**
+     * Add variant
+     *
+     * @param VariantInterface $variant
+     *
+     * @return ProductInterface
+     */
+    public function addVariant(VariantInterface $variant);
+
+    /**
+     * Get variants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVariants();
+
+    /**
+     * Remove variant
+     *
+     * @param VariantInterface $variant
+     *
+     * @return ProductInterface
+     */
+    public function removeVariant(VariantInterface $variant);
+
+    /**
+     * Add variantGroup
+     *
+     * @param VariantGroupInterface $variantGroup
+     *
+     * @return ProductInterface
+     */
+    public function addVariantGroup(VariantGroupInterface $variantGroup);
+
+    /**
+     * Get variantGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVariantGroups();
+
+    /**
+     * Remove variantGroup
+     *
+     * @param VariantGroupInterface $variantGroup
+     *
+     * @return ProductInterface
+     */
+    public function removeVariantGroup(VariantGroupInterface $variantGroup);
 
     /**
      * Get variantGroupIdList
