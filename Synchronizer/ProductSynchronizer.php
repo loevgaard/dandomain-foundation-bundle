@@ -27,7 +27,7 @@ class ProductSynchronizer extends Synchronizer
     public function syncProduct($product, $flush = true)
     {
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $product->id,
+            'number' => $product->number,
         ]);
 
         if (!($entity)) {
