@@ -84,12 +84,16 @@ class ProductService
             if (($end instanceof \DateTime) and ($end < $endStep)) {
                 break;
             }
-
-throw new \Exception("a");
-            $products = GuzzleHttp\json_decode($this->api->product->getProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
+var_dump($startStep);
+            if (true === $changed) {
+                $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
+            } else {
+                $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
+            }
 
             foreach ($products as $product) {
                 $this->productSynchronizer->syncProduct($product, true);
+throw new \Exception('a');
             }
 
             file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
