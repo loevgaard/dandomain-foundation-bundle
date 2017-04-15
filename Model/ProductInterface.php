@@ -110,6 +110,22 @@ interface ProductInterface
     public function setCreated($created);
 
     /**
+     * Get createdBy
+     *
+     * @return string
+     */
+    public function getCreatedBy();
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     *
+     * @return Product
+     */
+    public function setCreatedBy($createdBy);
+
+    /**
      * Get defaultCategoryId.
      *
      * @return int
@@ -670,6 +686,22 @@ interface ProductInterface
      * @return ProductInterface
      */
     public function setUpdated($updated);
+
+    /**
+     * Get updatedBy
+     *
+     * @return string
+     */
+    public function getUpdatedBy();
+
+    /**
+     * Set updatedBy
+     *
+     * @param string $updatedBy
+     *
+     * @return Product
+     */
+    public function setUpdatedBy($updatedBy);
 
     /**
      * Add variant.

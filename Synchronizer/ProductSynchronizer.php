@@ -34,13 +34,24 @@ class ProductSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
+        if ($order->created) {
+            $created = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
+            $created->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $created = null;
+        }
+
         $entity
-            ->setDisabled($product->disabled ? true : false)
-            ->setExternalId($product->id)
-            ->setEndDate(\Dandomain\Api\jsonDateToDate($product->endDate))
-            ->setStartDate(\Dandomain\Api\jsonDateToDate($product->startDate))
-            ->setTitle($product->title)
+            ->setBarCodeNumber($product->barCodeNumber)
+            ->setCategoryIdList($product->categoryIdList)
+            ->setComments($product->comments)
+            ->setCostPrice($product->costPrice)
+            ->setCostPrice($product->costPrice)
         ;
+
+        if (null !== $created) {
+            $entity->setCreated($created);
+        }
 
         $this->objectManager->persist($entity);
 

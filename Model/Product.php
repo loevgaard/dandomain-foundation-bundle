@@ -473,6 +473,24 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultCategoryId()
     {
         return $this->defaultCategoryId;
@@ -1098,6 +1116,24 @@ abstract class Product implements ProductInterface
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
