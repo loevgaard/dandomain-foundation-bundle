@@ -46,7 +46,13 @@ class ProductSynchronizer extends Synchronizer
             ->setCategoryIdList($product->categoryIdList)
             ->setComments($product->comments)
             ->setCostPrice($product->costPrice)
-            ->setCostPrice($product->costPrice)
+            ->setCreatedBy($product->createdBy)
+            ->setDefaultCategoryId($product->defaultCategoryId)
+            ->setDisabledVariantIdList($product->disabledVariantIdList)
+            ->setEdbPriserProductNumber($product->edbPriserProductNumber)
+            ->setExternalId($product->id)
+            ->setFileSaleLink($product->fileSaleLink)
+            ->setGoogleFeedCategory($product->googleFeedCategory)
         ;
 
         if (null !== $created) {
