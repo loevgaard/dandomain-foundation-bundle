@@ -47,10 +47,11 @@ class ProductService
     /**
      * Synchronizates products.
      *
+     * @param bool $changed
      * @param string $end
      * @param string $start
      */
-    public function productSync($end = null, $start = null)
+    public function productSync($changed = false, $end = null, $start = null)
     {
         $settings = unserialize(@file_get_contents($this->settingsFile));
 
@@ -83,7 +84,8 @@ class ProductService
             if (($end instanceof \DateTime) and ($end < $endStep)) {
                 break;
             }
-            throw new \Exception('aa');
+
+throw new \Exception("a");
             $products = GuzzleHttp\json_decode($this->api->product->getProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
             foreach ($products as $product) {
