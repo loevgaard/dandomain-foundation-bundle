@@ -53,53 +53,63 @@ class ProductService
      */
     public function productSync($changed = false, $end = null, $start = null)
     {
-        $settings = unserialize(@file_get_contents($this->settingsFile));
+        if (true === $changed) {
+            $settings = unserialize(@file_get_contents($this->settingsFile));
 
-        if (null !== $start) {
-            $start = new \DateTime($start);
-            $start->setTime(0, 0, 0);
-        } elseif (($settings) and array_key_exists('end', $settings)) {
-            $start = $settings['end'];
-        } else {
-            $start = new \DateTime('2000-01-01');
-            $start->setTime(0, 0, 0);
-        }
-
-        $startStep = clone $start;
-
-        if (null !== $end) {
-            $end = new \DateTime($end);
-        }
-
-        if ($startStep instanceof \DateTime) {
-            $endStep = clone $startStep;
-            $endStep = $endStep->add(new \DateInterval('PT15M'));
-        }
-
-        do {
-            $now = new \DateTime('NOW');
-            if ($startStep > $now) {
-                break;
-            }
-            if (($end instanceof \DateTime) and ($end < $endStep)) {
-                break;
-            }
-var_dump($startStep);
-            if (true === $changed) {
-                $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
+            if (null !== $start) {
+                $start = new \DateTime($start);
+                $start->setTime(0, 0, 0);
+            } elseif (($settings) and array_key_exists('end', $settings)) {
+                $start = $settings['end'];
             } else {
+                $start = new \DateTime('2000-01-01');
+                $start->setTime(0, 0, 0);
+            }
+
+            $startStep = clone $start;
+
+            if (null !== $end) {
+                $end = new \DateTime($end);
+            }
+
+            if ($startStep instanceof \DateTime) {
+                $endStep = clone $startStep;
+                $endStep = $endStep->add(new \DateInterval('PT15M'));
+            }
+
+            do {
+                $now = new \DateTime('NOW');
+                if ($startStep > $now) {
+                    break;
+                }
+                if (($end instanceof \DateTime) and ($end < $endStep)) {
+                    break;
+                }
+
                 $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
-            }
 
-            foreach ($products as $product) {
-                $this->productSynchronizer->syncProduct($product, true);
-throw new \Exception('a');
-            }
+                foreach ($products as $product) {
+                    $this->productSynchronizer->syncProduct($product, true);
+    throw new \Exception('a');
+                }
 
-            file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
-            $startStep = clone $endStep;
-            $endStep = clone $startStep;
-            $endStep = $endStep->add(new \DateInterval('PT15M'));
-        } while (true);
+                file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
+                $startStep = clone $endStep;
+                $endStep = clone $startStep;
+                $endStep = $endStep->add(new \DateInterval('PT15M'));
+            } while (true);
+        } else {
+            $pageSize = 200;
+            $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($pageSize)->getBody()->getContents());
+
+            for ($page = $pageCount; $page >= 1; --$page) {
+                $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $pageSize)->getBody()->getContents());
+
+                foreach ($products as $product) {
+                    $this->productSynchronizer->syncProduct($product, true);
+throw new \Exception('bb');
+                }
+            }
+        }
     }
 }
