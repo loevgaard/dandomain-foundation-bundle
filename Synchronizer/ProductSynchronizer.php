@@ -34,8 +34,8 @@ class ProductSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
-        if ($order->created) {
-            $created = \Dandomain\Api\jsonDateToDate($order->modifiedDate);
+        if ($product->created) {
+            $created = \Dandomain\Api\jsonDateToDate($product->created);
             $created->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
         } else {
             $created = null;
@@ -53,6 +53,19 @@ class ProductSynchronizer extends Synchronizer
             ->setExternalId($product->id)
             ->setFileSaleLink($product->fileSaleLink)
             ->setGoogleFeedCategory($product->googleFeedCategory)
+            ->setIsGiftCertificate($product->isGiftCertificate)
+            ->setIsModified($product->isModified)
+            ->setIsRateVariants($product->isRateVariants)
+            ->setIsReviewVariants($product->isReviewVariants)
+            ->setIsVariantMaster($product->isVariantMaster)
+            ->setLocationNumber($product->locationNumber)
+            ->setManufacturereIdList($product->manufacturereIdList)
+            ->setMaxBuyAmount($product->maxBuyAmount)
+            ->setMedias($product->media)
+            ->setMinBuyAmount($product->minBuyAmount)
+            ->setMinBuyAmountB2B($product->minBuyAmountB2B)
+            ->setNumber($product->number)
+            ->setPicture($product->picture)
         ;
 
         if (null !== $created) {
