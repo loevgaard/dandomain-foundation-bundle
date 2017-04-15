@@ -41,6 +41,13 @@ class ProductSynchronizer extends Synchronizer
             $created = null;
         }
 
+        if ($product->updated) {
+            $updated = \Dandomain\Api\jsonDateToDate($product->updated);
+            $updated->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $updated = null;
+        }
+
         $entity
             ->setBarCodeNumber($product->barCodeNumber)
             ->setCategoryIdList($product->categoryIdList)
@@ -66,6 +73,15 @@ class ProductSynchronizer extends Synchronizer
             ->setMinBuyAmountB2B($product->minBuyAmountB2B)
             ->setNumber($product->number)
             ->setPicture($product->picture)
+            ->setProductRelations($product->productRelations)
+            ->setProductType($product->productType)
+            ->setSalesCount($product->salesCount)
+            ->setSegmentIdList($product->segmentIdList)
+            ->setSiteSettings($product->siteSettings)
+            ->setSortOrder($product->sortOrder)
+            ->setStockCount($product->stockCount)
+            ->setStockLimit($product->stockLimit)
+            ->setTypeId($product->typeId)
         ;
 
         if (null !== $created) {
