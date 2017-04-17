@@ -7,6 +7,11 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductInterface;
 class ProductSynchronizer extends Synchronizer
 {
     /**
+     * @var CategorySynchronizer
+     */
+    protected $categorySynchronizer;
+
+    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Product';
@@ -15,6 +20,20 @@ class ProductSynchronizer extends Synchronizer
      * @var string
      */
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductInterface';
+
+    /**
+     * Set CategorySynchronizer.
+     *
+     * @param CategorySynchronizer $categorySynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setCategorySynchronizer(CategorySynchronizer $categorySynchronizer)
+    {
+        $this->categorySynchronizer = $categorySynchronizer;
+
+        return $this;
+    }
 
     /**
      * Synchronizes Product.
