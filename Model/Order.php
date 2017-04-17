@@ -510,7 +510,9 @@ abstract class Order implements OrderInterface
      */
     public function addOrderLine(OrderLineInterface $orderLine)
     {
-        $this->orderLines[] = $orderLine;
+        if (!($this->orderLines->contains($orderLine))) {
+            $this->orderLines[] = $orderLine;
+        }
 
         return $this;
     }

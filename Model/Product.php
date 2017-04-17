@@ -893,7 +893,9 @@ abstract class Product implements ProductInterface
      */
     public function addPrice(PriceInterface $price)
     {
-        $this->prices[] = $price;
+        if (!($this->prices->contains($price))) {
+            $this->prices[] = $price;
+        }
 
         return $this;
     }
@@ -975,7 +977,9 @@ abstract class Product implements ProductInterface
      */
     public function addSegment(SegmentInterface $segment)
     {
-        $this->segments[] = $segment;
+        if (!($this->segments->contains($segment))) {
+            $this->segments[] = $segment;
+        }
 
         return $this;
     }
@@ -1147,7 +1151,9 @@ abstract class Product implements ProductInterface
      */
     public function addVariant(VariantInterface $variant)
     {
-        $this->variants[] = $variant;
+        if (!($this->variants->contains($variant))) {
+            $this->variants[] = $variant;
+        }
 
         return $this;
     }
@@ -1175,7 +1181,9 @@ abstract class Product implements ProductInterface
      */
     public function addVariantGroup(VariantGroupInterface $variantGroup)
     {
-        $this->variantGroups[] = $variantGroup;
+        if (!($this->variantGroups->contains($variantGroup))) {
+            $this->variantGroups[] = $variantGroup;
+        }
 
         return $this;
     }
