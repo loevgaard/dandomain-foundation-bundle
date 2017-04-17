@@ -73,7 +73,9 @@ abstract class Segment implements SegmentInterface
      */
     public function addProduct(ProductInterface $product)
     {
-        $this->products[] = $product;
+        if (!($this->products->contains($product))) {
+            $this->products[] = $product;
+        }
 
         return $this;
     }
