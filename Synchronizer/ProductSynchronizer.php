@@ -117,6 +117,11 @@ class ProductSynchronizer extends Synchronizer
             $entity->setUpdated($updated);
         }
 
+        foreach ($product->productCategories as $productCategory) {
+            $category = $this->categorySynchronizer->syncCategory($productCategory, $flush);
+            $entity->addCategory($category);
+        }
+
         $this->objectManager->persist($entity);
 
         if (true === $flush) {

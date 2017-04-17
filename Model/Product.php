@@ -375,7 +375,9 @@ abstract class Product implements ProductInterface
      */
     public function addCategory(CategoryInterface $category)
     {
-        $this->categories[] = $category;
+        if (!($this->categories->contains($category))) {
+            $this->categories[] = $category;
+        }
 
         return $this;
     }
