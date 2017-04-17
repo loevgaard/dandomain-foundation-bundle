@@ -82,10 +82,20 @@ class ProductSynchronizer extends Synchronizer
             ->setStockCount($product->stockCount)
             ->setStockLimit($product->stockLimit)
             ->setTypeId($product->typeId)
+            ->setUpdatedBy($product->updatedBy)
+            ->setVariantGroupIdList($product->variantGroupIdList)
+            ->setVariantIdList($product->variantIdList)
+            ->setVariantMasterId($product->variantMasterId)
+            ->setVendorNumber($product->vendorNumber)
+            ->setWeight($product->weight)
         ;
 
         if (null !== $created) {
             $entity->setCreated($created);
+        }
+
+        if (null !== $updated) {
+            $entity->setUpdated($updated);
         }
 
         $this->objectManager->persist($entity);
