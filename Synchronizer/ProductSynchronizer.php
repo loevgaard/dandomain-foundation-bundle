@@ -12,6 +12,11 @@ class ProductSynchronizer extends Synchronizer
     protected $categorySynchronizer;
 
     /**
+     * @var ManufacturerSynchronizer
+     */
+    protected $manufacturerSynchronizer;
+
+    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Product';
@@ -31,6 +36,20 @@ class ProductSynchronizer extends Synchronizer
     public function setCategorySynchronizer(CategorySynchronizer $categorySynchronizer)
     {
         $this->categorySynchronizer = $categorySynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ManufacturerSynchronizer.
+     *
+     * @param ManufacturerSynchronizer $manufacturerSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setManufacturerSynchronizer(ManufacturerSynchronizer $manufacturerSynchronizer)
+    {
+        $this->manufacturerSynchronizer = $manufacturerSynchronizer;
 
         return $this;
     }
@@ -117,9 +136,14 @@ class ProductSynchronizer extends Synchronizer
             $entity->setUpdated($updated);
         }
 
-        foreach ($product->productCategories as $productCategory) {
-            $category = $this->categorySynchronizer->syncCategory($productCategory, $flush);
+        foreach ($product->productCategories as $categoryTmp) {
+            $category = $this->categorySynchronizer->syncCategory($categoryTmp, $flush);
             $entity->addCategory($category);
+        }
+
+        foreach ($product->manufacturers as $manufacturerTmp) {
+            $manufacturer = $this->manufacturerSynchronizer->syncManufacturer($manufacturerTmp, $flush);
+            $entity->addManufacturer($manufacturer);
         }
 
         $this->objectManager->persist($entity);

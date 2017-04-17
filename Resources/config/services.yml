@@ -133,6 +133,7 @@ services:
             - "%loevgaard_dandomain_foundation.product_class%"
         calls:
             - [setCategorySynchronizer, ["@loevgaard_dandomain_foundation.category_synchronizer"]]
+            - [setManufacturerSynchronizer, ["@loevgaard_dandomain_foundation.manufacturer_synchronizer"]]
 
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"

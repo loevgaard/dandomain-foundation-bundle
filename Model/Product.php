@@ -737,7 +737,9 @@ abstract class Product implements ProductInterface
      */
     public function addManufacturer(ManufacturerInterface $manufacturer)
     {
-        $this->manufacturers[] = $manufacturer;
+        if (!($this->manufacturers->contains($manufacturer))) {
+            $this->manufacturers[] = $manufacturer;
+        }
 
         return $this;
     }
