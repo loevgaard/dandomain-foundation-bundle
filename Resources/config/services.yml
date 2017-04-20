@@ -12,6 +12,7 @@ parameters:
     loevgaard_dandomain_foundation.payment_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PaymentMethodSynchronizer"
     loevgaard_dandomain_foundation.period_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\PeriodService"
     loevgaard_dandomain_foundation.period_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PeriodSynchronizer"
+    loevgaard_dandomain_foundation.price_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PriceSynchronizer"
     loevgaard_dandomain_foundation.product_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\ProductService"
     loevgaard_dandomain_foundation.product_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductSynchronizer"
     loevgaard_dandomain_foundation.shipping_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ShippingMethodSynchronizer"
@@ -118,6 +119,13 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.period_class%"
 
+    loevgaard_dandomain_foundation.price_synchronizer:
+        class: "%loevgaard_dandomain_foundation.price_synchronizer_class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.price_class%"
+
     loevgaard_dandomain_foundation.product_service:
         class: "%loevgaard_dandomain_foundation.product_service_class%"
         arguments:
@@ -134,6 +142,7 @@ services:
         calls:
             - [setCategorySynchronizer, ["@loevgaard_dandomain_foundation.category_synchronizer"]]
             - [setManufacturerSynchronizer, ["@loevgaard_dandomain_foundation.manufacturer_synchronizer"]]
+            - [setPriceSynchronizer, ["@loevgaard_dandomain_foundation.price_synchronizer"]]
 
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"

@@ -27,6 +27,11 @@ class ProductSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductInterface';
 
     /**
+     * @var PriceSynchronizer
+     */
+    protected $priceSynchronizer;
+
+    /**
      * Set CategorySynchronizer.
      *
      * @param CategorySynchronizer $categorySynchronizer
@@ -50,6 +55,20 @@ class ProductSynchronizer extends Synchronizer
     public function setManufacturerSynchronizer(ManufacturerSynchronizer $manufacturerSynchronizer)
     {
         $this->manufacturerSynchronizer = $manufacturerSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set PriceSynchronizer.
+     *
+     * @param PriceSynchronizer $priceSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setPriceSynchronizer(PriceSynchronizer $priceSynchronizer)
+    {
+        $this->priceSynchronizer = $priceSynchronizer;
 
         return $this;
     }
@@ -144,6 +163,11 @@ class ProductSynchronizer extends Synchronizer
         foreach ($product->manufacturers as $manufacturerTmp) {
             $manufacturer = $this->manufacturerSynchronizer->syncManufacturer($manufacturerTmp, $flush);
             $entity->addManufacturer($manufacturer);
+        }
+
+        foreach ($product->prices as $priceTmp) {
+            $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
+            $entity->addPrice($price);
         }
 
         $this->objectManager->persist($entity);
