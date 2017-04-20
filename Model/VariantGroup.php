@@ -19,27 +19,12 @@ abstract class VariantGroup implements VariantGroupInterface
      * @var ArrayCollection
      */
     protected $products;
-/*
-  <variantGroup>
-    <id>2147483647</id>
-    <selectText>String content</selectText>
-    <siteId>2147483647</siteId>
-    <sortOrder>2147483647</sortOrder>
-    <text>String content</text>
-    <variants>
-      <variant>
-        <id>2147483647</id>
-        <sortOrder>2147483647</sortOrder>
-        <text>String content</text>
-      </variant>
-      <variant>
-        <id>2147483647</id>
-        <sortOrder>2147483647</sortOrder>
-        <text>String content</text>
-      </variant>
-    </variants>
-  </variantGroup>
-*/
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $variants;
+
     /**
      * @var int
      *
@@ -102,6 +87,7 @@ abstract class VariantGroup implements VariantGroupInterface
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->variants = new ArrayCollection();
     }
 
     /**

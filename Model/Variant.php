@@ -21,6 +21,11 @@ abstract class Variant implements VariantInterface
     protected $products;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $variantGroups;
+
+    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -47,6 +52,7 @@ abstract class Variant implements VariantInterface
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->variantGroups = new ArrayCollection();
     }
 
     /**
