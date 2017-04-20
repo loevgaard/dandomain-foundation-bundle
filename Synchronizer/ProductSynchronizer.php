@@ -32,6 +32,11 @@ class ProductSynchronizer extends Synchronizer
     protected $priceSynchronizer;
 
     /**
+     * @var VariantSynchronizer
+     */
+    protected $variantSynchronizer;
+
+    /**
      * Set CategorySynchronizer.
      *
      * @param CategorySynchronizer $categorySynchronizer
@@ -69,6 +74,20 @@ class ProductSynchronizer extends Synchronizer
     public function setPriceSynchronizer(PriceSynchronizer $priceSynchronizer)
     {
         $this->priceSynchronizer = $priceSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set VariantSynchronizer.
+     *
+     * @param VariantSynchronizer $variantSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setVariantSynchronizer(VariantSynchronizer $variantSynchronizer)
+    {
+        $this->variantSynchronizer = $variantSynchronizer;
 
         return $this;
     }
@@ -168,6 +187,11 @@ class ProductSynchronizer extends Synchronizer
         foreach ($product->prices as $priceTmp) {
             $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
             $entity->addPrice($price);
+        }
+
+        foreach ($product->variants as $variantTmp) {
+            $variant = $this->variantSynchronizer->syncVariant($variantTmp, $flush);
+            $entity->addVariant($variant);
         }
 
         $this->objectManager->persist($entity);
