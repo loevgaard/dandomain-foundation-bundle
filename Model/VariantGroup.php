@@ -19,7 +19,27 @@ abstract class VariantGroup implements VariantGroupInterface
      * @var ArrayCollection
      */
     protected $products;
-
+/*
+  <variantGroup>
+    <id>2147483647</id>
+    <selectText>String content</selectText>
+    <siteId>2147483647</siteId>
+    <sortOrder>2147483647</sortOrder>
+    <text>String content</text>
+    <variants>
+      <variant>
+        <id>2147483647</id>
+        <sortOrder>2147483647</sortOrder>
+        <text>String content</text>
+      </variant>
+      <variant>
+        <id>2147483647</id>
+        <sortOrder>2147483647</sortOrder>
+        <text>String content</text>
+      </variant>
+    </variants>
+  </variantGroup>
+*/
     /**
      * @var int
      *
@@ -42,6 +62,13 @@ abstract class VariantGroup implements VariantGroupInterface
     protected $headline;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="text")
+     */
+    protected $selectText;
+
+    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -54,6 +81,13 @@ abstract class VariantGroup implements VariantGroupInterface
      * @ORM\Column(nullable=true, type="integer")
      */
     protected $sortOrder;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="text")
+     */
+    protected $text;
 
     /**
      * @var int
