@@ -90,7 +90,7 @@ class ProductService
 
                 foreach ($products as $product) {
                     $this->productSynchronizer->syncProduct($product, true);
-    throw new \Exception('a');
+throw new \Exception('aa');
                 }
 
                 file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
@@ -107,7 +107,10 @@ class ProductService
 
                 foreach ($products as $product) {
                     $this->productSynchronizer->syncProduct($product, true);
+var_dump($product->variantGroups);
+                    if ($product->variantGroups) {
 throw new \Exception('bb');
+                    }
                 }
             }
         }
