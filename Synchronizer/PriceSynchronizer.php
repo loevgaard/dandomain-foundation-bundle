@@ -26,20 +26,17 @@ class PriceSynchronizer extends Synchronizer
      */
     public function syncPrice($price, $flush = true)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $price->id,
-        ]);
-
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-        }
+        $entity = new $this->entityClassName();
 
         $entity
-            ->setDisabled($price->disabled ? true : false)
-            ->setExternalId($price->id)
-            ->setEndDate(\Dandomain\Api\jsonDateToDate($price->endDate))
-            ->setStartDate(\Dandomain\Api\jsonDateToDate($price->startDate))
-            ->setTitle($price->title)
+            ->setAmount($price->amount)
+            ->setAvance($price->avance)
+            ->setB2bGroupId($price->b2BGroupId)
+            ->setCurrencyCode($price->currencyCode)
+            ->setIsoCode($price->ISOCode)
+            ->setPeriodId($price->periodId)
+            ->setSpecialOfferPrice($price->specialOfferPrice)
+            ->setUnitPrice($price->unitPrice)
         ;
 
         $this->objectManager->persist($entity);
