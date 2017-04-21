@@ -61,13 +61,6 @@ abstract class Price implements PriceInterface
     protected $isoCode;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $periodId;
-
-    /**
      * @var float
      *
      * @ORM\Column(nullable=true, type="decimal")
@@ -201,24 +194,6 @@ abstract class Price implements PriceInterface
     public function setPeriod(PeriodInterface $period = null)
     {
         $this->period = $period;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPeriodId()
-    {
-        return $this->periodId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPeriodId($periodId)
-    {
-        $this->periodId = $periodId;
 
         return $this;
     }

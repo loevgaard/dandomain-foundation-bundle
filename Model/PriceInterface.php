@@ -108,22 +108,6 @@ interface PriceInterface
     public function setPeriod(PeriodInterface $period = null);
 
     /**
-     * Get periodId.
-     *
-     * @return int
-     */
-    public function getPeriodId();
-
-    /**
-     * Set periodId.
-     *
-     * @param int $periodId
-     *
-     * @return PriceInterface
-     */
-    public function setPeriodId($periodId);
-
-    /**
      * Add product.
      *
      * @param ProductInterface $product

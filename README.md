@@ -353,6 +353,14 @@ class Price extends BasePrice
     protected $id;
 
     /**
+     * @var Period
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Period")
+     */
+    protected $period;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(mappedBy="prices", targetEntity="Product")

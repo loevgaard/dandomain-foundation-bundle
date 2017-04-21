@@ -17,6 +17,25 @@ class PriceSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\PriceInterface';
 
     /**
+     * @var PeriodSynchronizer
+     */
+    protected $periodSynchronizer;
+
+    /**
+     * Set PeriodSynchronizer.
+     *
+     * @param PeriodSynchronizer $periodSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
+    {
+        $this->periodSynchronizer = $periodSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Synchronizes Price.
      *
      * @param array $price
@@ -34,10 +53,14 @@ class PriceSynchronizer extends Synchronizer
             ->setB2bGroupId($price->b2BGroupId)
             ->setCurrencyCode($price->currencyCode)
             ->setIsoCode($price->ISOCode)
-            ->setPeriodId($price->periodId)
             ->setSpecialOfferPrice($price->specialOfferPrice)
             ->setUnitPrice($price->unitPrice)
         ;
+
+        if ($price->period) {
+            $period = $this->periodSynchronizer->syncPeriod($price->period, true);
+            $entity->setPeriod($period);
+        }
 
         $this->objectManager->persist($entity);
 

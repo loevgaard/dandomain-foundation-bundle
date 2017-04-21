@@ -109,7 +109,7 @@ throw new \Exception('aa');
                     $this->productSynchronizer->syncProduct($product, true);
 //var_dump($product->variantGroups);
                     if ($product->variantGroups) {
-throw new \Exception('bb');
+//throw new \Exception('bb');
                     }
                 }
             }
