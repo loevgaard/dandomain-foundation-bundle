@@ -593,6 +593,13 @@ class Variant extends BaseVariant
     protected $products;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="variants", targetEntity="VariantGroup")
+     */
+    protected $variantGroups;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -631,6 +638,14 @@ class VariantGroup extends BaseVariantGroup
      * @ORM\ManyToMany(mappedBy="variantGroups", targetEntity="Product")
      */
     protected $products;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="variant_group_variant")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="variantGroups", targetEntity="Variant")
+     */
+    protected $variants;
 
     /**
      * Constructor.
