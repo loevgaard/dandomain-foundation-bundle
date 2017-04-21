@@ -20,6 +20,7 @@ parameters:
     loevgaard_dandomain_foundation.site_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSynchronizer"
     loevgaard_dandomain_foundation.state_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\StateSynchronizer"
     loevgaard_dandomain_foundation.variant_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\VariantSynchronizer"
+    loevgaard_dandomain_foundation.variant_group_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\VariantGroupSynchronizer"
 
 services:
     loevgaard_dandomain_foundation.category_service:
@@ -145,6 +146,7 @@ services:
             - [setManufacturerSynchronizer, ["@loevgaard_dandomain_foundation.manufacturer_synchronizer"]]
             - [setPriceSynchronizer, ["@loevgaard_dandomain_foundation.price_synchronizer"]]
             - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
+            - [setVariantGroupSynchronizer, ["@loevgaard_dandomain_foundation.variant_group_synchronizer"]]
 
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"
@@ -179,3 +181,12 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.variant_class%"
+
+    loevgaard_dandomain_foundation.variant_group_synchronizer:
+        class: "%loevgaard_dandomain_foundation.variant_group_synchronizer_class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.variant_group_class%"
+        calls:
+            - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
