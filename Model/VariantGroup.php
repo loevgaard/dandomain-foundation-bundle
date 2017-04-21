@@ -185,6 +185,24 @@ abstract class VariantGroup implements VariantGroupInterface
     /**
      * {@inheritdoc}
      */
+    public function getSelectText()
+    {
+        return $this->selectText;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSelectText($selectText)
+    {
+        $this->selectText = $selectText;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSiteId()
     {
         return $this->siteId;
@@ -214,6 +232,54 @@ abstract class VariantGroup implements VariantGroupInterface
     public function setSortOrder($sortOrder)
     {
         $this->sortOrder = $sortOrder;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariant(VariantInterface $variant)
+    {
+        if (!($this->variants->contains($variant))) {
+            $this->variants[] = $variant;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariants()
+    {
+        return $this->variants;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariant(VariantInterface $variant)
+    {
+        $this->variants->removeElement($variant);
 
         return $this;
     }
