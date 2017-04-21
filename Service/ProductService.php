@@ -12,17 +12,17 @@ class ProductService
     /**
      * @var Api
      */
-    private $api;
+    protected $api;
 
     /**
      * @var AppKernel
      */
-    private $kernel;
+    protected $kernel;
 
     /**
      * @var ProductSynchronizer
      */
-    private $productSynchronizer;
+    protected $productSynchronizer;
 
     /**
      * @var string

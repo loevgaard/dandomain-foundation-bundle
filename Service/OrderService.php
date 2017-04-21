@@ -12,17 +12,17 @@ class OrderService
     /**
      * @var Api
      */
-    private $api;
+    protected $api;
 
     /**
      * @var AppKernel
      */
-    private $kernel;
+    protected $kernel;
 
     /**
      * @var OrderSynchronizer
      */
-    private $orderSynchronizer;
+    protected $orderSynchronizer;
 
     /**
      * @var string
