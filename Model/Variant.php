@@ -146,4 +146,34 @@ abstract class Variant implements VariantInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariantGroup(VariantGroupInterface $variantGroup)
+    {
+        if (!($this->variantGroups->contains($variantGroup))) {
+            $this->variantGroups[] = $variantGroup;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariantGroups()
+    {
+        return $this->variantGroups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariantGroup(VariantGroupInterface $variantGroup)
+    {
+        $this->variantGroups->removeElement($variantGroup);
+
+        return $this;
+    }
 }
