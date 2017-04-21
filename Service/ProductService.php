@@ -107,10 +107,6 @@ throw new \Exception('aa');
 
                 foreach ($products as $product) {
                     $this->productSynchronizer->syncProduct($product, true);
-//var_dump($product->variantGroups);
-                    if ($product->variantGroups) {
-//throw new \Exception('bb');
-                    }
                 }
             }
         }
