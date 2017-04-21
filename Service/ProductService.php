@@ -90,7 +90,6 @@ class ProductService
 
                 foreach ($products as $product) {
                     $this->productSynchronizer->syncProduct($product, true);
-throw new \Exception('aa');
                 }
 
                 file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
