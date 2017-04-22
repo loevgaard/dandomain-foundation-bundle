@@ -51,8 +51,11 @@ class PeriodSynchronizer extends Synchronizer
         $entity
             ->setDisabled($period->disabled ? true : false)
             ->setExternalId($period->id)
-            ->setTitle($period->title)
         ;
+
+        if (is_string($period->title)) {
+            $entity->setTitle($period->title);
+        }
 
         if (null !== $endDate) {
             $entity->setEndDate($endDate);
