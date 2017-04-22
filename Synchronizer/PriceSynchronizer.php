@@ -56,12 +56,12 @@ class PriceSynchronizer extends Synchronizer
             ->setSpecialOfferPrice($price->specialOfferPrice)
             ->setUnitPrice($price->unitPrice)
         ;
-/*
+
         if ($price->period) {
             $period = $this->periodSynchronizer->syncPeriod($price->period, $flush);
             $entity->setPeriod($period);
         }
-*/
+
         $this->objectManager->persist($entity);
 
         if (true === $flush) {

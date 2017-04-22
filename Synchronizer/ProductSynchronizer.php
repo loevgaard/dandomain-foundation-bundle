@@ -169,7 +169,7 @@ class ProductSynchronizer extends Synchronizer
             ->setNumber($product->number)
             ->setPicture($product->picture)
             ->setProductRelations($product->productRelations)
-            ->setProductType($product->productType)
+//            ->setProductType($product->productType)
             ->setSalesCount($product->salesCount)
             ->setSegmentIdList($product->segmentIdList)
             ->setSiteSettings($product->siteSettings)
