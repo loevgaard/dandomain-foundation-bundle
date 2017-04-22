@@ -34,13 +34,33 @@ class PeriodSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
+        if ($period->endDate) {
+            $endDate = \Dandomain\Api\jsonDateToDate($period->endDate);
+            $endDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $endDate = null;
+        }
+
+        if ($period->startDate) {
+            $startDate = \Dandomain\Api\jsonDateToDate($period->startDate);
+            $startDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $startDate = null;
+        }
+
         $entity
             ->setDisabled($period->disabled ? true : false)
             ->setExternalId($period->id)
-            ->setEndDate(\Dandomain\Api\jsonDateToDate($period->endDate))
-            ->setStartDate(\Dandomain\Api\jsonDateToDate($period->startDate))
             ->setTitle($period->title)
         ;
+
+        if (null !== $endDate) {
+            $entity->setEndDate($endDate);
+        }
+
+        if (null !== $startDate) {
+            $entity->setStartDate($startDate);
+        }
 
         $this->objectManager->persist($entity);
 

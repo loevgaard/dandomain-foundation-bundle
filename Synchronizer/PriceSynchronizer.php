@@ -58,7 +58,7 @@ class PriceSynchronizer extends Synchronizer
         ;
 
         if ($price->period) {
-            $period = $this->periodSynchronizer->syncPeriod($price->period, true);
+            $period = $this->periodSynchronizer->syncPeriod($price->period, $flush);
             $entity->setPeriod($period);
         }
 
