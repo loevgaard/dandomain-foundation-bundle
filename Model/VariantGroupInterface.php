@@ -85,14 +85,14 @@ interface VariantGroupInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get selectText
+     * Get selectText.
      *
      * @return string
      */
     public function getSelectText();
 
     /**
-     * Set selectText
+     * Set selectText.
      *
      * @param string $selectText
      *
@@ -133,14 +133,14 @@ interface VariantGroupInterface
     public function setSortOrder($sortOrder);
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
     public function getText();
 
     /**
-     * Set text
+     * Set text.
      *
      * @param string $text
      *
@@ -149,7 +149,7 @@ interface VariantGroupInterface
     public function setText($text);
 
     /**
-     * Add variant
+     * Add variant.
      *
      * @param VariantInterface $variant
      *
@@ -158,14 +158,14 @@ interface VariantGroupInterface
     public function addVariant(VariantInterface $variant);
 
     /**
-     * Get variants
+     * Get variants.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariants();
 
     /**
-     * Remove variant
+     * Remove variant.
      *
      * @param VariantInterface $variant
      *

@@ -85,7 +85,7 @@ interface VariantInterface
     public function setText($text);
 
     /**
-     * Add variantGroup
+     * Add variantGroup.
      *
      * @param VariantGroupInterface $variantGroup
      *
@@ -94,14 +94,14 @@ interface VariantInterface
     public function addVariantGroup(VariantGroupInterface $variantGroup);
 
     /**
-     * Get variantGroups
+     * Get variantGroups.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariantGroups();
 
     /**
-     * Remove variantGroup
+     * Remove variantGroup.
      *
      * @param VariantGroupInterface $variantGroup
      *

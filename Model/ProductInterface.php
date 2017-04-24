@@ -110,14 +110,14 @@ interface ProductInterface
     public function setCreated($created);
 
     /**
-     * Get createdBy
+     * Get createdBy.
      *
      * @return string
      */
     public function getCreatedBy();
 
     /**
-     * Set createdBy
+     * Set createdBy.
      *
      * @param string $createdBy
      *
@@ -688,14 +688,14 @@ interface ProductInterface
     public function setUpdated($updated);
 
     /**
-     * Get updatedBy
+     * Get updatedBy.
      *
      * @return string
      */
     public function getUpdatedBy();
 
     /**
-     * Set updatedBy
+     * Set updatedBy.
      *
      * @param string $updatedBy
      *

@@ -47,7 +47,7 @@ class ProductService
     /**
      * Synchronizates products.
      *
-     * @param bool $changed
+     * @param bool   $changed
      * @param string $end
      * @param string $start
      */
