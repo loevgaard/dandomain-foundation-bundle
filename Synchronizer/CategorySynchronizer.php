@@ -56,12 +56,15 @@ class CategorySynchronizer extends Synchronizer
         }
 
         $actualTexts = null;
-        foreach ($category->texts as $text) {
-            if ($text->siteId != $this->defaultSiteId) {
-                continue;
-            }
 
-            $actualTexts = $text;
+        if (is_array($category->texts)) {
+            foreach ($category->texts as $text) {
+                if ($text->siteId != $this->defaultSiteId) {
+                    continue;
+                }
+
+                $actualTexts = $text;
+            }
         }
 
         if (null === $actualTexts) {

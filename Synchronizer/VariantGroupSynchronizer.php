@@ -60,9 +60,11 @@ class VariantGroupSynchronizer extends Synchronizer
             ->setText($variantGroup->text)
         ;
 
-        foreach ($variantGroup->variants as $variantTmp) {
-            $variant = $this->variantSynchronizer->syncVariant($variantTmp, $flush);
-            $entity->addVariant($variant);
+        if (is_array($variantGroup->variants)) {
+            foreach ($variantGroup->variants as $variantTmp) {
+                $variant = $this->variantSynchronizer->syncVariant($variantTmp, $flush);
+                $entity->addVariant($variant);
+            }
         }
 
         $this->objectManager->persist($entity);

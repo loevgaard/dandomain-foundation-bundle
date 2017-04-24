@@ -193,29 +193,39 @@ class ProductSynchronizer extends Synchronizer
             $entity->setUpdated($updated);
         }
 
-        foreach ($product->productCategories as $categoryTmp) {
-            $category = $this->categorySynchronizer->syncCategory($categoryTmp, $flush);
-            $entity->addCategory($category);
+        if (is_array($product->productCategories)) {
+            foreach ($product->productCategories as $categoryTmp) {
+                $category = $this->categorySynchronizer->syncCategory($categoryTmp, $flush);
+                $entity->addCategory($category);
+            }
         }
 
-        foreach ($product->manufacturers as $manufacturerTmp) {
-            $manufacturer = $this->manufacturerSynchronizer->syncManufacturer($manufacturerTmp, $flush);
-            $entity->addManufacturer($manufacturer);
+        if (is_array($product->manufacturers)) {
+            foreach ($product->manufacturers as $manufacturerTmp) {
+                $manufacturer = $this->manufacturerSynchronizer->syncManufacturer($manufacturerTmp, $flush);
+                $entity->addManufacturer($manufacturer);
+            }
         }
 
-        foreach ($product->prices as $priceTmp) {
-            $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
-            $entity->addPrice($price);
+        if (is_array($product->prices)) {
+            foreach ($product->prices as $priceTmp) {
+                $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
+                $entity->addPrice($price);
+            }
         }
 
-        foreach ($product->variants as $variantTmp) {
-            $variant = $this->variantSynchronizer->syncVariant($variantTmp, $flush);
-            $entity->addVariant($variant);
+        if (is_array($product->variants)) {
+            foreach ($product->variants as $variantTmp) {
+                $variant = $this->variantSynchronizer->syncVariant($variantTmp, $flush);
+                $entity->addVariant($variant);
+            }
         }
 
-        foreach ($product->variantGroups as $variantGroupTmp) {
-            $variantGroup = $this->variantGroupSynchronizer->syncVariantGroup($variantGroupTmp, $flush);
-            $entity->addVariantGroup($variantGroup);
+        if (is_array($product->variantGroups)) {
+            foreach ($product->variantGroups as $variantGroupTmp) {
+                $variantGroup = $this->variantGroupSynchronizer->syncVariantGroup($variantGroupTmp, $flush);
+                $entity->addVariantGroup($variantGroup);
+            }
         }
 
         $this->objectManager->persist($entity);

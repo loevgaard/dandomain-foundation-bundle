@@ -259,9 +259,11 @@ class OrderSynchronizer extends Synchronizer
             $this->objectManager->flush();
         }
 
-        foreach ($order->orderLines as $orderLineData) {
-            $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
-            $entity->addOrderLine($orderLine);
+        if (is_array($order->orderLines)) {
+            foreach ($order->orderLines as $orderLineData) {
+                $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
+                $entity->addOrderLine($orderLine);
+            }
         }
 
         return $entity;
