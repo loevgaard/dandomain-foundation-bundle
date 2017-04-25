@@ -141,7 +141,9 @@ abstract class ProductTypeField implements ProductTypeFieldInterface
      */
     public function addProductType(ProductTypeInterface $productType)
     {
-        $this->productTypes[] = $productType;
+        if (!($this->productTypes->contains($productType))) {
+            $this->productTypes[] = $productType;
+        }
 
         return $this;
     }

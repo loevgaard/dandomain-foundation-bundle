@@ -55,4 +55,114 @@ abstract class ProductTypeFormula implements ProductTypeFormulaInterface
     {
         $this->productTypes = new ArrayCollection();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormula()
+    {
+        return $this->formula;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFormula($formula)
+    {
+        $this->formula = $formula;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductType(ProductTypeInterface $productType)
+    {
+        if (!($this->productTypes->contains($productType))) {
+            $this->productTypes[] = $productType;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypes()
+    {
+        return $this->productTypes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductType(ProductTypeInterface $productType)
+    {
+        $this->productTypes->removeElement($productType);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypeGroupId()
+    {
+        return $this->productTypeGroupId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductTypeGroupId($productTypeGroupId)
+    {
+        $this->productTypeGroupId = $productTypeGroupId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
+
+        return $this;
+    }
 }
