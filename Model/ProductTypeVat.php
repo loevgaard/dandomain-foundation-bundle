@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +14,11 @@ abstract class ProductTypeVat implements ProductTypeVatInterface
      * @var int
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $productTypes;
 
     /**
      * @var string
@@ -41,4 +47,12 @@ abstract class ProductTypeVat implements ProductTypeVatInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $vatPct;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->productTypes = new ArrayCollection();
+    }
 }

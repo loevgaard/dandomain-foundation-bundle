@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +14,11 @@ abstract class ProductTypeFormula implements ProductTypeFormulaInterface
      * @var int
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $productTypes;
 
     /**
      * @var int
@@ -41,4 +47,12 @@ abstract class ProductTypeFormula implements ProductTypeFormulaInterface
      * @ORM\Column(nullable=true, type="integer")
      */
     protected $siteId;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->productTypes = new ArrayCollection();
+    }
 }
