@@ -142,7 +142,10 @@ class ProductSynchronizer extends Synchronizer
         } else {
             $updated = null;
         }
-
+if ($product->productType) {
+var_dump($product->productType);
+var_dump($product);
+}
         $entity
             ->setBarCodeNumber($product->barCodeNumber)
             ->setCategoryIdList($product->categoryIdList)
@@ -169,7 +172,7 @@ class ProductSynchronizer extends Synchronizer
             ->setNumber($product->number)
             ->setPicture($product->picture)
             ->setProductRelations($product->productRelations)
-//            ->setProductType($product->productType)
+            ->setProductType($product->productType)
             ->setSalesCount($product->salesCount)
             ->setSegmentIdList($product->segmentIdList)
             ->setSiteSettings($product->siteSettings)
