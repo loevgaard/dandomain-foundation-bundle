@@ -55,4 +55,112 @@ abstract class ProductTypeField implements ProductTypeFieldInterface
     {
         $this->productTypes = new ArrayCollection();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLanguageId()
+    {
+        return $this->languageId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLanguageId($languageId)
+    {
+        $this->languageId = $languageId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductType(ProductTypeInterface $productType)
+    {
+        $this->productTypes[] = $productType;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypes()
+    {
+        return $this->productTypes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductType(ProductTypeInterface $productType)
+    {
+        $this->productTypes->removeElement($productType);
+
+        return $this;
+    }
 }
