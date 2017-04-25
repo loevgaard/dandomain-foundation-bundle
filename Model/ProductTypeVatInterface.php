@@ -2,7 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
-interface ProductTypeInterface
+interface ProductTypeVatInterface
 {
 
 }

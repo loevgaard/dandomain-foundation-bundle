@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class ProductType implements ProductTypeInterface
+abstract class ProductTypeField implements ProductTypeFieldInterface
 {
     /**
      * @var int
@@ -26,5 +26,19 @@ abstract class ProductType implements ProductTypeInterface
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $name;
+    protected $label;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $languageId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $number;
 }
