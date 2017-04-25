@@ -53,4 +53,138 @@ abstract class ProductType implements ProductTypeInterface
         $this->productTypeFormulas = new ArrayCollection();
         $this->productTypeVats = new ArrayCollection();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductTypeField(ProductTypeFieldInterface $productTypeField)
+    {
+        if (!($this->productTypeFields->contains($productTypeField))) {
+            $this->productTypeFields[] = $productTypeField;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypeFields()
+    {
+        return $this->productTypeFields;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductTypeField(ProductTypeFieldInterface $productTypeField)
+    {
+        $this->productTypeFields->removeElement($productTypeField);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductTypeFormula(ProductTypeFormulaInterface $productTypeFormula)
+    {
+        if (!($this->productTypeFormulas->contains($productTypeFormula))) {
+            $this->productTypeFormulas[] = $productTypeFormula;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypeFormulas()
+    {
+        return $this->productTypeFormulas;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductTypeFormula(ProductTypeFormulaInterface $productTypeFormula)
+    {
+        $this->productTypeFormulas->removeElement($productTypeFormula);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductTypeVat(ProductTypeVatInterface $productTypeVat)
+    {
+        if (!($this->productTypeVats->contains($productTypeVat))) {
+            $this->productTypeVats[] = $productTypeVat;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypeVats()
+    {
+        return $this->productTypeVats;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductTypeVat(ProductTypeVatInterface $productTypeVat)
+    {
+        $this->productTypeVats->removeElement($productTypeVat);
+
+        return $this;
+    }
 }
