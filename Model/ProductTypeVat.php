@@ -55,4 +55,114 @@ abstract class ProductTypeVat implements ProductTypeVatInterface
     {
         $this->productTypes = new ArrayCollection();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCountryId()
+    {
+        return $this->countryId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCountryId($countryId)
+    {
+        $this->countryId = $countryId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductType(ProductTypeInterface $productType)
+    {
+        if (!($this->productTypes->contains($productType))) {
+            $this->productTypes[] = $productType;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTypes()
+    {
+        return $this->productTypes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductType(ProductTypeInterface $productType)
+    {
+        $this->productTypes->removeElement($productType);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVatPct()
+    {
+        return $this->vatPct;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVatPct($vatPct)
+    {
+        $this->vatPct = $vatPct;
+
+        return $this;
+    }
 }
