@@ -521,18 +521,18 @@ interface ProductInterface
     /**
      * Get productType.
      *
-     * @return string
+     * @return ProductTypeInterface
      */
     public function getProductType();
 
     /**
      * Set productType.
      *
-     * @param string $productType
+     * @param ProductTypeInterface $productType
      *
      * @return ProductInterface
      */
-    public function setProductType($productType);
+    public function setProductType(ProductTypeInterface $productType);
 
     /**
      * Get salesCount.

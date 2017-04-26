@@ -15,6 +15,7 @@ parameters:
     loevgaard_dandomain_foundation.price_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\PriceSynchronizer"
     loevgaard_dandomain_foundation.product_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\ProductService"
     loevgaard_dandomain_foundation.product_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductSynchronizer"
+    loevgaard_dandomain_foundation.product_type_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductTypeSynchronizer"
     loevgaard_dandomain_foundation.shipping_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ShippingMethodSynchronizer"
     loevgaard_dandomain_foundation.site_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\SiteService"
     loevgaard_dandomain_foundation.site_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSynchronizer"
@@ -147,8 +148,16 @@ services:
             - [setCategorySynchronizer, ["@loevgaard_dandomain_foundation.category_synchronizer"]]
             - [setManufacturerSynchronizer, ["@loevgaard_dandomain_foundation.manufacturer_synchronizer"]]
             - [setPriceSynchronizer, ["@loevgaard_dandomain_foundation.price_synchronizer"]]
+            - [setProductTypeSynchronizer, ["@loevgaard_dandomain_foundation.product_type_synchronizer"]]
             - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
             - [setVariantGroupSynchronizer, ["@loevgaard_dandomain_foundation.variant_group_synchronizer"]]
+
+    loevgaard_dandomain_foundation.product_type_synchronizer:
+        class: "%loevgaard_dandomain_foundation.product_type_synchronizer_class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.product_type_class%"
 
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"

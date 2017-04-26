@@ -31,6 +31,11 @@ abstract class Product implements ProductInterface
     protected $prices;
 
     /**
+     * @var ProductType
+     */
+    protected $productType;
+
+    /**
      * @var ArrayCollection
      */
     protected $segments;
@@ -233,13 +238,6 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="array")
      */
     protected $productRelations;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $productType;
 
     /**
      * @var int
@@ -947,7 +945,7 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductType($productType)
+    public function setProductType(ProductTypeInterface $productType)
     {
         $this->productType = $productType;
 

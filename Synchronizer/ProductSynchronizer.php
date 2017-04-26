@@ -32,6 +32,11 @@ class ProductSynchronizer extends Synchronizer
     protected $priceSynchronizer;
 
     /**
+     * @var ProductTypeSynchronizer
+     */
+    protected $productTypeSynchronizer;
+
+    /**
      * @var VariantSynchronizer
      */
     protected $variantSynchronizer;
@@ -79,6 +84,20 @@ class ProductSynchronizer extends Synchronizer
     public function setPriceSynchronizer(PriceSynchronizer $priceSynchronizer)
     {
         $this->priceSynchronizer = $priceSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ProductTypeSynchronizer.
+     *
+     * @param ProductTypeSynchronizer $productTypeSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setProductTypeSynchronizer(ProductTypeSynchronizer $productTypeSynchronizer)
+    {
+        $this->productTypeSynchronizer = $productTypeSynchronizer;
 
         return $this;
     }
@@ -172,7 +191,6 @@ var_dump($product);
             ->setNumber($product->number)
             ->setPicture($product->picture)
             ->setProductRelations($product->productRelations)
-            ->setProductType($product->productType)
             ->setSalesCount($product->salesCount)
             ->setSegmentIdList($product->segmentIdList)
             ->setSiteSettings($product->siteSettings)
@@ -215,6 +233,11 @@ var_dump($product);
                 $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
                 $entity->addPrice($price);
             }
+        }
+
+        if ($product->productType) {
+            $productType = $this->productTypeSynchronizer->syncProductType($product->productType, $flush);
+            $entity->setProductType($productType);
         }
 
         if (is_array($product->variants)) {
