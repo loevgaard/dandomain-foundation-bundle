@@ -211,6 +211,13 @@ class ProductSynchronizer extends Synchronizer
             $entity->setUpdated($updated);
         }
 
+        if (is_array($product->disabledVariants)) {
+            foreach ($product->disabledVariants as $disabledVariantTmp) {
+                $disabledVariant = $this->variantSynchronizer->syncVariant($disabledVariantTmp, $flush);
+                $entity->addDisabledVariant($disabledVariant);
+            }
+        }
+
         if (is_array($product->productCategories)) {
             foreach ($product->productCategories as $categoryTmp) {
                 $category = $this->categorySynchronizer->syncCategory($categoryTmp, $flush);
