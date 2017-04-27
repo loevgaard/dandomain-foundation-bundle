@@ -18,6 +18,7 @@ parameters:
     loevgaard_dandomain_foundation.product_type_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductTypeSynchronizer"
     loevgaard_dandomain_foundation.product_type_field_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductTypeFieldSynchronizer"
     loevgaard_dandomain_foundation.product_type_formula_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductTypeFormulaSynchronizer"
+    loevgaard_dandomain_foundation.product_type_vat_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ProductTypeVatSynchronizer"
     loevgaard_dandomain_foundation.shipping_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ShippingMethodSynchronizer"
     loevgaard_dandomain_foundation.site_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\SiteService"
     loevgaard_dandomain_foundation.site_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSynchronizer"
@@ -163,6 +164,7 @@ services:
         calls:
             - [setProductTypeFieldSynchronizer, ["@loevgaard_dandomain_foundation.product_type_field_synchronizer"]]
             - [setProductTypeFormulaSynchronizer, ["@loevgaard_dandomain_foundation.product_type_formula_synchronizer"]]
+            - [setProductTypeVatSynchronizer, ["@loevgaard_dandomain_foundation.product_type_vat_synchronizer"]]
 
     loevgaard_dandomain_foundation.product_type_field_synchronizer:
         class: "%loevgaard_dandomain_foundation.product_type_field_synchronizer_class%"
@@ -177,6 +179,13 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.product_type_formula_class%"
+
+    loevgaard_dandomain_foundation.product_type_vat_synchronizer:
+        class: "%loevgaard_dandomain_foundation.product_type_vat_synchronizer_class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.product_type_vat_class%"
 
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.shipping_method_synchronizer_class%"

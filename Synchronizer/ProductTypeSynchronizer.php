@@ -27,6 +27,11 @@ class ProductTypeSynchronizer extends Synchronizer
     protected $productTypeFormulaSynchronizer;
 
     /**
+     * @var ProductTypeVatSynchronizer
+     */
+    protected $productTypeVatSynchronizer;
+
+    /**
      * Set ProductTypeFieldSynchronizer.
      *
      * @param ProductTypeFieldSynchronizer $productTypeFieldSynchronizer
@@ -50,6 +55,20 @@ class ProductTypeSynchronizer extends Synchronizer
     public function setProductTypeFormulaSynchronizer(ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer)
     {
         $this->productTypeFormulaSynchronizer = $productTypeFormulaSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ProductTypeVatSynchronizer.
+     *
+     * @param ProductTypeVatSynchronizer $productTypeVatSynchronizer
+     *
+     * @return ProductTypeSynchronizer
+     */
+    public function setProductTypeVatSynchronizer(ProductTypeVatSynchronizer $productTypeVatSynchronizer)
+    {
+        $this->productTypeVatSynchronizer = $productTypeVatSynchronizer;
 
         return $this;
     }
@@ -88,6 +107,13 @@ class ProductTypeSynchronizer extends Synchronizer
             foreach ($productType->formula as $formulaTmp) {
                 $productTypeFormula = $this->productTypeFormulaSynchronizer->syncProductTypeFormula($formulaTmp, $flush);
                 $entity->addProductTypeFormula($productTypeFormula);
+            }
+        }
+
+        if (is_array($productType->vat)) {
+            foreach ($productType->vat as $vatTmp) {
+                $productTypeVat = $this->productTypeVatSynchronizer->syncProductTypeVat($vatTmp, $flush);
+                $entity->addProductTypeVat($productTypeVat);
             }
         }
 
