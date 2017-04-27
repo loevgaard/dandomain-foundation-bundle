@@ -17,6 +17,25 @@ class ProductTypeSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductTypeInterface';
 
     /**
+     * @var ProductTypeFieldSynchronizer
+     */
+    protected $productTypeFieldSynchronizer;
+
+    /**
+     * Set ProductTypeFieldSynchronizer.
+     *
+     * @param ProductTypeFieldSynchronizer $productTypeFieldSynchronizer
+     *
+     * @return ProductTypeSynchronizer
+     */
+    public function setProductTypeFieldSynchronizer(ProductTypeFieldSynchronizer $productTypeFieldSynchronizer)
+    {
+        $this->productTypeFieldSynchronizer = $productTypeFieldSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Synchronizes ProductType.
      *
      * @param array $productType
@@ -38,6 +57,13 @@ class ProductTypeSynchronizer extends Synchronizer
             ->setExternalId($productType->id)
             ->setName($productType->name)
         ;
+
+        if (is_array($product->fields)) {
+            foreach ($product->fields as $fieldTmp) {
+                $productTypeField = $this->productTypeFieldSynchronizer->syncProductTypeField($fieldTmp, $flush);
+                $entity->addProductTypeField($productTypeField);
+            }
+        }
 
         $this->objectManager->persist($entity);
 
