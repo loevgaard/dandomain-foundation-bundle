@@ -32,6 +32,11 @@ class ProductSynchronizer extends Synchronizer
     protected $priceSynchronizer;
 
     /**
+     * @var ProductRelationSynchronizer
+     */
+    protected $productRelationSynchronizer;
+
+    /**
      * @var ProductTypeSynchronizer
      */
     protected $productTypeSynchronizer;
@@ -84,6 +89,20 @@ class ProductSynchronizer extends Synchronizer
     public function setPriceSynchronizer(PriceSynchronizer $priceSynchronizer)
     {
         $this->priceSynchronizer = $priceSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ProductRelationSynchronizer.
+     *
+     * @param ProductRelationSynchronizer $productRelationSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setProductRelationSynchronizer(ProductRelationSynchronizer $productRelationSynchronizer)
+    {
+        $this->productRelationSynchronizer = $productRelationSynchronizer;
 
         return $this;
     }
@@ -187,7 +206,6 @@ class ProductSynchronizer extends Synchronizer
             ->setMinBuyAmountB2B($product->minBuyAmountB2B)
             ->setNumber($product->number)
             ->setPicture($product->picture)
-            ->setProductRelations($product->productRelations)
             ->setSalesCount($product->salesCount)
             ->setSegmentIdList($product->segmentIdList)
             ->setSiteSettings($product->siteSettings)
@@ -236,6 +254,13 @@ class ProductSynchronizer extends Synchronizer
             foreach ($product->prices as $priceTmp) {
                 $price = $this->priceSynchronizer->syncPrice($priceTmp, $flush);
                 $entity->addPrice($price);
+            }
+        }
+
+        if (is_array($product->productRelations)) {
+            foreach ($product->productRelations as $productRelationTmp) {
+                $productRelation = $this->productRelationSynchronizer->syncProductRelation($productRelationTmp, $flush);
+                $entity->addProductRelation($productRelation);
             }
         }
 

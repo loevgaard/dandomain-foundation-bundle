@@ -26,6 +26,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('period_class')->end()
                 ->scalarNode('price_class')->end()
                 ->scalarNode('product_class')->end()
+                ->scalarNode('product_relation_class')->end()
                 ->scalarNode('product_type_class')->end()
                 ->scalarNode('product_type_field_class')->end()
                 ->scalarNode('product_type_formula_class')->end()
