@@ -505,20 +505,29 @@ interface ProductInterface
     public function removePrice(PriceInterface $price);
 
     /**
+     * Add productRelation.
+     *
+     * @param ProductRelationInterface $productRelation
+     *
+     * @return ProductInterface
+     */
+    public function addProductRelation(ProductRelationInterface $productRelation);
+
+    /**
      * Get productRelations.
      *
-     * @return array
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductRelations();
 
     /**
-     * Set productRelations.
+     * Remove productRelation.
      *
-     * @param array $productRelations
+     * @param ProductRelationInterface $productRelation
      *
      * @return ProductInterface
      */
-    public function setProductRelations($productRelations);
+    public function removeProductRelation(ProductRelationInterface $productRelation);
 
     /**
      * Get productType.

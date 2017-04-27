@@ -36,6 +36,11 @@ abstract class Product implements ProductInterface
     protected $prices;
 
     /**
+     * @var ProductRelation
+     */
+    protected $productRelations;
+
+    /**
      * @var ProductType
      */
     protected $productType;
@@ -231,13 +236,6 @@ abstract class Product implements ProductInterface
     protected $picture;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(nullable=true, type="array")
-     */
-    protected $productRelations;
-
-    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -344,6 +342,7 @@ abstract class Product implements ProductInterface
         $this->disabledVariants = new ArrayCollection();
         $this->manufacturers = new ArrayCollection();
         $this->prices = new ArrayCollection();
+        $this->productRelations = new ArrayCollection();
         $this->segments = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->variantGroups = new ArrayCollection();
@@ -930,6 +929,18 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addProductRelation(ProductRelationInterface $productRelation)
+    {
+        if (!($this->productRelations->contains($productRelation))) {
+            $this->productRelations[] = $productRelation;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getProductRelations()
     {
         return $this->productRelations;
@@ -938,9 +949,9 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductRelations($productRelations)
+    public function removeProductRelation(ProductRelationInterface $productRelation)
     {
-        $this->productRelations = $productRelations;
+        $this->productRelations->removeElement($productRelation);
 
         return $this;
     }
