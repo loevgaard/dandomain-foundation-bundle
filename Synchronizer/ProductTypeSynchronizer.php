@@ -22,6 +22,11 @@ class ProductTypeSynchronizer extends Synchronizer
     protected $productTypeFieldSynchronizer;
 
     /**
+     * @var ProductTypeFormulaSynchronizer
+     */
+    protected $productTypeFormulaSynchronizer;
+
+    /**
      * Set ProductTypeFieldSynchronizer.
      *
      * @param ProductTypeFieldSynchronizer $productTypeFieldSynchronizer
@@ -31,6 +36,20 @@ class ProductTypeSynchronizer extends Synchronizer
     public function setProductTypeFieldSynchronizer(ProductTypeFieldSynchronizer $productTypeFieldSynchronizer)
     {
         $this->productTypeFieldSynchronizer = $productTypeFieldSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set ProductTypeFormulaSynchronizer.
+     *
+     * @param ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer
+     *
+     * @return ProductTypeSynchronizer
+     */
+    public function setProductTypeFormulaSynchronizer(ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer)
+    {
+        $this->productTypeFormulaSynchronizer = $productTypeFormulaSynchronizer;
 
         return $this;
     }
@@ -58,10 +77,17 @@ class ProductTypeSynchronizer extends Synchronizer
             ->setName($productType->name)
         ;
 
-        if (is_array($product->fields)) {
-            foreach ($product->fields as $fieldTmp) {
+        if (is_array($productType->fields)) {
+            foreach ($productType->fields as $fieldTmp) {
                 $productTypeField = $this->productTypeFieldSynchronizer->syncProductTypeField($fieldTmp, $flush);
                 $entity->addProductTypeField($productTypeField);
+            }
+        }
+
+        if (is_array($productType->formula)) {
+            foreach ($productType->formula as $formulaTmp) {
+                $productTypeFormula = $this->productTypeFormulaSynchronizer->syncProductTypeFormula($formulaTmp, $flush);
+                $entity->addProductTypeFormula($productTypeFormula);
             }
         }
 
