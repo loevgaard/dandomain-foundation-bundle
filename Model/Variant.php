@@ -18,6 +18,11 @@ abstract class Variant implements VariantInterface
     /**
      * @var ArrayCollection
      */
+    protected $disabledProducts;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $products;
 
     /**
@@ -51,8 +56,39 @@ abstract class Variant implements VariantInterface
      */
     public function __construct()
     {
+        $this->disabledProducts = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->variantGroups = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addDisabledProduct(ProductInterface $disabledProduct)
+    {
+        if (!($this->disabledProducts->contains($disabledProduct))) {
+            $this->disabledProducts[] = $disabledProduct;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDisabledProducts()
+    {
+        return $this->disabledProducts;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeDisabledProduct(ProductInterface $disabledProduct)
+    {
+        $this->disabledProducts->removeElement($disabledProduct);
+
+        return $this;
     }
 
     /**

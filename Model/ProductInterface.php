@@ -142,6 +142,31 @@ interface ProductInterface
     public function setDefaultCategoryId($defaultCategoryId);
 
     /**
+     * Add disabledVariant.
+     *
+     * @param VariantInterface $disabledVariant
+     *
+     * @return ProductInterface
+     */
+    public function addDisabledVariant(VariantInterface $disabledVariant);
+
+    /**
+     * Get disabledVariants.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDisabledVariants();
+
+    /**
+     * Remove disabledVariant.
+     *
+     * @param VariantInterface $disabledVariant
+     *
+     * @return ProductInterface
+     */
+    public function removeDisabledVariant(VariantInterface $disabledVariant);
+
+    /**
      * Get disabledVariantIdList.
      *
      * @return array
@@ -156,29 +181,6 @@ interface ProductInterface
      * @return ProductInterface
      */
     public function setDisabledVariantIdList($disabledVariantIdList);
-
-    /**
-     * Get disabledVariants.
-     *
-     * @return array
-     */
-    public function getDisabledVariants();
-
-    /**
-     * Set disabledVariants.
-     *
-     * @param array $disabledVariants
-     *
-     * @return ProductInterface
-     */
-    public function setDisabledVariants($disabledVariants);
-
-    /**
-     * Get edbPriserProductNumber.
-     *
-     * @return string
-     */
-    public function getEdbPriserProductNumber();
 
     /**
      * Set edbPriserProductNumber.

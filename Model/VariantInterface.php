@@ -5,6 +5,31 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface VariantInterface
 {
     /**
+     * Add disabledProduct.
+     *
+     * @param ProductInterface $disabledProduct
+     *
+     * @return VariantInterface
+     */
+    public function addDisabledProduct(ProductInterface $disabledProduct);
+
+    /**
+     * Get disabledProducts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDisabledProducts();
+
+    /**
+     * Remove disabledProduct.
+     *
+     * @param ProductInterface $disabledProduct
+     *
+     * @return VariantInterface
+     */
+    public function removeDisabledProduct(ProductInterface $disabledProduct);
+
+    /**
      * Get externalId.
      *
      * @return int

@@ -23,6 +23,11 @@ abstract class Product implements ProductInterface
     /**
      * @var ArrayCollection
      */
+    protected $disabledVariants;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $manufacturers;
 
     /**
@@ -105,13 +110,6 @@ abstract class Product implements ProductInterface
      * @ORM\Column(nullable=true, type="array")
      */
     protected $disabledVariantIdList;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(nullable=true, type="array")
-     */
-    protected $disabledVariants;
 
     /**
      * @var string
@@ -343,6 +341,7 @@ abstract class Product implements ProductInterface
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->disabledVariants = new ArrayCollection();
         $this->manufacturers = new ArrayCollection();
         $this->prices = new ArrayCollection();
         $this->segments = new ArrayCollection();
@@ -509,17 +508,11 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getDisabledVariantIdList()
+    public function addDisabledVariant(VariantInterface $disabledVariant)
     {
-        return $this->disabledVariantIdList;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDisabledVariantIdList($disabledVariantIdList)
-    {
-        $this->disabledVariantIdList = $disabledVariantIdList;
+        if (!($this->disabledVariants->contains($disabledVariant))) {
+            $this->disabledVariants[] = $disabledVariant;
+        }
 
         return $this;
     }
@@ -535,9 +528,27 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDisabledVariants($disabledVariants)
+    public function removeDisabledVariant(VariantInterface $disabledVariant)
     {
-        $this->disabledVariants = $disabledVariants;
+        $this->disabledVariants->removeElement($disabledVariant);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDisabledVariantIdList()
+    {
+        return $this->disabledVariantIdList;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDisabledVariantIdList($disabledVariantIdList)
+    {
+        $this->disabledVariantIdList = $disabledVariantIdList;
 
         return $this;
     }
