@@ -70,6 +70,19 @@ class SiteSettingSynchronizer extends Synchronizer
             ->setMetaDescription($siteSetting->metaDescription)
             ->setName($siteSetting->name)
             ->setPageTitle($siteSetting->pageTitle)
+            ->setRememberToBuyTextHeading($siteSetting->rememberToBuyTextHeading)
+            ->setRememberToBuyTextSubheading($siteSetting->rememberToBuyTextSubheading)
+            ->setRetailSalesPrice($siteSetting->retailSalesPrice)
+            ->setShortDescription($siteSetting->shortDescription)
+            ->setShowAsNew($siteSetting->showAsNew)
+            ->setShowOnFrontPage($siteSetting->showOnFrontPage)
+            ->setSiteId($siteSetting->siteID)
+            ->setSortOrder($siteSetting->sortOrder)
+            ->setTechDocLink($siteSetting->techDocLink)
+            ->setTechDocLink2($siteSetting->techDocLink2)
+            ->setTechDocLink3($siteSetting->techDocLink3)
+            ->setUnitNumber($siteSetting->unitNumber)
+            ->setUrlname($siteSetting->urlname)
         ;
 
         if (null !== $expectedDeliveryTime) {
