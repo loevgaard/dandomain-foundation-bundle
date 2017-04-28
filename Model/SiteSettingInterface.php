@@ -629,6 +629,22 @@ interface SiteSettingInterface
     public function setTechDocLink3($techDocLink3);
 
     /**
+     * Get unit
+     *
+     * @return UnitInterface
+     */
+    public function getUnit();
+
+    /**
+     * Set unit
+     *
+     * @param UnitInterface $unit
+     *
+     * @return SiteSettingInterface
+     */
+    public function setUnit(UnitInterface $unit = null);
+
+    /**
      * Get unitNumber
      *
      * @return string

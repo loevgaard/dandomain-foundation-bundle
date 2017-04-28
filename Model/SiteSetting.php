@@ -1007,6 +1007,24 @@ abstract class SiteSetting implements SiteSettingInterface
     /**
      * {@inheritdoc}
      */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUnit(UnitInterface $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUnitNumber()
     {
         return $this->unitNumber;
