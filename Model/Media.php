@@ -15,6 +15,13 @@ class Media implements MediaInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $externalId;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
@@ -22,11 +29,11 @@ class Media implements MediaInterface
     protected $height;
 
     /**
-     * @var int
+     * @var array
      *
-     * @ORM\Column(nullable=true, type="integer")
+     * @ORM\Column(nullable=true, type="array")
      */
-    protected $externalId;
+    protected $mediaTranslations;
 
     /**
      * @var int
