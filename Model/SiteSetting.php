@@ -30,6 +30,11 @@ abstract class SiteSetting implements SiteSettingInterface
     protected $periodNew;
 
     /**
+     * @var Unit
+     */
+    protected $unit;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
