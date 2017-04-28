@@ -27,4 +27,48 @@ abstract class Unit implements UnitInterface
      * @ORM\Column(nullable=true, type="text")
      */
     protected $text;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
 }
