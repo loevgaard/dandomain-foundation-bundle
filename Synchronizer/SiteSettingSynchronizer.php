@@ -22,6 +22,11 @@ class SiteSettingSynchronizer extends Synchronizer
     protected $periodSynchronizer;
 
     /**
+     * @var UnitSynchronizer
+     */
+    protected $unitSynchronizer;
+
+    /**
      * Set PeriodSynchronizer.
      *
      * @param PeriodSynchronizer $periodSynchronizer
@@ -31,6 +36,20 @@ class SiteSettingSynchronizer extends Synchronizer
     public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
     {
         $this->periodSynchronizer = $periodSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set UnitSynchronizer.
+     *
+     * @param UnitSynchronizer $unitSynchronizer
+     *
+     * @return SiteSettingSynchronizer
+     */
+    public function setUnitSynchronizer(UnitSynchronizer $unitSynchronizer)
+    {
+        $this->unitSynchronizer = $unitSynchronizer;
 
         return $this;
     }
@@ -125,6 +144,11 @@ class SiteSettingSynchronizer extends Synchronizer
         if ($siteSetting->periodNew) {
             $periodNew = $this->periodSynchronizer->syncPeriod($siteSetting->periodNew, $flush);
             $entity->setPeriodNew($periodNew);
+        }
+
+        if ($siteSetting->unit) {
+            $unit = $this->unitSynchronizer->syncUnit($siteSetting->unit, $flush);
+            $entity->setUnit($unit);
         }
 
         $this->objectManager->persist($entity);
