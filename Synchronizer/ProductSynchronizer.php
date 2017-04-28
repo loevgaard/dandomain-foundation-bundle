@@ -17,6 +17,11 @@ class ProductSynchronizer extends Synchronizer
     protected $manufacturerSynchronizer;
 
     /**
+     * @var MediaSynchronizer
+     */
+    protected $mediaSynchronizer;
+
+    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Product';
@@ -57,7 +62,7 @@ class ProductSynchronizer extends Synchronizer
     protected $variantGroupSynchronizer;
 
     /**
-     * Set CategorySynchronizer.
+     * Set categorySynchronizer.
      *
      * @param CategorySynchronizer $categorySynchronizer
      *
@@ -71,7 +76,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ManufacturerSynchronizer.
+     * Set manufacturerSynchronizer.
      *
      * @param ManufacturerSynchronizer $manufacturerSynchronizer
      *
@@ -85,7 +90,21 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set PriceSynchronizer.
+     * Set mediaSynchronizer.
+     *
+     * @param MediaSynchronizer $mediaSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setMediaSynchronizer(MediaSynchronizer $mediaSynchronizer)
+    {
+        $this->mediaSynchronizer = $mediaSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set priceSynchronizer.
      *
      * @param PriceSynchronizer $priceSynchronizer
      *
@@ -99,7 +118,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ProductRelationSynchronizer.
+     * Set productRelationSynchronizer.
      *
      * @param ProductRelationSynchronizer $productRelationSynchronizer
      *
@@ -113,7 +132,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ProductTypeSynchronizer.
+     * Set productTypeSynchronizer.
      *
      * @param ProductTypeSynchronizer $productTypeSynchronizer
      *
@@ -127,7 +146,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set SiteSettingSynchronizer.
+     * Set siteSettingSynchronizer.
      *
      * @param SiteSettingSynchronizer $siteSettingSynchronizer
      *
@@ -141,7 +160,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set VariantSynchronizer.
+     * Set variantSynchronizer.
      *
      * @param VariantSynchronizer $variantSynchronizer
      *
@@ -155,7 +174,7 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set VariantGroupSynchronizer.
+     * Set variantGroupSynchronizer.
      *
      * @param VariantGroupSynchronizer $variantGroupSynchronizer
      *
@@ -220,7 +239,6 @@ class ProductSynchronizer extends Synchronizer
             ->setLocationNumber($product->locationNumber)
             ->setManufacturereIdList($product->manufacturereIdList)
             ->setMaxBuyAmount($product->maxBuyAmount)
-            ->setMedias($product->media)
             ->setMinBuyAmount($product->minBuyAmount)
             ->setMinBuyAmountB2B($product->minBuyAmountB2B)
             ->setNumber($product->number)
@@ -251,6 +269,13 @@ class ProductSynchronizer extends Synchronizer
             foreach ($product->disabledVariants as $disabledVariantTmp) {
                 $disabledVariant = $this->variantSynchronizer->syncVariant($disabledVariantTmp, $flush);
                 $entity->addDisabledVariant($disabledVariant);
+            }
+        }
+
+        if (is_array($product->media)) {
+            foreach ($product->media as $mediaTmp) {
+                $media = $this->mediaSynchronizer->syncMedia($mediaTmp, $flush);
+                $entity->addMedia($media);
             }
         }
 
