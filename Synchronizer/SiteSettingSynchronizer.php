@@ -34,15 +34,15 @@ class SiteSettingSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
-        if ($product->expectedDeliveryTime) {
-            $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($product->expectedDeliveryTime);
+        if ($siteSetting->expectedDeliveryTime) {
+            $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($siteSetting->expectedDeliveryTime);
             $expectedDeliveryTime->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
         } else {
             $expectedDeliveryTime = null;
         }
 
-        if ($product->expectedDeliveryTimeNotInStock) {
-            $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($product->expectedDeliveryTimeNotInStock);
+        if ($siteSetting->expectedDeliveryTimeNotInStock) {
+            $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($siteSetting->expectedDeliveryTimeNotInStock);
             $expectedDeliveryTimeNotInStock->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
         } else {
             $expectedDeliveryTimeNotInStock = null;
@@ -62,6 +62,14 @@ class SiteSettingSynchronizer extends Synchronizer
             ->setGiftCertificatePdfBackgroundImage($siteSetting->giftCertificatePdfBackgroundImage)
             ->setHidden($siteSetting->hidden)
             ->setHiddenForMobile($siteSetting->hiddenForMobile)
+            ->setImageAltText($siteSetting->imageAltText)
+            ->setIsToplistHidden($siteSetting->isToplistHidden)
+            ->setKeyWords($siteSetting->keyWords)
+            ->setLongDescription($siteSetting->longDescription)
+            ->setLongDescription2($siteSetting->longDescription2)
+            ->setMetaDescription($siteSetting->metaDescription)
+            ->setName($siteSetting->name)
+            ->setPageTitle($siteSetting->pageTitle)
         ;
 
         if (null !== $expectedDeliveryTime) {
