@@ -33,6 +33,11 @@ abstract class Product implements ProductInterface
     /**
      * @var ArrayCollection
      */
+    protected $medias;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $prices;
 
     /**
@@ -206,13 +211,6 @@ abstract class Product implements ProductInterface
     protected $maxBuyAmount;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(nullable=true, type="array")
-     */
-    protected $medias;
-
-    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -339,6 +337,7 @@ abstract class Product implements ProductInterface
         $this->categories = new ArrayCollection();
         $this->disabledVariants = new ArrayCollection();
         $this->manufacturers = new ArrayCollection();
+        $this->medias = new ArrayCollection();
         $this->prices = new ArrayCollection();
         $this->productRelations = new ArrayCollection();
         $this->segments = new ArrayCollection();
@@ -808,6 +807,18 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addMedia(MediaInterface $media)
+    {
+        if (!($this->medias->contains($media))) {
+            $this->medias[] = $media;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getMedias()
     {
         return $this->medias;
@@ -816,9 +827,9 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setMedias($medias)
+    public function removeMedia(MediaInterface $media)
     {
-        $this->medias = $medias;
+        $this->medias->removeElement($media);
 
         return $this;
     }

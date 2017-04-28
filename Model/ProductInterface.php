@@ -400,20 +400,29 @@ interface ProductInterface
     public function setMaxBuyAmount($maxBuyAmount);
 
     /**
+     * Add media.
+     *
+     * @param MediaInterface $media
+     *
+     * @return ProductInterface
+     */
+    public function addMedia(MediaInterface $media);
+
+    /**
      * Get medias.
      *
-     * @return array
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias();
 
     /**
-     * Set medias.
+     * Remove media.
      *
-     * @param array $medias
+     * @param MediaInterface $media
      *
      * @return ProductInterface
      */
-    public function setMedias($medias);
+    public function removeMedia(MediaInterface $media);
 
     /**
      * Get minBuyAmount.

@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +14,11 @@ class Media implements MediaInterface
      * @var int
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $products;
 
     /**
      * @var int
@@ -76,4 +82,12 @@ class Media implements MediaInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $width;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
