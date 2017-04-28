@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +29,11 @@ abstract class SiteSetting implements SiteSettingInterface
      * @var Period
      */
     protected $periodNew;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $products;
 
     /**
      * @var Unit
@@ -285,4 +291,12 @@ abstract class SiteSetting implements SiteSettingInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $urlname;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }

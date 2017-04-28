@@ -53,6 +53,11 @@ abstract class Product implements ProductInterface
     /**
      * @var ArrayCollection
      */
+    protected $siteSettings;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $variantGroups;
 
     /**
@@ -250,13 +255,6 @@ abstract class Product implements ProductInterface
     protected $segmentIdList;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(nullable=true, type="array")
-     */
-    protected $siteSettings;
-
-    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -344,6 +342,7 @@ abstract class Product implements ProductInterface
         $this->prices = new ArrayCollection();
         $this->productRelations = new ArrayCollection();
         $this->segments = new ArrayCollection();
+        $this->siteSettings = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->variantGroups = new ArrayCollection();
     }
@@ -1043,6 +1042,18 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addSiteSetting(SiteSettingInterface $siteSetting)
+    {
+        if (!($this->siteSettings->contains($siteSetting))) {
+            $this->siteSettings[] = $siteSetting;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSiteSettings()
     {
         return $this->siteSettings;
@@ -1051,9 +1062,9 @@ abstract class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setSiteSettings($siteSettings)
+    public function removeSiteSetting(SiteSettingInterface $siteSetting)
     {
-        $this->siteSettings = $siteSettings;
+        $this->siteSettings->removeElement($siteSetting);
 
         return $this;
     }
