@@ -90,4 +90,204 @@ class Media implements MediaInterface
     {
         $this->products = new ArrayCollection();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMediaTranslations()
+    {
+        return $this->mediaTranslations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMediaTranslations($mediaTranslations)
+    {
+        $this->mediaTranslations = $mediaTranslations;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProduct(ProductInterface $product)
+    {
+        if (!($this->products->contains($product))) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProduct(ProductInterface $product)
+    {
+        $this->products->removeElement($product);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSortorder()
+    {
+        return $this->sortorder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSortorder($sortorder)
+    {
+        $this->sortorder = $sortorder;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThumbnailheight()
+    {
+        return $this->thumbnailheight;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setThumbnailheight($thumbnailheight)
+    {
+        $this->thumbnailheight = $thumbnailheight;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThumbnailwidth()
+    {
+        return $this->thumbnailwidth;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setThumbnailwidth($thumbnailwidth)
+    {
+        $this->thumbnailwidth = $thumbnailwidth;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
 }
