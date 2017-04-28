@@ -17,6 +17,25 @@ class SiteSettingSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\SiteSettingInterface';
 
     /**
+     * @var PeriodSynchronizer
+     */
+    protected $periodSynchronizer;
+
+    /**
+     * Set PeriodSynchronizer.
+     *
+     * @param PeriodSynchronizer $periodSynchronizer
+     *
+     * @return SiteSettingSynchronizer
+     */
+    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
+    {
+        $this->periodSynchronizer = $periodSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Synchronizes SiteSetting.
      *
      * @param array $siteSetting
@@ -91,6 +110,21 @@ class SiteSettingSynchronizer extends Synchronizer
 
         if (null !== $expectedDeliveryTimeNotInStock) {
             $entity->setExpectedDeliveryTimeNotInStock($expectedDeliveryTimeNotInStock);
+        }
+
+        if ($siteSetting->periodFrontPage) {
+            $periodFrontPage = $this->periodSynchronizer->syncPeriod($siteSetting->periodFrontPage, $flush);
+            $entity->setPeriodFrontPage($periodFrontPage);
+        }
+
+        if ($siteSetting->periodHidden) {
+            $periodHidden = $this->periodSynchronizer->syncPeriod($siteSetting->periodHidden, $flush);
+            $entity->setPeriodHidden($periodHidden);
+        }
+
+        if ($siteSetting->periodNew) {
+            $periodNew = $this->periodSynchronizer->syncPeriod($siteSetting->periodNew, $flush);
+            $entity->setPeriodNew($periodNew);
         }
 
         $this->objectManager->persist($entity);
