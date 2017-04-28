@@ -15,6 +15,21 @@ abstract class SiteSetting implements SiteSettingInterface
     protected $id;
 
     /**
+     * @var Period
+     */
+    protected $periodFrontPage;
+
+    /**
+     * @var Period
+     */
+    protected $periodHidden;
+
+    /**
+     * @var Period
+     */
+    protected $periodNew;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
@@ -174,4 +189,95 @@ abstract class SiteSetting implements SiteSettingInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $pageTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $rememberToBuyTextHeading;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $rememberToBuyTextSubheading;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(nullable=true, type="decimal")
+     */
+    protected $retailSalesPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $shortDescription;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $showAsNew;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(nullable=true, type="boolean")
+     */
+    protected $showOnFrontPage;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $siteId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(nullable=true, type="integer")
+     */
+    protected $sortOrder;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $techDocLink;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $techDocLink2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $techDocLink3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $unitNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="string")
+     */
+    protected $urlname;
 }

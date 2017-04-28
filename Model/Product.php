@@ -36,7 +36,7 @@ abstract class Product implements ProductInterface
     protected $prices;
 
     /**
-     * @var ProductRelation
+     * @var ArrayCollection
      */
     protected $productRelations;
 
