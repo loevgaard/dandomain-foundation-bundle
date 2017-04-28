@@ -227,7 +227,6 @@ class ProductSynchronizer extends Synchronizer
             ->setPicture($product->picture)
             ->setSalesCount($product->salesCount)
             ->setSegmentIdList($product->segmentIdList)
-            ->setSiteSettings($product->siteSettings)
             ->setSortOrder($product->sortOrder)
             ->setStockCount($product->stockCount)
             ->setStockLimit($product->stockLimit)

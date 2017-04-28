@@ -27,19 +27,50 @@ class SiteSettingSynchronizer extends Synchronizer
     public function syncSiteSetting($siteSetting, $flush = true)
     {
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $siteSetting->id,
+            'name' => $siteSetting->name,
         ]);
 
         if (!($entity)) {
             $entity = new $this->entityClassName();
         }
 
+        if ($product->expectedDeliveryTime) {
+            $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($product->expectedDeliveryTime);
+            $expectedDeliveryTime->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $expectedDeliveryTime = null;
+        }
+
+        if ($product->expectedDeliveryTimeNotInStock) {
+            $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($product->expectedDeliveryTimeNotInStock);
+            $expectedDeliveryTimeNotInStock->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+        } else {
+            $expectedDeliveryTimeNotInStock = null;
+        }
+
         $entity
-            ->setExternalId($siteSetting->id)
-            ->setExclStatistics($siteSetting->exclStatistics)
-            ->setIsDefault($siteSetting->isDefault)
-            ->setName($siteSetting->name)
+            ->setCustomField01($siteSetting->customField01)
+            ->setCustomField02($siteSetting->customField02)
+            ->setCustomField03($siteSetting->customField03)
+            ->setCustomField04($siteSetting->customField04)
+            ->setCustomField05($siteSetting->customField05)
+            ->setCustomField06($siteSetting->customField06)
+            ->setCustomField07($siteSetting->customField07)
+            ->setCustomField08($siteSetting->customField08)
+            ->setCustomField09($siteSetting->customField09)
+            ->setCustomField10($siteSetting->customField10)
+            ->setGiftCertificatePdfBackgroundImage($siteSetting->giftCertificatePdfBackgroundImage)
+            ->setHidden($siteSetting->hidden)
+            ->setHiddenForMobile($siteSetting->hiddenForMobile)
         ;
+
+        if (null !== $expectedDeliveryTime) {
+            $entity->setExpectedDeliveryTime($expectedDeliveryTime);
+        }
+
+        if (null !== $expectedDeliveryTimeNotInStock) {
+            $entity->setExpectedDeliveryTimeNotInStock($expectedDeliveryTimeNotInStock);
+        }
 
         $this->objectManager->persist($entity);
 
