@@ -42,6 +42,11 @@ class ProductSynchronizer extends Synchronizer
     protected $productTypeSynchronizer;
 
     /**
+     * @var SiteSettingSynchronizer
+     */
+    protected $siteSettingSynchronizer;
+
+    /**
      * @var VariantSynchronizer
      */
     protected $variantSynchronizer;
@@ -117,6 +122,20 @@ class ProductSynchronizer extends Synchronizer
     public function setProductTypeSynchronizer(ProductTypeSynchronizer $productTypeSynchronizer)
     {
         $this->productTypeSynchronizer = $productTypeSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set SiteSettingSynchronizer.
+     *
+     * @param SiteSettingSynchronizer $siteSettingSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setSiteSettingSynchronizer(SiteSettingSynchronizer $siteSettingSynchronizer)
+    {
+        $this->siteSettingSynchronizer = $siteSettingSynchronizer;
 
         return $this;
     }
@@ -261,6 +280,13 @@ class ProductSynchronizer extends Synchronizer
             foreach ($product->productRelations as $productRelationTmp) {
                 $productRelation = $this->productRelationSynchronizer->syncProductRelation($productRelationTmp, $flush);
                 $entity->addProductRelation($productRelation);
+            }
+        }
+
+        if (is_array($product->siteSettings)) {
+            foreach ($product->siteSettings as $siteSettingTmp) {
+                $siteSetting = $this->siteSettingSynchronizer->syncSiteSetting($siteSettingTmp, $flush);
+                $entity->addSiteSetting($siteSetting);
             }
         }
 
