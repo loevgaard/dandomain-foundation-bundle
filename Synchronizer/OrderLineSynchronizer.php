@@ -28,10 +28,6 @@ class OrderLineSynchronizer extends Synchronizer
      */
     public function syncOrderLine($orderLine, OrderInterface $order, $flush = true)
     {
-        if (is_numeric($orderLine)) {
-            $orderLine = \GuzzleHttp\json_decode($this->api->orderLine->getOrderLine($orderLine)->getBody()->getContents());
-        }
-
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
             'externalId' => $orderLine->id,
         ]);
