@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
-use AppKernel;
+use Symfony\Component\HttpKernel\Kernel;
 
 class OrderService
 {
@@ -15,7 +15,7 @@ class OrderService
     protected $api;
 
     /**
-     * @var AppKernel
+     * @var Kernel
      */
     protected $kernel;
 
@@ -34,9 +34,9 @@ class OrderService
      *
      * @param Api               $api
      * @param OrderSynchronizer $orderSynchronizer
-     * @param AppKernel         $kernel
+     * @param Kernel         $kernel
      */
-    public function __construct(Api $api, OrderSynchronizer $orderSynchronizer, AppKernel $kernel)
+    public function __construct(Api $api, OrderSynchronizer $orderSynchronizer, Kernel $kernel)
     {
         $this->api = $api;
         $this->kernel = $kernel;
