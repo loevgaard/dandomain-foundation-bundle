@@ -7,7 +7,7 @@ use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
 use AppKernel;
 
-class ProductService
+class ProductService extends Service
 {
     /**
      * @var Api

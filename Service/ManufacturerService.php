@@ -6,7 +6,7 @@ use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer;
 
-class ManufacturerService
+class ManufacturerService extends Service
 {
     /**
      * @var Api

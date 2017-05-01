@@ -5,9 +5,10 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-class OrderService
+class OrderService extends Service
 {
     /**
      * @var Api
@@ -52,37 +53,36 @@ class OrderService
      */
     public function orderSync($end = null, $start = null)
     {
+        $output = $this->getOutput();
         $settings = unserialize(@file_get_contents($this->settingsFile));
+        $stepInterval = new \DateInterval('PT15M');
 
         if (null !== $start) {
-            $start = new \DateTime($start);
-            $start->setTime(0, 0, 0);
+            $start = (new \DateTimeImmutable($start))->setTime(0, 0, 0);
         } elseif (($settings) and array_key_exists('end', $settings)) {
             $start = $settings['end'];
         } else {
-            $start = new \DateTime('2000-01-01');
-            $start->setTime(0, 0, 0);
+            $start = (new \DateTimeImmutable('2000-01-01'))->setTime(0, 0, 0);
         }
 
         $startStep = clone $start;
 
         if (null !== $end) {
-            $end = new \DateTime($end);
+            $end = new \DateTimeImmutable($end);
         }
 
-        if ($startStep instanceof \DateTime) {
-            $endStep = clone $startStep;
-            $endStep = $endStep->add(new \DateInterval('PT15M'));
-        }
+        $endStep = $startStep->add($stepInterval);
 
         do {
-            $now = new \DateTime('NOW');
+            $now = new \DateTimeImmutable('NOW');
             if ($startStep > $now) {
                 break;
             }
-            if (($end instanceof \DateTime) and ($end < $endStep)) {
+            if (($end instanceof \DateTimeImmutable) and ($end < $endStep)) {
                 break;
             }
+
+            $output->writeln($startStep->format('Y-m-d H:i:s').'-'.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
             $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
@@ -91,9 +91,8 @@ class OrderService
             }
 
             file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
-            $startStep = clone $endStep;
-            $endStep = clone $startStep;
-            $endStep = $endStep->add(new \DateInterval('PT15M'));
+            $startStep = $endStep->add(new \DateInterval('PT1S'));
+            $endStep = $startStep->add($stepInterval);
         } while (true);
     }
 }

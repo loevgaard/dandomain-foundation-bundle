@@ -6,7 +6,7 @@ use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer;
 
-class PeriodService
+class PeriodService extends Service
 {
     /**
      * @var Api

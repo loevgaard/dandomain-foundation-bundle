@@ -6,7 +6,7 @@ use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizer;
 
-class SiteService
+class SiteService extends Service
 {
     /**
      * @var Api

@@ -6,7 +6,7 @@ use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizer;
 
-class CategoryService
+class CategoryService extends Service
 {
     /**
      * @var Api
