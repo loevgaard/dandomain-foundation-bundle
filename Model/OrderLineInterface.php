@@ -60,16 +60,18 @@ interface OrderLineInterface
     public function setOrder(OrderInterface $order = null);
 
     /**
-     * @return Product
+     * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * @param Product $product
+     * The product can be null because Dandomain also adds discount and other non-products to order lines
+     *
+     * @param ProductInterface $product
      *
      * @return OrderLineInterface
      */
-    public function setProduct($product);
+    public function setProduct(ProductInterface $product = null);
 
     /**
      * Get productId.

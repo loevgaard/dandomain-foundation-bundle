@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
+use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainFoundationBundle\Model\ProductInterface;
 
 class ProductSynchronizer extends Synchronizer
@@ -190,13 +191,22 @@ class ProductSynchronizer extends Synchronizer
     /**
      * Synchronizes Product.
      *
-     * @param array $product
+     * @param string|\stdClass $product
      * @param bool  $flush
      *
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
     public function syncProduct($product, $flush = true)
     {
+        try {
+            if (is_string($product)) {
+                $product = \GuzzleHttp\json_decode($this->api->productData->getDataProduct($product)->getBody()->getContents());
+            }
+        } catch (ClientException $e) {
+            return null;
+        }
+
+        /** @var ProductInterface $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
             'number' => $product->number,
         ]);
@@ -254,8 +264,7 @@ class ProductSynchronizer extends Synchronizer
             ->setVariantIdList($product->variantIdList)
             ->setVariantMasterId($product->variantMasterId)
             ->setVendorNumber($product->vendorNumber)
-            ->setWeight($product->weight)
-        ;
+            ->setWeight($product->weight);
 
         if (null !== $created) {
             $entity->setCreated($created);
@@ -340,5 +349,6 @@ class ProductSynchronizer extends Synchronizer
         }
 
         return $entity;
+
     }
 }

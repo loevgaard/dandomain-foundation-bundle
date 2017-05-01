@@ -3,10 +3,16 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Loevgaard\DandomainFoundationBundle\Model\OrderInterface;
+use Loevgaard\DandomainFoundationBundle\Model\OrderLine;
 use Loevgaard\DandomainFoundationBundle\Model\OrderLineInterface;
 
 class OrderLineSynchronizer extends Synchronizer
 {
+    /**
+     * @var ProductSynchronizer
+     */
+    protected $productSynchronizer;
+
     /**
      * @var string
      */
@@ -28,6 +34,7 @@ class OrderLineSynchronizer extends Synchronizer
      */
     public function syncOrderLine($orderLine, OrderInterface $order, $flush = true)
     {
+        /** @var OrderLine $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
             'externalId' => $orderLine->id,
         ]);
@@ -36,11 +43,13 @@ class OrderLineSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
+        $product = $this->productSynchronizer->syncProduct($orderLine->productId, $flush);
+
         $entity
             ->setExternalId($orderLine->id)
             ->setFileUrl($orderLine->fileUrl)
             ->setOrder($order)
-            // @todo the order entity should BOTH contain the data for the product, but also a reference to the Product entity
+            ->setProduct($product)
             ->setProductId($orderLine->productId)
             ->setProductName($orderLine->productName)
             ->setQuantity($orderLine->quantity)
@@ -58,5 +67,15 @@ class OrderLineSynchronizer extends Synchronizer
         }
 
         return $entity;
+    }
+
+    /**
+     * @param ProductSynchronizer $productSynchronizer
+     * @return $this
+     */
+    public function setProductSynchronizer(ProductSynchronizer $productSynchronizer)
+    {
+        $this->productSynchronizer = $productSynchronizer;
+        return $this;
     }
 }
