@@ -60,12 +60,12 @@ interface OrderLineInterface
     public function setOrder(OrderInterface $order = null);
 
     /**
-     * @return ProductInterface
+     * @return Product
      */
     public function getProduct();
 
     /**
-     * @param ProductInterface $product
+     * @param Product $product
      *
      * @return OrderLineInterface
      */

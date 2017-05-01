@@ -34,6 +34,11 @@ abstract class OrderLine implements OrderLineInterface
     protected $fileUrl;
 
     /**
+     * @var Product
+     */
+    protected $product;
+
+    /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
@@ -147,6 +152,24 @@ abstract class OrderLine implements OrderLineInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
 
         return $this;
     }
