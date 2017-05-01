@@ -44,6 +44,7 @@ class OrderLineSynchronizer extends Synchronizer
             ->setExternalId($orderLine->id)
             ->setFileUrl($orderLine->fileUrl)
             ->setOrder($order)
+            // @todo the order entity should BOTH contain the data for the product, but also a reference to the Product entity
             ->setProductId($orderLine->productId)
             ->setProductName($orderLine->productName)
             ->setQuantity($orderLine->quantity)
