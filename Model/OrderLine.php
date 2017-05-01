@@ -43,7 +43,7 @@ abstract class OrderLine implements OrderLineInterface
      *
      * @ORM\Column(nullable=true, type="integer")
      */
-    protected $productId;
+    protected $productNumber;
 
     /**
      * @var string
@@ -177,17 +177,17 @@ abstract class OrderLine implements OrderLineInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductId()
+    public function getProductNumber()
     {
-        return $this->productId;
+        return $this->productNumber;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProductId($productId)
+    public function setProductNumber($productId)
     {
-        $this->productId = $productId;
+        $this->productNumber = $productId;
 
         return $this;
     }

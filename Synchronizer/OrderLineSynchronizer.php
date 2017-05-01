@@ -50,7 +50,7 @@ class OrderLineSynchronizer extends Synchronizer
             ->setFileUrl($orderLine->fileUrl)
             ->setOrder($order)
             ->setProduct($product)
-            ->setProductId($orderLine->productId)
+            ->setProductNumber($orderLine->productId)
             ->setProductName($orderLine->productName)
             ->setQuantity($orderLine->quantity)
             ->setTotalPrice($orderLine->totalPrice)

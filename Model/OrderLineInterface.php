@@ -74,20 +74,18 @@ interface OrderLineInterface
     public function setProduct(ProductInterface $product = null);
 
     /**
-     * Get productId.
-     *
      * @return int
      */
-    public function getProductId();
+    public function getProductNumber();
 
     /**
-     * Set productId.
+     * In the API data for the order line the product number is the product id attribute
      *
-     * @param int $productId
+     * @param int $productNumber
      *
      * @return OrderLineInterface
      */
-    public function setProductId($productId);
+    public function setProductNumber($productNumber);
 
     /**
      * Get productName.
