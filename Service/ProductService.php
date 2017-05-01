@@ -6,6 +6,7 @@ use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
 use AppKernel;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ProductService extends Service
 {
@@ -15,7 +16,7 @@ class ProductService extends Service
     protected $api;
 
     /**
-     * @var AppKernel
+     * @var Kernel
      */
     protected $kernel;
 
@@ -34,9 +35,9 @@ class ProductService extends Service
      *
      * @param Api                 $api
      * @param ProductSynchronizer $productSynchronizer
-     * @param AppKernel           $kernel
+     * @param Kernel           $kernel
      */
-    public function __construct(Api $api, ProductSynchronizer $productSynchronizer, AppKernel $kernel)
+    public function __construct(Api $api, ProductSynchronizer $productSynchronizer, Kernel $kernel)
     {
         $this->api = $api;
         $this->kernel = $kernel;
