@@ -20,7 +20,7 @@ class OrderLineSynchronizer extends Synchronizer
     /**
      * Synchronizes OrderLine.
      *
-     * @param array          $orderLine
+     * @param \stdClass      $orderLine
      * @param OrderInterface $order
      * @param bool           $flush
      *
