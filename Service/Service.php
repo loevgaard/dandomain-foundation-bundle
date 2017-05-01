@@ -12,10 +12,12 @@ abstract class Service
 
     /**
      * @param OutputInterface $output
+     * @return $this
      */
     public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
+        return $this;
     }
 
     /**
