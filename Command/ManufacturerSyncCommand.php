@@ -30,5 +30,7 @@ class ManufacturerSyncCommand extends ContainerAwareCommand
         $this->getContainer()->get('loevgaard_dandomain_foundation.manufacturer_service')->manufacturerSync();
 
         $this->release();
+
+        return 0;
     }
 }

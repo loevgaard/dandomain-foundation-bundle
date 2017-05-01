@@ -38,5 +38,7 @@ class OrderSyncCommand extends ContainerAwareCommand
         $service->orderSync($end, $start);
 
         $this->release();
+
+        return 0;
     }
 }

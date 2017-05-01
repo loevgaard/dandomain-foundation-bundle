@@ -5,7 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
-use AppKernel;
 use Symfony\Component\HttpKernel\Kernel;
 
 class ProductService extends Service

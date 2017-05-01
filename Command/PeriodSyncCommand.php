@@ -30,5 +30,7 @@ class PeriodSyncCommand extends ContainerAwareCommand
         $this->getContainer()->get('loevgaard_dandomain_foundation.period_service')->periodSync();
 
         $this->release();
+
+        return 0;
     }
 }

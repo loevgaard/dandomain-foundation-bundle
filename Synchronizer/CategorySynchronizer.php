@@ -40,13 +40,14 @@ class CategorySynchronizer extends Synchronizer
     /**
      * Synchronizes Category.
      *
-     * @param array $category
+     * @param \stdClass $category
      * @param bool  $flush
      *
-     * @return CategoryInterface
+     * @return CategoryInterface|null
      */
     public function syncCategory($category, $flush = true)
     {
+        /** @var CategoryInterface $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
             'externalId' => (int) $category->number,
         ]);
@@ -68,7 +69,7 @@ class CategorySynchronizer extends Synchronizer
         }
 
         if (null === $actualTexts) {
-            return;
+            return null;
         }
 
         if ($category->createdDate) {

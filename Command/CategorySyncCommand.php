@@ -30,5 +30,7 @@ class CategorySyncCommand extends ContainerAwareCommand
         $this->getContainer()->get('loevgaard_dandomain_foundation.category_service')->categorySync();
 
         $this->release();
+
+        return 0;
     }
 }

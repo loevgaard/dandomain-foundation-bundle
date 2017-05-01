@@ -26,7 +26,7 @@ class PriceSynchronizer extends Synchronizer
      *
      * @param PeriodSynchronizer $periodSynchronizer
      *
-     * @return ProductSynchronizer
+     * @return $this
      */
     public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
     {
@@ -38,13 +38,14 @@ class PriceSynchronizer extends Synchronizer
     /**
      * Synchronizes Price.
      *
-     * @param array $price
+     * @param \stdClass $price
      * @param bool  $flush
      *
      * @return PriceInterface
      */
     public function syncPrice($price, $flush = true)
     {
+        /** @var PriceInterface $entity */
         $entity = new $this->entityClassName();
 
         $entity

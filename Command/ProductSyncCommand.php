@@ -38,5 +38,7 @@ class ProductSyncCommand extends ContainerAwareCommand
         $this->getContainer()->get('loevgaard_dandomain_foundation.product_service')->productSync($changed, $end, $start);
 
         $this->release();
+
+        return 0;
     }
 }

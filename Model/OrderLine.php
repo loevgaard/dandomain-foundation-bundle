@@ -167,7 +167,7 @@ abstract class OrderLine implements OrderLineInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct($product)
+    public function setProduct(ProductInterface $product = null)
     {
         $this->product = $product;
 

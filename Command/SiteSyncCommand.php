@@ -30,5 +30,7 @@ class SiteSyncCommand extends ContainerAwareCommand
         $this->getContainer()->get('loevgaard_dandomain_foundation.site_service')->siteSync();
 
         $this->release();
+
+        return 0;
     }
 }
