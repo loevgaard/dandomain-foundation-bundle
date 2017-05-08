@@ -28,6 +28,7 @@ class LoevgaardDandomainFoundationExtension extends Extension
         $container->setParameter('loevgaard_dandomain_foundation.price_class', $config['price_class']);
         $container->setParameter('loevgaard_dandomain_foundation.product_class', $config['product_class']);
         $container->setParameter('loevgaard_dandomain_foundation.product_relation_class', $config['product_relation_class']);
+        $container->setParameter('loevgaard_dandomain_foundation.product_translation_class', $config['product_translation_class']);
         $container->setParameter('loevgaard_dandomain_foundation.product_type_class', $config['product_type_class']);
         $container->setParameter('loevgaard_dandomain_foundation.product_type_field_class', $config['product_type_field_class']);
         $container->setParameter('loevgaard_dandomain_foundation.product_type_formula_class', $config['product_type_formula_class']);
