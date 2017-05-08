@@ -27,7 +27,8 @@ class SiteSyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $this->getContainer()->get('loevgaard_dandomain_foundation.site_service')->siteSync();
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.site_service');
+        $service->setOutput($output)->siteSync();
 
         $this->release();
 

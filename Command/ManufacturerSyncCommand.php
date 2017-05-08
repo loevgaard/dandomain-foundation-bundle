@@ -27,7 +27,8 @@ class ManufacturerSyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $this->getContainer()->get('loevgaard_dandomain_foundation.manufacturer_service')->manufacturerSync();
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.manufacturer_service');
+        $service->setOutput($output)->manufacturerSync();
 
         $this->release();
 
