@@ -428,31 +428,6 @@ interface ProductTranslationInterface
     public function setPeriodNew(PeriodInterface $periodNew = null);
 
     /**
-     * Add product
-     *
-     * @param ProductInterface $product
-     *
-     * @return SiteSettingInterface
-     */
-    public function addProduct(ProductInterface $product);
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProducts();
-
-    /**
-     * Remove product
-     *
-     * @param ProductInterface $product
-     *
-     * @return SiteSettingInterface
-     */
-    public function removeProduct(ProductInterface $product);
-
-    /**
      * Get rememberToBuyTextHeading
      *
      * @return string
