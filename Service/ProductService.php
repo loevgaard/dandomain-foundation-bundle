@@ -5,6 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 use Dandomain\Api\Api;
 use GuzzleHttp;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 class ProductService extends Service
@@ -53,38 +54,42 @@ class ProductService extends Service
      */
     public function productSync($changed = false, $end = null, $start = null)
     {
+        $output = $this->getOutput();
+
         if (true === $changed) {
             $settings = unserialize(@file_get_contents($this->settingsFile));
+            $stepInterval = new \DateInterval('PT15M');
 
             if (null !== $start) {
-                $start = new \DateTime($start);
+                $start = new \DateTimeImmutable($start);
                 $start->setTime(0, 0, 0);
-            } elseif (($settings) and array_key_exists('end', $settings)) {
+            } elseif ($settings and array_key_exists('end', $settings) and ($settings['end'] instanceof \DateTimeImmutable)) {
                 $start = $settings['end'];
             } else {
-                $start = new \DateTime('2000-01-01');
+                $start = new \DateTimeImmutable('2000-01-01');
                 $start->setTime(0, 0, 0);
             }
 
+            /** @var \DateTimeImmutable $startStep */
             $startStep = clone $start;
 
             if (null !== $end) {
-                $end = new \DateTime($end);
+                $end = new \DateTimeImmutable($end);
             }
 
-            if ($startStep instanceof \DateTime) {
-                $endStep = clone $startStep;
-                $endStep = $endStep->add(new \DateInterval('PT15M'));
-            }
+            /** @var \DateTimeImmutable $endStep */
+            $endStep = $startStep->add($stepInterval);
 
             do {
-                $now = new \DateTime('NOW');
+                $now = new \DateTimeImmutable('NOW');
                 if ($startStep > $now) {
                     break;
                 }
-                if (($end instanceof \DateTime) and ($end < $endStep)) {
+                if (($end instanceof \DateTimeImmutable) and ($end < $endStep)) {
                     break;
                 }
+
+                $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
                 $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
@@ -93,9 +98,8 @@ class ProductService extends Service
                 }
 
                 file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
-                $startStep = clone $endStep;
-                $endStep = clone $startStep;
-                $endStep = $endStep->add(new \DateInterval('PT15M'));
+                $startStep = $endStep->add(new \DateInterval('PT1S'));
+                $endStep = $startStep->add($stepInterval);
             } while (true);
         } else {
             $pageSize = 200;

@@ -35,7 +35,7 @@ class OrderService extends Service
      *
      * @param Api               $api
      * @param OrderSynchronizer $orderSynchronizer
-     * @param Kernel         $kernel
+     * @param Kernel            $kernel
      */
     public function __construct(Api $api, OrderSynchronizer $orderSynchronizer, Kernel $kernel)
     {
@@ -65,12 +65,14 @@ class OrderService extends Service
             $start = (new \DateTimeImmutable('2000-01-01'))->setTime(0, 0, 0);
         }
 
+        /** @var \DateTimeImmutable $startStep */
         $startStep = clone $start;
 
         if (null !== $end) {
             $end = new \DateTimeImmutable($end);
         }
 
+        /** @var \DateTimeImmutable $endStep */
         $endStep = $startStep->add($stepInterval);
 
         do {
@@ -82,7 +84,7 @@ class OrderService extends Service
                 break;
             }
 
-            $output->writeln($startStep->format('Y-m-d H:i:s').'-'.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
+            $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
             $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
