@@ -3,7 +3,9 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use GuzzleHttp\Exception\ClientException;
+use Loevgaard\DandomainFoundationBundle\Model\Product;
 use Loevgaard\DandomainFoundationBundle\Model\ProductInterface;
+use Loevgaard\DandomainFoundationBundle\Model\TranslatableInterface;
 
 class ProductSynchronizer extends Synchronizer
 {
@@ -61,6 +63,16 @@ class ProductSynchronizer extends Synchronizer
      * @var VariantGroupSynchronizer
      */
     protected $variantGroupSynchronizer;
+
+    /**
+     * @var PeriodSynchronizer
+     */
+    protected $periodSynchronizer;
+
+    /**
+     * @var UnitSynchronizer
+     */
+    protected $unitSynchronizer;
 
     /**
      * Set categorySynchronizer.
@@ -147,6 +159,18 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
+     * @param PeriodSynchronizer $periodSynchronizer
+     *
+     * @return $this
+     */
+    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
+    {
+        $this->periodSynchronizer = $periodSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Set siteSettingSynchronizer.
      *
      * @param SiteSettingSynchronizer $siteSettingSynchronizer
@@ -184,6 +208,18 @@ class ProductSynchronizer extends Synchronizer
     public function setVariantGroupSynchronizer(VariantGroupSynchronizer $variantGroupSynchronizer)
     {
         $this->variantGroupSynchronizer = $variantGroupSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * @param UnitSynchronizer $unitSynchronizer
+     *
+     * @return $this
+     */
+    public function setUnitSynchronizer(UnitSynchronizer $unitSynchronizer)
+    {
+        $this->unitSynchronizer = $unitSynchronizer;
 
         return $this;
     }
@@ -316,10 +352,59 @@ class ProductSynchronizer extends Synchronizer
             }
         }
 
-        if (is_array($product->siteSettings)) {
+        if($entity instanceof TranslatableInterface && is_array($product->siteSettings)) {
             foreach ($product->siteSettings as $siteSettingTmp) {
-                $siteSetting = $this->siteSettingSynchronizer->syncSiteSetting($siteSettingTmp, $flush);
-                $entity->addSiteSetting($siteSetting);
+                /** @var Product $entity */
+                $entity->translate($siteSettingTmp->siteID)->setCustomField01($siteSettingTmp->customField01);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField02($siteSettingTmp->customField02);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField03($siteSettingTmp->customField03);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField04($siteSettingTmp->customField04);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField05($siteSettingTmp->customField05);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField06($siteSettingTmp->customField06);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField07($siteSettingTmp->customField07);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField08($siteSettingTmp->customField08);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField09($siteSettingTmp->customField09);
+                $entity->translate($siteSettingTmp->siteID)->setCustomField10($siteSettingTmp->customField10);
+                $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTime($siteSettingTmp->expectedDeliveryTime);
+                $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTimeNotInStock($siteSettingTmp->expectedDeliveryTimeNotInStock);
+                $entity->translate($siteSettingTmp->siteID)->setGiftCertificatePdfBackgroundImage($siteSettingTmp->giftCertificatePdfBackgroundImage);
+                $entity->translate($siteSettingTmp->siteID)->setHidden($siteSettingTmp->hidden);
+                $entity->translate($siteSettingTmp->siteID)->setHiddenForMobile($siteSettingTmp->hiddenForMobile);
+                $entity->translate($siteSettingTmp->siteID)->setImageAltText($siteSettingTmp->imageAltText);
+                $entity->translate($siteSettingTmp->siteID)->setIsToplistHidden($siteSettingTmp->isToplistHidden);
+                $entity->translate($siteSettingTmp->siteID)->setKeyWords($siteSettingTmp->keyWords);
+                $entity->translate($siteSettingTmp->siteID)->setLongDescription($siteSettingTmp->longDescription);
+                $entity->translate($siteSettingTmp->siteID)->setLongDescription2($siteSettingTmp->longDescription2);
+                $entity->translate($siteSettingTmp->siteID)->setMetaDescription($siteSettingTmp->metaDescription);
+                $entity->translate($siteSettingTmp->siteID)->setName($siteSettingTmp->name);
+                $entity->translate($siteSettingTmp->siteID)->setPageTitle($siteSettingTmp->pageTitle);
+                $entity->translate($siteSettingTmp->siteID)->setRememberToBuyTextHeading($siteSettingTmp->rememberToBuyTextHeading);
+                $entity->translate($siteSettingTmp->siteID)->setRememberToBuyTextSubheading($siteSettingTmp->rememberToBuyTextSubheading);
+                $entity->translate($siteSettingTmp->siteID)->setRetailSalesPrice($siteSettingTmp->retailSalesPrice);
+                $entity->translate($siteSettingTmp->siteID)->setShortDescription($siteSettingTmp->shortDescription);
+                $entity->translate($siteSettingTmp->siteID)->setShowAsNew($siteSettingTmp->showAsNew);
+                $entity->translate($siteSettingTmp->siteID)->setShowOnFrontPage($siteSettingTmp->showOnFrontPage);
+                $entity->translate($siteSettingTmp->siteID)->setSiteId($siteSettingTmp->siteID);
+                $entity->translate($siteSettingTmp->siteID)->setSortOrder($siteSettingTmp->sortOrder);
+                $entity->translate($siteSettingTmp->siteID)->setTechDocLink($siteSettingTmp->techDocLink);
+                $entity->translate($siteSettingTmp->siteID)->setTechDocLink2($siteSettingTmp->techDocLink2);
+                $entity->translate($siteSettingTmp->siteID)->setTechDocLink3($siteSettingTmp->techDocLink3);
+                $entity->translate($siteSettingTmp->siteID)->setUnitNumber($siteSettingTmp->unitNumber);
+                $entity->translate($siteSettingTmp->siteID)->setUrlname($siteSettingTmp->urlname);
+
+                $periodFrontPage = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodFrontPage, $flush);
+                $entity->translate($siteSettingTmp->siteID)->setPeriodFrontPage($periodFrontPage);
+
+                $periodHidden = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodHidden, $flush);
+                $entity->translate($siteSettingTmp->siteID)->setPeriodHidden($periodHidden);
+
+                $periodNew = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodNew, $flush);
+                $entity->translate($siteSettingTmp->siteID)->setPeriodNew($periodNew);
+
+                $unit = $this->unitSynchronizer->syncUnit($siteSettingTmp->unit, $flush);
+                $entity->translate($siteSettingTmp->siteID)->setUnit($unit);
+
+                $entity->mergeNewTranslations();
             }
         }
 

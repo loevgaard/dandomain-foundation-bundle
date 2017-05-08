@@ -2,10 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
-/**
- * @deprecated Use Loevgaard\DandomainFoundationBundle\Model\ProductTranslationInterface instead
- */
-interface SiteSettingInterface
+interface ProductTranslationInterface
 {
     /**
      * Get customField01

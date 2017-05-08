@@ -165,6 +165,7 @@ services:
             - [setPriceSynchronizer, ["@loevgaard_dandomain_foundation.price_synchronizer"]]
             - [setProductRelationSynchronizer, ["@loevgaard_dandomain_foundation.product_relation_synchronizer"]]
             - [setProductTypeSynchronizer, ["@loevgaard_dandomain_foundation.product_type_synchronizer"]]
+            - [setPeriodSynchronizer, ["@loevgaard_dandomain_foundation.period_synchronizer"]]
             - [setSiteSettingSynchronizer, ["@loevgaard_dandomain_foundation.site_setting_synchronizer"]]
             - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
             - [setVariantGroupSynchronizer, ["@loevgaard_dandomain_foundation.variant_group_synchronizer"]]

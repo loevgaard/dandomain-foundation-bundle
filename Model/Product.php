@@ -4,12 +4,15 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Product implements ProductInterface
+abstract class Product implements ProductInterface, TranslatableInterface
 {
+    use ORMBehaviors\Translatable\Translatable;
+
     /**
      * @var int
      */

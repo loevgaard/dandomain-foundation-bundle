@@ -2,19 +2,15 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @deprecated Use Loevgaard\DandomainFoundationBundle\Model\ProductTranslation instead
- * @ORM\MappedSuperclass
+ * @ORM\MappedSuperclass()
  */
-abstract class SiteSetting implements SiteSettingInterface
+abstract class ProductTranslation implements ProductTranslationInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    use ORMBehaviors\Translatable\Translation;
 
     /**
      * @var Period
@@ -30,11 +26,6 @@ abstract class SiteSetting implements SiteSettingInterface
      * @var Period
      */
     protected $periodNew;
-
-    /**
-     * @var ArrayCollection
-     */
-    protected $products;
 
     /**
      * @var Unit
@@ -292,14 +283,6 @@ abstract class SiteSetting implements SiteSettingInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $urlname;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
 
     /**
      * {@inheritdoc}
@@ -773,36 +756,6 @@ abstract class SiteSetting implements SiteSettingInterface
     public function setPeriodNew(PeriodInterface $periodNew = null)
     {
         $this->periodNew = $periodNew;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addProduct(ProductInterface $product)
-    {
-        if (!($this->products->contains($product))) {
-            $this->products[] = $product;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeProduct(ProductInterface $product)
-    {
-        $this->products->removeElement($product);
 
         return $this;
     }

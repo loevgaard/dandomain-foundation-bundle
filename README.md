@@ -1,4 +1,25 @@
-# dandomain-foundation
+# Dandomain Foundation Bundle
+
+```php
+<?php
+
+class AppKernel
+{
+    function registerBundles()
+    {
+        $bundles = array(
+            //...
+            new Loevgaard\DandomainFoundationBundle\LoevgaardDandomainFoundationBundle(),
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            //...
+        );
+
+        //...
+
+        return $bundles;
+    }
+}
+```
 
 ```php
 <?php
@@ -39,8 +60,9 @@ class Category extends BaseCategory
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -63,8 +85,9 @@ class Customer extends BaseCustomer
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -87,8 +110,9 @@ class Delivery extends BaseDelivery
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -111,8 +135,9 @@ class Invoice extends BaseInvoice
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -151,8 +176,9 @@ class Manufacturer extends BaseManufacturer
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -247,8 +273,9 @@ class Order extends BaseOrder
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -279,8 +306,9 @@ class OrderLine extends BaseOrderLine
      */
     protected $order;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -303,8 +331,9 @@ class PaymentMethod extends BasePaymentMethod
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -327,8 +356,9 @@ class Period extends BasePeriod
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -375,8 +405,9 @@ class Price extends BasePrice
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -456,8 +487,9 @@ class Product extends BaseProduct
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -496,8 +528,9 @@ class Segment extends BaseSegment
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -520,8 +553,9 @@ class ShippingMethod extends BaseShippingMethod
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -544,8 +578,9 @@ class Site extends BaseSite
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -568,8 +603,9 @@ class State extends BaseState
      */
     protected $id;
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
@@ -615,8 +651,9 @@ class Variant extends BaseVariant
         parent::__construct();
     }
 }
+```
 
-
+```php
 <?php
 
 namespace AppBundle\Entity;
