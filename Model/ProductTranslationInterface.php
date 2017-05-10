@@ -16,7 +16,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField01
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField01($customField01);
 
@@ -32,7 +32,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField02
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField02($customField02);
 
@@ -48,7 +48,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField03
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField03($customField03);
 
@@ -64,7 +64,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField04
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField04($customField04);
 
@@ -80,7 +80,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField05
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField05($customField05);
 
@@ -96,7 +96,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField06
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField06($customField06);
 
@@ -112,7 +112,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField07
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField07($customField07);
 
@@ -128,7 +128,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField08
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField08($customField08);
 
@@ -144,7 +144,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField09
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField09($customField09);
 
@@ -160,7 +160,7 @@ interface ProductTranslationInterface
      *
      * @param string $customField10
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setCustomField10($customField10);
 
@@ -176,7 +176,7 @@ interface ProductTranslationInterface
      *
      * @param \DateTime $expectedDeliveryTime
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setExpectedDeliveryTime($expectedDeliveryTime);
 
@@ -192,7 +192,7 @@ interface ProductTranslationInterface
      *
      * @param \DateTime $expectedDeliveryTimeNotInStock
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setExpectedDeliveryTimeNotInStock($expectedDeliveryTimeNotInStock);
 
@@ -208,7 +208,7 @@ interface ProductTranslationInterface
      *
      * @param string $giftCertificatePdfBackgroundImage
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setGiftCertificatePdfBackgroundImage($giftCertificatePdfBackgroundImage);
 
@@ -224,7 +224,7 @@ interface ProductTranslationInterface
      *
      * @param bool $hidden
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setHidden($hidden);
 
@@ -240,7 +240,7 @@ interface ProductTranslationInterface
      *
      * @param bool $hiddenForMobile
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setHiddenForMobile($hiddenForMobile);
 
@@ -263,7 +263,7 @@ interface ProductTranslationInterface
      *
      * @param string $imageAltText
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setImageAltText($imageAltText);
 
@@ -279,7 +279,7 @@ interface ProductTranslationInterface
      *
      * @param bool $isToplistHidden
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setIsToplistHidden($isToplistHidden);
 
@@ -295,7 +295,7 @@ interface ProductTranslationInterface
      *
      * @param string $keyWords
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setKeyWords($keyWords);
 
@@ -311,7 +311,7 @@ interface ProductTranslationInterface
      *
      * @param string $longDescription
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setLongDescription($longDescription);
 
@@ -327,7 +327,7 @@ interface ProductTranslationInterface
      *
      * @param string $longDescription2
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setLongDescription2($longDescription2);
 
@@ -343,7 +343,7 @@ interface ProductTranslationInterface
      *
      * @param string $metaDescription
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setMetaDescription($metaDescription);
 
@@ -359,7 +359,7 @@ interface ProductTranslationInterface
      *
      * @param string $name
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setName($name);
 
@@ -375,7 +375,7 @@ interface ProductTranslationInterface
      *
      * @param string $pageTitle
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setPageTitle($pageTitle);
 
@@ -391,7 +391,7 @@ interface ProductTranslationInterface
      *
      * @param PeriodInterface $periodFrontPage
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setPeriodFrontPage(PeriodInterface $periodFrontPage = null);
 
@@ -407,7 +407,7 @@ interface ProductTranslationInterface
      *
      * @param PeriodInterface $periodHidden
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setPeriodHidden(PeriodInterface $periodHidden = null);
 
@@ -423,7 +423,7 @@ interface ProductTranslationInterface
      *
      * @param PeriodInterface $periodNew
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setPeriodNew(PeriodInterface $periodNew = null);
 
@@ -439,7 +439,7 @@ interface ProductTranslationInterface
      *
      * @param string $rememberToBuyTextHeading
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setRememberToBuyTextHeading($rememberToBuyTextHeading);
 
@@ -455,7 +455,7 @@ interface ProductTranslationInterface
      *
      * @param string $rememberToBuyTextSubheading
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setRememberToBuyTextSubheading($rememberToBuyTextSubheading);
 
@@ -471,7 +471,7 @@ interface ProductTranslationInterface
      *
      * @param string $retailSalesPrice
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setRetailSalesPrice($retailSalesPrice);
 
@@ -487,7 +487,7 @@ interface ProductTranslationInterface
      *
      * @param string $shortDescription
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setShortDescription($shortDescription);
 
@@ -503,7 +503,7 @@ interface ProductTranslationInterface
      *
      * @param bool $showAsNew
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setShowAsNew($showAsNew);
 
@@ -519,7 +519,7 @@ interface ProductTranslationInterface
      *
      * @param bool $showOnFrontPage
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setShowOnFrontPage($showOnFrontPage);
 
@@ -535,7 +535,7 @@ interface ProductTranslationInterface
      *
      * @param int $siteId
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setSiteId($siteId);
 
@@ -551,7 +551,7 @@ interface ProductTranslationInterface
      *
      * @param int $sortOrder
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setSortOrder($sortOrder);
 
@@ -567,7 +567,7 @@ interface ProductTranslationInterface
      *
      * @param string $techDocLink
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setTechDocLink($techDocLink);
 
@@ -583,7 +583,7 @@ interface ProductTranslationInterface
      *
      * @param string $techDocLink2
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setTechDocLink2($techDocLink2);
 
@@ -599,7 +599,7 @@ interface ProductTranslationInterface
      *
      * @param string $techDocLink3
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setTechDocLink3($techDocLink3);
 
@@ -615,7 +615,7 @@ interface ProductTranslationInterface
      *
      * @param UnitInterface $unit
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setUnit(UnitInterface $unit = null);
 
@@ -631,7 +631,7 @@ interface ProductTranslationInterface
      *
      * @param string $unitNumber
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setUnitNumber($unitNumber);
 
@@ -647,7 +647,7 @@ interface ProductTranslationInterface
      *
      * @param string $urlname
      *
-     * @return SiteSettingInterface
+     * @return ProductTranslationInterface
      */
     public function setUrlname($urlname);
 }
