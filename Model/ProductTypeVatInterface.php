@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeVatInterface
 {
     /**
-     * Get country
+     * Get country.
      *
      * @return string
      */
     public function getCountry();
 
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      *
@@ -21,14 +21,14 @@ interface ProductTypeVatInterface
     public function setCountry($country);
 
     /**
-     * Get countryId
+     * Get countryId.
      *
      * @return string
      */
     public function getCountryId();
 
     /**
-     * Set countryId
+     * Set countryId.
      *
      * @param string $countryId
      *
@@ -37,14 +37,14 @@ interface ProductTypeVatInterface
     public function setCountryId($countryId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Add productType
+     * Add productType.
      *
      * @param ProductTypeInterface $productType
      *
@@ -53,14 +53,14 @@ interface ProductTypeVatInterface
     public function addProductType(ProductTypeInterface $productType);
 
     /**
-     * Get productTypes
+     * Get productTypes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypes();
 
     /**
-     * Remove productType
+     * Remove productType.
      *
      * @param ProductTypeInterface $productType
      *
@@ -69,30 +69,30 @@ interface ProductTypeVatInterface
     public function removeProductType(ProductTypeInterface $productType);
 
     /**
-     * Get siteId
+     * Get siteId.
      *
-     * @return integer
+     * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId
+     * Set siteId.
      *
-     * @param integer $siteId
+     * @param int $siteId
      *
      * @return ProductTypeVatInterface
      */
     public function setSiteId($siteId);
 
     /**
-     * Get vatPct
+     * Get vatPct.
      *
      * @return string
      */
     public function getVatPct();
 
     /**
-     * Set vatPct
+     * Set vatPct.
      *
      * @param string $vatPct
      *

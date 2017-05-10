@@ -228,7 +228,7 @@ class ProductSynchronizer extends Synchronizer
      * Synchronizes Product.
      *
      * @param string|\stdClass $product
-     * @param bool  $flush
+     * @param bool             $flush
      *
      * @return ProductInterface|null
      */
@@ -352,9 +352,9 @@ class ProductSynchronizer extends Synchronizer
             }
         }
 
-        if($entity instanceof TranslatableInterface && is_array($product->siteSettings)) {
+        if ($entity instanceof TranslatableInterface && is_array($product->siteSettings)) {
             foreach ($product->siteSettings as $siteSettingTmp) {
-                /** @var Product $entity */
+                /* @var Product $entity */
                 $entity->translate($siteSettingTmp->siteID)->setCustomField01($siteSettingTmp->customField01);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField02($siteSettingTmp->customField02);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField03($siteSettingTmp->customField03);
@@ -434,6 +434,5 @@ class ProductSynchronizer extends Synchronizer
         }
 
         return $entity;
-
     }
 }

@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeFieldInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
      * @param string $externalId
      *
@@ -21,21 +21,21 @@ interface ProductTypeFieldInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */
     public function getLabel();
 
     /**
-     * Set label
+     * Set label.
      *
      * @param string $label
      *
@@ -44,39 +44,39 @@ interface ProductTypeFieldInterface
     public function setLabel($label);
 
     /**
-     * Get languageId
+     * Get languageId.
      *
-     * @return integer
+     * @return int
      */
     public function getLanguageId();
 
     /**
-     * Set languageId
+     * Set languageId.
      *
-     * @param integer $languageId
+     * @param int $languageId
      *
      * @return ProductTypeFieldInterface
      */
     public function setLanguageId($languageId);
 
     /**
-     * Get number
+     * Get number.
      *
-     * @return integer
+     * @return int
      */
     public function getNumber();
 
     /**
-     * Set number
+     * Set number.
      *
-     * @param integer $number
+     * @param int $number
      *
      * @return ProductTypeFieldInterface
      */
     public function setNumber($number);
 
     /**
-     * Add productType
+     * Add productType.
      *
      * @param ProductTypeInterface $productType
      *
@@ -85,14 +85,14 @@ interface ProductTypeFieldInterface
     public function addProductType(ProductTypeInterface $productType);
 
     /**
-     * Get productTypes
+     * Get productTypes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypes();
 
     /**
-     * Remove productType
+     * Remove productType.
      *
      * @param ProductTypeInterface $productType
      *

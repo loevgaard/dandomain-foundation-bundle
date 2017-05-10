@@ -65,7 +65,7 @@ interface OrderLineInterface
     public function getProduct();
 
     /**
-     * The product can be null because Dandomain also adds discount and other non-products to order lines
+     * The product can be null because Dandomain also adds discount and other non-products to order lines.
      *
      * @param ProductInterface $product
      *
@@ -79,7 +79,7 @@ interface OrderLineInterface
     public function getProductNumber();
 
     /**
-     * In the API data for the order line the product number is the product id attribute
+     * In the API data for the order line the product number is the product id attribute.
      *
      * @param int $productNumber
      *

@@ -12,11 +12,13 @@ abstract class Service
 
     /**
      * @param OutputInterface $output
+     *
      * @return $this
      */
     public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
+
         return $this;
     }
 
@@ -25,7 +27,7 @@ abstract class Service
      */
     public function getOutput()
     {
-        if(is_null($this->output)) {
+        if (is_null($this->output)) {
             $this->output = new NullOutput();
         }
 

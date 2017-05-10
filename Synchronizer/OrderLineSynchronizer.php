@@ -71,11 +71,13 @@ class OrderLineSynchronizer extends Synchronizer
 
     /**
      * @param ProductSynchronizer $productSynchronizer
+     *
      * @return $this
      */
     public function setProductSynchronizer(ProductSynchronizer $productSynchronizer)
     {
         $this->productSynchronizer = $productSynchronizer;
+
         return $this;
     }
 }

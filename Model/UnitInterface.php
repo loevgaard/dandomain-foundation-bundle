@@ -5,37 +5,37 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface UnitInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return UnitInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
     public function getText();
 
     /**
-     * Set text
+     * Set text.
      *
      * @param string $text
      *

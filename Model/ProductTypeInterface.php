@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
      * @param string $externalId
      *
@@ -21,21 +21,21 @@ interface ProductTypeInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -44,7 +44,7 @@ interface ProductTypeInterface
     public function setName($name);
 
     /**
-     * Add productTypeField
+     * Add productTypeField.
      *
      * @param ProductTypeFieldInterface $productTypeField
      *
@@ -53,14 +53,14 @@ interface ProductTypeInterface
     public function addProductTypeField(ProductTypeFieldInterface $productTypeField);
 
     /**
-     * Get productTypeFields
+     * Get productTypeFields.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeFields();
 
     /**
-     * Remove productTypeField
+     * Remove productTypeField.
      *
      * @param ProductTypeFieldInterface $productTypeField
      *
@@ -69,7 +69,7 @@ interface ProductTypeInterface
     public function removeProductTypeField(ProductTypeFieldInterface $productTypeField);
 
     /**
-     * Add productTypeFormula
+     * Add productTypeFormula.
      *
      * @param ProductTypeFormulaInterface $productTypeFormula
      *
@@ -78,14 +78,14 @@ interface ProductTypeInterface
     public function addProductTypeFormula(ProductTypeFormulaInterface $productTypeFormula);
 
     /**
-     * Get productTypeFormulas
+     * Get productTypeFormulas.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeFormulas();
 
     /**
-     * Remove productTypeFormula
+     * Remove productTypeFormula.
      *
      * @param ProductTypeFormulaInterface $productTypeFormula
      *
@@ -94,7 +94,7 @@ interface ProductTypeInterface
     public function removeProductTypeFormula(ProductTypeFormulaInterface $productTypeFormula);
 
     /**
-     * Add productTypeVat
+     * Add productTypeVat.
      *
      * @param ProductTypeVatInterface $productTypeVat
      *
@@ -103,14 +103,14 @@ interface ProductTypeInterface
     public function addProductTypeVat(ProductTypeVatInterface $productTypeVat);
 
     /**
-     * Get productTypeVats
+     * Get productTypeVats.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeVats();
 
     /**
-     * Remove productTypeVat
+     * Remove productTypeVat.
      *
      * @param ProductTypeVatInterface $productTypeVat
      *

@@ -39,7 +39,7 @@ class PriceSynchronizer extends Synchronizer
      * Synchronizes Price.
      *
      * @param \stdClass $price
-     * @param bool  $flush
+     * @param bool      $flush
      *
      * @return PriceInterface
      */

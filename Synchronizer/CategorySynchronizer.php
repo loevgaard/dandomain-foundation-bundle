@@ -41,7 +41,7 @@ class CategorySynchronizer extends Synchronizer
      * Synchronizes Category.
      *
      * @param \stdClass $category
-     * @param bool  $flush
+     * @param bool      $flush
      *
      * @return CategoryInterface|null
      */

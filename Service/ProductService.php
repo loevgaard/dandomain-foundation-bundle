@@ -35,7 +35,7 @@ class ProductService extends Service
      *
      * @param Api                 $api
      * @param ProductSynchronizer $productSynchronizer
-     * @param Kernel           $kernel
+     * @param Kernel              $kernel
      */
     public function __construct(Api $api, ProductSynchronizer $productSynchronizer, Kernel $kernel)
     {

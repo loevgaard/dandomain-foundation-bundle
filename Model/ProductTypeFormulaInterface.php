@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeFormulaInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
      * @param string $externalId
      *
@@ -21,14 +21,14 @@ interface ProductTypeFormulaInterface
     public function setExternalId($externalId);
 
     /**
-     * Get formula
+     * Get formula.
      *
      * @return string
      */
     public function getFormula();
 
     /**
-     * Set formula
+     * Set formula.
      *
      * @param string $formula
      *
@@ -37,14 +37,14 @@ interface ProductTypeFormulaInterface
     public function setFormula($formula);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Add productType
+     * Add productType.
      *
      * @param ProductTypeInterface $productType
      *
@@ -53,14 +53,14 @@ interface ProductTypeFormulaInterface
     public function addProductType(ProductTypeInterface $productType);
 
     /**
-     * Get productTypes
+     * Get productTypes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypes();
 
     /**
-     * Remove productType
+     * Remove productType.
      *
      * @param ProductTypeInterface $productType
      *
@@ -69,32 +69,32 @@ interface ProductTypeFormulaInterface
     public function removeProductType(ProductTypeInterface $productType);
 
     /**
-     * Get productTypeGroupId
+     * Get productTypeGroupId.
      *
-     * @return integer
+     * @return int
      */
     public function getProductTypeGroupId();
 
     /**
-     * Set productTypeGroupId
+     * Set productTypeGroupId.
      *
-     * @param integer $productTypeGroupId
+     * @param int $productTypeGroupId
      *
      * @return ProductTypeFormulaInterface
      */
     public function setProductTypeGroupId($productTypeGroupId);
 
     /**
-     * Get siteId
+     * Get siteId.
      *
-     * @return integer
+     * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId
+     * Set siteId.
      *
-     * @param integer $siteId
+     * @param int $siteId
      *
      * @return ProductTypeFormulaInterface
      */

@@ -5,30 +5,30 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface MediaInterface
 {
     /**
-     * Get externalId
+     * Get externalId.
      *
-     * @return integer
+     * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId
+     * Set externalId.
      *
-     * @param integer $externalId
+     * @param int $externalId
      *
      * @return MediaInterface
      */
     public function setExternalId($externalId);
 
     /**
-     * Get height
+     * Get height.
      *
      * @return string
      */
     public function getHeight();
 
     /**
-     * Set height
+     * Set height.
      *
      * @param string $height
      *
@@ -37,21 +37,21 @@ interface MediaInterface
     public function setHeight($height);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get mediaTranslations
+     * Get mediaTranslations.
      *
      * @return array
      */
     public function getMediaTranslations();
 
     /**
-     * Set mediaTranslations
+     * Set mediaTranslations.
      *
      * @param array $mediaTranslations
      *
@@ -60,7 +60,7 @@ interface MediaInterface
     public function setMediaTranslations($mediaTranslations);
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      *
@@ -69,14 +69,14 @@ interface MediaInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
 
     /**
-     * Remove product
+     * Remove product.
      *
      * @param ProductInterface $product
      *
@@ -85,30 +85,30 @@ interface MediaInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get sortorder
+     * Get sortorder.
      *
-     * @return integer
+     * @return int
      */
     public function getSortorder();
 
     /**
-     * Set sortorder
+     * Set sortorder.
      *
-     * @param integer $sortorder
+     * @param int $sortorder
      *
      * @return MediaInterface
      */
     public function setSortorder($sortorder);
 
     /**
-     * Get thumbnail
+     * Get thumbnail.
      *
      * @return string
      */
     public function getThumbnail();
 
     /**
-     * Set thumbnail
+     * Set thumbnail.
      *
      * @param string $thumbnail
      *
@@ -117,14 +117,14 @@ interface MediaInterface
     public function setThumbnail($thumbnail);
 
     /**
-     * Get thumbnailheight
+     * Get thumbnailheight.
      *
      * @return string
      */
     public function getThumbnailheight();
 
     /**
-     * Set thumbnailheight
+     * Set thumbnailheight.
      *
      * @param string $thumbnailheight
      *
@@ -133,14 +133,14 @@ interface MediaInterface
     public function setThumbnailheight($thumbnailheight);
 
     /**
-     * Get thumbnailwidth
+     * Get thumbnailwidth.
      *
      * @return string
      */
     public function getThumbnailwidth();
 
     /**
-     * Set thumbnailwidth
+     * Set thumbnailwidth.
      *
      * @param string $thumbnailwidth
      *
@@ -149,14 +149,14 @@ interface MediaInterface
     public function setThumbnailwidth($thumbnailwidth);
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
     public function getUrl();
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
      *
@@ -165,14 +165,14 @@ interface MediaInterface
     public function setUrl($url);
 
     /**
-     * Get width
+     * Get width.
      *
      * @return string
      */
     public function getWidth();
 
     /**
-     * Set width
+     * Set width.
      *
      * @param string $width
      *

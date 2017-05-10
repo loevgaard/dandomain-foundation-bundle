@@ -5,14 +5,14 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTranslationInterface
 {
     /**
-     * Get customField01
+     * Get customField01.
      *
      * @return string
      */
     public function getCustomField01();
 
     /**
-     * Set customField01
+     * Set customField01.
      *
      * @param string $customField01
      *
@@ -21,14 +21,14 @@ interface ProductTranslationInterface
     public function setCustomField01($customField01);
 
     /**
-     * Get customField02
+     * Get customField02.
      *
      * @return string
      */
     public function getCustomField02();
 
     /**
-     * Set customField02
+     * Set customField02.
      *
      * @param string $customField02
      *
@@ -37,14 +37,14 @@ interface ProductTranslationInterface
     public function setCustomField02($customField02);
 
     /**
-     * Get customField03
+     * Get customField03.
      *
      * @return string
      */
     public function getCustomField03();
 
     /**
-     * Set customField03
+     * Set customField03.
      *
      * @param string $customField03
      *
@@ -53,14 +53,14 @@ interface ProductTranslationInterface
     public function setCustomField03($customField03);
 
     /**
-     * Get customField04
+     * Get customField04.
      *
      * @return string
      */
     public function getCustomField04();
 
     /**
-     * Set customField04
+     * Set customField04.
      *
      * @param string $customField04
      *
@@ -69,14 +69,14 @@ interface ProductTranslationInterface
     public function setCustomField04($customField04);
 
     /**
-     * Get customField05
+     * Get customField05.
      *
      * @return string
      */
     public function getCustomField05();
 
     /**
-     * Set customField05
+     * Set customField05.
      *
      * @param string $customField05
      *
@@ -85,14 +85,14 @@ interface ProductTranslationInterface
     public function setCustomField05($customField05);
 
     /**
-     * Get customField06
+     * Get customField06.
      *
      * @return string
      */
     public function getCustomField06();
 
     /**
-     * Set customField06
+     * Set customField06.
      *
      * @param string $customField06
      *
@@ -101,14 +101,14 @@ interface ProductTranslationInterface
     public function setCustomField06($customField06);
 
     /**
-     * Get customField07
+     * Get customField07.
      *
      * @return string
      */
     public function getCustomField07();
 
     /**
-     * Set customField07
+     * Set customField07.
      *
      * @param string $customField07
      *
@@ -117,14 +117,14 @@ interface ProductTranslationInterface
     public function setCustomField07($customField07);
 
     /**
-     * Get customField08
+     * Get customField08.
      *
      * @return string
      */
     public function getCustomField08();
 
     /**
-     * Set customField08
+     * Set customField08.
      *
      * @param string $customField08
      *
@@ -133,14 +133,14 @@ interface ProductTranslationInterface
     public function setCustomField08($customField08);
 
     /**
-     * Get customField09
+     * Get customField09.
      *
      * @return string
      */
     public function getCustomField09();
 
     /**
-     * Set customField09
+     * Set customField09.
      *
      * @param string $customField09
      *
@@ -149,14 +149,14 @@ interface ProductTranslationInterface
     public function setCustomField09($customField09);
 
     /**
-     * Get customField10
+     * Get customField10.
      *
      * @return string
      */
     public function getCustomField10();
 
     /**
-     * Set customField10
+     * Set customField10.
      *
      * @param string $customField10
      *
@@ -165,14 +165,14 @@ interface ProductTranslationInterface
     public function setCustomField10($customField10);
 
     /**
-     * Get expectedDeliveryTime
+     * Get expectedDeliveryTime.
      *
      * @return \DateTime
      */
     public function getExpectedDeliveryTime();
 
     /**
-     * Set expectedDeliveryTime
+     * Set expectedDeliveryTime.
      *
      * @param \DateTime $expectedDeliveryTime
      *
@@ -181,14 +181,14 @@ interface ProductTranslationInterface
     public function setExpectedDeliveryTime($expectedDeliveryTime);
 
     /**
-     * Get expectedDeliveryTimeNotInStock
+     * Get expectedDeliveryTimeNotInStock.
      *
      * @return \DateTime
      */
     public function getExpectedDeliveryTimeNotInStock();
 
     /**
-     * Set expectedDeliveryTimeNotInStock
+     * Set expectedDeliveryTimeNotInStock.
      *
      * @param \DateTime $expectedDeliveryTimeNotInStock
      *
@@ -197,14 +197,14 @@ interface ProductTranslationInterface
     public function setExpectedDeliveryTimeNotInStock($expectedDeliveryTimeNotInStock);
 
     /**
-     * Get giftCertificatePdfBackgroundImage
+     * Get giftCertificatePdfBackgroundImage.
      *
      * @return string
      */
     public function getGiftCertificatePdfBackgroundImage();
 
     /**
-     * Set giftCertificatePdfBackgroundImage
+     * Set giftCertificatePdfBackgroundImage.
      *
      * @param string $giftCertificatePdfBackgroundImage
      *
@@ -213,53 +213,53 @@ interface ProductTranslationInterface
     public function setGiftCertificatePdfBackgroundImage($giftCertificatePdfBackgroundImage);
 
     /**
-     * Get hidden
+     * Get hidden.
      *
-     * @return boolean
+     * @return bool
      */
     public function getHidden();
 
     /**
-     * Set hidden
+     * Set hidden.
      *
-     * @param boolean $hidden
+     * @param bool $hidden
      *
      * @return SiteSettingInterface
      */
     public function setHidden($hidden);
 
     /**
-     * Get hiddenForMobile
+     * Get hiddenForMobile.
      *
-     * @return boolean
+     * @return bool
      */
     public function getHiddenForMobile();
 
     /**
-     * Set hiddenForMobile
+     * Set hiddenForMobile.
      *
-     * @param boolean $hiddenForMobile
+     * @param bool $hiddenForMobile
      *
      * @return SiteSettingInterface
      */
     public function setHiddenForMobile($hiddenForMobile);
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Get imageAltText
+     * Get imageAltText.
      *
      * @return string
      */
     public function getImageAltText();
 
     /**
-     * Set imageAltText
+     * Set imageAltText.
      *
      * @param string $imageAltText
      *
@@ -268,30 +268,30 @@ interface ProductTranslationInterface
     public function setImageAltText($imageAltText);
 
     /**
-     * Get isToplistHidden
+     * Get isToplistHidden.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsToplistHidden();
 
     /**
-     * Set isToplistHidden
+     * Set isToplistHidden.
      *
-     * @param boolean $isToplistHidden
+     * @param bool $isToplistHidden
      *
      * @return SiteSettingInterface
      */
     public function setIsToplistHidden($isToplistHidden);
 
     /**
-     * Get keyWords
+     * Get keyWords.
      *
      * @return string
      */
     public function getKeyWords();
 
     /**
-     * Set keyWords
+     * Set keyWords.
      *
      * @param string $keyWords
      *
@@ -300,14 +300,14 @@ interface ProductTranslationInterface
     public function setKeyWords($keyWords);
 
     /**
-     * Get longDescription
+     * Get longDescription.
      *
      * @return string
      */
     public function getLongDescription();
 
     /**
-     * Set longDescription
+     * Set longDescription.
      *
      * @param string $longDescription
      *
@@ -316,14 +316,14 @@ interface ProductTranslationInterface
     public function setLongDescription($longDescription);
 
     /**
-     * Get longDescription2
+     * Get longDescription2.
      *
      * @return string
      */
     public function getLongDescription2();
 
     /**
-     * Set longDescription2
+     * Set longDescription2.
      *
      * @param string $longDescription2
      *
@@ -332,14 +332,14 @@ interface ProductTranslationInterface
     public function setLongDescription2($longDescription2);
 
     /**
-     * Get metaDescription
+     * Get metaDescription.
      *
      * @return string
      */
     public function getMetaDescription();
 
     /**
-     * Set metaDescription
+     * Set metaDescription.
      *
      * @param string $metaDescription
      *
@@ -348,14 +348,14 @@ interface ProductTranslationInterface
     public function setMetaDescription($metaDescription);
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -364,14 +364,14 @@ interface ProductTranslationInterface
     public function setName($name);
 
     /**
-     * Get pageTitle
+     * Get pageTitle.
      *
      * @return string
      */
     public function getPageTitle();
 
     /**
-     * Set pageTitle
+     * Set pageTitle.
      *
      * @param string $pageTitle
      *
@@ -380,14 +380,14 @@ interface ProductTranslationInterface
     public function setPageTitle($pageTitle);
 
     /**
-     * Get periodFrontPage
+     * Get periodFrontPage.
      *
      * @return PeriodInterface
      */
     public function getPeriodFrontPage();
 
     /**
-     * Set periodFrontPage
+     * Set periodFrontPage.
      *
      * @param PeriodInterface $periodFrontPage
      *
@@ -396,14 +396,14 @@ interface ProductTranslationInterface
     public function setPeriodFrontPage(PeriodInterface $periodFrontPage = null);
 
     /**
-     * Get periodHidden
+     * Get periodHidden.
      *
      * @return PeriodInterface
      */
     public function getPeriodHidden();
 
     /**
-     * Set periodHidden
+     * Set periodHidden.
      *
      * @param PeriodInterface $periodHidden
      *
@@ -412,14 +412,14 @@ interface ProductTranslationInterface
     public function setPeriodHidden(PeriodInterface $periodHidden = null);
 
     /**
-     * Get periodNew
+     * Get periodNew.
      *
      * @return PeriodInterface
      */
     public function getPeriodNew();
 
     /**
-     * Set periodNew
+     * Set periodNew.
      *
      * @param PeriodInterface $periodNew
      *
@@ -428,14 +428,14 @@ interface ProductTranslationInterface
     public function setPeriodNew(PeriodInterface $periodNew = null);
 
     /**
-     * Get rememberToBuyTextHeading
+     * Get rememberToBuyTextHeading.
      *
      * @return string
      */
     public function getRememberToBuyTextHeading();
 
     /**
-     * Set rememberToBuyTextHeading
+     * Set rememberToBuyTextHeading.
      *
      * @param string $rememberToBuyTextHeading
      *
@@ -444,14 +444,14 @@ interface ProductTranslationInterface
     public function setRememberToBuyTextHeading($rememberToBuyTextHeading);
 
     /**
-     * Get rememberToBuyTextSubheading
+     * Get rememberToBuyTextSubheading.
      *
      * @return string
      */
     public function getRememberToBuyTextSubheading();
 
     /**
-     * Set rememberToBuyTextSubheading
+     * Set rememberToBuyTextSubheading.
      *
      * @param string $rememberToBuyTextSubheading
      *
@@ -460,14 +460,14 @@ interface ProductTranslationInterface
     public function setRememberToBuyTextSubheading($rememberToBuyTextSubheading);
 
     /**
-     * Get retailSalesPrice
+     * Get retailSalesPrice.
      *
      * @return string
      */
     public function getRetailSalesPrice();
 
     /**
-     * Set retailSalesPrice
+     * Set retailSalesPrice.
      *
      * @param string $retailSalesPrice
      *
@@ -476,14 +476,14 @@ interface ProductTranslationInterface
     public function setRetailSalesPrice($retailSalesPrice);
 
     /**
-     * Get shortDescription
+     * Get shortDescription.
      *
      * @return string
      */
     public function getShortDescription();
 
     /**
-     * Set shortDescription
+     * Set shortDescription.
      *
      * @param string $shortDescription
      *
@@ -492,78 +492,78 @@ interface ProductTranslationInterface
     public function setShortDescription($shortDescription);
 
     /**
-     * Get showAsNew
+     * Get showAsNew.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowAsNew();
 
     /**
-     * Set showAsNew
+     * Set showAsNew.
      *
-     * @param boolean $showAsNew
+     * @param bool $showAsNew
      *
      * @return SiteSettingInterface
      */
     public function setShowAsNew($showAsNew);
 
     /**
-     * Get showOnFrontPage
+     * Get showOnFrontPage.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowOnFrontPage();
 
     /**
-     * Set showOnFrontPage
+     * Set showOnFrontPage.
      *
-     * @param boolean $showOnFrontPage
+     * @param bool $showOnFrontPage
      *
      * @return SiteSettingInterface
      */
     public function setShowOnFrontPage($showOnFrontPage);
 
     /**
-     * Get siteId
+     * Get siteId.
      *
-     * @return integer
+     * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId
+     * Set siteId.
      *
-     * @param integer $siteId
+     * @param int $siteId
      *
      * @return SiteSettingInterface
      */
     public function setSiteId($siteId);
 
     /**
-     * Get sortOrder
+     * Get sortOrder.
      *
-     * @return integer
+     * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder
+     * Set sortOrder.
      *
-     * @param integer $sortOrder
+     * @param int $sortOrder
      *
      * @return SiteSettingInterface
      */
     public function setSortOrder($sortOrder);
 
     /**
-     * Get techDocLink
+     * Get techDocLink.
      *
      * @return string
      */
     public function getTechDocLink();
 
     /**
-     * Set techDocLink
+     * Set techDocLink.
      *
      * @param string $techDocLink
      *
@@ -572,14 +572,14 @@ interface ProductTranslationInterface
     public function setTechDocLink($techDocLink);
 
     /**
-     * Get techDocLink2
+     * Get techDocLink2.
      *
      * @return string
      */
     public function getTechDocLink2();
 
     /**
-     * Set techDocLink2
+     * Set techDocLink2.
      *
      * @param string $techDocLink2
      *
@@ -588,14 +588,14 @@ interface ProductTranslationInterface
     public function setTechDocLink2($techDocLink2);
 
     /**
-     * Get techDocLink3
+     * Get techDocLink3.
      *
      * @return string
      */
     public function getTechDocLink3();
 
     /**
-     * Set techDocLink3
+     * Set techDocLink3.
      *
      * @param string $techDocLink3
      *
@@ -604,14 +604,14 @@ interface ProductTranslationInterface
     public function setTechDocLink3($techDocLink3);
 
     /**
-     * Get unit
+     * Get unit.
      *
      * @return UnitInterface
      */
     public function getUnit();
 
     /**
-     * Set unit
+     * Set unit.
      *
      * @param UnitInterface $unit
      *
@@ -620,14 +620,14 @@ interface ProductTranslationInterface
     public function setUnit(UnitInterface $unit = null);
 
     /**
-     * Get unitNumber
+     * Get unitNumber.
      *
      * @return string
      */
     public function getUnitNumber();
 
     /**
-     * Set unitNumber
+     * Set unitNumber.
      *
      * @param string $unitNumber
      *
@@ -636,14 +636,14 @@ interface ProductTranslationInterface
     public function setUnitNumber($unitNumber);
 
     /**
-     * Get urlname
+     * Get urlname.
      *
      * @return string
      */
     public function getUrlname();
 
     /**
-     * Set urlname
+     * Set urlname.
      *
      * @param string $urlname
      *
