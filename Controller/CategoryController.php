@@ -40,8 +40,9 @@ class CategoryController extends Controller
      */
     public function newAction(Request $request)
     {
-        $category = new Category();
-        $form = $this->createForm('AppBundle\Form\CategoryType', $category);
+        $categoryClass = $this->getParameter('loevgaard_dandomain_foundation.category_class');
+        $category = new $categoryClass();
+        $form = $this->createForm('Loevgaard\DandomainFoundationBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
