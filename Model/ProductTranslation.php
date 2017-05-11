@@ -3,15 +3,12 @@
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\MappedSuperclass()
  */
 abstract class ProductTranslation implements ProductTranslationInterface
 {
-    use ORMBehaviors\Translatable\Translation;
-
     /**
      * @var Period
      */

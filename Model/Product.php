@@ -4,15 +4,12 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\MappedSuperclass
  */
 abstract class Product implements ProductInterface, TranslatableInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-
     /**
      * @var int
      */
@@ -57,11 +54,6 @@ abstract class Product implements ProductInterface, TranslatableInterface
      * @var ArrayCollection
      */
     protected $segments;
-
-    /**
-     * @var ArrayCollection
-     */
-    protected $siteSettings;
 
     /**
      * @var ArrayCollection
@@ -344,7 +336,6 @@ abstract class Product implements ProductInterface, TranslatableInterface
         $this->prices = new ArrayCollection();
         $this->productRelations = new ArrayCollection();
         $this->segments = new ArrayCollection();
-        $this->siteSettings = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->variantGroups = new ArrayCollection();
     }
@@ -1049,36 +1040,6 @@ abstract class Product implements ProductInterface, TranslatableInterface
     public function setSegmentIdList($segmentIdList)
     {
         $this->segmentIdList = $segmentIdList;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addSiteSetting(SiteSettingInterface $siteSetting)
-    {
-        if (!($this->siteSettings->contains($siteSetting))) {
-            $this->siteSettings[] = $siteSetting;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSiteSettings()
-    {
-        return $this->siteSettings;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeSiteSetting(SiteSettingInterface $siteSetting)
-    {
-        $this->siteSettings->removeElement($siteSetting);
 
         return $this;
     }

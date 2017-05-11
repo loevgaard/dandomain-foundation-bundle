@@ -612,31 +612,6 @@ interface ProductInterface
     public function setSegmentIdList($segmentIdList);
 
     /**
-     * Add siteSetting.
-     *
-     * @param SiteSettingInterface $siteSetting
-     *
-     * @return ProductInterface
-     */
-    public function addSiteSetting(SiteSettingInterface $siteSetting);
-
-    /**
-     * Get siteSettings.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSiteSettings();
-
-    /**
-     * Remove siteSetting.
-     *
-     * @param SiteSettingInterface $siteSetting
-     *
-     * @return ProductInterface
-     */
-    public function removeSiteSetting(SiteSettingInterface $siteSetting);
-
-    /**
      * Get sortOrder.
      *
      * @return int
