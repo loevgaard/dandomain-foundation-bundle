@@ -18,7 +18,8 @@
         "symfony/framework-bundle": "^2.7 || ^3.0",
         "symfony/filesystem": "^2.7 || ^3.0",
         "symfony/console": "^3.0",
-        "knplabs/doctrine-behaviors": "~1.1"
+        "knplabs/doctrine-behaviors": "~1.1",
+        "knplabs/knp-paginator-bundle": "~2.5"
     },
     "autoload": {
         "psr-4": {
