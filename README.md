@@ -785,6 +785,92 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\ProductTypeFormula as BaseProductTypeFormula;
+
+/**
+ * ProductTypeFormula.
+ *
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductTypeFormula extends BaseProductTypeFormula
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="productTypeFormulas", targetEntity="ProductType")
+     */
+    protected $productTypes;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\ProductTypeVat as BaseProductTypeVat;
+
+/**
+ * ProductTypeVat.
+ *
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductTypeVat extends BaseProductTypeVat
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="productTypeVats", targetEntity="ProductType")
+     */
+    protected $productTypes;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Segment as BaseSegment;
 
 /**
@@ -882,6 +968,31 @@ use Loevgaard\DandomainFoundationBundle\Model\State as BaseState;
  * @ORM\Table()
  */
 class State extends BaseState
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Unit as BaseUnit;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class Unit extends BaseUnit
 {
     /**
      * @var int
