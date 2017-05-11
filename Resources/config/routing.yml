@@ -1,0 +1,4 @@
+app_admin_category:
+    resource: "@LoevgaardDandomainFoundationBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/category
+

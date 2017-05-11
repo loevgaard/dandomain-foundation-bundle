@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Category</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Consignment</th>
+                <td>{% if category.consignment %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Textdescription</th>
+                <td>{{ category.textDescription }}</td>
+            </tr>
+            <tr>
+                <th>Texthidden</th>
+                <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Textmetadescription</th>
+                <td>{{ category.textMetaDescription }}</td>
+            </tr>
+            <tr>
+                <th>Textname</th>
+                <td>{{ category.textName }}</td>
+            </tr>
+            <tr>
+                <th>Texttitle</th>
+                <td>{{ category.textTitle }}</td>
+            </tr>
+            <tr>
+                <th>Texturlname</th>
+                <td>{{ category.textUrlname }}</td>
+            </tr>
+            <tr>
+                <th>B2bgroupid</th>
+                <td>{{ category.b2bGroupId }}</td>
+            </tr>
+            <tr>
+                <th>Createddate</th>
+                <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Custominfolayout</th>
+                <td>{{ category.customInfoLayout }}</td>
+            </tr>
+            <tr>
+                <th>Customlistlayout</th>
+                <td>{{ category.customListLayout }}</td>
+            </tr>
+            <tr>
+                <th>Defaultparentid</th>
+                <td>{{ category.defaultParentId }}</td>
+            </tr>
+            <tr>
+                <th>Editeddate</th>
+                <td>{% if category.editedDate %}{{ category.editedDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Externalid</th>
+                <td>{{ category.externalId }}</td>
+            </tr>
+            <tr>
+                <th>Infolayout</th>
+                <td>{{ category.infoLayout }}</td>
+            </tr>
+            <tr>
+                <th>Internalid</th>
+                <td>{{ category.internalId }}</td>
+            </tr>
+            <tr>
+                <th>Listlayout</th>
+                <td>{{ category.listLayout }}</td>
+            </tr>
+            <tr>
+                <th>Modified</th>
+                <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Parentidlist</th>
+                <td>{% if category.parentIdList %}{{ category.parentIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Segmentidlist</th>
+                <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Textkeywords</th>
+                <td>{{ category.textKeywords }}</td>
+            </tr>
+            <tr>
+                <th>Textcategorynumber</th>
+                <td>{{ category.textCategoryNumber }}</td>
+            </tr>
+            <tr>
+                <th>Textexternalid</th>
+                <td>{{ category.textExternalId }}</td>
+            </tr>
+            <tr>
+                <th>Texthiddenmobile</th>
+                <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Texticon</th>
+                <td>{{ category.textIcon }}</td>
+            </tr>
+            <tr>
+                <th>Textimage</th>
+                <td>{{ category.textImage }}</td>
+            </tr>
+            <tr>
+                <th>Textlink</th>
+                <td>{{ category.textLink }}</td>
+            </tr>
+            <tr>
+                <th>Textsiteid</th>
+                <td>{{ category.textSiteId }}</td>
+            </tr>
+            <tr>
+                <th>Textsortorder</th>
+                <td>{{ category.textSortOrder }}</td>
+            </tr>
+            <tr>
+                <th>Textstring</th>
+                <td>{{ category.textString }}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ category.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Updatedby</th>
+                <td>{{ category.updatedBy }}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if category.deletedAt %}{{ category.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if category.updatedAt %}{{ category.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_category_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
