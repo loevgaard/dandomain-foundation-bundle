@@ -3,45 +3,23 @@
 {% block content %}
     <h1>Categories list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Consignment</th>
-                <th>Textdescription</th>
-                <th>Texthidden</th>
-                <th>Textmetadescription</th>
-                <th>Textname</th>
-                <th>Texttitle</th>
-                <th>Texturlname</th>
-                <th>B2bgroupid</th>
-                <th>Createddate</th>
-                <th>Custominfolayout</th>
-                <th>Customlistlayout</th>
-                <th>Defaultparentid</th>
-                <th>Editeddate</th>
-                <th>Externalid</th>
-                <th>Infolayout</th>
-                <th>Internalid</th>
-                <th>Listlayout</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>External ID</th>
+                <th>Internal ID</th>
                 <th>Modified</th>
                 <th>Parentidlist</th>
                 <th>Segmentidlist</th>
-                <th>Textkeywords</th>
-                <th>Textcategorynumber</th>
                 <th>Textexternalid</th>
                 <th>Texthiddenmobile</th>
-                <th>Texticon</th>
-                <th>Textimage</th>
-                <th>Textlink</th>
                 <th>Textsiteid</th>
                 <th>Textsortorder</th>
-                <th>Textstring</th>
-                <th>Createdby</th>
-                <th>Updatedby</th>
-                <th>Deletedat</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
+                <th>Created date</th>
+                <th>Edited date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -49,41 +27,19 @@
         {% for category in categories %}
             <tr>
                 <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{% if category.consignment %}Yes{% else %}No{% endif %}</td>
-                <td>{{ category.textDescription }}</td>
-                <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
-                <td>{{ category.textMetaDescription }}</td>
                 <td>{{ category.textName }}</td>
                 <td>{{ category.textTitle }}</td>
-                <td>{{ category.textUrlname }}</td>
-                <td>{{ category.b2bGroupId }}</td>
-                <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ category.customInfoLayout }}</td>
-                <td>{{ category.customListLayout }}</td>
-                <td>{{ category.defaultParentId }}</td>
-                <td>{% if category.editedDate %}{{ category.editedDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ category.externalId }}</td>
-                <td>{{ category.infoLayout }}</td>
                 <td>{{ category.internalId }}</td>
-                <td>{{ category.listLayout }}</td>
                 <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
                 <td>{% if category.parentIdList %}{{ category.parentIdList|join(', ') }}{% endif %}</td>
                 <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
-                <td>{{ category.textKeywords }}</td>
-                <td>{{ category.textCategoryNumber }}</td>
                 <td>{{ category.textExternalId }}</td>
                 <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
-                <td>{{ category.textIcon }}</td>
-                <td>{{ category.textImage }}</td>
-                <td>{{ category.textLink }}</td>
                 <td>{{ category.textSiteId }}</td>
                 <td>{{ category.textSortOrder }}</td>
-                <td>{{ category.textString }}</td>
-                <td>{{ category.createdBy }}</td>
-                <td>{{ category.updatedBy }}</td>
-                <td>{% if category.deletedAt %}{{ category.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if category.updatedAt %}{{ category.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if category.editedDate %}{{ category.editedDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
