@@ -359,15 +359,23 @@ class ProductSynchronizer extends Synchronizer
         if (($entity instanceof TranslatableInterface) && (is_array($product->siteSettings))) {
             foreach ($product->siteSettings as $siteSettingTmp) {
                 if ($siteSettingTmp->expectedDeliveryTime) {
-                    $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTime);
-                    $expectedDeliveryTime->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                    try {
+                        $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTime);
+                        $expectedDeliveryTime->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                    } catch (\Exception $e) {
+                        $expectedDeliveryTime = null;
+                    }
                 } else {
                     $expectedDeliveryTime = null;
                 }
 
                 if ($siteSettingTmp->expectedDeliveryTimeNotInStock) {
-                    $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTimeNotInStock);
-                    $expectedDeliveryTimeNotInStock->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                    try {
+                        $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTimeNotInStock);
+                        $expectedDeliveryTimeNotInStock->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                    } catch (\Exception $e) {
+                        $expectedDeliveryTimeNotInStock = null;
+                    }
                 } else {
                     $expectedDeliveryTimeNotInStock = null;
                 }
