@@ -16,11 +16,18 @@ class CategoryController extends Controller
      * Lists all category entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $paginator = $this->get('knp_paginator');
 
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $query = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.category_class'))->findAll();
+
+        $categories = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 50)
+        );
 
         return $this->render('LoevgaardDandomainFoundationBundle:category:index.html.twig', array(
             'categories' => $categories,
@@ -55,11 +62,18 @@ class CategoryController extends Controller
      * Finds and displays a category entity.
      *
      */
-    public function showAction(CategoryInterface $category)
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.category_class'))->findOneById($id);
+
+        if (null === $category) {
+            throw $this->createNotFoundException();
+        }
+
         $deleteForm = $this->createDeleteForm($category);
 
-        return $this->render('category/show.html.twig', array(
+        return $this->render('LoevgaardDandomainFoundationBundle:category:show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
         ));

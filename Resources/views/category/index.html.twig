@@ -3,6 +3,8 @@
 {% block content %}
     <h1>Categories list</h1>
 
+    <a class="btn btn-primary" href="{{ path('admin_category_new') }}">Create a new category</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -23,33 +25,30 @@
             </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.textName }}</td>
-                <td>{{ category.textTitle }}</td>
-                <td>{{ category.externalId }}</td>
-                <td>{{ category.internalId }}</td>
-                <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
-                <td>{% if category.parentIdList %}{{ category.parentIdList|join(', ') }}{% endif %}</td>
-                <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
-                <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
-                <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
-                <td>{{ category.textSiteId }}</td>
-                <td>{{ category.textSortOrder }}</td>
-                <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('admin_category_show', { 'id': category.id }) }}">show</a>
-                    <a class="btn btn-success" href="{{ path('admin_category_edit', { 'id': category.id }) }}">edit</a>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for category in categories %}
+                <tr>
+                    <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                    <td>{{ category.textName }}</td>
+                    <td>{{ category.textTitle }}</td>
+                    <td>{{ category.externalId }}</td>
+                    <td>{{ category.internalId }}</td>
+                    <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
+                    <td>{% if category.parentIdList %}{{ category.parentIdList|join(', ') }}{% endif %}</td>
+                    <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
+                    <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
+                    <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
+                    <td>{{ category.textSiteId }}</td>
+                    <td>{{ category.textSortOrder }}</td>
+                    <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('admin_category_show', { 'id': category.id }) }}">show</a>
+                        <a class="btn btn-success" href="{{ path('admin_category_edit', { 'id': category.id }) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+    <div class="navigation">
+        {{ knp_pagination_render(categories) }}
+    </div>
 {% endblock %}
