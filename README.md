@@ -185,6 +185,47 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\Media as BaseMedia;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class Media extends BaseMedia
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="medias", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\DandomainFoundationBundle\Model\Order as BaseOrder;
 
 /**
@@ -229,7 +270,7 @@ class Order extends BaseOrder
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(mappedBy="order", onDelete="SET NULL", targetEntity="OrderLine")
+     * @ORM\OneToMany(mappedBy="order", targetEntity="OrderLine")
      */
     protected $orderLines;
 
@@ -301,10 +342,18 @@ class OrderLine extends BaseOrderLine
     /**
      * @var Order
      *
-     * @ORM\JoinColumn(name="order_id", onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\JoinColumn(name="order_id", onDelete="CASCADE", referencedColumnName="id", nullable=false)
      * @ORM\ManyToOne(inversedBy="orderLines", targetEntity="Order")
      */
     protected $order;
+
+    /**
+     * @var Product
+     *
+     * @ORM\JoinColumn(onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Product")
+     */
+    protected $product;
 }
 ```
 
@@ -442,10 +491,34 @@ class Product extends BaseProduct
     /**
      * @var ArrayCollection
      *
-     * @ORM\JoinTable(name="product_brand")
+     * @ORM\JoinTable(name="product_disabled_variant")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="disabledProducts", targetEntity="Variant")
+     */
+    protected $disabledVariants;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_manufacturer")
      * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Manufacturer")
      */
     protected $manufacturers;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_media")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Media")
+     */
+    protected $medias;
+
+    /**
+     * @var Period
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Period")
+     */
+    protected $pricePeriod;
 
     /**
      * @var ArrayCollection
@@ -454,6 +527,22 @@ class Product extends BaseProduct
      * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="Price")
      */
     protected $prices;
+
+    /**
+     * @var ProductRelation
+     *
+     * @ORM\JoinTable(name="product_product_relation")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="ProductRelation")
+     */
+    protected $productRelations;
+
+    /**
+     * @var ProductType
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ProductType")
+     */
+    protected $productType;
 
     /**
      * @var ArrayCollection
@@ -632,6 +721,13 @@ class Variant extends BaseVariant
     /**
      * @var ArrayCollection
      *
+     * @ORM\ManyToMany(mappedBy="disabledVariants", targetEntity="Product")
+     */
+    protected $disabledProducts;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(mappedBy="variants", targetEntity="Product")
      */
     protected $products;
@@ -710,15 +806,24 @@ loevgaard_dandomain_foundation:
     delivery_class: AppBundle\Entity\Delivery
     invoice_class: AppBundle\Entity\Invoice
     manufacturer_class: AppBundle\Entity\Manufacturer
+    media_class: AppBundle\Entity\Media
     order_class: AppBundle\Entity\Order
     order_line_class: AppBundle\Entity\OrderLine
     payment_method_class: AppBundle\Entity\PaymentMethod
     period_class: AppBundle\Entity\Period
     price_class: AppBundle\Entity\Price
+    product_class: AppBundle\Entity\Product
+    product_relation_class: AppBundle\Entity\ProductRelation
+    product_translation_class: AppBundle\Entity\ProductTranslation
+    product_type_class: AppBundle\Entity\ProductType
+    product_type_field_class: AppBundle\Entity\ProductTypeField
+    product_type_formula_class: AppBundle\Entity\ProductTypeFormula
+    product_type_vat_class: AppBundle\Entity\ProductTypeVat
     segment_class: AppBundle\Entity\Segment
     shipping_method_class: AppBundle\Entity\ShippingMethod
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State
+    unit_class: AppBundle\Entity\Unit
     variant_class: AppBundle\Entity\Variant
     variant_group_class: AppBundle\Entity\VariantGroup
 ```

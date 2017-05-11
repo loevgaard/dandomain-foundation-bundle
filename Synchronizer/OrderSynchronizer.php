@@ -256,7 +256,7 @@ class OrderSynchronizer extends Synchronizer
         $this->objectManager->persist($entity);
 
         if (true === $flush) {
-            $this->objectManager->flush();
+            $this->objectManager->flush($entity);
         }
 
         if (is_array($order->orderLines)) {
