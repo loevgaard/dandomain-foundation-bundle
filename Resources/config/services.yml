@@ -24,7 +24,6 @@ parameters:
     loevgaard_dandomain_foundation.shipping_method_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\ShippingMethodSynchronizer"
     loevgaard_dandomain_foundation.site_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\SiteService"
     loevgaard_dandomain_foundation.site_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSynchronizer"
-    loevgaard_dandomain_foundation.site_setting_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\SiteSettingSynchronizer"
     loevgaard_dandomain_foundation.state_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\StateSynchronizer"
     loevgaard_dandomain_foundation.unit_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\UnitSynchronizer"
     loevgaard_dandomain_foundation.variant_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\VariantSynchronizer"
@@ -166,7 +165,6 @@ services:
             - [setProductRelationSynchronizer, ["@loevgaard_dandomain_foundation.product_relation_synchronizer"]]
             - [setProductTypeSynchronizer, ["@loevgaard_dandomain_foundation.product_type_synchronizer"]]
             - [setPeriodSynchronizer, ["@loevgaard_dandomain_foundation.period_synchronizer"]]
-            - [setSiteSettingSynchronizer, ["@loevgaard_dandomain_foundation.site_setting_synchronizer"]]
             - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
             - [setVariantGroupSynchronizer, ["@loevgaard_dandomain_foundation.variant_group_synchronizer"]]
 
@@ -228,16 +226,6 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.site_class%"
-
-    loevgaard_dandomain_foundation.site_setting_synchronizer:
-        class: "%loevgaard_dandomain_foundation.site_setting_synchronizer_class%"
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@dandomain.api"
-            - "%loevgaard_dandomain_foundation.site_setting_class%"
-        calls:
-            - [setPeriodSynchronizer, ["@loevgaard_dandomain_foundation.period_synchronizer"]]
-            - [setUnitSynchronizer, ["@loevgaard_dandomain_foundation.unit_synchronizer"]]
 
     loevgaard_dandomain_foundation.state_synchronizer:
         class: "%loevgaard_dandomain_foundation.state_synchronizer_class%"

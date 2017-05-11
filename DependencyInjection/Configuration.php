@@ -36,7 +36,6 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('segment_class')->end()
                 ->scalarNode('shipping_method_class')->end()
                 ->scalarNode('site_class')->end()
-                ->scalarNode('site_setting_class')->end()
                 ->scalarNode('state_class')->end()
                 ->scalarNode('unit_class')->end()
                 ->scalarNode('variant_class')->end()

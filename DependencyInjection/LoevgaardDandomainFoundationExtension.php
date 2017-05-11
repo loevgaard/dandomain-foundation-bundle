@@ -36,7 +36,6 @@ class LoevgaardDandomainFoundationExtension extends Extension
         $container->setParameter('loevgaard_dandomain_foundation.segment_class', $config['segment_class']);
         $container->setParameter('loevgaard_dandomain_foundation.shipping_method_class', $config['shipping_method_class']);
         $container->setParameter('loevgaard_dandomain_foundation.site_class', $config['site_class']);
-        $container->setParameter('loevgaard_dandomain_foundation.site_setting_class', $config['site_setting_class']);
         $container->setParameter('loevgaard_dandomain_foundation.state_class', $config['state_class']);
         $container->setParameter('loevgaard_dandomain_foundation.unit_class', $config['unit_class']);
         $container->setParameter('loevgaard_dandomain_foundation.variant_class', $config['variant_class']);

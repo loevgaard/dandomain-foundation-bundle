@@ -35,6 +35,11 @@ class ProductSynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductInterface';
 
     /**
+     * @var PeriodSynchronizer
+     */
+    protected $periodSynchronizer;
+
+    /**
      * @var PriceSynchronizer
      */
     protected $priceSynchronizer;
@@ -50,9 +55,9 @@ class ProductSynchronizer extends Synchronizer
     protected $productTypeSynchronizer;
 
     /**
-     * @var SiteSettingSynchronizer
+     * @var UnitSynchronizer
      */
-    protected $siteSettingSynchronizer;
+    protected $unitSynchronizer;
 
     /**
      * @var VariantSynchronizer
@@ -63,16 +68,6 @@ class ProductSynchronizer extends Synchronizer
      * @var VariantGroupSynchronizer
      */
     protected $variantGroupSynchronizer;
-
-    /**
-     * @var PeriodSynchronizer
-     */
-    protected $periodSynchronizer;
-
-    /**
-     * @var UnitSynchronizer
-     */
-    protected $unitSynchronizer;
 
     /**
      * Set categorySynchronizer.
@@ -112,6 +107,20 @@ class ProductSynchronizer extends Synchronizer
     public function setMediaSynchronizer(MediaSynchronizer $mediaSynchronizer)
     {
         $this->mediaSynchronizer = $mediaSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set periodSynchronizer.
+     *
+     * @param PeriodSynchronizer $periodSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
+    {
+        $this->periodSynchronizer = $periodSynchronizer;
 
         return $this;
     }
@@ -159,27 +168,15 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * @param PeriodSynchronizer $periodSynchronizer
+     * Set unitSynchronizer.
      *
-     * @return $this
-     */
-    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
-    {
-        $this->periodSynchronizer = $periodSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * Set siteSettingSynchronizer.
-     *
-     * @param SiteSettingSynchronizer $siteSettingSynchronizer
+     * @param UnitSynchronizer $unitSynchronizer
      *
      * @return ProductSynchronizer
      */
-    public function setSiteSettingSynchronizer(SiteSettingSynchronizer $siteSettingSynchronizer)
+    public function setUnitSynchronizer(UnitSynchronizer $unitSynchronizer)
     {
-        $this->siteSettingSynchronizer = $siteSettingSynchronizer;
+        $this->unitSynchronizer = $unitSynchronizer;
 
         return $this;
     }
@@ -208,18 +205,6 @@ class ProductSynchronizer extends Synchronizer
     public function setVariantGroupSynchronizer(VariantGroupSynchronizer $variantGroupSynchronizer)
     {
         $this->variantGroupSynchronizer = $variantGroupSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param UnitSynchronizer $unitSynchronizer
-     *
-     * @return $this
-     */
-    public function setUnitSynchronizer(UnitSynchronizer $unitSynchronizer)
-    {
-        $this->unitSynchronizer = $unitSynchronizer;
 
         return $this;
     }
@@ -352,9 +337,22 @@ class ProductSynchronizer extends Synchronizer
             }
         }
 
-        if ($entity instanceof TranslatableInterface && is_array($product->siteSettings)) {
+        if (($entity instanceof TranslatableInterface) && (is_array($product->siteSettings))) {
             foreach ($product->siteSettings as $siteSettingTmp) {
-                /* @var Product $entity */
+                if ($siteSettingTmp->expectedDeliveryTime) {
+                    $expectedDeliveryTime = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTime);
+                    $expectedDeliveryTime->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                } else {
+                    $expectedDeliveryTime = null;
+                }
+
+                if ($siteSettingTmp->expectedDeliveryTimeNotInStock) {
+                    $expectedDeliveryTimeNotInStock = \Dandomain\Api\jsonDateToDate($siteSettingTmp->expectedDeliveryTimeNotInStock);
+                    $expectedDeliveryTimeNotInStock->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
+                } else {
+                    $expectedDeliveryTimeNotInStock = null;
+                }
+
                 $entity->translate($siteSettingTmp->siteID)->setCustomField01($siteSettingTmp->customField01);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField02($siteSettingTmp->customField02);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField03($siteSettingTmp->customField03);
@@ -365,8 +363,6 @@ class ProductSynchronizer extends Synchronizer
                 $entity->translate($siteSettingTmp->siteID)->setCustomField08($siteSettingTmp->customField08);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField09($siteSettingTmp->customField09);
                 $entity->translate($siteSettingTmp->siteID)->setCustomField10($siteSettingTmp->customField10);
-                $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTime($siteSettingTmp->expectedDeliveryTime);
-                $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTimeNotInStock($siteSettingTmp->expectedDeliveryTimeNotInStock);
                 $entity->translate($siteSettingTmp->siteID)->setGiftCertificatePdfBackgroundImage($siteSettingTmp->giftCertificatePdfBackgroundImage);
                 $entity->translate($siteSettingTmp->siteID)->setHidden($siteSettingTmp->hidden);
                 $entity->translate($siteSettingTmp->siteID)->setHiddenForMobile($siteSettingTmp->hiddenForMobile);
@@ -392,17 +388,33 @@ class ProductSynchronizer extends Synchronizer
                 $entity->translate($siteSettingTmp->siteID)->setUnitNumber($siteSettingTmp->unitNumber);
                 $entity->translate($siteSettingTmp->siteID)->setUrlname($siteSettingTmp->urlname);
 
-                $periodFrontPage = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodFrontPage, $flush);
-                $entity->translate($siteSettingTmp->siteID)->setPeriodFrontPage($periodFrontPage);
+                if (null !== $expectedDeliveryTime) {
+                    $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTime($expectedDeliveryTime);
+                }
 
-                $periodHidden = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodHidden, $flush);
-                $entity->translate($siteSettingTmp->siteID)->setPeriodHidden($periodHidden);
+                if (null !== $expectedDeliveryTimeNotInStock) {
+                    $entity->translate($siteSettingTmp->siteID)->setExpectedDeliveryTimeNotInStock($expectedDeliveryTimeNotInStock);
+                }
 
-                $periodNew = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodNew, $flush);
-                $entity->translate($siteSettingTmp->siteID)->setPeriodNew($periodNew);
+                if ($siteSettingTmp->periodFrontPage) {
+                    $periodFrontPage = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodFrontPage, $flush);
+                    $entity->translate($siteSettingTmp->siteID)->setPeriodFrontPage($periodFrontPage);
+                }
 
-                $unit = $this->unitSynchronizer->syncUnit($siteSettingTmp->unit, $flush);
-                $entity->translate($siteSettingTmp->siteID)->setUnit($unit);
+                if ($siteSettingTmp->periodHidden) {
+                    $periodHidden = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodHidden, $flush);
+                    $entity->translate($siteSettingTmp->siteID)->setPeriodHidden($periodHidden);
+                }
+
+                if ($siteSettingTmp->periodNew) {
+                    $periodNew = $this->periodSynchronizer->syncPeriod($siteSettingTmp->periodNew, $flush);
+                    $entity->translate($siteSettingTmp->siteID)->setPeriodNew($periodNew);
+                }
+
+                if ($siteSettingTmp->unit) {
+                    $unit = $this->unitSynchronizer->syncUnit($siteSettingTmp->unit, $flush);
+                    $entity->translate($siteSettingTmp->siteID)->setUnit($unit);
+                }
 
                 $entity->mergeNewTranslations();
             }
