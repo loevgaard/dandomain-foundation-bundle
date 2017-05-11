@@ -68,7 +68,7 @@ class PeriodSynchronizer extends Synchronizer
         $this->objectManager->persist($entity);
 
         if (true === $flush) {
-            $this->objectManager->flush();
+            $this->objectManager->flush($entity);
         }
 
         return $entity;
