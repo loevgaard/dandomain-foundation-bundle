@@ -463,6 +463,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Loevgaard\DandomainFoundationBundle\Model\Product as BaseProduct;
 
 /**
@@ -471,6 +472,8 @@ use Loevgaard\DandomainFoundationBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
+    use ORMBehaviors\Translatable\Translatable;
+
     /**
      * @var int
      *
@@ -567,6 +570,203 @@ class Product extends BaseProduct
      * @ORM\ManyToMany(cascade={"persist"}, inversedBy="products", targetEntity="VariantGroup")
      */
     protected $variantGroups;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\ProductRelation as BaseProductRelation;
+
+/**
+ * ProductRelation.
+ *
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductRelation extends BaseProductRelation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="productRelations", targetEntity="Product")
+     */
+    protected $products;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Loevgaard\DandomainFoundationBundle\Model\ProductTranslation as BaseProductTranslation;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductTranslation extends BaseProductTranslation
+{
+    use ORMBehaviors\Translatable\Translation;
+
+    /**
+     * @var Period
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Period")
+     */
+    protected $periodFrontPage;
+
+    /**
+     * @var Period
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Period")
+     */
+    protected $periodHidden;
+
+    /**
+     * @var Period
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Period")
+     */
+    protected $periodNew;
+
+    /**
+     * @var Unit
+     *
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Unit")
+     */
+    protected $unit;
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\ProductType as BaseProductType;
+
+/**
+ * ProductType.
+ *
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductType extends BaseProductType
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_type_product_type_field")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="productTypes", targetEntity="ProductTypeField")
+     */
+    protected $productTypeFields;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_type_product_type_formula")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="productTypes", targetEntity="ProductTypeFormula")
+     */
+    protected $productTypeFormulas;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\JoinTable(name="product_type_product_type_vat")
+     * @ORM\ManyToMany(cascade={"persist"}, inversedBy="productTypes", targetEntity="ProductTypeVat")
+     */
+    protected $productTypeVats;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+```
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Loevgaard\DandomainFoundationBundle\Model\ProductTypeField as BaseProductTypeField;
+
+/**
+ * ProductTypeField.
+ *
+ * @ORM\Entity()
+ * @ORM\Table()
+ */
+class ProductTypeField extends BaseProductTypeField
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     */
+    protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(mappedBy="productTypeFields", targetEntity="ProductType")
+     */
+    protected $productTypes;
 
     /**
      * Constructor.
