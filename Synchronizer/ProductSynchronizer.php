@@ -55,6 +55,11 @@ class ProductSynchronizer extends Synchronizer
     protected $productTypeSynchronizer;
 
     /**
+     * @var SegmentSynchronizer
+     */
+    protected $segmentSynchronizer;
+
+    /**
      * @var UnitSynchronizer
      */
     protected $unitSynchronizer;
@@ -163,6 +168,20 @@ class ProductSynchronizer extends Synchronizer
     public function setProductTypeSynchronizer(ProductTypeSynchronizer $productTypeSynchronizer)
     {
         $this->productTypeSynchronizer = $productTypeSynchronizer;
+
+        return $this;
+    }
+
+    /**
+     * Set segmentSynchronizer.
+     *
+     * @param SegmentSynchronizer $segmentSynchronizer
+     *
+     * @return ProductSynchronizer
+     */
+    public function setSegmentSynchronizer(SegmentSynchronizer $segmentSynchronizer)
+    {
+        $this->segmentSynchronizer = $segmentSynchronizer;
 
         return $this;
     }
@@ -423,6 +442,13 @@ class ProductSynchronizer extends Synchronizer
         if ($product->productType) {
             $productType = $this->productTypeSynchronizer->syncProductType($product->productType, $flush);
             $entity->setProductType($productType);
+        }
+
+        if (is_array($product->segments)) {
+            foreach ($product->segments as $segmentTmp) {
+                $segment = $this->segmentSynchronizer->syncSegment($segmentTmp, $flush);
+                $entity->addSegment($segment);
+            }
         }
 
         if (is_array($product->variants)) {
