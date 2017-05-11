@@ -42,7 +42,7 @@ class OrderService extends Service
         $this->api = $api;
         $this->kernel = $kernel;
         $this->orderSynchronizer = $orderSynchronizer;
-        $this->settingsFile = $kernel->getCacheDir().'/dandomain-foundation-order-sync.cache';
+        $this->settingsFile = $kernel->getLogDir().'/dandomain-foundation-order-sync.log';
     }
 
     /**

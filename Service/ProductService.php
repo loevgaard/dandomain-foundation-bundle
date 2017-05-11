@@ -42,7 +42,7 @@ class ProductService extends Service
         $this->api = $api;
         $this->kernel = $kernel;
         $this->productSynchronizer = $productSynchronizer;
-        $this->settingsFile = $kernel->getCacheDir().'/dandomain-foundation-product-sync.cache';
+        $this->settingsFile = $kernel->getLogDir().'/dandomain-foundation-product-sync.log';
     }
 
     /**
