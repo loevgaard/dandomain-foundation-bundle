@@ -115,6 +115,8 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.order_line_class%"
+        calls:
+            - [setProductSynchronizer, ["@loevgaard_dandomain_foundation.product_synchronizer"]]
 
     loevgaard_dandomain_foundation.payment_method_synchronizer:
         class: "%loevgaard_dandomain_foundation.payment_method_synchronizer_class%"

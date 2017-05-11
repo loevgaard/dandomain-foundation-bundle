@@ -9,11 +9,6 @@ use Loevgaard\DandomainFoundationBundle\Model\OrderLineInterface;
 class OrderLineSynchronizer extends Synchronizer
 {
     /**
-     * @var ProductSynchronizer
-     */
-    protected $productSynchronizer;
-
-    /**
      * @var string
      */
     protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderLine';
@@ -22,6 +17,25 @@ class OrderLineSynchronizer extends Synchronizer
      * @var string
      */
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\OrderLineInterface';
+
+    /**
+     * @var ProductSynchronizer
+     */
+    protected $productSynchronizer;
+
+    /**
+     * Set productSynchronizer.
+     *
+     * @param ProductSynchronizer $productSynchronizer
+     *
+     * @return OrderLineSynchronizer
+     */
+    public function setProductSynchronizer(ProductSynchronizer $productSynchronizer)
+    {
+        $this->productSynchronizer = $productSynchronizer;
+
+        return $this;
+    }
 
     /**
      * Synchronizes OrderLine.
@@ -43,13 +57,10 @@ class OrderLineSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
-        $product = $this->productSynchronizer->syncProduct($orderLine->productId, $flush);
-
         $entity
             ->setExternalId($orderLine->id)
             ->setFileUrl($orderLine->fileUrl)
             ->setOrder($order)
-            ->setProduct($product)
             ->setProductNumber($orderLine->productId)
             ->setProductName($orderLine->productName)
             ->setQuantity($orderLine->quantity)
@@ -60,6 +71,11 @@ class OrderLineSynchronizer extends Synchronizer
             ->setXmlParams($orderLine->xmlParams)
         ;
 
+        if ($orderLine->productId) {
+            $product = $this->productSynchronizer->syncProduct($orderLine->productId, $flush);
+            $entity->setProduct($product);
+        }
+
         $this->objectManager->persist($entity);
 
         if (true === $flush) {
@@ -67,17 +83,5 @@ class OrderLineSynchronizer extends Synchronizer
         }
 
         return $entity;
-    }
-
-    /**
-     * @param ProductSynchronizer $productSynchronizer
-     *
-     * @return $this
-     */
-    public function setProductSynchronizer(ProductSynchronizer $productSynchronizer)
-    {
-        $this->productSynchronizer = $productSynchronizer;
-
-        return $this;
     }
 }
