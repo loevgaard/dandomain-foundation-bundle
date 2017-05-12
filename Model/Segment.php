@@ -18,6 +18,11 @@ abstract class Segment implements SegmentInterface
     /**
      * @var ArrayCollection
      */
+    protected $categories;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $products;
 
     /**
@@ -39,7 +44,38 @@ abstract class Segment implements SegmentInterface
      */
     public function __construct()
     {
+        $this->categories = new ArrayCollection();
         $this->products = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCategory(CategoryInterface $category)
+    {
+        if (!($this->categories->contains($category))) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCategory(CategoryInterface $category)
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
     }
 
     /**

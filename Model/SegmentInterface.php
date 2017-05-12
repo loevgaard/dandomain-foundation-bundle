@@ -5,6 +5,31 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface SegmentInterface
 {
     /**
+     * Add category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return Segment
+     */
+    public function addCategory(CategoryInterface $category);
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories();
+
+    /**
+     * Remove category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return Segment
+     */
+    public function removeCategory(CategoryInterface $category);
+
+    /**
      * Get externalId.
      *
      * @return string

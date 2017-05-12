@@ -20,7 +20,22 @@ abstract class Category implements CategoryInterface
     /**
      * @var ArrayCollection
      */
+    protected $childrenCategories;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $parentCategories;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $products;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $segments;
 
     /**
      * @var string
@@ -230,7 +245,10 @@ abstract class Category implements CategoryInterface
      */
     public function __construct()
     {
+        $this->childrenCategories = new ArrayCollection();
+        $this->parentCategories = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->segments = new ArrayCollection();
     }
 
     /**
@@ -255,6 +273,36 @@ abstract class Category implements CategoryInterface
     public function setB2bGroupId($b2bGroupId)
     {
         $this->b2bGroupId = $b2bGroupId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChildrenCategory(CategoryInterface $childrenCategory)
+    {
+        if (!($this->childrenCategories->contains($childrenCategory))) {
+            $this->childrenCategories[] = $childrenCategory;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChildrenCategories()
+    {
+        return $this->childrenCategories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChildrenCategory(CategoryInterface $childrenCategory)
+    {
+        $this->childrenCategories->removeElement($childrenCategory);
 
         return $this;
     }
@@ -450,6 +498,36 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
+    public function addParentCategory(CategoryInterface $parentCategory)
+    {
+        if (!($this->parentCategories->contains($parentCategory))) {
+            $this->parentCategories[] = $parentCategory;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParentCategories()
+    {
+        return $this->parentCategories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeParentCategory(CategoryInterface $parentCategory)
+    {
+        $this->parentCategories->removeElement($parentCategory);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getParentIdList()
     {
         return $this->parentIdList;
@@ -491,6 +569,36 @@ abstract class Category implements CategoryInterface
     public function removeProduct(ProductInterface $product)
     {
         $this->products->removeElement($product);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSegment(SegmentInterface $segment)
+    {
+        if (!($this->segments->contains($segment))) {
+            $this->segments[] = $segment;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSegments()
+    {
+        return $this->segments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSegment(SegmentInterface $segment)
+    {
+        $this->segments->removeElement($segment);
 
         return $this;
     }
