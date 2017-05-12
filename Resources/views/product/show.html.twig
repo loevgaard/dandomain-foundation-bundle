@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Barcodenumber</th>
+                <td>{{ product.barCodeNumber }}</td>
+            </tr>
+            <tr>
+                <th>Categoriesraw</th>
+                <td>{{ product.categoriesRaw }}</td>
+            </tr>
+            <tr>
+                <th>Consignment</th>
+                <td>{% if product.consignment %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Costpriceexclvat</th>
+                <td>{{ product.costPriceExclVat }}</td>
+            </tr>
+            <tr>
+                <th>Hidden</th>
+                <td>{% if product.hidden %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ product.image }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ product.number }}</td>
+            </tr>
+            <tr>
+                <th>Priceinclvat</th>
+                <td>{{ product.priceInclVat }}</td>
+            </tr>
+            <tr>
+                <th>Stockcount</th>
+                <td>{{ product.stockCount }}</td>
+            </tr>
+            <tr>
+                <th>Vendornumber</th>
+                <td>{{ product.vendorNumber }}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{ product.version }}</td>
+            </tr>
+            <tr>
+                <th>Categoryidlist</th>
+                <td>{% if product.categoryIdList %}{{ product.categoryIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ product.comments }}</td>
+            </tr>
+            <tr>
+                <th>Costprice</th>
+                <td>{{ product.costPrice }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{% if product.created %}{{ product.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ product.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Defaultcategoryid</th>
+                <td>{{ product.defaultCategoryId }}</td>
+            </tr>
+            <tr>
+                <th>Disabledvariantidlist</th>
+                <td>{% if product.disabledVariantIdList %}{{ product.disabledVariantIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Edbpriserproductnumber</th>
+                <td>{{ product.edbPriserProductNumber }}</td>
+            </tr>
+            <tr>
+                <th>Externalid</th>
+                <td>{{ product.externalId }}</td>
+            </tr>
+            <tr>
+                <th>Filesalelink</th>
+                <td>{{ product.fileSaleLink }}</td>
+            </tr>
+            <tr>
+                <th>Googlefeedcategory</th>
+                <td>{{ product.googleFeedCategory }}</td>
+            </tr>
+            <tr>
+                <th>Isgiftcertificate</th>
+                <td>{% if product.isGiftCertificate %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ismodified</th>
+                <td>{% if product.isModified %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isratevariants</th>
+                <td>{% if product.isRateVariants %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isreviewvariants</th>
+                <td>{% if product.isReviewVariants %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isvariantmaster</th>
+                <td>{% if product.isVariantMaster %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Locationnumber</th>
+                <td>{{ product.locationNumber }}</td>
+            </tr>
+            <tr>
+                <th>Manufacturereidlist</th>
+                <td>{% if product.manufacturereIdList %}{{ product.manufacturereIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Maxbuyamount</th>
+                <td>{{ product.maxBuyAmount }}</td>
+            </tr>
+            <tr>
+                <th>Minbuyamount</th>
+                <td>{{ product.minBuyAmount }}</td>
+            </tr>
+            <tr>
+                <th>Minbuyamountb2b</th>
+                <td>{{ product.minBuyAmountB2B }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ product.picture }}</td>
+            </tr>
+            <tr>
+                <th>Salescount</th>
+                <td>{{ product.salesCount }}</td>
+            </tr>
+            <tr>
+                <th>Segmentidlist</th>
+                <td>{% if product.segmentIdList %}{{ product.segmentIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sortorder</th>
+                <td>{{ product.sortOrder }}</td>
+            </tr>
+            <tr>
+                <th>Stocklimit</th>
+                <td>{{ product.stockLimit }}</td>
+            </tr>
+            <tr>
+                <th>Typeid</th>
+                <td>{{ product.typeId }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{% if product.updated %}{{ product.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedby</th>
+                <td>{{ product.updatedBy }}</td>
+            </tr>
+            <tr>
+                <th>Variantgroupidlist</th>
+                <td>{% if product.variantGroupIdList %}{{ product.variantGroupIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Variantidlist</th>
+                <td>{% if product.variantIdList %}{{ product.variantIdList|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Variantmasterid</th>
+                <td>{{ product.variantMasterId }}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{ product.weight }}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if product.deletedAt %}{{ product.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if product.updatedAt %}{{ product.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_product_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_product_edit', { 'id': product.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

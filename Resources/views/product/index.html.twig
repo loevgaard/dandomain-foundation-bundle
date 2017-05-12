@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Products list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Barcodenumber</th>
+                <th>Categoriesraw</th>
+                <th>Consignment</th>
+                <th>Costpriceexclvat</th>
+                <th>Hidden</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Priceinclvat</th>
+                <th>Stockcount</th>
+                <th>Vendornumber</th>
+                <th>Version</th>
+                <th>Categoryidlist</th>
+                <th>Comments</th>
+                <th>Costprice</th>
+                <th>Created</th>
+                <th>Createdby</th>
+                <th>Defaultcategoryid</th>
+                <th>Disabledvariantidlist</th>
+                <th>Edbpriserproductnumber</th>
+                <th>Externalid</th>
+                <th>Filesalelink</th>
+                <th>Googlefeedcategory</th>
+                <th>Isgiftcertificate</th>
+                <th>Ismodified</th>
+                <th>Isratevariants</th>
+                <th>Isreviewvariants</th>
+                <th>Isvariantmaster</th>
+                <th>Locationnumber</th>
+                <th>Manufacturereidlist</th>
+                <th>Maxbuyamount</th>
+                <th>Minbuyamount</th>
+                <th>Minbuyamountb2b</th>
+                <th>Picture</th>
+                <th>Salescount</th>
+                <th>Segmentidlist</th>
+                <th>Sortorder</th>
+                <th>Stocklimit</th>
+                <th>Typeid</th>
+                <th>Updated</th>
+                <th>Updatedby</th>
+                <th>Variantgroupidlist</th>
+                <th>Variantidlist</th>
+                <th>Variantmasterid</th>
+                <th>Weight</th>
+                <th>Deletedat</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('admin_product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>{{ product.barCodeNumber }}</td>
+                <td>{{ product.categoriesRaw }}</td>
+                <td>{% if product.consignment %}Yes{% else %}No{% endif %}</td>
+                <td>{{ product.costPriceExclVat }}</td>
+                <td>{% if product.hidden %}Yes{% else %}No{% endif %}</td>
+                <td>{{ product.image }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.number }}</td>
+                <td>{{ product.priceInclVat }}</td>
+                <td>{{ product.stockCount }}</td>
+                <td>{{ product.vendorNumber }}</td>
+                <td>{{ product.version }}</td>
+                <td>{% if product.categoryIdList %}{{ product.categoryIdList|join(', ') }}{% endif %}</td>
+                <td>{{ product.comments }}</td>
+                <td>{{ product.costPrice }}</td>
+                <td>{% if product.created %}{{ product.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ product.createdBy }}</td>
+                <td>{{ product.defaultCategoryId }}</td>
+                <td>{% if product.disabledVariantIdList %}{{ product.disabledVariantIdList|join(', ') }}{% endif %}</td>
+                <td>{{ product.edbPriserProductNumber }}</td>
+                <td>{{ product.externalId }}</td>
+                <td>{{ product.fileSaleLink }}</td>
+                <td>{{ product.googleFeedCategory }}</td>
+                <td>{% if product.isGiftCertificate %}Yes{% else %}No{% endif %}</td>
+                <td>{% if product.isModified %}Yes{% else %}No{% endif %}</td>
+                <td>{% if product.isRateVariants %}Yes{% else %}No{% endif %}</td>
+                <td>{% if product.isReviewVariants %}Yes{% else %}No{% endif %}</td>
+                <td>{% if product.isVariantMaster %}Yes{% else %}No{% endif %}</td>
+                <td>{{ product.locationNumber }}</td>
+                <td>{% if product.manufacturereIdList %}{{ product.manufacturereIdList|join(', ') }}{% endif %}</td>
+                <td>{{ product.maxBuyAmount }}</td>
+                <td>{{ product.minBuyAmount }}</td>
+                <td>{{ product.minBuyAmountB2B }}</td>
+                <td>{{ product.picture }}</td>
+                <td>{{ product.salesCount }}</td>
+                <td>{% if product.segmentIdList %}{{ product.segmentIdList|join(', ') }}{% endif %}</td>
+                <td>{{ product.sortOrder }}</td>
+                <td>{{ product.stockLimit }}</td>
+                <td>{{ product.typeId }}</td>
+                <td>{% if product.updated %}{{ product.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ product.updatedBy }}</td>
+                <td>{% if product.variantGroupIdList %}{{ product.variantGroupIdList|join(', ') }}{% endif %}</td>
+                <td>{% if product.variantIdList %}{{ product.variantIdList|join(', ') }}{% endif %}</td>
+                <td>{{ product.variantMasterId }}</td>
+                <td>{{ product.weight }}</td>
+                <td>{% if product.deletedAt %}{{ product.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if product.updatedAt %}{{ product.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_product_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_product_edit', { 'id': product.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_product_new') }}">Create a new product</a>
+        </li>
+    </ul>
+{% endblock %}
