@@ -341,6 +341,14 @@ abstract class Product implements ProductInterface, TranslatableInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getBarCodeNumber()

@@ -84,14 +84,21 @@ class CategoryController extends Controller
      * Displays a form to edit an existing category entity.
      *
      */
-    public function editAction(Request $request, CategoryInterface $category)
+    public function editAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.category_class'))->findOneById($id);
+
+        if (null === $category) {
+            throw $this->createNotFoundException();
+        }
+
         $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
+        $editForm = $this->createForm('Loevgaard\DandomainFoundationBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('admin_category_edit', array('id' => $category->getId()));
         }
@@ -107,13 +114,19 @@ class CategoryController extends Controller
      * Deletes a category entity.
      *
      */
-    public function deleteAction(Request $request, CategoryInterface $category)
+    public function deleteAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.category_class'))->findOneById($id);
+
+        if (null === $category) {
+            throw $this->createNotFoundException();
+        }
+
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
         }

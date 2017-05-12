@@ -148,9 +148,9 @@
         </tbody>
     </table>
 
-    <a class="btn btn-info" href="{{ path('admin_category_index') }}">Back to the list</a>
-    <a class="btn btn-success" href="{{ path('admin_category_edit', { 'id': category.id }) }}">Edit</a>
     {{ form_start(delete_form) }}
+        <a class="btn btn-info" href="{{ path('admin_category_index') }}">Back to the list</a>
+        <a class="btn btn-success" href="{{ path('admin_category_edit', { 'id': category.id }) }}">Edit</a>
         <input class="btn btn-danger" type="submit" value="Delete">
     {{ form_end(delete_form) }}
 {% endblock %}
