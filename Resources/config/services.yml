@@ -1,6 +1,7 @@
 parameters:
     loevgaard_dandomain_foundation.category_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\CategoryService"
     loevgaard_dandomain_foundation.category_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\CategorySynchronizer"
+    loevgaard_dandomain_foundation.category_type_class: "Loevgaard\\DandomainFoundationBundle\\Form\\CategoryType"
     loevgaard_dandomain_foundation.customer_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\CustomerSynchronizer"
     loevgaard_dandomain_foundation.delivery_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\DeliverySynchronizer"
     loevgaard_dandomain_foundation.invoice_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\InvoiceSynchronizer"
