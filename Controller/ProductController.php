@@ -105,7 +105,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
         }
 
-        return $this->render('product/edit.html.twig', array(
+        return $this->render('LoevgaardDandomainFoundationBundle:product:edit.html.twig', array(
             'product' => $product,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -116,13 +116,19 @@ class ProductController extends Controller
      * Deletes a product entity.
      *
      */
-    public function deleteAction(Request $request, Product $product)
+    public function deleteAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.product_class'))->findOneById($id);
+
+        if (null === $product) {
+            throw $this->createNotFoundException();
+        }
+
         $form = $this->createDeleteForm($product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($product);
             $em->flush();
         }
