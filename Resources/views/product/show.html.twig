@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-admin.html.twig' %}
 
-{% block body %}
+{% block content %}
     <h1>Product</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -14,36 +14,8 @@
                 <td>{{ product.barCodeNumber }}</td>
             </tr>
             <tr>
-                <th>Categoriesraw</th>
-                <td>{{ product.categoriesRaw }}</td>
-            </tr>
-            <tr>
-                <th>Consignment</th>
-                <td>{% if product.consignment %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Costpriceexclvat</th>
-                <td>{{ product.costPriceExclVat }}</td>
-            </tr>
-            <tr>
-                <th>Hidden</th>
-                <td>{% if product.hidden %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
                 <th>Number</th>
                 <td>{{ product.number }}</td>
-            </tr>
-            <tr>
-                <th>Priceinclvat</th>
-                <td>{{ product.priceInclVat }}</td>
             </tr>
             <tr>
                 <th>Stockcount</th>
@@ -52,10 +24,6 @@
             <tr>
                 <th>Vendornumber</th>
                 <td>{{ product.vendorNumber }}</td>
-            </tr>
-            <tr>
-                <th>Version</th>
-                <td>{{ product.version }}</td>
             </tr>
             <tr>
                 <th>Categoryidlist</th>
@@ -204,17 +172,9 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_product_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_product_edit', { 'id': product.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_start(delete_form) }}
+        <a class="btn btn-info" href="{{ path('admin_product_index') }}">Back to the list</a>
+        <a class="btn btn-success" href="{{ path('admin_product_edit', { 'id': product.id }) }}">Edit</a>
+        <input class="btn btn-danger" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
 {% endblock %}

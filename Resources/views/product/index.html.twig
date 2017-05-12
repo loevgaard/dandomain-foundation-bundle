@@ -36,7 +36,7 @@
                 <th>Variant master ID</th>
                 <th>Weight</th>
                 <th>Created</th>
-                <th>Actions</th>
+                <th style="min-width: 150px;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -71,14 +71,8 @@
                     <td>{{ product.weight }}</td>
                     <td>{% if product.created %}{{ product.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('admin_product_show', { 'id': product.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('admin_product_edit', { 'id': product.id }) }}">edit</a>
-                            </li>
-                        </ul>
+                        <a class="btn btn-default" href="{{ path('admin_product_show', { 'id': product.id }) }}">show</a>
+                        <a class="btn btn-success" href="{{ path('admin_product_edit', { 'id': product.id }) }}">edit</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -63,11 +63,18 @@ class ProductController extends Controller
      * Finds and displays a product entity.
      *
      */
-    public function showAction(Product $product)
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.product_class'))->findOneById($id);
+
+        if (null === $product) {
+            throw $this->createNotFoundException();
+        }
+
         $deleteForm = $this->createDeleteForm($product);
 
-        return $this->render('product/show.html.twig', array(
+        return $this->render('LoevgaardDandomainFoundationBundle:product:show.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -121,7 +128,7 @@ class ProductController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Product $product)
+    private function createDeleteForm(ProductInterface $product)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_product_delete', array('id' => $product->getId())))
