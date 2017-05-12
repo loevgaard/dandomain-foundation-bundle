@@ -62,6 +62,14 @@ abstract class Variant implements VariantInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function addDisabledProduct(ProductInterface $disabledProduct)

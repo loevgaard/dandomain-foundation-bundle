@@ -50,6 +50,14 @@ abstract class ProductRelation implements ProductRelationInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()

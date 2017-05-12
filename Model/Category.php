@@ -234,6 +234,14 @@ abstract class Category implements CategoryInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getB2bGroupId()

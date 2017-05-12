@@ -55,6 +55,14 @@ abstract class ProductType implements ProductTypeInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getExternalId()

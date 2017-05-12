@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
         $productClass = $this->getParameter('loevgaard_dandomain_foundation.product_class');
         $product = new $productClass();
-        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.product_type_form_class'), $product);
+        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.product_type_form_class'), $product, ['data_class' => $productClass]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

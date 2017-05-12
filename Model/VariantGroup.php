@@ -91,6 +91,14 @@ abstract class VariantGroup implements VariantGroupInterface
     }
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getExternalId()

@@ -50,6 +50,14 @@ abstract class Period implements PeriodInterface
     protected $title;
 
     /**
+     * To string.
+     */
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getDisabled()
