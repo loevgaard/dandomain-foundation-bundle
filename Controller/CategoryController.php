@@ -42,7 +42,7 @@ class CategoryController extends Controller
     {
         $categoryClass = $this->getParameter('loevgaard_dandomain_foundation.category_class');
         $category = new $categoryClass();
-        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category);
+        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category, ['data_class' => $categoryClass]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -86,15 +86,16 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, $id)
     {
+        $categoryClass = $this->getParameter('loevgaard_dandomain_foundation.category_class');
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.category_class'))->findOneById($id);
+        $category = $em->getRepository($categoryClass)->findOneById($id);
 
         if (null === $category) {
             throw $this->createNotFoundException();
         }
 
         $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category);
+        $editForm = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category, ['data_class' => $categoryClass]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -85,10 +85,18 @@ class ProductController extends Controller
      * Displays a form to edit an existing product entity.
      *
      */
-    public function editAction(Request $request, Product $product)
+    public function editAction(Request $request, $id)
     {
+        $productClass = $this->getParameter('loevgaard_dandomain_foundation.product_class');
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository($productClass)->findOneById($id);
+
+        if (null === $product) {
+            throw $this->createNotFoundException();
+        }
+
         $deleteForm = $this->createDeleteForm($product);
-        $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
+        $editForm = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.product_type_form_class'), $product, ['data_class' => $productClass]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
