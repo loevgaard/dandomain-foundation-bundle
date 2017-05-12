@@ -49,7 +49,7 @@ class CategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Category'
+            'data_class' => 'Loevgaard\DandomainFoundationBundle\Model\Category'
         ));
     }
 
@@ -58,8 +58,6 @@ class CategoryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_category';
+        return 'loevgaard_dandomain_foundation_bundle_category';
     }
-
-
 }

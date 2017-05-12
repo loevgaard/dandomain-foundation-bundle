@@ -41,8 +41,9 @@ class ProductController extends Controller
      */
     public function newAction(Request $request)
     {
-        $product = new Product();
-        $form = $this->createForm('AppBundle\Form\ProductType', $product);
+        $productClass = $this->getParameter('loevgaard_dandomain_foundation.product_class');
+        $product = new $productClass();
+        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.product_type_form_class'), $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +54,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_show', array('id' => $product->getId()));
         }
 
-        return $this->render('product/new.html.twig', array(
+        return $this->render('LoevgaardDandomainFoundationBundle:product:new.html.twig', array(
             'product' => $product,
             'form' => $form->createView(),
         ));

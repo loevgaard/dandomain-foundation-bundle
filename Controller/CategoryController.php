@@ -42,7 +42,7 @@ class CategoryController extends Controller
     {
         $categoryClass = $this->getParameter('loevgaard_dandomain_foundation.category_class');
         $category = new $categoryClass();
-        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_class'), $category);
+        $form = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_class'), $category);
+        $editForm = $this->createForm($this->getParameter('loevgaard_dandomain_foundation.category_type_form_class'), $category);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
