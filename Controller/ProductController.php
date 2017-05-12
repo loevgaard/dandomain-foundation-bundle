@@ -16,13 +16,21 @@ class ProductController extends Controller
      * Lists all product entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository('AppBundle:Product')->findAll();
+        $paginator = $this->get('knp_paginator');
 
-        return $this->render('product/index.html.twig', array(
+        $query = $em->getRepository($this->getParameter('loevgaard_dandomain_foundation.product_class'))->findAll();
+
+        $products = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 50)
+        );
+
+        return $this->render('LoevgaardDandomainFoundationBundle:product:index.html.twig', array(
             'products' => $products,
         ));
     }
