@@ -16,27 +16,24 @@
                 <th>Cost price</th>
                 <th>External ID</th>
                 <th>Google feed category</th>
-                <th>Isgiftcertificate</th>
-                <th>Ismodified</th>
-                <th>Isratevariants</th>
-                <th>Isreviewvariants</th>
-                <th>Isvariantmaster</th>
-                <th>Locationnumber</th>
-                <th>Manufacturereidlist</th>
-                <th>Maxbuyamount</th>
-                <th>Minbuyamount</th>
-                <th>Minbuyamountb2b</th>
+                <th>Is gift certificate</th>
+                <th>Is modified</th>
+                <th>Is rate variants</th>
+                <th>Is review variants</th>
+                <th>Is variant master</th>
+                <th>Location number</th>
+                <th>Manufacturere ID list</th>
+                <th>Max buy amount</th>
+                <th>Min buy amount</th>
+                <th>Min buy amount b2b</th>
                 <th>Picture</th>
-                <th>Salescount</th>
-                <th>Segmentidlist</th>
-                <th>Sortorder</th>
-                <th>Stocklimit</th>
-                <th>Typeid</th>
-                <th>Updated</th>
-                <th>Updatedby</th>
-                <th>Variantgroupidlist</th>
-                <th>Variantidlist</th>
-                <th>Variantmasterid</th>
+                <th>Sales count</th>
+                <th>Sort order</th>
+                <th>Stock limit</th>
+                <th>Type ID</th>
+                <th>Variant group ID list</th>
+                <th>Variant ID list</th>
+                <th>Variant master ID</th>
                 <th>Weight</th>
                 <th>Created</th>
                 <th>Actions</th>
@@ -65,12 +62,9 @@
                     <td>{{ product.minBuyAmountB2B }}</td>
                     <td>{{ product.picture }}</td>
                     <td>{{ product.salesCount }}</td>
-                    <td>{% if product.segmentIdList %}{{ product.segmentIdList|join(', ') }}{% endif %}</td>
                     <td>{{ product.sortOrder }}</td>
                     <td>{{ product.stockLimit }}</td>
                     <td>{{ product.typeId }}</td>
-                    <td>{% if product.updated %}{{ product.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ product.updatedBy }}</td>
                     <td>{% if product.variantGroupIdList %}{{ product.variantGroupIdList|join(', ') }}{% endif %}</td>
                     <td>{% if product.variantIdList %}{{ product.variantIdList|join(', ') }}{% endif %}</td>
                     <td>{{ product.variantMasterId }}</td>
@@ -90,4 +84,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(products) }}
+    </div>
 {% endblock %}
