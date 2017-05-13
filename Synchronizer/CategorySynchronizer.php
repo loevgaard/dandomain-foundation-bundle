@@ -24,6 +24,25 @@ class CategorySynchronizer extends Synchronizer
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\CategoryInterface';
 
     /**
+     * @var SegmentSynchronizer
+     */
+    protected $segmentSynchronizer;
+
+    /**
+     * Set segmentSynchronizer.
+     *
+     * @param SegmentSynchronizer $segmentSynchronizer
+     *
+     * @return CategorySynchronizer
+     */
+    public function setSegmentSynchronizer(SegmentSynchronizer $segmentSynchronizer)
+    {
+        $this->segmentSynchronizer = $segmentSynchronizer;
+
+        return $this;
+    }
+
+    /**
      * Constructor.
      *
      * @param EntityManager $em
@@ -117,6 +136,25 @@ class CategorySynchronizer extends Synchronizer
             ->setTextTitle($actualTexts->title)
             ->setTextUrlname($actualTexts->urlname)
         ;
+
+        if (is_array($category->parentIdList)) {
+            foreach ($category->parentIdList as $parentId) {
+                $parentEntity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                    'externalId' => (int) $parentId,
+                ]);
+
+                if (null !== $parentEntity) {
+                    $entity->addParentCategory($parentEntity);
+                }
+            }
+        }
+
+        if (is_array($category->segmentIdList)) {
+            foreach ($category->segmentIdList as $segmentId) {
+                $segment = $this->segmentSynchronizer->syncSegment($segmentId, $flush);
+                $entity->addSegment($segment);
+            }
+        }
 
         $this->objectManager->persist($entity);
 

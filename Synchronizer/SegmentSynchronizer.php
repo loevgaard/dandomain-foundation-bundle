@@ -26,23 +26,29 @@ class SegmentSynchronizer extends Synchronizer
      */
     public function syncSegment($segment, $flush = true)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $segment->id,
-        ]);
+        if (is_numeric($segment)) {
+            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                'externalId' => $segment,
+            ]);
+        } else {
+            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
+                'externalId' => $segment->id,
+            ]);
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-        }
+            if (!($entity)) {
+                $entity = new $this->entityClassName();
+            }
 
-        $entity
-            ->setExternalId($segment->id)
-            ->setSegmentOptions($segment->segmentOptions)
-        ;
+            $entity
+                ->setExternalId($segment->id)
+                ->setSegmentOptions($segment->segmentOptions)
+            ;
 
-        $this->objectManager->persist($entity);
+            $this->objectManager->persist($entity);
 
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
+            if (true === $flush) {
+                $this->objectManager->flush($entity);
+            }
         }
 
         return $entity;

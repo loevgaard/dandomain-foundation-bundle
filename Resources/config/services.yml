@@ -46,6 +46,8 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.category_class%"
             - "%loevgaard_dandomain_foundation.default_site_id%"
+        calls:
+            - [setSegmentSynchronizer, ["@loevgaard_dandomain_foundation.segment_synchronizer"]]
 
     loevgaard_dandomain_foundation.customer_synchronizer:
         class: "%loevgaard_dandomain_foundation.customer_synchronizer_class%"
