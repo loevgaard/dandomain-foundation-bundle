@@ -12,13 +12,6 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * @var string
      *
-     * @ORM\Column(nullable=true, type="text")
-     */
-    protected $keywords;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(nullable=true, type="string")
      */
     protected $categoryNumber;
@@ -64,6 +57,13 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="text")
+     */
+    protected $keywords;
 
     /**
      * @var string

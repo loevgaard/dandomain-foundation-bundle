@@ -15,6 +15,7 @@ class LoevgaardDandomainFoundationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('loevgaard_dandomain_foundation.category_class', $config['category_class']);
+        $container->setParameter('loevgaard_dandomain_foundation.category_translation_class', $config['category_translation_class']);
         $container->setParameter('loevgaard_dandomain_foundation.customer_class', $config['customer_class']);
         $container->setParameter('loevgaard_dandomain_foundation.default_site_id', $config['default_site_id']);
         $container->setParameter('loevgaard_dandomain_foundation.delivery_class', $config['delivery_class']);

@@ -15,6 +15,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('category_class')->end()
+                ->scalarNode('category_translation_class')->end()
                 ->scalarNode('customer_class')->end()
                 ->scalarNode('default_site_id')->end()
                 ->scalarNode('delivery_class')->end()
