@@ -131,7 +131,7 @@ abstract class Category implements CategoryInterface
     /**
      * @var string
      *
-     * @ORM\Column(nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="text")
      */
     protected $textKeywords;
 
@@ -194,7 +194,7 @@ abstract class Category implements CategoryInterface
     /**
      * @var string
      *
-     * @ORM\Column(nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="text")
      */
     protected $textMetaDescription;
 
