@@ -5,22 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface CategoryTranslationInterface
 {
     /**
-     * Get keywords.
-     *
-     * @return string
-     */
-    public function getKeywords();
-
-    /**
-     * Set keywords.
-     *
-     * @param string $keywords
-     *
-     * @return CategoryTranslationInterface
-     */
-    public function setKeywords($keywords);
-
-    /**
      * Get categoryNumber.
      *
      * @return string
@@ -131,6 +115,22 @@ interface CategoryTranslationInterface
      * @return CategoryTranslationInterface
      */
     public function setImage($image);
+
+    /**
+     * Get keywords.
+     *
+     * @return string
+     */
+    public function getKeywords();
+
+    /**
+     * Set keywords.
+     *
+     * @param string $keywords
+     *
+     * @return CategoryTranslationInterface
+     */
+    public function setKeywords($keywords);
 
     /**
      * Get link.

@@ -12,129 +12,129 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * @var string
      *
-     * @ORM\Column(nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="text")
      */
-    protected $textKeywords;
+    protected $keywords;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textCategoryNumber;
+    protected $categoryNumber;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="text")
      */
-    protected $textDescription;
+    protected $description;
 
     /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
      */
-    protected $textExternalId;
+    protected $externalId;
 
     /**
      * @var bool
      *
      * @ORM\Column(nullable=true, type="boolean")
      */
-    protected $textHidden;
+    protected $hidden;
 
     /**
      * @var bool
      *
      * @ORM\Column(nullable=true, type="boolean")
      */
-    protected $textHiddenMobile;
+    protected $hiddenMobile;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textIcon;
+    protected $icon;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textImage;
+    protected $image;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textLink;
+    protected $link;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true, type="text")
+     */
+    protected $metaDescription;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textMetaDescription;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $textName;
+    protected $name;
 
     /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
      */
-    protected $textSiteId;
+    protected $siteId;
 
     /**
      * @var int
      *
      * @ORM\Column(nullable=true, type="integer")
      */
-    protected $textSortOrder;
+    protected $sortOrder;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textString;
+    protected $string;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textTitle;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
      */
-    protected $textUrlname;
+    protected $urlname;
 
     /**
      * {@inheritdoc}
      */
-    public function getTextKeywords()
+    public function getKeywords()
     {
-        return $this->textKeywords;
+        return $this->keywords;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextKeywords($textKeywords)
+    public function setKeywords($keywords)
     {
-        $this->textKeywords = $textKeywords;
+        $this->keywords = $keywords;
 
         return $this;
     }
@@ -142,17 +142,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextCategoryNumber()
+    public function getCategoryNumber()
     {
-        return $this->textCategoryNumber;
+        return $this->categoryNumber;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextCategoryNumber($textCategoryNumber)
+    public function setCategoryNumber($categoryNumber)
     {
-        $this->textCategoryNumber = $textCategoryNumber;
+        $this->categoryNumber = $categoryNumber;
 
         return $this;
     }
@@ -160,17 +160,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextDescription()
+    public function getDescription()
     {
-        return $this->textDescription;
+        return $this->description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextDescription($textDescription)
+    public function setDescription($description)
     {
-        $this->textDescription = $textDescription;
+        $this->description = $description;
 
         return $this;
     }
@@ -178,17 +178,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextExternalId()
+    public function getExternalId()
     {
-        return $this->textExternalId;
+        return $this->externalId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextExternalId($textExternalId)
+    public function setExternalId($externalId)
     {
-        $this->textExternalId = $textExternalId;
+        $this->externalId = $externalId;
 
         return $this;
     }
@@ -196,17 +196,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextHidden()
+    public function getHidden()
     {
-        return $this->textHidden;
+        return $this->hidden;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextHidden($textHidden)
+    public function setHidden($hidden)
     {
-        $this->textHidden = $textHidden;
+        $this->hidden = $hidden;
 
         return $this;
     }
@@ -214,17 +214,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextHiddenMobile()
+    public function getHiddenMobile()
     {
-        return $this->textHiddenMobile;
+        return $this->hiddenMobile;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextHiddenMobile($textHiddenMobile)
+    public function setHiddenMobile($hiddenMobile)
     {
-        $this->textHiddenMobile = $textHiddenMobile;
+        $this->hiddenMobile = $hiddenMobile;
 
         return $this;
     }
@@ -232,17 +232,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextIcon()
+    public function getIcon()
     {
-        return $this->textIcon;
+        return $this->icon;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextIcon($textIcon)
+    public function setIcon($icon)
     {
-        $this->textIcon = $textIcon;
+        $this->icon = $icon;
 
         return $this;
     }
@@ -250,17 +250,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextImage()
+    public function getImage()
     {
-        return $this->textImage;
+        return $this->image;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextImage($textImage)
+    public function setImage($image)
     {
-        $this->textImage = $textImage;
+        $this->image = $image;
 
         return $this;
     }
@@ -268,17 +268,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextLink()
+    public function getLink()
     {
-        return $this->textLink;
+        return $this->link;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextLink($textLink)
+    public function setLink($link)
     {
-        $this->textLink = $textLink;
+        $this->link = $link;
 
         return $this;
     }
@@ -286,17 +286,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextMetaDescription()
+    public function getMetaDescription()
     {
-        return $this->textMetaDescription;
+        return $this->metaDescription;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextMetaDescription($textMetaDescription)
+    public function setMetaDescription($metaDescription)
     {
-        $this->textMetaDescription = $textMetaDescription;
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }
@@ -304,17 +304,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextName()
+    public function getName()
     {
-        return $this->textName;
+        return $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextName($textName)
+    public function setName($name)
     {
-        $this->textName = $textName;
+        $this->name = $name;
 
         return $this;
     }
@@ -322,17 +322,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextSiteId()
+    public function getSiteId()
     {
-        return $this->textSiteId;
+        return $this->siteId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextSiteId($textSiteId)
+    public function setSiteId($siteId)
     {
-        $this->textSiteId = $textSiteId;
+        $this->siteId = $siteId;
 
         return $this;
     }
@@ -340,17 +340,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextSortOrder()
+    public function getSortOrder()
     {
-        return $this->textSortOrder;
+        return $this->sortOrder;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextSortOrder($textSortOrder)
+    public function setSortOrder($sortOrder)
     {
-        $this->textSortOrder = $textSortOrder;
+        $this->sortOrder = $sortOrder;
 
         return $this;
     }
@@ -358,17 +358,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextString()
+    public function getString()
     {
-        return $this->textString;
+        return $this->string;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextString($textString)
+    public function setString($string)
     {
-        $this->textString = $textString;
+        $this->string = $string;
 
         return $this;
     }
@@ -376,17 +376,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextTitle()
+    public function getTitle()
     {
-        return $this->textTitle;
+        return $this->title;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextTitle($textTitle)
+    public function setTitle($title)
     {
-        $this->textTitle = $textTitle;
+        $this->title = $title;
 
         return $this;
     }
@@ -394,17 +394,17 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getTextUrlname()
+    public function getUrlname()
     {
-        return $this->textUrlname;
+        return $this->urlname;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTextUrlname($textUrlname)
+    public function setUrlname($urlname)
     {
-        $this->textUrlname = $textUrlname;
+        $this->urlname = $urlname;
 
         return $this;
     }
