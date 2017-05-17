@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
+        "a2lix/translation-form-bundle": "^2.1",
         "doctrine/common": "^2.6",
         "loevgaard/dandomain-api": "^2.2",
         "doctrine/orm": "^2.5",

@@ -78,6 +78,7 @@ class CategoryController extends Controller
         return $this->render('LoevgaardDandomainFoundationBundle:category:show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
+            'locale' => $this->getParameter('loevgaard_dandomain_foundation.default_site_id'),
         ));
     }
 
