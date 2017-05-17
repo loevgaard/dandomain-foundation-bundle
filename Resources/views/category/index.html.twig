@@ -28,8 +28,8 @@
             {% for category in categories %}
                 <tr>
                     <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                    <td>{{ category.textName }}</td>
-                    <td>{{ category.textTitle }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.title }}</td>
                     <td>{{ category.externalId }}</td>
                     <td>{{ category.internalId }}</td>
                     <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
