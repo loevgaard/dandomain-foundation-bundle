@@ -14,12 +14,9 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textDescription')
-            ->add('textHidden')
-            ->add('textMetaDescription')
-            ->add('textName')
-            ->add('textTitle')
-            ->add('textUrlname')
+            ->add('translations', 'A2lix\TranslationFormBundle\Form\Type\TranslationsFormsType', [
+                'form_type' => 'Loevgaard\DandomainFoundationBundle\Form\CategoryTranslationType',
+            ])
             ->add('b2bGroupId')
             ->add('customInfoLayout')
             ->add('customListLayout')
@@ -31,16 +28,7 @@ class CategoryType extends AbstractType
             ->add('modified')
             ->add('parentIdList')
             ->add('segmentIdList')
-            ->add('textKeywords')
-            ->add('textCategoryNumber')
-            ->add('textExternalId')
-            ->add('textHiddenMobile')
-            ->add('textIcon')
-            ->add('textImage')
-            ->add('textLink')
-            ->add('textSiteId')
-            ->add('textSortOrder')
-            ->add('textString');
+        ;
     }
     
     /**
