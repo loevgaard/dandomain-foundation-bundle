@@ -31,6 +31,7 @@ class CategoryController extends Controller
 
         return $this->render('LoevgaardDandomainFoundationBundle:category:index.html.twig', array(
             'categories' => $categories,
+            'locale' => $this->getParameter('loevgaard_dandomain_foundation.default_site_id'),
         ));
     }
 

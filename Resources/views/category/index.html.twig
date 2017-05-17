@@ -28,17 +28,17 @@
             {% for category in categories %}
                 <tr>
                     <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                    <td>{{ category.name }}</td>
-                    <td>{{ category.title }}</td>
+                    <td>{{ category.translate(locale).name }}</td>
+                    <td>{{ category.translate(locale).title }}</td>
                     <td>{{ category.externalId }}</td>
                     <td>{{ category.internalId }}</td>
                     <td>{% if category.modified %}Yes{% else %}No{% endif %}</td>
                     <td>{% if category.parentIdList %}{{ category.parentIdList|join(', ') }}{% endif %}</td>
                     <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
-                    <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
-                    <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
-                    <td>{{ category.textSiteId }}</td>
-                    <td>{{ category.textSortOrder }}</td>
+                    <td>{% if category.translate(locale).hidden %}Yes{% else %}No{% endif %}</td>
+                    <td>{% if category.translate(locale).hiddenMobile %}Yes{% else %}No{% endif %}</td>
+                    <td>{{ category.translate(locale).siteId }}</td>
+                    <td>{{ category.translate(locale).sortOrder }}</td>
                     <td>{% if category.createdDate %}{{ category.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
                         <a class="btn btn-default" href="{{ path('admin_category_show', { 'id': category.id }) }}">show</a>
