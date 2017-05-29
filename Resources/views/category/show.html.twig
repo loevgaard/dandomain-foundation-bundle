@@ -10,28 +10,28 @@
                 <td>{{ category.id }}</td>
             </tr>
             <tr>
-                <th>Textdescription</th>
-                <td>{{ category.textDescription }}</td>
+                <th>Description</th>
+                <td>{{ category.translate(locale).description }}</td>
             </tr>
             <tr>
-                <th>Texthidden</th>
-                <td>{% if category.textHidden %}Yes{% else %}No{% endif %}</td>
+                <th>Hidden</th>
+                <td>{% if category.translate(locale).hidden %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Textmetadescription</th>
-                <td>{{ category.textMetaDescription }}</td>
+                <th>Meta description</th>
+                <td>{{ category.translate(locale).metaDescription }}</td>
             </tr>
             <tr>
-                <th>Textname</th>
-                <td>{{ category.textName }}</td>
+                <th>Name</th>
+                <td>{{ category.translate(locale).name }}</td>
             </tr>
             <tr>
-                <th>Texttitle</th>
-                <td>{{ category.textTitle }}</td>
+                <th>Title</th>
+                <td>{{ category.translate(locale).title }}</td>
             </tr>
             <tr>
-                <th>Texturlname</th>
-                <td>{{ category.textUrlname }}</td>
+                <th>Url name</th>
+                <td>{{ category.translate(locale).urlname }}</td>
             </tr>
             <tr>
                 <th>B2bgroupid</th>
@@ -86,44 +86,44 @@
                 <td>{% if category.segmentIdList %}{{ category.segmentIdList|join(', ') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Textkeywords</th>
-                <td>{{ category.textKeywords }}</td>
+                <th>Keywords</th>
+                <td>{{ category.translate(locale).keywords }}</td>
             </tr>
             <tr>
-                <th>Textcategorynumber</th>
-                <td>{{ category.textCategoryNumber }}</td>
+                <th>Category number</th>
+                <td>{{ category.translate(locale).categoryNumber }}</td>
             </tr>
             <tr>
-                <th>Textexternalid</th>
-                <td>{{ category.textExternalId }}</td>
+                <th>External ID</th>
+                <td>{{ category.translate(locale).externalId }}</td>
             </tr>
             <tr>
-                <th>Texthiddenmobile</th>
-                <td>{% if category.textHiddenMobile %}Yes{% else %}No{% endif %}</td>
+                <th>Hidden mobile</th>
+                <td>{% if category.translate(locale).hiddenMobile %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Texticon</th>
-                <td>{{ category.textIcon }}</td>
+                <th>Icon</th>
+                <td>{{ category.translate(locale).icon }}</td>
             </tr>
             <tr>
-                <th>Textimage</th>
-                <td>{{ category.textImage }}</td>
+                <th>Image</th>
+                <td>{{ category.translate(locale).image }}</td>
             </tr>
             <tr>
-                <th>Textlink</th>
-                <td>{{ category.textLink }}</td>
+                <th>Link</th>
+                <td>{{ category.translate(locale).link }}</td>
             </tr>
             <tr>
-                <th>Textsiteid</th>
-                <td>{{ category.textSiteId }}</td>
+                <th>Siteid</th>
+                <td>{{ category.translate(locale).siteId }}</td>
             </tr>
             <tr>
-                <th>Textsortorder</th>
-                <td>{{ category.textSortOrder }}</td>
+                <th>Sort order</th>
+                <td>{{ category.translate(locale).sortOrder }}</td>
             </tr>
             <tr>
-                <th>Textstring</th>
-                <td>{{ category.textString }}</td>
+                <th>String</th>
+                <td>{{ category.translate(locale).string }}</td>
             </tr>
             <tr>
                 <th>Createdby</th>

@@ -5,6 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Doctrine\ORM\EntityManager;
 use Loevgaard\DandomainFoundationBundle\Model\CategoryInterface;
+use Loevgaard\DandomainFoundationBundle\Model\TranslatableInterface;
 
 class CategorySynchronizer extends Synchronizer
 {
@@ -87,10 +88,6 @@ class CategorySynchronizer extends Synchronizer
             }
         }
 
-        if (null === $actualTexts) {
-            return null;
-        }
-
         if ($category->createdDate) {
             $createdDate = \Dandomain\Api\jsonDateToDate($category->createdDate);
             $createdDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
@@ -119,22 +116,6 @@ class CategorySynchronizer extends Synchronizer
             ->setModified($category->modified)
             ->setParentIdList($category->parentIdList)
             ->setSegmentIdList($category->segmentIdList)
-            ->setTextKeywords($actualTexts->Keywords)
-            ->setTextCategoryNumber($actualTexts->categoryNumber)
-            ->setTextDescription($actualTexts->description)
-            ->setTextExternalId($actualTexts->id)
-            ->setTextHidden($actualTexts->hidden)
-            ->setTextHiddenMobile($actualTexts->hiddenMobile)
-            ->setTextIcon($actualTexts->icon)
-            ->setTextImage($actualTexts->image)
-            ->setTextLink($actualTexts->link)
-            ->setTextMetaDescription($actualTexts->metaDescription)
-            ->setTextName($actualTexts->name)
-            ->setTextSiteId($actualTexts->siteId)
-            ->setTextSortOrder($actualTexts->sortOrder)
-            ->setTextString($actualTexts->string)
-            ->setTextTitle($actualTexts->title)
-            ->setTextUrlname($actualTexts->urlname)
         ;
 
         if (is_array($category->parentIdList)) {
@@ -153,6 +134,29 @@ class CategorySynchronizer extends Synchronizer
             foreach ($category->segmentIdList as $segmentId) {
                 $segment = $this->segmentSynchronizer->syncSegment($segmentId, $flush);
                 $entity->addSegment($segment);
+            }
+        }
+
+        if (($entity instanceof TranslatableInterface) && (is_array($category->texts))) {
+            foreach ($category->texts as $text) {
+                $entity->translate($text->siteId)->setCategoryNumber($text->categoryNumber);
+                $entity->translate($text->siteId)->setDescription($text->description);
+                $entity->translate($text->siteId)->setExternalId($text->id);
+                $entity->translate($text->siteId)->setHidden($text->hidden);
+                $entity->translate($text->siteId)->setHiddenMobile($text->hiddenMobile);
+                $entity->translate($text->siteId)->setIcon($text->icon);
+                $entity->translate($text->siteId)->setImage($text->image);
+                $entity->translate($text->siteId)->setKeywords($text->Keywords);
+                $entity->translate($text->siteId)->setLink($text->link);
+                $entity->translate($text->siteId)->setMetaDescription($text->metaDescription);
+                $entity->translate($text->siteId)->setName($text->name);
+                $entity->translate($text->siteId)->setSiteId($text->siteId);
+                $entity->translate($text->siteId)->setSortOrder($text->sortOrder);
+                $entity->translate($text->siteId)->setString($text->string);
+                $entity->translate($text->siteId)->setTitle($text->title);
+                $entity->translate($text->siteId)->setUrlname($text->urlname);
+
+                $entity->mergeNewTranslations();
             }
         }
 
