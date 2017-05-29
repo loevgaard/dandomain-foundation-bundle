@@ -41,7 +41,7 @@ abstract class OrderLine implements OrderLineInterface
     /**
      * @var int
      *
-     * @ORM\Column(nullable=true, type="integer")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $productNumber;
 
