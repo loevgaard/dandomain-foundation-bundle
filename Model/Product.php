@@ -306,7 +306,7 @@ abstract class Product implements ProductInterface, TranslatableInterface
     /**
      * @var int
      *
-     * @ORM\Column(nullable=true, type="integer")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $variantMasterId;
 
