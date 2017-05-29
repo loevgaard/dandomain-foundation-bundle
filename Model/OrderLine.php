@@ -245,7 +245,7 @@ abstract class OrderLine implements OrderLineInterface
             return $this->getTotalPrice();
         }
 
-        return (float)bcdiv(bcmul($this->getTotalPrice(), 100 + (float)$this->getVatPct()), 100, 2);
+        return $this->getTotalPrice() * (100 + (float)$this->getVatPct()) / 100;
     }
 
     /**
