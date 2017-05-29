@@ -239,6 +239,18 @@ abstract class OrderLine implements OrderLineInterface
     /**
      * {@inheritdoc}
      */
+    public function getTotalPriceInclVat()
+    {
+        if($this->getVatPct() === 0) {
+            return $this->getTotalPrice();
+        }
+
+        return (float)bcdiv(bcmul($this->getTotalPrice(), 100 + (float)$this->getVatPct()), 100, 2);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setTotalPrice($totalPrice)
     {
         $this->totalPrice = $totalPrice;

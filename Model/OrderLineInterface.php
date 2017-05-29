@@ -127,6 +127,11 @@ interface OrderLineInterface
     public function getTotalPrice();
 
     /**
+     * @return float
+     */
+    public function getTotalPriceInclVat();
+
+    /**
      * Set totalPrice.
      *
      * @param string $totalPrice
