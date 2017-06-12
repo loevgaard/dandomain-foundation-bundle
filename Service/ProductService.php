@@ -94,6 +94,7 @@ class ProductService extends Service
                 $products = GuzzleHttp\json_decode($this->api->productData->getDataProductsInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
                 foreach ($products as $product) {
+                    $output->writeln('Product: '.$product->number, OutputInterface::VERBOSITY_VERBOSE);
                     $this->productSynchronizer->syncProduct($product, true);
                 }
 
@@ -109,6 +110,7 @@ class ProductService extends Service
                 $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $pageSize)->getBody()->getContents());
 
                 foreach ($products as $product) {
+                    $output->writeln('Product: '.$product->number, OutputInterface::VERBOSITY_VERBOSE);
                     $this->productSynchronizer->syncProduct($product, true);
                 }
             }

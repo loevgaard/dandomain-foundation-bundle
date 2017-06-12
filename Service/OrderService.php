@@ -89,6 +89,7 @@ class OrderService extends Service
             $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody()->getContents());
 
             foreach ($orders as $order) {
+                $output->writeln('Order: '.$order->id, OutputInterface::VERBOSITY_VERBOSE);
                 $this->orderSynchronizer->syncOrder($order, true);
             }
 
