@@ -105,9 +105,9 @@ abstract class Order implements OrderInterface
     protected $giftCertificateAmount;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(nullable=true, type="integer")
+     * @ORM\Column(nullable=true, type="string")
      */
     protected $giftCertificateNumber;
 

@@ -135,14 +135,14 @@ interface OrderInterface
     /**
      * Get giftCertificateNumber.
      *
-     * @return int
+     * @return string
      */
     public function getGiftCertificateNumber();
 
     /**
      * Set giftCertificateNumber.
      *
-     * @param int $giftCertificateNumber
+     * @param string $giftCertificateNumber
      *
      * @return OrderInterface
      */
