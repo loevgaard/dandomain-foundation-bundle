@@ -224,9 +224,9 @@ abstract class Order implements OrderInterface
     protected $transactionNumber;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(nullable=true, type="string")
+     * @ORM\Column(nullable=true, type="decimal", precision=5, scale=2)
      */
     protected $vatPct;
 
@@ -244,9 +244,6 @@ abstract class Order implements OrderInterface
      */
     protected $xmlParams;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->orderLines = new ArrayCollection();
