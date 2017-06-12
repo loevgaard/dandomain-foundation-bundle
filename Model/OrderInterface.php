@@ -419,6 +419,17 @@ interface OrderInterface
     public function setShippingMethod(ShippingMethodInterface $shippingMethod = null);
 
     /**
+     * @return float
+     */
+    public function getShippingMethodFee();
+
+    /**
+     * @param float $shippingMethodFee
+     * @return OrderInterface
+     */
+    public function setShippingMethodFee($shippingMethodFee);
+
+    /**
      * Get site.
      *
      * @return SiteInterface

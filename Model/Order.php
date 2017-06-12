@@ -46,6 +46,13 @@ abstract class Order implements OrderInterface
     protected $shippingMethod;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(type="decimal")
+     */
+    protected $shippingMethodFee;
+
+    /**
      * @var Site
      */
     protected $site;
@@ -710,6 +717,23 @@ abstract class Order implements OrderInterface
     {
         $this->shippingMethod = $shippingMethod;
 
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethodFee()
+    {
+        return $this->shippingMethodFee;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingMethodFee($shippingMethodFee)
+    {
+        $this->shippingMethodFee = $shippingMethodFee;
         return $this;
     }
 

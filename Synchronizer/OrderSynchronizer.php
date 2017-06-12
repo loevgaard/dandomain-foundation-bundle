@@ -200,6 +200,7 @@ class OrderSynchronizer extends Synchronizer
             $modifiedDate = null;
         }
 
+        /** @var OrderInterface $entity */
         $entity
             ->setExternalId($order->id)
             ->setComment($order->comment)
@@ -226,6 +227,7 @@ class OrderSynchronizer extends Synchronizer
             ->setVatPct($order->vatPct)
             ->setVatRegNumber($order->vatRegNumber)
             ->setXmlParams($order->xmlParams)
+            ->setShippingMethodFee($order->shippingInfo->fee)
         ;
 
         if (null !== $modifiedDate) {
