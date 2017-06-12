@@ -39,19 +39,19 @@ class CustomerSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($customer->id)
-            ->setAddress($customer->address)
-            ->setAddress2($customer->address2)
-            ->setAttention($customer->attention)
-            ->setCity($customer->city)
-            ->setCountry($customer->country)
-            ->setEan($customer->ean)
-            ->setEmail($customer->email)
-            ->setFax($customer->fax)
-            ->setName($customer->name)
-            ->setPhone($customer->phone)
-            ->setState($customer->state)
-            ->setZipCode($customer->zipCode)
+            ->setExternalId($customer->id ? : null)
+            ->setAddress($customer->address ? : null)
+            ->setAddress2($customer->address2 ? : null)
+            ->setAttention($customer->attention ? : null)
+            ->setCity($customer->city ? : null)
+            ->setCountry($customer->country ? : null)
+            ->setEan($customer->ean ? : null)
+            ->setEmail($customer->email ? : null)
+            ->setFax($customer->fax ? : null)
+            ->setName($customer->name ? : null)
+            ->setPhone($customer->phone ? : null)
+            ->setState($customer->state ? : null)
+            ->setZipCode($customer->zipCode ? : null)
         ;
 
         $this->objectManager->persist($entity);

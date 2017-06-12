@@ -19,8 +19,8 @@ class VariantSynchronizer extends Synchronizer
     /**
      * Synchronizes Variant.
      *
-     * @param array $variant
-     * @param bool  $flush
+     * @param \stdClass $variant
+     * @param bool      $flush
      *
      * @return VariantInterface
      */
@@ -35,9 +35,9 @@ class VariantSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($variant->id)
-            ->setSortOrder($variant->sortOrder)
-            ->setText($variant->text)
+            ->setExternalId($variant->id ? : null)
+            ->setSortOrder($variant->sortOrder ? : null)
+            ->setText($variant->text ? : null)
         ;
 
         $this->objectManager->persist($entity);

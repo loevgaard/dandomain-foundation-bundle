@@ -39,10 +39,10 @@ class PaymentMethodSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($paymentMethod->id)
-            ->setFee($paymentMethod->fee)
+            ->setExternalId($paymentMethod->id ? : null)
+            ->setFee($paymentMethod->fee ? : null)
             ->setFeeInclVat($paymentMethod->feeInclVat)
-            ->setName($paymentMethod->name)
+            ->setName($paymentMethod->name ? : null)
         ;
 
         $this->objectManager->persist($entity);

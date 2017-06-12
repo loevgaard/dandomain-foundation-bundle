@@ -19,8 +19,8 @@ class ProductTypeFieldSynchronizer extends Synchronizer
     /**
      * Synchronizes ProductTypeField.
      *
-     * @param array $productTypeField
-     * @param bool  $flush
+     * @param \stdClass $productTypeField
+     * @param bool      $flush
      *
      * @return ProductTypeFieldInterface
      */
@@ -35,10 +35,10 @@ class ProductTypeFieldSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($productTypeField->id)
-            ->setLabel($productTypeField->label)
-            ->setLanguageId($productTypeField->languageId)
-            ->setNumber($productTypeField->number)
+            ->setExternalId($productTypeField->id ? : null)
+            ->setLabel($productTypeField->label ? : null)
+            ->setLanguageId($productTypeField->languageId ? : null)
+            ->setNumber($productTypeField->number ? : null)
         ;
 
         $this->objectManager->persist($entity);

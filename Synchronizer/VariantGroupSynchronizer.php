@@ -38,8 +38,8 @@ class VariantGroupSynchronizer extends Synchronizer
     /**
      * Synchronizes VariantGroup.
      *
-     * @param array $variantGroup
-     * @param bool  $flush
+     * @param \stdClass $variantGroup
+     * @param bool      $flush
      *
      * @return VariantGroupInterface
      */
@@ -54,10 +54,10 @@ class VariantGroupSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($variantGroup->id)
-            ->setSelectText($variantGroup->selectText)
-            ->setSortOrder($variantGroup->sortOrder)
-            ->setText($variantGroup->text)
+            ->setExternalId($variantGroup->id ? : null)
+            ->setSelectText($variantGroup->selectText ? : null)
+            ->setSortOrder($variantGroup->sortOrder ? : null)
+            ->setText($variantGroup->text ? : null)
         ;
 
         if (is_array($variantGroup->variants)) {

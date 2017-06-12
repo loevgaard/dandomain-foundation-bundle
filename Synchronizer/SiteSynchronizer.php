@@ -19,8 +19,8 @@ class SiteSynchronizer extends Synchronizer
     /**
      * Synchronizes Site.
      *
-     * @param array $site
-     * @param bool  $flush
+     * @param \stdClass $site
+     * @param bool      $flush
      *
      * @return SiteInterface
      */
@@ -40,10 +40,10 @@ class SiteSynchronizer extends Synchronizer
             }
 
             $entity
-                ->setExternalId($site->id)
-                ->setCountryId($site->countryId)
-                ->setCurrencyCode($site->currencyCode)
-                ->setName($site->name)
+                ->setExternalId($site->id ? : null)
+                ->setCountryId($site->countryId ? : null)
+                ->setCurrencyCode($site->currencyCode ? : null)
+                ->setName($site->name ? : null)
             ;
 
             $this->objectManager->persist($entity);

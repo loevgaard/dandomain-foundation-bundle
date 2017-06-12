@@ -19,8 +19,8 @@ class ProductRelationSynchronizer extends Synchronizer
     /**
      * Synchronizes ProductRelation.
      *
-     * @param array $productRelation
-     * @param bool  $flush
+     * @param \stdClass $productRelation
+     * @param bool      $flush
      *
      * @return ProductRelationInterface
      */
@@ -37,9 +37,9 @@ class ProductRelationSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setProductNumber($productRelation->productNumber)
-            ->setRelatedType($productRelation->relatedType)
-            ->setSortOrder($productRelation->sortOrder)
+            ->setProductNumber($productRelation->productNumber ? : null)
+            ->setRelatedType($productRelation->relatedType ? : null)
+            ->setSortOrder($productRelation->sortOrder ? : null)
         ;
 
         $this->objectManager->persist($entity);

@@ -19,8 +19,8 @@ class StateSynchronizer extends Synchronizer
     /**
      * Synchronizes State.
      *
-     * @param array $state
-     * @param bool  $flush
+     * @param \stdClass $state
+     * @param bool      $flush
      *
      * @return StateInterface
      */
@@ -35,10 +35,10 @@ class StateSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($state->id)
+            ->setExternalId($state->id ? : null)
             ->setExclStatistics($state->exclStatistics)
             ->setIsDefault($state->isDefault)
-            ->setName($state->name)
+            ->setName($state->name ? : null)
         ;
 
         $this->objectManager->persist($entity);

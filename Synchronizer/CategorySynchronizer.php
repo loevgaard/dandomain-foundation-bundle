@@ -103,19 +103,19 @@ class CategorySynchronizer extends Synchronizer
         }
 
         $entity
-            ->setB2bGroupId($category->b2BGroupId)
-            ->setCreatedDate($createdDate)
-            ->setCustomInfoLayout($category->customInfoLayout)
-            ->setCustomListLayout($category->customListLayout)
-            ->setDefaultParentId($category->defaultParentId)
-            ->setEditedDate($editedDate)
-            ->setExternalId($category->number)
-            ->setInfoLayout($category->infoLayout)
-            ->setInternalId($category->internalId)
-            ->setListLayout($category->listLayout)
-            ->setModified($category->modified)
-            ->setParentIdList($category->parentIdList)
-            ->setSegmentIdList($category->segmentIdList)
+            ->setB2bGroupId($category->b2BGroupId ? : null)
+            ->setCreatedDate($createdDate ? : null)
+            ->setCustomInfoLayout($category->customInfoLayout ? : null)
+            ->setCustomListLayout($category->customListLayout ? : null)
+            ->setDefaultParentId($category->defaultParentId ? : null)
+            ->setEditedDate($editedDate ? : null)
+            ->setExternalId($category->number ? : null)
+            ->setInfoLayout($category->infoLayout ? : null)
+            ->setInternalId($category->internalId ? : null)
+            ->setListLayout($category->listLayout ? : null)
+            ->setModified($category->modified ? : null)
+            ->setParentIdList($category->parentIdList ? : null)
+            ->setSegmentIdList($category->segmentIdList ? : null)
         ;
 
         if (is_array($category->parentIdList)) {

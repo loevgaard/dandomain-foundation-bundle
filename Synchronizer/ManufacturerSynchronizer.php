@@ -19,8 +19,8 @@ class ManufacturerSynchronizer extends Synchronizer
     /**
      * Synchronizes Manufacturer.
      *
-     * @param array $manufacturer
-     * @param bool  $flush
+     * @param \stdClass $manufacturer
+     * @param bool      $flush
      *
      * @return ManufacturerInterface
      */
@@ -35,10 +35,10 @@ class ManufacturerSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($manufacturer->id)
-            ->setLink($manufacturer->link)
-            ->setLinkText($manufacturer->linkText)
-            ->setName($manufacturer->name)
+            ->setExternalId($manufacturer->id ? : null)
+            ->setLink($manufacturer->link ? : null)
+            ->setLinkText($manufacturer->linkText ? : null)
+            ->setName($manufacturer->name ? : null)
         ;
 
         $this->objectManager->persist($entity);

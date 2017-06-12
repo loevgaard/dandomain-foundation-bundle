@@ -19,7 +19,7 @@ class DeliverySynchronizer extends Synchronizer
     /**
      * Synchronizes Delivery.
      *
-     * @param array             $delivery
+     * @param \stdClass         $delivery
      * @param bool              $flush
      * @param DeliveryInterface $deliveryEntity
      *
@@ -36,20 +36,20 @@ class DeliverySynchronizer extends Synchronizer
         }
 
         $entity
-            ->setAddress($delivery->address)
-            ->setAddress2($delivery->address2)
-            ->setAttention($delivery->attention)
-            ->setCity($delivery->city)
-            ->setCountry($delivery->country)
-            ->setCountryId($delivery->countryId)
-            ->setCvr($delivery->cvr)
-            ->setEan($delivery->ean)
-            ->setEmail($delivery->email)
-            ->setFax($delivery->fax)
-            ->setName($delivery->name)
-            ->setPhone($delivery->phone)
-            ->setState($delivery->state)
-            ->setZipCode($delivery->zipCode)
+            ->setAddress($delivery->address ? : null)
+            ->setAddress2($delivery->address2 ? : null)
+            ->setAttention($delivery->attention ? : null)
+            ->setCity($delivery->city ? : null)
+            ->setCountry($delivery->country ? : null)
+            ->setCountryId($delivery->countryId ? : null)
+            ->setCvr($delivery->cvr ? : null)
+            ->setEan($delivery->ean ? : null)
+            ->setEmail($delivery->email ? : null)
+            ->setFax($delivery->fax ? : null)
+            ->setName($delivery->name ? : null)
+            ->setPhone($delivery->phone ? : null)
+            ->setState($delivery->state ? : null)
+            ->setZipCode($delivery->zipCode ? : null)
         ;
 
         $this->objectManager->persist($entity);

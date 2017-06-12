@@ -58,17 +58,17 @@ class OrderLineSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($orderLine->id)
-            ->setFileUrl($orderLine->fileUrl)
+            ->setExternalId($orderLine->id ? : null)
+            ->setFileUrl($orderLine->fileUrl ? : null)
             ->setOrder($order)
-            ->setProductNumber($orderLine->productId)
-            ->setProductName($orderLine->productName)
-            ->setQuantity($orderLine->quantity)
-            ->setTotalPrice($orderLine->totalPrice)
-            ->setUnitPrice($orderLine->unitPrice)
-            ->setVatPct($orderLine->vatPct)
-            ->setVariant($orderLine->variant)
-            ->setXmlParams($orderLine->xmlParams)
+            ->setProductNumber($orderLine->productId ? : null)
+            ->setProductName($orderLine->productName ? : null)
+            ->setQuantity($orderLine->quantity ? : null)
+            ->setTotalPrice($orderLine->totalPrice ? : null)
+            ->setUnitPrice($orderLine->unitPrice ? : null)
+            ->setVatPct($orderLine->vatPct ? : null)
+            ->setVariant($orderLine->variant ? : null)
+            ->setXmlParams($orderLine->xmlParams ? : null)
         ;
 
         if ($orderLine->productId) {

@@ -19,7 +19,7 @@ class InvoiceSynchronizer extends Synchronizer
     /**
      * Synchronizes Invoice.
      *
-     * @param array            $invoice
+     * @param \stdClass        $invoice
      * @param bool             $flush
      * @param InvoiceInterface $invoiceEntity
      *
@@ -43,10 +43,10 @@ class InvoiceSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setCreditNoteNumber($invoice->creditNoteNumber)
+            ->setCreditNoteNumber($invoice->creditNoteNumber ? : null)
             ->setIsPaid($invoice->isPaid)
-            ->setNumber($invoice->number)
-            ->setState($invoice->state)
+            ->setNumber($invoice->number ? : null)
+            ->setState($invoice->state ? : null)
         ;
 
         if (null !== $date) {

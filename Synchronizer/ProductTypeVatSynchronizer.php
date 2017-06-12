@@ -19,8 +19,8 @@ class ProductTypeVatSynchronizer extends Synchronizer
     /**
      * Synchronizes ProductTypeVat.
      *
-     * @param array $productTypeVat
-     * @param bool  $flush
+     * @param \stdClass $productTypeVat
+     * @param bool      $flush
      *
      * @return ProductTypeVatInterface
      */
@@ -35,10 +35,10 @@ class ProductTypeVatSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setCountry($productTypeVat->country)
-            ->setCountryId($productTypeVat->countryId)
-            ->setSiteId($productTypeVat->siteId)
-            ->setVatPct($productTypeVat->vatPct)
+            ->setCountry($productTypeVat->country ? : null)
+            ->setCountryId($productTypeVat->countryId ? : null)
+            ->setSiteId($productTypeVat->siteId ? : null)
+            ->setVatPct($productTypeVat->vatPct ? : null)
         ;
 
         $this->objectManager->persist($entity);

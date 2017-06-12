@@ -19,8 +19,8 @@ class UnitSynchronizer extends Synchronizer
     /**
      * Synchronizes Unit.
      *
-     * @param array $unit
-     * @param bool  $flush
+     * @param \stdClass $unit
+     * @param bool      $flush
      *
      * @return UnitInterface
      */
@@ -35,8 +35,8 @@ class UnitSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($unit->id)
-            ->setText($unit->text)
+            ->setExternalId($unit->id ? : null)
+            ->setText($unit->text ? : null)
         ;
 
         $this->objectManager->persist($entity);

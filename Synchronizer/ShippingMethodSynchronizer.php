@@ -19,8 +19,8 @@ class ShippingMethodSynchronizer extends Synchronizer
     /**
      * Synchronizes ShippingMethod.
      *
-     * @param array $shippingMethod
-     * @param bool  $flush
+     * @param \stdClass $shippingMethod
+     * @param bool      $flush
      *
      * @return ShippingMethodInterface
      */
@@ -39,10 +39,10 @@ class ShippingMethodSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($shippingMethod->id)
-            ->setFee($shippingMethod->fee)
-            ->setFeeInclVat($shippingMethod->feeInclVat)
-            ->setName($shippingMethod->name)
+            ->setExternalId($shippingMethod->id ? : null)
+            ->setFee($shippingMethod->fee ? : null)
+            ->setFeeInclVat($shippingMethod->feeInclVat ? : null)
+            ->setName($shippingMethod->name ? : null)
         ;
 
         $this->objectManager->persist($entity);

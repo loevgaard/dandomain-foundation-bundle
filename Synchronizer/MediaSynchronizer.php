@@ -19,8 +19,8 @@ class MediaSynchronizer extends Synchronizer
     /**
      * Synchronizes Media.
      *
-     * @param array $media
-     * @param bool  $flush
+     * @param \stdClass $media
+     * @param bool      $flush
      *
      * @return MediaInterface
      */
@@ -35,15 +35,15 @@ class MediaSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($media->id)
-            ->setHeight($media->height)
-            ->setMediaTranslations($media->mediaTranslations)
-            ->setSortorder($media->sortorder)
-            ->setThumbnail($media->thumbnail)
-            ->setThumbnailheight($media->thumbnailheight)
-            ->setThumbnailwidth($media->thumbnailwidth)
-            ->setUrl($media->url)
-            ->setWidth($media->width)
+            ->setExternalId($media->id ? : null)
+            ->setHeight($media->height ? : null)
+            ->setMediaTranslations($media->mediaTranslations ? : null)
+            ->setSortorder($media->sortorder ? : null)
+            ->setThumbnail($media->thumbnail ? : null)
+            ->setThumbnailheight($media->thumbnailheight ? : null)
+            ->setThumbnailwidth($media->thumbnailwidth ? : null)
+            ->setUrl($media->url ? : null)
+            ->setWidth($media->width ? : null)
         ;
 
         $this->objectManager->persist($entity);

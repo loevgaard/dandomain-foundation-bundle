@@ -19,8 +19,8 @@ class PeriodSynchronizer extends Synchronizer
     /**
      * Synchronizes Period.
      *
-     * @param array $period
-     * @param bool  $flush
+     * @param \stdClass $period
+     * @param bool      $flush
      *
      * @return PeriodInterface
      */
@@ -50,7 +50,7 @@ class PeriodSynchronizer extends Synchronizer
 
         $entity
             ->setDisabled($period->disabled ? true : false)
-            ->setExternalId($period->id)
+            ->setExternalId($period->id ? : null)
         ;
 
         if (is_string($period->title)) {
