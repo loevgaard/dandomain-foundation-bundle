@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface VariantGroupInterface
 {
     /**
-     * Get externalId.
-     *
      * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param int $externalId
      *
      * @return VariantGroupInterface
@@ -21,15 +17,11 @@ interface VariantGroupInterface
     public function setExternalId($externalId);
 
     /**
-     * Get groupName.
-     *
      * @return string
      */
     public function getGroupName();
 
     /**
-     * Set groupName.
-     *
      * @param string $groupName
      *
      * @return VariantGroupInterface
@@ -37,15 +29,11 @@ interface VariantGroupInterface
     public function setGroupName($groupName);
 
     /**
-     * Get headline.
-     *
      * @return string
      */
     public function getHeadline();
 
     /**
-     * Set headline.
-     *
      * @param string $headline
      *
      * @return VariantGroupInterface
@@ -53,8 +41,6 @@ interface VariantGroupInterface
     public function setHeadline($headline);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
@@ -69,8 +55,6 @@ interface VariantGroupInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
@@ -85,15 +69,11 @@ interface VariantGroupInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get selectText.
-     *
      * @return string
      */
     public function getSelectText();
 
     /**
-     * Set selectText.
-     *
      * @param string $selectText
      *
      * @return VariantGroupInterface
@@ -101,15 +81,11 @@ interface VariantGroupInterface
     public function setSelectText($selectText);
 
     /**
-     * Get siteId.
-     *
      * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId.
-     *
      * @param int $siteId
      *
      * @return VariantGroupInterface
@@ -117,15 +93,11 @@ interface VariantGroupInterface
     public function setSiteId($siteId);
 
     /**
-     * Get sortOrder.
-     *
      * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder.
-     *
      * @param int $sortOrder
      *
      * @return VariantGroupInterface
@@ -133,15 +105,11 @@ interface VariantGroupInterface
     public function setSortOrder($sortOrder);
 
     /**
-     * Get text.
-     *
      * @return string
      */
     public function getText();
 
     /**
-     * Set text.
-     *
      * @param string $text
      *
      * @return VariantGroupInterface
@@ -158,8 +126,6 @@ interface VariantGroupInterface
     public function addVariant(VariantInterface $variant);
 
     /**
-     * Get variants.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariants();
@@ -174,15 +140,11 @@ interface VariantGroupInterface
     public function removeVariant(VariantInterface $variant);
 
     /**
-     * Get variantType.
-     *
      * @return int
      */
     public function getVariantType();
 
     /**
-     * Set variantType.
-     *
      * @param int $variantType
      *
      * @return VariantGroupInterface

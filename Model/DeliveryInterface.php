@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface DeliveryInterface
 {
     /**
-     * Get address.
-     *
      * @return string
      */
     public function getAddress();
 
     /**
-     * Set address.
-     *
      * @param string $address
      *
      * @return DeliveryInterface
@@ -21,15 +17,11 @@ interface DeliveryInterface
     public function setAddress($address);
 
     /**
-     * Get address2.
-     *
      * @return string
      */
     public function getAddress2();
 
     /**
-     * Set address2.
-     *
      * @param string $address2
      *
      * @return DeliveryInterface
@@ -37,15 +29,11 @@ interface DeliveryInterface
     public function setAddress2($address2);
 
     /**
-     * Get attention.
-     *
      * @return string
      */
     public function getAttention();
 
     /**
-     * Set attention.
-     *
      * @param string $attention
      *
      * @return DeliveryInterface
@@ -53,15 +41,11 @@ interface DeliveryInterface
     public function setAttention($attention);
 
     /**
-     * Get city.
-     *
      * @return string
      */
     public function getCity();
 
     /**
-     * Set city.
-     *
      * @param string $city
      *
      * @return DeliveryInterface
@@ -69,15 +53,11 @@ interface DeliveryInterface
     public function setCity($city);
 
     /**
-     * Get country.
-     *
      * @return string
      */
     public function getCountry();
 
     /**
-     * Set country.
-     *
      * @param string $country
      *
      * @return DeliveryInterface
@@ -85,15 +65,11 @@ interface DeliveryInterface
     public function setCountry($country);
 
     /**
-     * Get countryId.
-     *
      * @return int
      */
     public function getCountryId();
 
     /**
-     * Set countryId.
-     *
      * @param int $countryId
      *
      * @return DeliveryInterface
@@ -101,15 +77,11 @@ interface DeliveryInterface
     public function setCountryId($countryId);
 
     /**
-     * Get cvr.
-     *
      * @return string
      */
     public function getCvr();
 
     /**
-     * Set cvr.
-     *
      * @param string $cvr
      *
      * @return DeliveryInterface
@@ -117,15 +89,11 @@ interface DeliveryInterface
     public function setCvr($cvr);
 
     /**
-     * Get ean.
-     *
      * @return string
      */
     public function getEan();
 
     /**
-     * Set ean.
-     *
      * @param string $ean
      *
      * @return DeliveryInterface
@@ -133,15 +101,11 @@ interface DeliveryInterface
     public function setEan($ean);
 
     /**
-     * Get email.
-     *
      * @return string
      */
     public function getEmail();
 
     /**
-     * Set email.
-     *
      * @param string $email
      *
      * @return DeliveryInterface
@@ -149,15 +113,11 @@ interface DeliveryInterface
     public function setEmail($email);
 
     /**
-     * Get fax.
-     *
      * @return string
      */
     public function getFax();
 
     /**
-     * Set fax.
-     *
      * @param string $fax
      *
      * @return DeliveryInterface
@@ -165,22 +125,16 @@ interface DeliveryInterface
     public function setFax($fax);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name.
-     *
      * @param string $name
      *
      * @return DeliveryInterface
@@ -188,15 +142,11 @@ interface DeliveryInterface
     public function setName($name);
 
     /**
-     * Get phone.
-     *
      * @return string
      */
     public function getPhone();
 
     /**
-     * Set phone.
-     *
      * @param string $phone
      *
      * @return DeliveryInterface
@@ -204,15 +154,11 @@ interface DeliveryInterface
     public function setPhone($phone);
 
     /**
-     * Get state.
-     *
      * @return string
      */
     public function getState();
 
     /**
-     * Set state.
-     *
      * @param string $state
      *
      * @return DeliveryInterface
@@ -220,15 +166,11 @@ interface DeliveryInterface
     public function setState($state);
 
     /**
-     * Get zipCode.
-     *
      * @return string
      */
     public function getZipCode();
 
     /**
-     * Set zipCode.
-     *
      * @param string $zipCode
      *
      * @return DeliveryInterface

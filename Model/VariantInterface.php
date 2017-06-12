@@ -14,8 +14,6 @@ interface VariantInterface
     public function addDisabledProduct(ProductInterface $disabledProduct);
 
     /**
-     * Get disabledProducts.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getDisabledProducts();
@@ -30,15 +28,11 @@ interface VariantInterface
     public function removeDisabledProduct(ProductInterface $disabledProduct);
 
     /**
-     * Get externalId.
-     *
      * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param int $externalId
      *
      * @return VariantInterface
@@ -46,8 +40,6 @@ interface VariantInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
@@ -62,8 +54,6 @@ interface VariantInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
@@ -78,15 +68,11 @@ interface VariantInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get sortOrder.
-     *
      * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder.
-     *
      * @param int $sortOrder
      *
      * @return VariantInterface
@@ -94,15 +80,11 @@ interface VariantInterface
     public function setSortOrder($sortOrder);
 
     /**
-     * Get text.
-     *
      * @return string
      */
     public function getText();
 
     /**
-     * Set text.
-     *
      * @param string $text
      *
      * @return VariantInterface
@@ -119,8 +101,6 @@ interface VariantInterface
     public function addVariantGroup(VariantGroupInterface $variantGroup);
 
     /**
-     * Get variantGroups.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariantGroups();

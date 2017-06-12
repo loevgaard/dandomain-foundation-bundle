@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface CategoryTranslationInterface
 {
     /**
-     * Get categoryNumber.
-     *
      * @return string
      */
     public function getCategoryNumber();
 
     /**
-     * Set categoryNumber.
-     *
      * @param string $categoryNumber
      *
      * @return CategoryTranslationInterface
@@ -21,15 +17,11 @@ interface CategoryTranslationInterface
     public function setCategoryNumber($categoryNumber);
 
     /**
-     * Get description.
-     *
      * @return string
      */
     public function getDescription();
 
     /**
-     * Set description.
-     *
      * @param string $description
      *
      * @return CategoryTranslationInterface
@@ -37,15 +29,11 @@ interface CategoryTranslationInterface
     public function setDescription($description);
 
     /**
-     * Get externalId.
-     *
      * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param int $externalId
      *
      * @return CategoryTranslationInterface
@@ -53,15 +41,11 @@ interface CategoryTranslationInterface
     public function setExternalId($externalId);
 
     /**
-     * Get hidden.
-     *
      * @return bool
      */
     public function getHidden();
 
     /**
-     * Set hidden.
-     *
      * @param bool $hidden
      *
      * @return CategoryTranslationInterface
@@ -69,15 +53,11 @@ interface CategoryTranslationInterface
     public function setHidden($hidden);
 
     /**
-     * Get hiddenMobile.
-     *
      * @return bool
      */
     public function getHiddenMobile();
 
     /**
-     * Set hiddenMobile.
-     *
      * @param bool $hiddenMobile
      *
      * @return CategoryTranslationInterface
@@ -85,15 +65,11 @@ interface CategoryTranslationInterface
     public function setHiddenMobile($hiddenMobile);
 
     /**
-     * Get icon.
-     *
      * @return string
      */
     public function getIcon();
 
     /**
-     * Set icon.
-     *
      * @param string $icon
      *
      * @return CategoryTranslationInterface
@@ -101,15 +77,11 @@ interface CategoryTranslationInterface
     public function setIcon($icon);
 
     /**
-     * Get image.
-     *
      * @return string
      */
     public function getImage();
 
     /**
-     * Set image.
-     *
      * @param string $image
      *
      * @return CategoryTranslationInterface
@@ -117,15 +89,11 @@ interface CategoryTranslationInterface
     public function setImage($image);
 
     /**
-     * Get keywords.
-     *
      * @return string
      */
     public function getKeywords();
 
     /**
-     * Set keywords.
-     *
      * @param string $keywords
      *
      * @return CategoryTranslationInterface
@@ -133,15 +101,11 @@ interface CategoryTranslationInterface
     public function setKeywords($keywords);
 
     /**
-     * Get link.
-     *
      * @return string
      */
     public function getLink();
 
     /**
-     * Set link.
-     *
      * @param string $link
      *
      * @return CategoryTranslationInterface
@@ -149,15 +113,11 @@ interface CategoryTranslationInterface
     public function setLink($link);
 
     /**
-     * Get metaDescription.
-     *
      * @return string
      */
     public function getMetaDescription();
 
     /**
-     * Set metaDescription.
-     *
      * @param string $metaDescription
      *
      * @return CategoryTranslationInterface
@@ -165,15 +125,11 @@ interface CategoryTranslationInterface
     public function setMetaDescription($metaDescription);
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name.
-     *
      * @param string $name
      *
      * @return CategoryTranslationInterface
@@ -181,15 +137,11 @@ interface CategoryTranslationInterface
     public function setName($name);
 
     /**
-     * Get siteId.
-     *
      * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId.
-     *
      * @param int $siteId
      *
      * @return CategoryTranslationInterface
@@ -197,15 +149,11 @@ interface CategoryTranslationInterface
     public function setSiteId($siteId);
 
     /**
-     * Get sortOrder.
-     *
      * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder.
-     *
      * @param int $sortOrder
      *
      * @return CategoryTranslationInterface
@@ -213,15 +161,11 @@ interface CategoryTranslationInterface
     public function setSortOrder($sortOrder);
 
     /**
-     * Get string.
-     *
      * @return string
      */
     public function getString();
 
     /**
-     * Set string.
-     *
      * @param string $string
      *
      * @return CategoryTranslationInterface
@@ -229,15 +173,11 @@ interface CategoryTranslationInterface
     public function setString($string);
 
     /**
-     * Get title.
-     *
      * @return string
      */
     public function getTitle();
 
     /**
-     * Set title.
-     *
      * @param string $title
      *
      * @return CategoryTranslationInterface
@@ -245,15 +185,11 @@ interface CategoryTranslationInterface
     public function setTitle($title);
 
     /**
-     * Get urlname.
-     *
      * @return string
      */
     public function getUrlname();
 
     /**
-     * Set urlname.
-     *
      * @param string $urlname
      *
      * @return CategoryTranslationInterface

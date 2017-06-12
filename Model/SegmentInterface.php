@@ -14,8 +14,6 @@ interface SegmentInterface
     public function addCategory(CategoryInterface $category);
 
     /**
-     * Get categories
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories();
@@ -30,15 +28,11 @@ interface SegmentInterface
     public function removeCategory(CategoryInterface $category);
 
     /**
-     * Get externalId.
-     *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param string $externalId
      *
      * @return SegmentInterface
@@ -46,8 +40,6 @@ interface SegmentInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
@@ -62,8 +54,6 @@ interface SegmentInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
@@ -78,15 +68,11 @@ interface SegmentInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get segmentOptions.
-     *
      * @return array
      */
     public function getSegmentOptions();
 
     /**
-     * Set segmentOptions.
-     *
      * @param array $segmentOptions
      *
      * @return SegmentInterface

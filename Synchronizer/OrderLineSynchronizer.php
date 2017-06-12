@@ -24,8 +24,6 @@ class OrderLineSynchronizer extends Synchronizer
     protected $productSynchronizer;
 
     /**
-     * Set productSynchronizer.
-     *
      * @param ProductSynchronizer $productSynchronizer
      *
      * @return OrderLineSynchronizer

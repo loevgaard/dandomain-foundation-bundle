@@ -22,8 +22,6 @@ class VariantGroupSynchronizer extends Synchronizer
     protected $variantSynchronizer;
 
     /**
-     * Set VariantSynchronizer.
-     *
      * @param VariantSynchronizer $variantSynchronizer
      *
      * @return VariantGroupSynchronizer

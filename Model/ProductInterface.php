@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductInterface
 {
     /**
-     * Get barCodeNumber.
-     *
      * @return string
      */
     public function getBarCodeNumber();
 
     /**
-     * Set barCodeNumber.
-     *
      * @param string $barCodeNumber
      *
      * @return ProductInterface
@@ -30,8 +26,6 @@ interface ProductInterface
     public function addCategory(CategoryInterface $category);
 
     /**
-     * Get categories.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories();
@@ -46,15 +40,11 @@ interface ProductInterface
     public function removeCategory(CategoryInterface $category);
 
     /**
-     * Get categoryIdList.
-     *
      * @return array
      */
     public function getCategoryIdList();
 
     /**
-     * Set categoryIdList.
-     *
      * @param array $categoryIdList
      *
      * @return ProductInterface
@@ -62,15 +52,11 @@ interface ProductInterface
     public function setCategoryIdList($categoryIdList);
 
     /**
-     * Get comments.
-     *
      * @return string
      */
     public function getComments();
 
     /**
-     * Set comments.
-     *
      * @param string $comments
      *
      * @return ProductInterface
@@ -78,15 +64,11 @@ interface ProductInterface
     public function setComments($comments);
 
     /**
-     * Get costPrice.
-     *
      * @return string
      */
     public function getCostPrice();
 
     /**
-     * Set costPrice.
-     *
      * @param string $costPrice
      *
      * @return ProductInterface
@@ -94,15 +76,11 @@ interface ProductInterface
     public function setCostPrice($costPrice);
 
     /**
-     * Get created.
-     *
      * @return \DateTime
      */
     public function getCreated();
 
     /**
-     * Set created.
-     *
      * @param \DateTime $created
      *
      * @return ProductInterface
@@ -110,15 +88,11 @@ interface ProductInterface
     public function setCreated($created);
 
     /**
-     * Get createdBy.
-     *
      * @return string
      */
     public function getCreatedBy();
 
     /**
-     * Set createdBy.
-     *
      * @param string $createdBy
      *
      * @return Product
@@ -126,15 +100,11 @@ interface ProductInterface
     public function setCreatedBy($createdBy);
 
     /**
-     * Get defaultCategoryId.
-     *
      * @return int
      */
     public function getDefaultCategoryId();
 
     /**
-     * Set defaultCategoryId.
-     *
      * @param int $defaultCategoryId
      *
      * @return ProductInterface
@@ -151,8 +121,6 @@ interface ProductInterface
     public function addDisabledVariant(VariantInterface $disabledVariant);
 
     /**
-     * Get disabledVariants.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getDisabledVariants();
@@ -167,15 +135,11 @@ interface ProductInterface
     public function removeDisabledVariant(VariantInterface $disabledVariant);
 
     /**
-     * Get disabledVariantIdList.
-     *
      * @return array
      */
     public function getDisabledVariantIdList();
 
     /**
-     * Set disabledVariantIdList.
-     *
      * @param array $disabledVariantIdList
      *
      * @return ProductInterface
@@ -183,8 +147,6 @@ interface ProductInterface
     public function setDisabledVariantIdList($disabledVariantIdList);
 
     /**
-     * Set edbPriserProductNumber.
-     *
      * @param string $edbPriserProductNumber
      *
      * @return ProductInterface
@@ -192,15 +154,11 @@ interface ProductInterface
     public function setEdbPriserProductNumber($edbPriserProductNumber);
 
     /**
-     * Get externalId.
-     *
      * @return int
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param int $externalId
      *
      * @return ProductInterface
@@ -208,15 +166,11 @@ interface ProductInterface
     public function setExternalId($externalId);
 
     /**
-     * Get fileSaleLink.
-     *
      * @return string
      */
     public function getFileSaleLink();
 
     /**
-     * Set fileSaleLink.
-     *
      * @param string $fileSaleLink
      *
      * @return ProductInterface
@@ -224,15 +178,11 @@ interface ProductInterface
     public function setFileSaleLink($fileSaleLink);
 
     /**
-     * Get googleFeedCategory.
-     *
      * @return string
      */
     public function getGoogleFeedCategory();
 
     /**
-     * Set googleFeedCategory.
-     *
      * @param string $googleFeedCategory
      *
      * @return ProductInterface
@@ -240,22 +190,16 @@ interface ProductInterface
     public function setGoogleFeedCategory($googleFeedCategory);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
 
     /**
-     * Get isGiftCertificate.
-     *
      * @return bool
      */
     public function getIsGiftCertificate();
 
     /**
-     * Set isGiftCertificate.
-     *
      * @param bool $isGiftCertificate
      *
      * @return ProductInterface
@@ -263,15 +207,11 @@ interface ProductInterface
     public function setIsGiftCertificate($isGiftCertificate);
 
     /**
-     * Get isModified.
-     *
      * @return bool
      */
     public function getIsModified();
 
     /**
-     * Set isModified.
-     *
      * @param bool $isModified
      *
      * @return ProductInterface
@@ -279,15 +219,11 @@ interface ProductInterface
     public function setIsModified($isModified);
 
     /**
-     * Get isRateVariants.
-     *
      * @return bool
      */
     public function getIsRateVariants();
 
     /**
-     * Set isRateVariants.
-     *
      * @param bool $isRateVariants
      *
      * @return ProductInterface
@@ -295,15 +231,11 @@ interface ProductInterface
     public function setIsRateVariants($isRateVariants);
 
     /**
-     * Get isReviewVariants.
-     *
      * @return bool
      */
     public function getIsReviewVariants();
 
     /**
-     * Set isReviewVariants.
-     *
      * @param bool $isReviewVariants
      *
      * @return ProductInterface
@@ -311,15 +243,11 @@ interface ProductInterface
     public function setIsReviewVariants($isReviewVariants);
 
     /**
-     * Get isVariantMaster.
-     *
      * @return bool
      */
     public function getIsVariantMaster();
 
     /**
-     * Set isVariantMaster.
-     *
      * @param bool $isVariantMaster
      *
      * @return ProductInterface
@@ -327,15 +255,11 @@ interface ProductInterface
     public function setIsVariantMaster($isVariantMaster);
 
     /**
-     * Get locationNumber.
-     *
      * @return string
      */
     public function getLocationNumber();
 
     /**
-     * Set locationNumber.
-     *
      * @param string $locationNumber
      *
      * @return ProductInterface
@@ -352,8 +276,6 @@ interface ProductInterface
     public function addManufacturer(ManufacturerInterface $manufacturer);
 
     /**
-     * Get manufacturers.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getManufacturers();
@@ -368,15 +290,11 @@ interface ProductInterface
     public function removeManufacturer(ManufacturerInterface $manufacturer);
 
     /**
-     * Get manufacturereIdList.
-     *
      * @return array
      */
     public function getManufacturereIdList();
 
     /**
-     * Set manufacturereIdList.
-     *
      * @param array $manufacturereIdList
      *
      * @return ProductInterface
@@ -384,15 +302,11 @@ interface ProductInterface
     public function setManufacturereIdList($manufacturereIdList);
 
     /**
-     * Get maxBuyAmount.
-     *
      * @return int
      */
     public function getMaxBuyAmount();
 
     /**
-     * Set maxBuyAmount.
-     *
      * @param int $maxBuyAmount
      *
      * @return ProductInterface
@@ -409,8 +323,6 @@ interface ProductInterface
     public function addMedia(MediaInterface $media);
 
     /**
-     * Get medias.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias();
@@ -425,15 +337,11 @@ interface ProductInterface
     public function removeMedia(MediaInterface $media);
 
     /**
-     * Get minBuyAmount.
-     *
      * @return int
      */
     public function getMinBuyAmount();
 
     /**
-     * Set minBuyAmount.
-     *
      * @param int $minBuyAmount
      *
      * @return ProductInterface
@@ -441,15 +349,11 @@ interface ProductInterface
     public function setMinBuyAmount($minBuyAmount);
 
     /**
-     * Get minBuyAmountB2B.
-     *
      * @return int
      */
     public function getMinBuyAmountB2B();
 
     /**
-     * Set minBuyAmountB2B.
-     *
      * @param int $minBuyAmountB2B
      *
      * @return ProductInterface
@@ -457,15 +361,11 @@ interface ProductInterface
     public function setMinBuyAmountB2B($minBuyAmountB2B);
 
     /**
-     * Get number.
-     *
      * @return string
      */
     public function getNumber();
 
     /**
-     * Set number.
-     *
      * @param string $number
      *
      * @return ProductInterface
@@ -473,15 +373,11 @@ interface ProductInterface
     public function setNumber($number);
 
     /**
-     * Get picture.
-     *
      * @return string
      */
     public function getPicture();
 
     /**
-     * Set picture.
-     *
      * @param string $picture
      *
      * @return ProductInterface
@@ -498,8 +394,6 @@ interface ProductInterface
     public function addPrice(PriceInterface $price);
 
     /**
-     * Get prices.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getPrices();
@@ -523,8 +417,6 @@ interface ProductInterface
     public function addProductRelation(ProductRelationInterface $productRelation);
 
     /**
-     * Get productRelations.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductRelations();
@@ -539,15 +431,11 @@ interface ProductInterface
     public function removeProductRelation(ProductRelationInterface $productRelation);
 
     /**
-     * Get productType.
-     *
      * @return ProductTypeInterface
      */
     public function getProductType();
 
     /**
-     * Set productType.
-     *
      * @param ProductTypeInterface $productType
      *
      * @return ProductInterface
@@ -555,15 +443,11 @@ interface ProductInterface
     public function setProductType(ProductTypeInterface $productType);
 
     /**
-     * Get salesCount.
-     *
      * @return int
      */
     public function getSalesCount();
 
     /**
-     * Set salesCount.
-     *
      * @param int $salesCount
      *
      * @return ProductInterface
@@ -580,8 +464,6 @@ interface ProductInterface
     public function addSegment(SegmentInterface $segment);
 
     /**
-     * Get segments.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getSegments();
@@ -596,15 +478,11 @@ interface ProductInterface
     public function removeSegment(SegmentInterface $segment);
 
     /**
-     * Get segmentIdList.
-     *
      * @return array
      */
     public function getSegmentIdList();
 
     /**
-     * Set segmentIdList.
-     *
      * @param array $segmentIdList
      *
      * @return ProductInterface
@@ -612,15 +490,11 @@ interface ProductInterface
     public function setSegmentIdList($segmentIdList);
 
     /**
-     * Get sortOrder.
-     *
      * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder.
-     *
      * @param int $sortOrder
      *
      * @return ProductInterface
@@ -628,15 +502,11 @@ interface ProductInterface
     public function setSortOrder($sortOrder);
 
     /**
-     * Get stockCount.
-     *
      * @return int
      */
     public function getStockCount();
 
     /**
-     * Set stockCount.
-     *
      * @param int $stockCount
      *
      * @return ProductInterface
@@ -644,15 +514,11 @@ interface ProductInterface
     public function setStockCount($stockCount);
 
     /**
-     * Get stockLimit.
-     *
      * @return int
      */
     public function getStockLimit();
 
     /**
-     * Set stockLimit.
-     *
      * @param int $stockLimit
      *
      * @return ProductInterface
@@ -660,15 +526,11 @@ interface ProductInterface
     public function setStockLimit($stockLimit);
 
     /**
-     * Get typeId.
-     *
      * @return int
      */
     public function getTypeId();
 
     /**
-     * Set typeId.
-     *
      * @param int $typeId
      *
      * @return ProductInterface
@@ -676,15 +538,11 @@ interface ProductInterface
     public function setTypeId($typeId);
 
     /**
-     * Get updated.
-     *
      * @return \DateTime
      */
     public function getUpdated();
 
     /**
-     * Set updated.
-     *
      * @param \DateTime $updated
      *
      * @return ProductInterface
@@ -692,15 +550,11 @@ interface ProductInterface
     public function setUpdated($updated);
 
     /**
-     * Get updatedBy.
-     *
      * @return string
      */
     public function getUpdatedBy();
 
     /**
-     * Set updatedBy.
-     *
      * @param string $updatedBy
      *
      * @return Product
@@ -717,8 +571,6 @@ interface ProductInterface
     public function addVariant(VariantInterface $variant);
 
     /**
-     * Get variants.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariants();
@@ -742,8 +594,6 @@ interface ProductInterface
     public function addVariantGroup(VariantGroupInterface $variantGroup);
 
     /**
-     * Get variantGroups.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getVariantGroups();
@@ -758,15 +608,11 @@ interface ProductInterface
     public function removeVariantGroup(VariantGroupInterface $variantGroup);
 
     /**
-     * Get variantGroupIdList.
-     *
      * @return array
      */
     public function getVariantGroupIdList();
 
     /**
-     * Set variantGroupIdList.
-     *
      * @param array $variantGroupIdList
      *
      * @return ProductInterface
@@ -774,15 +620,11 @@ interface ProductInterface
     public function setVariantGroupIdList($variantGroupIdList);
 
     /**
-     * Get variantIdList.
-     *
      * @return array
      */
     public function getVariantIdList();
 
     /**
-     * Set variantIdList.
-     *
      * @param array $variantIdList
      *
      * @return ProductInterface
@@ -790,15 +632,11 @@ interface ProductInterface
     public function setVariantIdList($variantIdList);
 
     /**
-     * Get variantMasterId.
-     *
      * @return int
      */
     public function getVariantMasterId();
 
     /**
-     * Set variantMasterId.
-     *
      * @param int $variantMasterId
      *
      * @return ProductInterface
@@ -806,15 +644,11 @@ interface ProductInterface
     public function setVariantMasterId($variantMasterId);
 
     /**
-     * Get vendorNumber.
-     *
      * @return string
      */
     public function getVendorNumber();
 
     /**
-     * Set vendorNumber.
-     *
      * @param string $vendorNumber
      *
      * @return ProductInterface
@@ -822,15 +656,11 @@ interface ProductInterface
     public function setVendorNumber($vendorNumber);
 
     /**
-     * Get weight.
-     *
      * @return int
      */
     public function getWeight();
 
     /**
-     * Set weight.
-     *
      * @param int $weight
      *
      * @return ProductInterface

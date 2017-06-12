@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeInterface
 {
     /**
-     * Get externalId.
-     *
      * @return string
      */
     public function getExternalId();
 
     /**
-     * Set externalId.
-     *
      * @param string $externalId
      *
      * @return ProductTypeInterface
@@ -21,22 +17,16 @@ interface ProductTypeInterface
     public function setExternalId($externalId);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName();
 
     /**
-     * Set name.
-     *
      * @param string $name
      *
      * @return ProductTypeInterface
@@ -53,8 +43,6 @@ interface ProductTypeInterface
     public function addProductTypeField(ProductTypeFieldInterface $productTypeField);
 
     /**
-     * Get productTypeFields.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeFields();
@@ -78,8 +66,6 @@ interface ProductTypeInterface
     public function addProductTypeFormula(ProductTypeFormulaInterface $productTypeFormula);
 
     /**
-     * Get productTypeFormulas.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeFormulas();
@@ -103,8 +89,6 @@ interface ProductTypeInterface
     public function addProductTypeVat(ProductTypeVatInterface $productTypeVat);
 
     /**
-     * Get productTypeVats.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypeVats();

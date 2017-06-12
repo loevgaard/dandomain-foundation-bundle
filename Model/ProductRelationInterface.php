@@ -5,8 +5,6 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductRelationInterface
 {
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
@@ -21,8 +19,6 @@ interface ProductRelationInterface
     public function addProduct(ProductInterface $product);
 
     /**
-     * Get products.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducts();
@@ -37,15 +33,11 @@ interface ProductRelationInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Get productNumber.
-     *
      * @return string
      */
     public function getProductNumber();
 
     /**
-     * Set productNumber.
-     *
      * @param string $productNumber
      *
      * @return ProductRelationInterface
@@ -53,15 +45,11 @@ interface ProductRelationInterface
     public function setProductNumber($productNumber);
 
     /**
-     * Get relatedType.
-     *
      * @return int
      */
     public function getRelatedType();
 
     /**
-     * Set relatedType.
-     *
      * @param int $relatedType
      *
      * @return ProductRelationInterface
@@ -69,15 +57,11 @@ interface ProductRelationInterface
     public function setRelatedType($relatedType);
 
     /**
-     * Get sortOrder.
-     *
      * @return int
      */
     public function getSortOrder();
 
     /**
-     * Set sortOrder.
-     *
      * @param int $sortOrder
      *
      * @return ProductRelationInterface

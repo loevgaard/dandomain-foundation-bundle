@@ -5,15 +5,11 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface ProductTypeVatInterface
 {
     /**
-     * Get country.
-     *
      * @return string
      */
     public function getCountry();
 
     /**
-     * Set country.
-     *
      * @param string $country
      *
      * @return ProductTypeVatInterface
@@ -21,15 +17,11 @@ interface ProductTypeVatInterface
     public function setCountry($country);
 
     /**
-     * Get countryId.
-     *
      * @return string
      */
     public function getCountryId();
 
     /**
-     * Set countryId.
-     *
      * @param string $countryId
      *
      * @return ProductTypeVatInterface
@@ -37,8 +29,6 @@ interface ProductTypeVatInterface
     public function setCountryId($countryId);
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId();
@@ -53,8 +43,6 @@ interface ProductTypeVatInterface
     public function addProductType(ProductTypeInterface $productType);
 
     /**
-     * Get productTypes.
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getProductTypes();
@@ -69,15 +57,11 @@ interface ProductTypeVatInterface
     public function removeProductType(ProductTypeInterface $productType);
 
     /**
-     * Get siteId.
-     *
      * @return int
      */
     public function getSiteId();
 
     /**
-     * Set siteId.
-     *
      * @param int $siteId
      *
      * @return ProductTypeVatInterface
@@ -85,15 +69,11 @@ interface ProductTypeVatInterface
     public function setSiteId($siteId);
 
     /**
-     * Get vatPct.
-     *
      * @return string
      */
     public function getVatPct();
 
     /**
-     * Set vatPct.
-     *
      * @param string $vatPct
      *
      * @return ProductTypeVatInterface

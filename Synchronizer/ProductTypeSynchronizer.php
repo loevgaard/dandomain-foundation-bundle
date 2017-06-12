@@ -32,8 +32,6 @@ class ProductTypeSynchronizer extends Synchronizer
     protected $productTypeVatSynchronizer;
 
     /**
-     * Set ProductTypeFieldSynchronizer.
-     *
      * @param ProductTypeFieldSynchronizer $productTypeFieldSynchronizer
      *
      * @return ProductTypeSynchronizer
@@ -46,8 +44,6 @@ class ProductTypeSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ProductTypeFormulaSynchronizer.
-     *
      * @param ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer
      *
      * @return ProductTypeSynchronizer
@@ -60,8 +56,6 @@ class ProductTypeSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ProductTypeVatSynchronizer.
-     *
      * @param ProductTypeVatSynchronizer $productTypeVatSynchronizer
      *
      * @return ProductTypeSynchronizer

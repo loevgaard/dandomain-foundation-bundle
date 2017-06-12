@@ -30,8 +30,6 @@ class CategorySynchronizer extends Synchronizer
     protected $segmentSynchronizer;
 
     /**
-     * Set segmentSynchronizer.
-     *
      * @param SegmentSynchronizer $segmentSynchronizer
      *
      * @return CategorySynchronizer

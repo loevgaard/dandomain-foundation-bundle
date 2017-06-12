@@ -75,8 +75,6 @@ class ProductSynchronizer extends Synchronizer
     protected $variantGroupSynchronizer;
 
     /**
-     * Set categorySynchronizer.
-     *
      * @param CategorySynchronizer $categorySynchronizer
      *
      * @return ProductSynchronizer
@@ -89,8 +87,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set manufacturerSynchronizer.
-     *
      * @param ManufacturerSynchronizer $manufacturerSynchronizer
      *
      * @return ProductSynchronizer
@@ -103,8 +99,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set mediaSynchronizer.
-     *
      * @param MediaSynchronizer $mediaSynchronizer
      *
      * @return ProductSynchronizer
@@ -117,8 +111,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set periodSynchronizer.
-     *
      * @param PeriodSynchronizer $periodSynchronizer
      *
      * @return ProductSynchronizer
@@ -131,8 +123,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set priceSynchronizer.
-     *
      * @param PriceSynchronizer $priceSynchronizer
      *
      * @return ProductSynchronizer
@@ -145,8 +135,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set productRelationSynchronizer.
-     *
      * @param ProductRelationSynchronizer $productRelationSynchronizer
      *
      * @return ProductSynchronizer
@@ -159,8 +147,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set productTypeSynchronizer.
-     *
      * @param ProductTypeSynchronizer $productTypeSynchronizer
      *
      * @return ProductSynchronizer
@@ -173,8 +159,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set segmentSynchronizer.
-     *
      * @param SegmentSynchronizer $segmentSynchronizer
      *
      * @return ProductSynchronizer
@@ -187,8 +171,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set unitSynchronizer.
-     *
      * @param UnitSynchronizer $unitSynchronizer
      *
      * @return ProductSynchronizer
@@ -201,8 +183,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set variantSynchronizer.
-     *
      * @param VariantSynchronizer $variantSynchronizer
      *
      * @return ProductSynchronizer
@@ -215,8 +195,6 @@ class ProductSynchronizer extends Synchronizer
     }
 
     /**
-     * Set variantGroupSynchronizer.
-     *
      * @param VariantGroupSynchronizer $variantGroupSynchronizer
      *
      * @return ProductSynchronizer

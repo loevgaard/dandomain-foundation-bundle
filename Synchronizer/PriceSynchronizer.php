@@ -22,8 +22,6 @@ class PriceSynchronizer extends Synchronizer
     protected $periodSynchronizer;
 
     /**
-     * Set PeriodSynchronizer.
-     *
      * @param PeriodSynchronizer $periodSynchronizer
      *
      * @return $this

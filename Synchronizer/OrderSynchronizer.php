@@ -57,8 +57,6 @@ class OrderSynchronizer extends Synchronizer
     protected $stateSynchronizer;
 
     /**
-     * Set CustomerSynchronizer.
-     *
      * @param CustomerSynchronizer $customerSynchronizer
      *
      * @return OrderSynchronizer
@@ -71,8 +69,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set DeliverySynchronizer.
-     *
      * @param DeliverySynchronizer $deliverySynchronizer
      *
      * @return OrderSynchronizer
@@ -85,8 +81,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set InvoiceSynchronizer.
-     *
      * @param InvoiceSynchronizer $invoiceSynchronizer
      *
      * @return OrderSynchronizer
@@ -99,8 +93,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set OrderLineSynchronizer.
-     *
      * @param OrderLineSynchronizer $orderLineSynchronizer
      *
      * @return OrderSynchronizer
@@ -113,8 +105,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set PaymentMethodSynchronizer.
-     *
      * @param PaymentMethodSynchronizer $paymentMethodSynchronizer
      *
      * @return OrderSynchronizer
@@ -127,8 +117,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set ShippingMethodSynchronizer.
-     *
      * @param ShippingMethodSynchronizer $shippingMethodSynchronizer
      *
      * @return OrderSynchronizer
@@ -141,8 +129,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set SiteSynchronizer.
-     *
      * @param SiteSynchronizer $siteSynchronizer
      *
      * @return OrderSynchronizer
@@ -155,8 +141,6 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
-     * Set StateSynchronizer.
-     *
      * @param StateSynchronizer $stateSynchronizer
      *
      * @return OrderSynchronizer
