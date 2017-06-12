@@ -48,7 +48,7 @@ abstract class Order implements OrderInterface
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=12, scale=2)
      */
     protected $shippingMethodFee;
 
@@ -100,7 +100,7 @@ abstract class Order implements OrderInterface
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $giftCertificateAmount;
 
@@ -191,21 +191,21 @@ abstract class Order implements OrderInterface
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $salesDiscount;
 
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $totalPrice;
 
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $totalWeight;
 

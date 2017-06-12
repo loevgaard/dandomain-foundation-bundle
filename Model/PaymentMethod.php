@@ -24,7 +24,7 @@ abstract class PaymentMethod implements PaymentMethodInterface
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $fee;
 

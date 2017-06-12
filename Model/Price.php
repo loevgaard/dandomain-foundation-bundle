@@ -63,14 +63,14 @@ abstract class Price implements PriceInterface
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $specialOfferPrice;
 
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $unitPrice;
 

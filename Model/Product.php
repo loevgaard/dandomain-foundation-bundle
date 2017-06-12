@@ -89,7 +89,7 @@ abstract class Product implements ProductInterface, TranslatableInterface
     /**
      * @var float
      *
-     * @ORM\Column(nullable=true, type="decimal")
+     * @ORM\Column(nullable=true, type="decimal", precision=12, scale=2)
      */
     protected $costPrice;
 
