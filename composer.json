@@ -23,6 +23,7 @@
         "knplabs/knp-paginator-bundle": "~2.5"
     },
     "autoload": {
+        "files": ["functions_include.php"],
         "psr-4": {
             "Loevgaard\\DandomainFoundationBundle\\": ""
         }

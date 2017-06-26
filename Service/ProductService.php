@@ -4,6 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
 use GuzzleHttp;
+use function Loevgaard\DandomainFoundationBundle\getDateTime;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -61,13 +62,11 @@ class ProductService extends Service
             $stepInterval = new \DateInterval('PT15M');
 
             if (null !== $start) {
-                $start = new \DateTimeImmutable($start);
-                $start->setTime(0, 0, 0);
+                $start = getDateTime($start, true)->setTime(0, 0, 0);
             } elseif ($settings and array_key_exists('end', $settings) and ($settings['end'] instanceof \DateTimeImmutable)) {
                 $start = $settings['end'];
             } else {
-                $start = new \DateTimeImmutable('2000-01-01');
-                $start->setTime(0, 0, 0);
+                $start = getDateTime('2000-01-01', true)->setTime(0, 0, 0);
             }
 
             /** @var \DateTimeImmutable $startStep */
