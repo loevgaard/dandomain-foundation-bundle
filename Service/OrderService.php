@@ -46,7 +46,7 @@ class OrderService extends Service
     }
 
     /**
-     * Synchronizates orders.
+     * Synchronizes orders
      *
      * @param string $end
      * @param string $start
