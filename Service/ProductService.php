@@ -82,6 +82,14 @@ class ProductService extends Service
             do {
                 $now = new DateTimeImmutable();
                 if ($startStep > $now) {
+                    $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
+                    break;
+                }
+                if($endStep > $now) {
+                    $endStep = $now;
+                }
+                if($startStep > $endStep) {
+                    $output->writeln('Start time is higher than end time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                     break;
                 }
                 if (($end instanceof \DateTimeInterface) and ($end < $endStep)) {

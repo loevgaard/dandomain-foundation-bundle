@@ -87,6 +87,13 @@ class OrderService extends Service
                 $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }
+            if($endStep > $now) {
+                $endStep = $now;
+            }
+            if($startStep > $endStep) {
+                $output->writeln('Start time is higher than end time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
+                break;
+            }
             if (($end instanceof \DateTimeInterface) and ($end < $endStep)) {
                 $output->writeln('End step is higher than the specified end date, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
@@ -99,7 +106,7 @@ class OrderService extends Service
                 $this->orderSynchronizer->syncOrder($order, true);
             }
 
-            file_put_contents($this->settingsFile, serialize(['end' => $endStep, 'start' => $startStep]));
+            file_put_contents($this->settingsFile, serialize(['start' => $startStep, 'end' => $endStep]));
             $startStep = $endStep->add(new \DateInterval('PT1S'));
             $endStep = $startStep->add($stepInterval);
         } while (true);
