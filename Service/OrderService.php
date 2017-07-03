@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
 use GuzzleHttp;
-use function Loevgaard\DandomainFoundationBundle\getDateTime;
+use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -49,45 +49,45 @@ class OrderService extends Service
     /**
      * Synchronizes orders
      *
-     * @param string $end
-     * @param string $start
+     * @param string $end Format must be Y-m-d
+     * @param string $start Format must be Y-m-d
      */
-    public function orderSync($end = null, $start = null)
+    public function orderSync($start = null, $end = null)
     {
         $output = $this->getOutput();
         $settings = unserialize(@file_get_contents($this->settingsFile));
         $stepInterval = new \DateInterval('PT15M');
 
         if (null !== $start) {
-            $start = getDateTime($start, true)->setTime(0, 0, 0);
+            $start = DateTimeImmutable::createFromFormat('Y-m-d', $start)->setTime(0, 0, 0);
         } elseif (($settings) and array_key_exists('end', $settings)) {
             $start = $settings['end'];
         } else {
-            $start = getDateTime('2000-01-01', true)->setTime(0, 0, 0);
+            $start = DateTimeImmutable::createFromFormat('Y-m-d', '2000-01-01')->setTime(0, 0, 0);
         }
 
-        $output->writeln('Date from: '.$start->format('Y-m-d H:i:s'));
+        $output->writeln('Date from: '.$start->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
-        /** @var \DateTimeImmutable $startStep */
+        /** @var DateTimeImmutable $startStep */
         $startStep = clone $start;
 
         if (null !== $end) {
-            $end = new \DateTimeImmutable($end);
-            $output->writeln('Date to: '.$end->format('Y-m-d H:i:s'));
+            $end = DateTimeImmutable::createFromFormat('Y-m-d', $end);
+            $output->writeln('Date to: '.$end->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
         }
 
-        /** @var \DateTimeImmutable $endStep */
+        /** @var DateTimeImmutable $endStep */
         $endStep = $startStep->add($stepInterval);
 
         do {
             $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
-            $now = getDateTime('now', true);
+            $now = new DateTimeImmutable();
             if ($startStep > $now) {
                 $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }
-            if (($end instanceof \DateTimeImmutable) and ($end < $endStep)) {
+            if (($end instanceof \DateTimeInterface) and ($end < $endStep)) {
                 $output->writeln('End step is higher than the specified end date, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }

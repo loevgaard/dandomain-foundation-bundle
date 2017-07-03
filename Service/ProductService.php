@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Service;
 
 use Dandomain\Api\Api;
 use GuzzleHttp;
-use function Loevgaard\DandomainFoundationBundle\getDateTime;
+use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -62,29 +62,29 @@ class ProductService extends Service
             $stepInterval = new \DateInterval('PT15M');
 
             if (null !== $start) {
-                $start = getDateTime($start, true)->setTime(0, 0, 0);
+                $start = DateTimeImmutable::createFromFormat('Y-m-d', $start)->setTime(0, 0, 0);
             } elseif ($settings and array_key_exists('end', $settings) and ($settings['end'] instanceof \DateTimeImmutable)) {
                 $start = $settings['end'];
             } else {
-                $start = getDateTime('2000-01-01', true)->setTime(0, 0, 0);
+                $start = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
             }
 
-            /** @var \DateTimeImmutable $startStep */
+            /** @var DateTimeImmutable $startStep */
             $startStep = clone $start;
 
             if (null !== $end) {
-                $end = new \DateTimeImmutable($end);
+                $end = DateTimeImmutable::createFromFormat('Y-m-d', $end);
             }
 
-            /** @var \DateTimeImmutable $endStep */
+            /** @var DateTimeImmutable $endStep */
             $endStep = $startStep->add($stepInterval);
 
             do {
-                $now = new \DateTimeImmutable('NOW');
+                $now = new DateTimeImmutable();
                 if ($startStep > $now) {
                     break;
                 }
-                if (($end instanceof \DateTimeImmutable) and ($end < $endStep)) {
+                if (($end instanceof \DateTimeInterface) and ($end < $endStep)) {
                     break;
                 }
 
