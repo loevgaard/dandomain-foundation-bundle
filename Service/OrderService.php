@@ -80,8 +80,6 @@ class OrderService extends Service
         $endStep = $startStep->add($stepInterval);
 
         do {
-            $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
-
             $now = new DateTimeImmutable();
             if ($startStep > $now) {
                 $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
@@ -98,6 +96,8 @@ class OrderService extends Service
                 $output->writeln('End step is higher than the specified end date, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }
+
+            $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
 
             $orders = GuzzleHttp\json_decode((string)$this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody());
 
