@@ -21,7 +21,7 @@ class DateTimeImmutable extends \DateTimeImmutable {
         return $this->setTimezone(static::defaultTimeZone());
     }
 
-    public static function createFromFormat($format, $time, DateTimeZone $timezone = null)
+    public static function createFromFormat($format, $time, $timezone = null)
     {
         if($timezone !== null) {
             throw new \InvalidArgumentException('Do not pass time zone as an argument');
