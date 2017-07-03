@@ -66,28 +66,33 @@ class OrderService extends Service
             $start = getDateTime('2000-01-01', true)->setTime(0, 0, 0);
         }
 
+        $output->writeln('Date from: '.$start->format('Y-m-d H:i:s'));
+
         /** @var \DateTimeImmutable $startStep */
         $startStep = clone $start;
 
         if (null !== $end) {
             $end = new \DateTimeImmutable($end);
+            $output->writeln('Date to: '.$end->format('Y-m-d H:i:s'));
         }
 
         /** @var \DateTimeImmutable $endStep */
         $endStep = $startStep->add($stepInterval);
 
         do {
-            $now = new \DateTimeImmutable('NOW');
+            $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
+
+            $now = getDateTime('now', true);
             if ($startStep > $now) {
+                $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }
             if (($end instanceof \DateTimeImmutable) and ($end < $endStep)) {
+                $output->writeln('End step is higher than the specified end date, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
                 break;
             }
 
-            $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
-
-            $orders = GuzzleHttp\json_decode($this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody()->getContents());
+            $orders = GuzzleHttp\json_decode((string)$this->api->order->getOrdersInModifiedInterval($startStep, $endStep)->getBody());
 
             foreach ($orders as $order) {
                 $output->writeln('Order: '.$order->id, OutputInterface::VERBOSITY_VERBOSE);
