@@ -21,6 +21,9 @@ class DateTimeImmutable extends \DateTimeImmutable {
         return $this->setTimezone(static::defaultTimeZone());
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function createFromFormat($format, $time, $timezone = null)
     {
         if($timezone !== null) {
@@ -30,7 +33,10 @@ class DateTimeImmutable extends \DateTimeImmutable {
         return parent::createFromFormat($format, $time, static::defaultTimeZone());
     }
 
-    public static function createFromMutable(\DateTime $dateTime)
+    /**
+     * @inheritdoc
+     */
+    public static function createFromMutable($dateTime)
     {
         return parent::createFromMutable($dateTime)->setTimezone(static::defaultTimeZone());
     }

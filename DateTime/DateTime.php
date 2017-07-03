@@ -21,6 +21,9 @@ class DateTime extends \DateTime {
         $this->setTimezone(static::defaultTimeZone());
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function createFromFormat($format, $time, $timezone = null)
     {
         if($timezone !== null) {
