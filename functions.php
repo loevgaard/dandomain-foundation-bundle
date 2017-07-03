@@ -1,7 +1,6 @@
 <?php
 namespace Loevgaard\DandomainFoundationBundle;
 
-use Loevgaard\DandomainFoundationBundle\DateTime\DateTime;
 use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 
 /**
@@ -9,9 +8,9 @@ use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
  *
  * @param string $date
  * @param bool $immutable
- * @return DateTime|DateTimeImmutable
+ * @return DateTimeImmutable
  */
-function jsonDateToDate($date, $immutable = false) {
+function jsonDateToDate($date) {
     preg_match('/([0-9]+)\+/', $date, $matches);
     if(!isset($matches[1])) {
         throw new \InvalidArgumentException('$date is not a valid JSON date. Input: ' . $date);
@@ -20,11 +19,5 @@ function jsonDateToDate($date, $immutable = false) {
     $timestamp = substr($matches[1], 0, -3);
 
     // timestamps will always be given in the UTC time zone
-    $dateTime = new DateTime('@' . $timestamp);
-
-    if($immutable) {
-        return DateTimeImmutable::createFromMutable($dateTime);
-    }
-
-    return $dateTime;
+    return DateTimeImmutable::createFromTimestamp('@' . $timestamp);
 }

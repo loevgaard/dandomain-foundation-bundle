@@ -13,16 +13,31 @@ class DateTimeImmutable extends \DateTimeImmutable {
             throw new \InvalidArgumentException('Do not pass time zone as an argument');
         }
 
-        parent::__construct($time);
+        if(strpos($time, '@') !== false) {
+            throw new \InvalidArgumentException('Use DateTimeImmutable::createFromTimestamp instead');
+        }
 
-        // we use setTimezone instead of injecting the timezone in the constructor
-        // because the $time can be a timestamp and if it is, the timezone
-        // has to be set after the object is instantiated
-        return $this->setTimezone(static::defaultTimeZone());
+        parent::__construct($time, static::defaultTimeZone());
     }
 
     /**
-     * @inheritdoc
+     * @param \DateTimeInterface $dt
+     *
+     * @return static
+     */
+    public static function instance(\DateTimeInterface $dt)
+    {
+        if ($dt instanceof static) {
+            return clone $dt;
+        }
+        return new static($dt->format('Y-m-d H:i:s.u'));
+    }
+
+    /**
+     * @param string $format
+     * @param string $time
+     * @param null $timezone
+     * @return DateTimeImmutable
      */
     public static function createFromFormat($format, $time, $timezone = null)
     {
@@ -30,15 +45,29 @@ class DateTimeImmutable extends \DateTimeImmutable {
             throw new \InvalidArgumentException('Do not pass time zone as an argument');
         }
 
-        return parent::createFromFormat($format, $time, static::defaultTimeZone());
+        $dt = parent::createFromFormat($format, $time, static::defaultTimeZone());
+        return static::instance($dt);
     }
 
     /**
-     * @inheritdoc
+     * @param \DateTime $dateTime
+     * @return DateTimeImmutable
      */
     public static function createFromMutable($dateTime)
     {
-        return parent::createFromMutable($dateTime)->setTimezone(static::defaultTimeZone());
+        $dt = parent::createFromMutable($dateTime);
+        return static::instance($dt);
+    }
+
+    /**
+     * @param $timestamp
+     * @return \DateTimeImmutable
+     */
+    public static function createFromTimestamp($timestamp)
+    {
+        $dateTime = new \DateTime('@'.$timestamp);
+        $dateTime->setTimezone(static::defaultTimeZone());
+        return static::instance($dateTime);
     }
 
     /**
@@ -47,6 +76,6 @@ class DateTimeImmutable extends \DateTimeImmutable {
      * @return DateTimeZone
      */
     public static function defaultTimeZone() {
-        return DateTime::defaultTimeZone();
+        return new \DateTimeZone('Europe/Copenhagen');
     }
 }
