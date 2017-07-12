@@ -41,6 +41,7 @@ class LoevgaardDandomainFoundationExtension extends Extension
         $container->setParameter('loevgaard_dandomain_foundation.unit_class', $config['unit_class']);
         $container->setParameter('loevgaard_dandomain_foundation.variant_class', $config['variant_class']);
         $container->setParameter('loevgaard_dandomain_foundation.variant_group_class', $config['variant_group_class']);
+        $container->setParameter('loevgaard_dandomain_foundation.tag_class', $config['tag_class']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

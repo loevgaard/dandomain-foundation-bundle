@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('unit_class')->end()
                 ->scalarNode('variant_class')->end()
                 ->scalarNode('variant_group_class')->end()
+                ->scalarNode('tag_class')->end()
             ->end()
         ;
 

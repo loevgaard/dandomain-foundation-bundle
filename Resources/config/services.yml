@@ -31,6 +31,8 @@ parameters:
     loevgaard_dandomain_foundation.unit_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\UnitSynchronizer"
     loevgaard_dandomain_foundation.variant_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\VariantSynchronizer"
     loevgaard_dandomain_foundation.variant_group_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\VariantGroupSynchronizer"
+    loevgaard_dandomain_foundation.tag_service_class: "Loevgaard\\DandomainFoundationBundle\\Service\\TagService"
+    loevgaard_dandomain_foundation.tag_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\TagSynchronizer"
 
 services:
     loevgaard_dandomain_foundation.category_service:
@@ -272,3 +274,16 @@ services:
             - "%loevgaard_dandomain_foundation.variant_group_class%"
         calls:
             - [setVariantSynchronizer, ["@loevgaard_dandomain_foundation.variant_synchronizer"]]
+
+    loevgaard_dandomain_foundation.tag_service:
+        class: "%loevgaard_dandomain_foundation.tag_service_class%"
+        arguments:
+            - "@dandomain.api"
+            - "@loevgaard_dandomain_foundation.tag_synchronizer"
+
+    loevgaard_dandomain_foundation.tag_synchronizer:
+        class: "%loevgaard_dandomain_foundation.tag_synchronizer_class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.tag_class%"

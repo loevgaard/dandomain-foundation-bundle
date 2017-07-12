@@ -335,7 +335,7 @@ class ProductSynchronizer extends Synchronizer
             }
         }
 
-        if (($entity instanceof TranslatableInterface) && (is_array($product->siteSettings))) {
+        if (($entity instanceof TranslatableInterface) && is_array($product->siteSettings)) {
             foreach ($product->siteSettings as $siteSettingTmp) {
                 if ($siteSettingTmp->expectedDeliveryTime) {
                     try {
