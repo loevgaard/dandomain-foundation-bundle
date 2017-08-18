@@ -15,18 +15,18 @@ class State implements StateInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var bool
      *
      * @ORM\Column(nullable=true, type="boolean")
      */
     protected $exclStatistics;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var bool

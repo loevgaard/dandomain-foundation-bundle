@@ -18,6 +18,13 @@ abstract class Category implements CategoryInterface, TranslatableInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $childrenCategories;
@@ -78,13 +85,6 @@ abstract class Category implements CategoryInterface, TranslatableInterface
      * @ORM\Column(nullable=true, type="datetime")
      */
     protected $editedDate;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var int

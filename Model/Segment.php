@@ -16,6 +16,13 @@ abstract class Segment implements SegmentInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $categories;
@@ -24,13 +31,6 @@ abstract class Segment implements SegmentInterface
      * @var ArrayCollection
      */
     protected $products;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $externalId;
 
     /**
      * @var array

@@ -15,16 +15,16 @@ abstract class OrderLine implements OrderLineInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var Order
      */
     protected $order;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var string

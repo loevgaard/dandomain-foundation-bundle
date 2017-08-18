@@ -16,16 +16,16 @@ abstract class ProductTypeField implements ProductTypeFieldInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $productTypes;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $externalId;
 
     /**
      * @var string

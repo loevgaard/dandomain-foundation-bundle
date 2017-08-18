@@ -16,6 +16,13 @@ abstract class VariantGroup implements VariantGroupInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $products;
@@ -24,13 +31,6 @@ abstract class VariantGroup implements VariantGroupInterface
      * @var ArrayCollection
      */
     protected $variants;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var string

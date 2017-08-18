@@ -17,7 +17,7 @@ abstract class Unit implements UnitInterface
     /**
      * @var int
      *
-     * @ORM\Column(nullable=true, type="integer")
+     * @ORM\Column(type="integer", unique=true)
      */
     protected $externalId;
 

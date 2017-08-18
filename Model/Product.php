@@ -16,6 +16,13 @@ abstract class Product implements ProductInterface, TranslatableInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $categories;
@@ -127,13 +134,6 @@ abstract class Product implements ProductInterface, TranslatableInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $edbPriserProductNumber;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var string

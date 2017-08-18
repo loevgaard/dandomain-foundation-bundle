@@ -17,6 +17,13 @@ abstract class Site implements SiteInterface
     /**
      * @var int
      *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(nullable=true, type="integer")
      */
     protected $countryId;
@@ -27,13 +34,6 @@ abstract class Site implements SiteInterface
      * @ORM\Column(nullable=true, type="string")
      */
     protected $currencyCode;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var string

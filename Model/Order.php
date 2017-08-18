@@ -16,6 +16,13 @@ abstract class Order implements OrderInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var Customer
      */
     protected $customer;
@@ -89,13 +96,6 @@ abstract class Order implements OrderInterface
      * @ORM\Column(nullable=true, type="text")
      */
     protected $customerComment;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var float

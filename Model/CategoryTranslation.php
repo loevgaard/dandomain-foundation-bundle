@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class CategoryTranslation implements CategoryTranslationInterface
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")
@@ -22,13 +29,6 @@ abstract class CategoryTranslation implements CategoryTranslationInterface
      * @ORM\Column(nullable=true, type="text")
      */
     protected $description;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="integer")
-     */
-    protected $externalId;
 
     /**
      * @var bool

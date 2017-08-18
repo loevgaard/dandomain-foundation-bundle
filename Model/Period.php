@@ -15,6 +15,13 @@ abstract class Period implements PeriodInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var bool
      *
      * @ORM\Column(nullable=true, type="boolean")
@@ -27,13 +34,6 @@ abstract class Period implements PeriodInterface
      * @ORM\Column(nullable=true, type="datetime")
      */
     protected $endDate;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $externalId;
 
     /**
      * @var \DateTime

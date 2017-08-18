@@ -16,6 +16,13 @@ abstract class ProductType implements ProductTypeInterface
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var ArrayCollection
      */
     protected $productTypeFields;
@@ -29,13 +36,6 @@ abstract class ProductType implements ProductTypeInterface
      * @var ArrayCollection
      */
     protected $productTypeVats;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(nullable=true, type="string")
-     */
-    protected $externalId;
 
     /**
      * @var string
