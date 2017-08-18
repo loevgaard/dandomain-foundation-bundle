@@ -3,33 +3,13 @@ namespace Loevgaard\DandomainFoundationBundle\Manager;
 
 use Loevgaard\DandomainFoundationBundle\Model\PaymentMethodInterface;
 
+/**
+ * @method PaymentMethodInterface create()
+ * @method delete(PaymentMethodInterface $obj)
+ * @method update(PaymentMethodInterface $obj, $flush = true)
+ */
 class PaymentMethodManager extends Manager
 {
-    /**
-     * @return PaymentMethodInterface
-     */
-    public function create()
-    {
-        return parent::_create();
-    }
-
-    /**
-     * @param PaymentMethodInterface $obj
-     */
-    public function delete(PaymentMethodInterface $obj)
-    {
-        parent::_delete($obj);
-    }
-
-    /**
-     * @param PaymentMethodInterface $obj The entity
-     * @param bool $flush
-     */
-    public function update(PaymentMethodInterface $obj, $flush = true)
-    {
-        parent::_update($obj, $flush);
-    }
-
     /**
      * @param int $externalId
      * @param bool $fetch If true, we will try to fetch the payment method from Dandomain

@@ -3,30 +3,11 @@ namespace Loevgaard\DandomainFoundationBundle\Manager;
 
 use Loevgaard\DandomainFoundationBundle\Model\CustomerInterface;
 
+/**
+ * @method CustomerInterface create()
+ * @method delete(CustomerInterface $obj)
+ * @method update(CustomerInterface $obj, $flush = true)
+ */
 class CustomerManager extends Manager
 {
-    /**
-     * @return CustomerInterface
-     */
-    public function create()
-    {
-        return parent::_create();
-    }
-
-    /**
-     * @param CustomerInterface $obj
-     */
-    public function delete(CustomerInterface $obj)
-    {
-        parent::_delete($obj);
-    }
-
-    /**
-     * @param CustomerInterface $obj The entity
-     * @param bool $flush
-     */
-    public function update(CustomerInterface $obj, $flush = true)
-    {
-        parent::_update($obj, $flush);
-    }
 }

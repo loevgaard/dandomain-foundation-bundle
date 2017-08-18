@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Manager;
 use Loevgaard\DandomainFoundationBundle\Model\SiteInterface;
 
 /**
- * @method create()
+ * @method SiteInterface create()
  * @method delete(SiteInterface $obj)
  * @method update(SiteInterface $obj, $flush = true)
  */
