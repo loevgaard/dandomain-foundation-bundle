@@ -287,6 +287,16 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.tag_class%"
+    loevgaard_dandomain_foundation.customer_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\CustomerManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.customer_class%"
+    loevgaard_dandomain_foundation.delivery_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\DeliveryManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.delivery_class%"
     loevgaard_dandomain_foundation.order_manager:
         class: Loevgaard\DandomainFoundationBundle\Manager\OrderManager
         arguments:
