@@ -302,11 +302,21 @@ services:
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.order_class%"
+    loevgaard_dandomain_foundation.payment_method_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\PaymentMethodManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.payment_method_class%"
     loevgaard_dandomain_foundation.order_line_manager:
         class: Loevgaard\DandomainFoundationBundle\Manager\OrderLineManager
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.order_class%"
+    loevgaard_dandomain_foundation.shipping_method_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\ShippingMethodManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.shipping_method_class%"
     loevgaard_dandomain_foundation.site_manager:
         class: Loevgaard\DandomainFoundationBundle\Manager\SiteManager
         arguments:

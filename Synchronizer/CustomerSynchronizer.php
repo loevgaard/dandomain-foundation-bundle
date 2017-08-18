@@ -38,6 +38,7 @@ class CustomerSynchronizer extends Synchronizer
             $entity = new $this->entityClassName();
         }
 
+        // @todo some fields are missing here
         $entity
             ->setExternalId($customer->id ? : null)
             ->setAddress($customer->address ? : null)
