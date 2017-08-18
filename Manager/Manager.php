@@ -5,7 +5,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
-abstract class Manager implements ManagerInterface
+abstract class Manager
 {
     /**
      * @var ObjectManager
@@ -33,7 +33,7 @@ abstract class Manager implements ManagerInterface
 
     /**
      * @param string $class
-     * @return ManagerInterface
+     * @return Manager
      */
     public function setClass($class) {
         if (false !== strpos($this->class, ':')) {
@@ -57,7 +57,7 @@ abstract class Manager implements ManagerInterface
      *
      * @return mixed
      */
-    public function create()
+    protected function _create()
     {
         $class = $this->getClass();
         $obj = new $class();
@@ -67,7 +67,7 @@ abstract class Manager implements ManagerInterface
     /**
      * @param mixed $obj The entity
      */
-    public function delete($obj)
+    protected function _delete($obj)
     {
         $this->objectManager->remove($obj);
         $this->objectManager->flush();
@@ -79,7 +79,7 @@ abstract class Manager implements ManagerInterface
      * @param mixed $obj The entity
      * @param bool $flush
      */
-    public function update($obj, $flush = true)
+    protected function _update($obj, $flush = true)
     {
         $this->objectManager->persist($obj);
 

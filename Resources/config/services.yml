@@ -287,8 +287,13 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.tag_class%"
-    loevgaard_dandomain_altapay.order_manager:
+    loevgaard_dandomain_foundation.order_manager:
         class: Loevgaard\DandomainFoundationBundle\Manager\OrderManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.order_class%"
+    loevgaard_dandomain_foundation.order_line_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\OrderLineManager
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.order_class%"
