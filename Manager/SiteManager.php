@@ -29,4 +29,22 @@ class SiteManager extends Manager
     {
         parent::_update($obj, $flush);
     }
+
+    /**
+     * @param $externalId
+     * @param bool $fetch If true, we will try to fetch the site from Dandomain
+     * @return SiteInterface|null
+     */
+    public function findByExternalId($externalId, $fetch = true) {
+        /** @var SiteInterface $site */
+        $site = $this->getRepository()->findOneBy([
+            'externalId' => $externalId
+        ]);
+
+        if(!$site && $fetch) {
+            // @todo fetch sites from Dandomain
+        }
+
+        return $site;
+    }
 }
