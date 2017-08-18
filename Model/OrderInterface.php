@@ -436,4 +436,14 @@ interface OrderInterface
      * @return OrderInterface
      */
     public function setXmlParams($xmlParams);
+
+    /**
+     * @return float
+     */
+    public function getPaymentMethodFee();
+    /**
+     * @param float $paymentMethodFee
+     * @return Order
+     */
+    public function setPaymentMethodFee($paymentMethodFee);
 }

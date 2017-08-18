@@ -48,6 +48,13 @@ abstract class Order implements OrderInterface
     protected $paymentMethod;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(type="decimal", precision=12, scale=2)
+     */
+    protected $paymentMethodFee;
+
+    /**
      * @var ShippingMethod
      */
     protected $shippingMethod;
@@ -893,6 +900,23 @@ abstract class Order implements OrderInterface
     {
         $this->xmlParams = $xmlParams;
 
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPaymentMethodFee()
+    {
+        return $this->paymentMethodFee;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPaymentMethodFee($paymentMethodFee)
+    {
+        $this->paymentMethodFee = $paymentMethodFee;
         return $this;
     }
 }
