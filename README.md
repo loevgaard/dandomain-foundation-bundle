@@ -1112,6 +1112,7 @@ class VariantGroup extends BaseVariantGroup
 ```yaml
 loevgaard_dandomain_foundation:
     category_class: AppBundle\Entity\Category
+    category_translation_class: AppBundle\Entity\CategoryTranslation
     customer_class: AppBundle\Entity\Customer
     default_site_id: "%default_site_id%"
     delivery_class: AppBundle\Entity\Delivery
@@ -1134,6 +1135,7 @@ loevgaard_dandomain_foundation:
     shipping_method_class: AppBundle\Entity\ShippingMethod
     site_class: AppBundle\Entity\Site
     state_class: AppBundle\Entity\State
+    tag_class: AppBundle\Entity\Tag
     unit_class: AppBundle\Entity\Unit
     variant_class: AppBundle\Entity\Variant
     variant_group_class: AppBundle\Entity\VariantGroup
