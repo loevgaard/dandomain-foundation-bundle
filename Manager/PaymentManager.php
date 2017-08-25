@@ -1,6 +1,7 @@
 <?php
 namespace Loevgaard\DandomainFoundationBundle\Manager;
 
+use Loevgaard\Dandomain\Pay\PaymentRequest;
 use Loevgaard\DandomainFoundationBundle\Model\Payment;
 
 /**
@@ -10,4 +11,14 @@ use Loevgaard\DandomainFoundationBundle\Model\Payment;
  */
 class PaymentManager extends Manager
 {
+    /**
+     * @param PaymentRequest $paymentRequest
+     * @return Payment
+     */
+    public function createPaymentFromDandomainPaymentRequest(PaymentRequest $paymentRequest)
+    {
+        $payment = Payment::createFromPaymentRequest($paymentRequest);
+
+        return $payment;
+    }
 }
