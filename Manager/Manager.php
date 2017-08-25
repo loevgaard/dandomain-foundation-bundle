@@ -92,7 +92,7 @@ abstract class Manager
     {
         if(!method_exists($this, $name) && in_array($name, ['create', 'update', 'delete'])) {
             $name = '_'.$name;
-            call_user_func_array([$this, $name], $arguments);
+            return call_user_func_array([$this, $name], $arguments);
         }
     }
 }
