@@ -523,6 +523,7 @@ abstract class Order implements OrderInterface
     {
         if (!($this->orderLines->contains($orderLine))) {
             $this->orderLines[] = $orderLine;
+            $orderLine->setOrder($this);
         }
 
         return $this;
@@ -542,6 +543,7 @@ abstract class Order implements OrderInterface
     public function removeOrderLine(OrderLineInterface $orderLine)
     {
         $this->orderLines->removeElement($orderLine);
+        $orderLine->setOrder(null);
     }
 
     /**
