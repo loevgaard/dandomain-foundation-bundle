@@ -1,5 +1,10 @@
 # Dandomain Foundation Bundle
 
+1. Follow the instructions to install [Dandomain API Bundle](https://github.com/loevgaard/dandomain-api-bundle)
+2. Register bundle with the AppKernel
+3. Create Entity classes
+4. Go crazy!
+
 ```php
 <?php
 

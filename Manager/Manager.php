@@ -19,7 +19,7 @@ abstract class Manager
 
     public function __construct(ManagerRegistry $registry, $class)
     {
-        $this->class = $this->setClass($class);
+        $this->setClass($class);
         $this->objectManager = $registry->getManagerForClass($this->class);
     }
 
