@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Loevgaard\Dandomain\Pay\PaymentRequest;
 
@@ -282,4 +283,11 @@ abstract class Payment extends PaymentRequest
      * @ORM\Column(type="string")
      */
     protected $loadBalancerRealIp;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->paymentLines = new ArrayCollection();
+    }
 }

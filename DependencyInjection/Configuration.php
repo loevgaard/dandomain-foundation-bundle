@@ -24,6 +24,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('media_class')->end()
                 ->scalarNode('order_class')->end()
                 ->scalarNode('order_line_class')->end()
+                ->scalarNode('payment_class')->end()
+                ->scalarNode('payment_line_class')->end()
                 ->scalarNode('payment_method_class')->end()
                 ->scalarNode('period_class')->end()
                 ->scalarNode('price_class')->end()
