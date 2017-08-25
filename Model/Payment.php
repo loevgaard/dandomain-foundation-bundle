@@ -20,6 +20,13 @@ use Loevgaard\Dandomain\Pay\PaymentRequest;
 abstract class Payment extends PaymentRequest
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $apiKey;
@@ -322,5 +329,23 @@ abstract class Payment extends PaymentRequest
         }
 
         return $payment;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Payment
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 }
