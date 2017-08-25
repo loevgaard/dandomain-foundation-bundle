@@ -220,6 +220,8 @@ abstract class Product implements ProductInterface, TranslatableInterface
     protected $minBuyAmountB2B;
 
     /**
+     * The product number
+     *
      * @var string
      *
      * @ORM\Column(nullable=true, type="string")

@@ -322,3 +322,8 @@ services:
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.site_class%"
+    loevgaard_dandomain_foundation.product_manager:
+        class: Loevgaard\DandomainFoundationBundle\Manager\ProductManager
+        arguments:
+            - "@doctrine"
+            - "%loevgaard_dandomain_foundation.product_class%"
