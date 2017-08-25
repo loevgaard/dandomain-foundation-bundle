@@ -9,8 +9,9 @@ class AppKernel
     {
         $bundles = array(
             //...
-            new Loevgaard\DandomainFoundationBundle\LoevgaardDandomainFoundationBundle(),
+            new Dandomain\ApiBundle\DandomainApiBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new Loevgaard\DandomainFoundationBundle\LoevgaardDandomainFoundationBundle(),
             //...
         );
 
