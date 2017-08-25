@@ -17,13 +17,9 @@ abstract class Customer implements CustomerInterface
     protected $id;
 
     /**
-     * @todo We added nullable=true because this bundle is also used together with the Dandomain Payment API
-     * and the customer id is not sent in the POST request from the Payment API, which means we need to be able to
-     * create a customer without an id
-     *
      * @var int
      *
-     * @ORM\Column(type="integer", unique=true, nullable=true)
+     * @ORM\Column(type="integer", unique=true)
      */
     protected $externalId;
 
