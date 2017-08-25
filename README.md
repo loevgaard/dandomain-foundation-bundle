@@ -38,7 +38,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Category as BaseCategory;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="categories")
  */
 class Category extends BaseCategory
 {
@@ -78,7 +78,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Customer as BaseCustomer;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="customers")
  */
 class Customer extends BaseCustomer
 {
@@ -103,7 +103,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Delivery as BaseDelivery;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="deliveries")
  */
 class Delivery extends BaseDelivery
 {
@@ -128,7 +128,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Invoice as BaseInvoice;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="invoices")
  */
 class Invoice extends BaseInvoice
 {
@@ -154,7 +154,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Manufacturer as BaseManufacturer;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="manufacturers")
  */
 class Manufacturer extends BaseManufacturer
 {
@@ -195,7 +195,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Media as BaseMedia;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="media")
  */
 class Media extends BaseMedia
 {
@@ -236,7 +236,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Order as BaseOrder;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="orders")
  */
 class Order extends BaseOrder
 {
@@ -253,7 +253,7 @@ class Order extends BaseOrder
      * @var Customer
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Customer")
+     * @ORM\ManyToOne(targetEntity="Customer", cascade={"persist", "remove"})
      */
     protected $customer;
 
@@ -261,7 +261,7 @@ class Order extends BaseOrder
      * @var Delivery
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Delivery")
+     * @ORM\ManyToOne(targetEntity="Delivery", cascade={"persist", "remove"})
      */
     protected $delivery;
 
@@ -269,14 +269,14 @@ class Order extends BaseOrder
      * @var Invoice
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Invoice")
+     * @ORM\ManyToOne(targetEntity="Invoice", cascade={"persist", "remove"})
      */
     protected $invoice;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(mappedBy="order", targetEntity="OrderLine")
+     * @ORM\OneToMany(mappedBy="order", targetEntity="OrderLine", cascade={"persist", "remove"})
      */
     protected $orderLines;
 
@@ -284,7 +284,7 @@ class Order extends BaseOrder
      * @var PaymentMethod
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="PaymentMethod")
+     * @ORM\ManyToOne(targetEntity="PaymentMethod", cascade={"persist", "remove"})
      */
     protected $paymentMethod;
 
@@ -292,7 +292,7 @@ class Order extends BaseOrder
      * @var ShippingMethod
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="ShippingMethod")
+     * @ORM\ManyToOne(targetEntity="ShippingMethod", cascade={"persist", "remove"})
      */
     protected $shippingMethod;
 
@@ -300,7 +300,7 @@ class Order extends BaseOrder
      * @var Site
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="Site")
+     * @ORM\ManyToOne(targetEntity="Site", cascade={"persist", "remove"})
      */
     protected $site;
 
@@ -308,7 +308,7 @@ class Order extends BaseOrder
      * @var State
      *
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="State")
+     * @ORM\ManyToOne(targetEntity="State", cascade={"persist", "remove"})
      */
     protected $state;
 
@@ -332,7 +332,7 @@ use Loevgaard\DandomainFoundationBundle\Model\OrderLine as BaseOrderLine;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="order_lines")
  */
 class OrderLine extends BaseOrderLine
 {
@@ -373,7 +373,7 @@ use Loevgaard\DandomainFoundationBundle\Model\PaymentMethod as BasePaymentMethod
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="payment_methods")
  */
 class PaymentMethod extends BasePaymentMethod
 {
@@ -398,7 +398,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Period as BasePeriod;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="periods")
  */
 class Period extends BasePeriod
 {
@@ -424,7 +424,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Price as BasePrice;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="prices")
  */
 class Price extends BasePrice
 {
@@ -474,7 +474,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Product as BaseProduct;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="products")
  */
 class Product extends BaseProduct
 {
@@ -600,7 +600,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductRelation as BaseProductRela
  * ProductRelation.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_relations")
  */
 class ProductRelation extends BaseProductRelation
 {
@@ -641,7 +641,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductTranslation as BaseProductT
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_translations")
  */
 class ProductTranslation extends BaseProductTranslation
 {
@@ -694,7 +694,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductType as BaseProductType;
  * ProductType.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_types")
  */
 class ProductType extends BaseProductType
 {
@@ -754,7 +754,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductTypeField as BaseProductTyp
  * ProductTypeField.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_type_fields")
  */
 class ProductTypeField extends BaseProductTypeField
 {
@@ -797,7 +797,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductTypeFormula as BaseProductT
  * ProductTypeFormula.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_type_formulas")
  */
 class ProductTypeFormula extends BaseProductTypeFormula
 {
@@ -840,7 +840,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ProductTypeVat as BaseProductTypeV
  * ProductTypeVat.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="product_type_vats")
  */
 class ProductTypeVat extends BaseProductTypeVat
 {
@@ -881,7 +881,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Segment as BaseSegment;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="segments")
  */
 class Segment extends BaseSegment
 {
@@ -921,7 +921,7 @@ use Loevgaard\DandomainFoundationBundle\Model\ShippingMethod as BaseShippingMeth
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="shipping_methods")
  */
 class ShippingMethod extends BaseShippingMethod
 {
@@ -946,7 +946,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Site as BaseSite;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="sites")
  */
 class Site extends BaseSite
 {
@@ -971,7 +971,7 @@ use Loevgaard\DandomainFoundationBundle\Model\State as BaseState;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="states")
  */
 class State extends BaseState
 {
@@ -996,7 +996,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Unit as BaseUnit;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="units")
  */
 class Unit extends BaseUnit
 {
@@ -1022,7 +1022,7 @@ use Loevgaard\DandomainFoundationBundle\Model\Variant as BaseVariant;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="variants")
  */
 class Variant extends BaseVariant
 {
@@ -1077,7 +1077,7 @@ use Loevgaard\DandomainFoundationBundle\Model\VariantGroup as BaseVariantGroup;
 
 /**
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(name="variant_groups")
  **/
 class VariantGroup extends BaseVariantGroup
 {

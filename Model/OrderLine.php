@@ -15,9 +15,13 @@ abstract class OrderLine implements OrderLineInterface
     protected $id;
 
     /**
+     * @todo We added nullable=true because this bundle is also used together with the Dandomain Payment API
+     * and the order line id is not sent in the POST request from the Payment API, which means we need to be able to
+     * create an order line without an id
+     *
      * @var int
      *
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer", unique=true, nullable=true)
      */
     protected $externalId;
 

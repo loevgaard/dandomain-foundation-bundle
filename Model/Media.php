@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
+ *
+ * @todo should be renamed 'Medium' because medium is singular of media
  */
 class Media implements MediaInterface
 {
