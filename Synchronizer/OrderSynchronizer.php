@@ -212,6 +212,7 @@ class OrderSynchronizer extends Synchronizer
             ->setVatRegNumber($order->vatRegNumber ? : null)
             ->setXmlParams($order->xmlParams ? : null)
             ->setShippingMethodFee($order->shippingInfo->fee)
+            ->setPaymentMethodFee($order->paymentInfo->fee)
         ;
 
         if (null !== $modifiedDate) {
