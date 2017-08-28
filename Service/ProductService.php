@@ -99,7 +99,10 @@ class ProductService extends Service
             $modifiedProductCount = $this->api->productData->countByModifiedInterval($start, $end);
             $pages = ceil($modifiedProductCount / $pageSize);
 
+            $output->writeln('Modified products: '.$modifiedProductCount.' | Page size: '.$pageSize.' | Page count: '.$pages, OutputInterface::VERBOSITY_VERBOSE);
+
             for($page = 1; $page <= $pages; $page++) {
+                $output->writeln($page.' / '.$pages, OutputInterface::VERBOSITY_VERBOSE);
                 $products = GuzzleHttp\json_decode((string)$this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $pageSize)->getBody());
 
                 foreach ($products as $product) {
