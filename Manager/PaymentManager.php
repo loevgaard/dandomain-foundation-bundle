@@ -34,6 +34,10 @@ class PaymentManager extends Manager
                 continue;
             }
 
+            if(!is_scalar($val)) {
+                continue;
+            }
+
             $setter = 'set'.$property;
 
             if(method_exists($payment, $setter)) {

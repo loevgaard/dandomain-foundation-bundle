@@ -218,7 +218,7 @@ class ProductSynchronizer extends Synchronizer
     {
         try {
             if (is_string($product)) {
-                $product = \GuzzleHttp\json_decode($this->api->productData->getDataProduct($product)->getBody()->getContents());
+                $product = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProduct($product)->getBody());
             }
         } catch (ClientException $e) {
             return null;
@@ -229,7 +229,7 @@ class ProductSynchronizer extends Synchronizer
             'number' => $product->number,
         ]);
 
-        if (!($entity)) {
+        if (!$entity) {
             $entity = new $this->entityClassName();
         }
 
