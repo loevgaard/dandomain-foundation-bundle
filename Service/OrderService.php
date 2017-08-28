@@ -57,44 +57,48 @@ class OrderService extends Service
         $output = $this->getOutput();
         $settings = unserialize(@file_get_contents($this->settingsFile));
         $stepInterval = new \DateInterval('PT15M');
+        $now = new DateTimeImmutable();
 
-        if (null !== $start) {
-            $start = DateTimeImmutable::createFromFormat('Y-m-d', $start)->setTime(0, 0, 0);
+        if ($start) {
+            $start = DateTimeImmutable::createFromFormat('Y-m-d', $start);
+            if($start === false) {
+                throw new \InvalidArgumentException('$start has the wrong format');
+            }
+            $start = $start->setTime(0, 0, 0);
         } elseif (($settings) and array_key_exists('end', $settings)) {
             $start = $settings['end'];
         } else {
             $start = DateTimeImmutable::createFromFormat('Y-m-d', '2000-01-01')->setTime(0, 0, 0);
         }
 
-        $output->writeln('Date from: '.$start->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
-
-        /** @var DateTimeImmutable $startStep */
-        $startStep = clone $start;
-
-        if (null !== $end) {
+        if ($end) {
             $end = DateTimeImmutable::createFromFormat('Y-m-d', $end);
-            $output->writeln('Date to: '.$end->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
+            if($end === false) {
+                throw new \InvalidArgumentException('$end has the wrong format');
+            }
+
+            $end = $end->setTime(23, 59, 59);
+        } else {
+            $end = $now;
         }
 
-        /** @var DateTimeImmutable $endStep */
-        $endStep = $startStep->add($stepInterval);
+        // verification of dates
+        if($end > $now) {
+            $end = $now;
+        }
 
-        do {
-            $now = new DateTimeImmutable();
-            if ($startStep > $now) {
-                $output->writeln('Start time is higher than current time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
-                break;
-            }
-            if($endStep > $now) {
-                $endStep = $now;
-            }
-            if($startStep > $endStep) {
-                $output->writeln('Start time is higher than end time, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
-                break;
-            }
-            if (($end instanceof \DateTimeInterface) and ($end < $endStep)) {
-                $output->writeln('End step is higher than the specified end date, so we stop syncing', OutputInterface::VERBOSITY_VERBOSE);
-                break;
+        if($start > $end) {
+            throw new \InvalidArgumentException('Start date is after end date');
+        }
+
+        $output->writeln($start->format('Y-m-d H:i:s').' - '.$end->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
+
+        $steps = new \DatePeriod($start, $stepInterval, $end);
+        foreach ($steps as $startStep) {
+            /** @var \DateTimeImmutable $startStep */
+            $endStep = $startStep->add($stepInterval);
+            if($endStep > $end) {
+                $endStep = $end;
             }
 
             $output->writeln($startStep->format('Y-m-d H:i:s').' - '.$endStep->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
@@ -106,9 +110,10 @@ class OrderService extends Service
                 $this->orderSynchronizer->syncOrder($order, true);
             }
 
-            file_put_contents($this->settingsFile, serialize(['start' => $startStep, 'end' => $endStep]));
-            $startStep = $endStep->add(new \DateInterval('PT1S'));
-            $endStep = $startStep->add($stepInterval);
-        } while (true);
+            file_put_contents($this->settingsFile, serialize([
+                'start' => $startStep,
+                'end' => $endStep
+            ]));
+        }
     }
 }
