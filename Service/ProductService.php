@@ -53,7 +53,7 @@ class ProductService extends Service
      * @param string $end
      * @param string $start
      */
-    public function productSync($changed = false, $end = null, $start = null)
+    public function productSync($changed = false, $start = null, $end = null)
     {
         $output = $this->getOutput();
 
@@ -61,12 +61,12 @@ class ProductService extends Service
             $settings = unserialize(@file_get_contents($this->settingsFile));
             $now = new \DateTimeImmutable();
 
-            if (null !== $start) {
+            if ($start) {
                 $start = DateTimeImmutable::createFromFormat('Y-m-d', $start);
                 if($start === false) {
                     throw new \InvalidArgumentException('$start has the wrong format');
                 }
-                $start->setTime(0, 0, 0);
+                $start = $start->setTime(0, 0, 0);
             } elseif ($settings and array_key_exists('end', $settings) and ($settings['end'] instanceof \DateTimeImmutable)) {
                 $start = $settings['end'];
             } else {
@@ -79,7 +79,7 @@ class ProductService extends Service
                     throw new \InvalidArgumentException('$end has the wrong format');
                 }
 
-                $end->setTime(23, 59, 59);
+                $end = $end->setTime(23, 59, 59);
             } else {
                 $end = $now;
             }

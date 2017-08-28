@@ -36,7 +36,7 @@ class ProductSyncCommand extends ContainerAwareCommand
         $end = $input->getOption('end');
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.product_service');
-        $service->setOutput($output)->productSync($changed, $end, $start);
+        $service->setOutput($output)->productSync($changed, $start, $end);
 
         $this->release();
 
