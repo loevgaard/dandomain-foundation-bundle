@@ -26,7 +26,7 @@ abstract class Manager
     /**
      * @return ObjectRepository
      */
-    protected function getRepository()
+    public function getRepository()
     {
         return $this->objectManager->getRepository($this->getClass());
     }
