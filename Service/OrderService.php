@@ -54,6 +54,7 @@ class OrderService extends Service
      */
     public function orderSync($start = null, $end = null)
     {
+        $exceptions = [];
         $output = $this->getOutput();
         $settings = unserialize(@file_get_contents($this->settingsFile));
         $stepInterval = new \DateInterval('PT15M');
@@ -107,13 +108,21 @@ class OrderService extends Service
 
             foreach ($orders as $order) {
                 $output->writeln('Order: '.$order->id, OutputInterface::VERBOSITY_VERBOSE);
-                $this->orderSynchronizer->syncOrder($order, true);
+                try {
+                    $this->orderSynchronizer->syncOrder($order, true);
+                } catch (\Exception $e) {
+                    $exceptions[] = '[Order: '.$order->id.'] '.$e->getMessage();
+                }
             }
 
             file_put_contents($this->settingsFile, serialize([
                 'start' => $startStep,
                 'end' => $endStep
             ]));
+        }
+
+        if(count($exceptions)) {
+            throw new \RuntimeException(join("\n\n", $exceptions));
         }
     }
 }
