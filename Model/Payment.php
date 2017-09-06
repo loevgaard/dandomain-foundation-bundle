@@ -291,6 +291,11 @@ abstract class Payment extends PaymentRequest
      */
     protected $loadBalancerRealIp;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $referrer;
+
     public function __construct()
     {
         parent::__construct();
