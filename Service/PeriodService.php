@@ -19,8 +19,6 @@ class PeriodService extends Service
     protected $periodSynchronizer;
 
     /**
-     * Constructor.
-     *
      * @param Api                $api
      * @param PeriodSynchronizer $periodSynchronizer
      */
@@ -31,14 +29,24 @@ class PeriodService extends Service
     }
 
     /**
-     * Synchronizates periods.
+     * @deprecated
      */
     public function periodSync()
+    {
+        $this->syncAll();
+    }
+
+    public function syncAll(array $options = [])
     {
         $periods = GuzzleHttp\json_decode($this->api->relatedData->getPeriods()->getBody()->getContents());
 
         foreach ($periods as $period) {
             $this->periodSynchronizer->syncPeriod($period, true);
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        $this->syncAll();
     }
 }

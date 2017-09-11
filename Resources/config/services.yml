@@ -234,9 +234,9 @@ services:
 
     loevgaard_dandomain_foundation.site_service:
         class: "%loevgaard_dandomain_foundation.site_service_class%"
-        arguments:
-            - "@dandomain.api"
-            - "@loevgaard_dandomain_foundation.site_synchronizer"
+        calls:
+            - [setApi, ["@dandomain.api"]]
+            - [setSiteSynchronizer, ["@loevgaard_dandomain_foundation.site_synchronizer"]]
 
     loevgaard_dandomain_foundation.site_synchronizer:
         class: "%loevgaard_dandomain_foundation.site_synchronizer_class%"

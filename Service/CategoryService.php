@@ -31,9 +31,14 @@ class CategoryService extends Service
     }
 
     /**
-     * Synchronizates categories.
+     * @deprecated
      */
     public function categorySync()
+    {
+        $this->syncAll();
+    }
+
+    public function syncAll(array $options = [])
     {
         $categories = GuzzleHttp\json_decode($this->api->productData->getDataCategories()->getBody()->getContents());
 
@@ -45,5 +50,10 @@ class CategoryService extends Service
                 $this->categorySynchronizer->syncCategory($subCategory, true);
             }
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        $this->syncAll();
     }
 }

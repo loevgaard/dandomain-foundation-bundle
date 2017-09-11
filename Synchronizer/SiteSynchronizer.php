@@ -19,7 +19,7 @@ class SiteSynchronizer extends Synchronizer
     /**
      * Synchronizes Site.
      *
-     * @param \stdClass $site
+     * @param \stdClass|int $site
      * @param bool      $flush
      *
      * @return SiteInterface

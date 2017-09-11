@@ -31,14 +31,24 @@ class ManufacturerService extends Service
     }
 
     /**
-     * Synchronizates manufacturers.
+     * @deprecated
      */
     public function manufacturerSync()
+    {
+        $this->syncAll();
+    }
+
+    public function syncAll(array $options = [])
     {
         $manufacturers = GuzzleHttp\json_decode($this->api->relatedData->getManufacturers()->getBody()->getContents());
 
         foreach ($manufacturers as $manufacturer) {
             $this->manufacturerSynchronizer->syncManufacturer($manufacturer, true);
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        $this->syncAll();
     }
 }

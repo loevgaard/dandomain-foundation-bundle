@@ -32,8 +32,6 @@ class ProductService extends Service
     protected $settingsFile;
 
     /**
-     * Constructor.
-     *
      * @param Api                 $api
      * @param ProductSynchronizer $productSynchronizer
      * @param Kernel              $kernel
@@ -55,6 +53,19 @@ class ProductService extends Service
      */
     public function productSync($changed = false, $start = null, $end = null)
     {
+        $this->syncAll([
+            'changed' => $changed,
+            'start' => $start,
+            'end' => $end
+        ]);
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $changed = $options['changed'];
+        $start = $options['start'];
+        $end = $options['end'];
+
         $output = $this->getOutput();
 
         if ($changed) {
@@ -128,5 +139,10 @@ class ProductService extends Service
                 }
             }
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        $this->syncAll();
     }
 }

@@ -30,7 +30,15 @@ class TagService extends Service
         $this->tagSynchronizer = $tagSynchronizer;
     }
 
+    /**
+     * @deprecated
+     */
     public function sync()
+    {
+        $this->syncAll();
+    }
+
+    public function syncAll(array $options = [])
     {
         $output = $this->getOutput();
         $pageSize = 100;
@@ -43,5 +51,10 @@ class TagService extends Service
                 $this->tagSynchronizer->syncTag($tag, true);
             }
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        $this->syncAll();
     }
 }

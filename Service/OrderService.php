@@ -47,13 +47,24 @@ class OrderService extends Service
     }
 
     /**
-     * Synchronizes orders
+     * @deprecated
      *
      * @param string $end Format must be Y-m-d
      * @param string $start Format must be Y-m-d
      */
     public function orderSync($start = null, $end = null)
     {
+        $this->syncAll([
+            'start' => $start,
+            'end' => $end,
+        ]);
+    }
+
+    public function syncAll(array $options = [])
+    {
+        // @todo use options resolver
+        $start = $options['start'];
+        $end = $options['end'];
         $exceptions = [];
         $output = $this->getOutput();
         $settings = unserialize(@file_get_contents($this->settingsFile));
@@ -124,5 +135,10 @@ class OrderService extends Service
         if(count($exceptions)) {
             throw new \RuntimeException(join("\n\n", $exceptions));
         }
+    }
+
+    public function syncOne(array $options = [])
+    {
+        throw new \RuntimeException('Not implemented');
     }
 }
