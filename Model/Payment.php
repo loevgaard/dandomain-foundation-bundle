@@ -292,9 +292,20 @@ abstract class Payment extends PaymentRequest
     protected $loadBalancerRealIp;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
     protected $referrer;
+
+    /**
+     * Use this property to save the status for the payment
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $status;
 
     public function __construct()
     {
@@ -318,6 +329,24 @@ abstract class Payment extends PaymentRequest
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus() : string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     * @return Payment
+     */
+    public function setStatus(string $status) : self
+    {
+        $this->status = $status;
         return $this;
     }
 }
