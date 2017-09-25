@@ -131,10 +131,10 @@ class ProductService extends Service
             $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($pageSize)->getBody()->getContents());
 
             for ($page = $pageCount; $page >= 1; --$page) {
+                $output->writeln($page.'/'.$pageCount, OutputInterface::VERBOSITY_VERBOSE);
                 $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $pageSize)->getBody()->getContents());
 
                 foreach ($products as $product) {
-                    $output->writeln('Product: '.$product->number, OutputInterface::VERBOSITY_VERBOSE);
                     $this->productSynchronizer->syncProduct($product, true);
                 }
             }
