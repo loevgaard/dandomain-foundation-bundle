@@ -32,11 +32,32 @@ class ProductSyncCommand extends ContainerAwareCommand
         }
 
         $changed = $input->getOption('changed');
-        $start = $input->getOption('start');
-        $end = $input->getOption('end');
+        $optionStart = $input->getOption('start');
+        $optionEnd = $input->getOption('end');
+        $start = $end = null;
+
+        if($optionStart) {
+            $start = \DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
+            if($start === false) {
+                throw new \InvalidArgumentException('Option --start has the wrong format');
+            }
+            $start = $start->setTime(0, 0, 0);
+        }
+
+        if($optionEnd) {
+            $end = \DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
+            if($end === false) {
+                throw new \InvalidArgumentException('Option --end has the wrong format');
+            }
+            $end = $end->setTime(23, 59, 59);
+        }
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.product_service');
-        $service->setOutput($output)->productSync($changed, $start, $end);
+        $service->setOutput($output)->syncAll([
+            'changed' => $changed,
+            'start' => $start,
+            'end' => $end,
+        ]);
 
         $this->release();
 
