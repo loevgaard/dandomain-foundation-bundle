@@ -327,13 +327,3 @@ services:
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.product_class%"
-    loevgaard_dandomain_foundation.payment_manager:
-        class: Loevgaard\DandomainFoundationBundle\Manager\PaymentManager
-        arguments:
-            - "@doctrine"
-            - "%loevgaard_dandomain_foundation.payment_class%"
-    loevgaard_dandomain_foundation.payment_line_manager:
-        class: Loevgaard\DandomainFoundationBundle\Manager\PaymentLineManager
-        arguments:
-            - "@doctrine"
-            - "%loevgaard_dandomain_foundation.payment_line_class%"
