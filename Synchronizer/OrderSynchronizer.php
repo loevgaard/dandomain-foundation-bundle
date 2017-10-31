@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
+use Loevgaard\DandomainFoundationBundle\Manager\OrderLineManager;
 use Loevgaard\DandomainFoundationBundle\Model\OrderInterface;
 
 class OrderSynchronizer extends Synchronizer
@@ -55,6 +56,16 @@ class OrderSynchronizer extends Synchronizer
      * @var StateSynchronizer
      */
     protected $stateSynchronizer;
+
+    /**
+     * @var ProductSynchronizer
+     */
+    protected $productSynchronizer;
+
+    /**
+     * @var OrderLineManager
+     */
+    protected $orderLineManager;
 
     /**
      * @param CustomerSynchronizer $customerSynchronizer
@@ -153,6 +164,26 @@ class OrderSynchronizer extends Synchronizer
     }
 
     /**
+     * @param ProductSynchronizer $productSynchronizer
+     * @return OrderSynchronizer
+     */
+    public function setProductSynchronizer(ProductSynchronizer $productSynchronizer)
+    {
+        $this->productSynchronizer = $productSynchronizer;
+        return $this;
+    }
+
+    /**
+     * @param OrderLineManager $orderLineManager
+     * @return OrderSynchronizer
+     */
+    public function setOrderLineManager(OrderLineManager $orderLineManager)
+    {
+        $this->orderLineManager = $orderLineManager;
+        return $this;
+    }
+
+    /**
      * Synchronizes Order.
      *
      * @param array $order
@@ -242,12 +273,36 @@ class OrderSynchronizer extends Synchronizer
 
         if (is_array($order->orderLines)) {
             foreach ($order->orderLines as $orderLineData) {
-                $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
+                $orderLine = $this->orderLineManager->create();
+                $orderLine
+                    ->setExternalId($orderLineData->id ?? null)
+                    ->setFileUrl($orderLineData->fileUrl ?? null)
+                    ->setProductNumber($orderLineData->productId ?? null)
+                    ->setProductName($orderLineData->productName ?? null)
+                    ->setQuantity($orderLineData->quantity ?? null)
+                    ->setTotalPrice($orderLineData->totalPrice ?? null)
+                    ->setUnitPrice($orderLineData->unitPrice ?? null)
+                    ->setVatPct($orderLineData->vatPct ?? null)
+                    ->setVariant($orderLineData->variant ?? null)
+                    ->setXmlParams($orderLineData->xmlParams ?? null)
+                ;
+
+                if ($orderLineData->productId) {
+                    $product = $this->productSynchronizer->syncProduct($orderLineData->productId, $flush);
+                    $orderLine->setProduct($product);
+                }
                 $entity->addOrderLine($orderLine);
             }
         }
 
         $this->objectManager->persist($entity);
+
+        /*if (is_array($order->orderLines)) {
+            foreach ($order->orderLines as $orderLineData) {
+                $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
+                $entity->addOrderLine($orderLine);
+            }
+        }*/
 
         if ($flush) {
             $this->objectManager->flush($entity);

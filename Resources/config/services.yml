@@ -114,6 +114,8 @@ services:
             - [setShippingMethodSynchronizer, ["@loevgaard_dandomain_foundation.shipping_method_synchronizer"]]
             - [setSiteSynchronizer, ["@loevgaard_dandomain_foundation.site_synchronizer"]]
             - [setStateSynchronizer, ["@loevgaard_dandomain_foundation.state_synchronizer"]]
+            - [setProductSynchronizer, ["@loevgaard_dandomain_foundation.product_synchronizer"]]
+            - [setOrderLineManager, ["@loevgaard_dandomain_foundation.order_line_manager"]]
 
     loevgaard_dandomain_foundation.order_line_synchronizer:
         class: "%loevgaard_dandomain_foundation.order_line_synchronizer_class%"
