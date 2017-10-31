@@ -2,6 +2,8 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 interface OrderInterface
 {
     /**
@@ -187,7 +189,7 @@ interface OrderInterface
     public function addOrderLine(OrderLineInterface $orderLine);
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection|OrderLineInterface[]
      */
     public function getOrderLines();
 
