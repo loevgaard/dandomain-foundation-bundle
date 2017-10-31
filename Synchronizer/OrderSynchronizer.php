@@ -240,14 +240,14 @@ class OrderSynchronizer extends Synchronizer
         $state = $this->stateSynchronizer->syncState($order->orderState, $flush);
         $entity->setState($state);
 
-        $this->objectManager->persist($entity);
-
         if (is_array($order->orderLines)) {
             foreach ($order->orderLines as $orderLineData) {
                 $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
                 $entity->addOrderLine($orderLine);
             }
         }
+
+        $this->objectManager->persist($entity);
 
         if ($flush) {
             $this->objectManager->flush($entity);
