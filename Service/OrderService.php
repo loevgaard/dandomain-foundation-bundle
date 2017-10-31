@@ -140,6 +140,7 @@ class OrderService extends Service
 
     public function syncOne(array $options = [])
     {
-        throw new \RuntimeException('Not implemented');
+        $order = GuzzleHttp\json_decode((string)$this->api->order->getOrder($options['order'])->getBody());
+        $this->orderSynchronizer->syncOrder($order, true);
     }
 }

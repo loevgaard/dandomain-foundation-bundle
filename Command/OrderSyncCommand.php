@@ -17,8 +17,9 @@ class OrderSyncCommand extends ContainerAwareCommand
         $this
             ->setName('dandomain-foundation:order-sync')
             ->setDescription('Runs Order synchronization')
-            ->addOption('start', null, InputOption::VALUE_OPTIONAL, 'Start date in the format `Y-m-d`')
-            ->addOption('end', null, InputOption::VALUE_OPTIONAL, 'End date in the format `Y-m-d`')
+            ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Start date in the format `Y-m-d`')
+            ->addOption('end', null, InputOption::VALUE_REQUIRED, 'End date in the format `Y-m-d`')
+            ->addOption('order', 'o', InputOption::VALUE_REQUIRED, 'If set, this is the only order that will be synced')
         ;
     }
 
@@ -32,9 +33,21 @@ class OrderSyncCommand extends ContainerAwareCommand
 
         $start = $input->getOption('start');
         $end = $input->getOption('end');
+        $order = $input->getOption('order');
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.order_service');
-        $service->setOutput($output)->orderSync($start, $end);
+        $service->setOutput($output);
+
+        if($order) {
+            $service->syncOne([
+                'order' => (int)$order
+            ]);
+        } else {
+            $service->syncAll([
+                'start' => $start,
+                'end' => $end
+            ]);
+        }
 
         $this->release();
 
