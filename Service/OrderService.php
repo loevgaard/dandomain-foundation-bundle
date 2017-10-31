@@ -122,6 +122,7 @@ class OrderService extends Service
                 try {
                     $this->orderSynchronizer->syncOrder($order, true);
                 } catch (\Exception $e) {
+                    $output->writeln('[Order: '.$order->id.'] '.$e->getMessage(), OutputInterface::VERBOSITY_VERBOSE);
                     $exceptions[] = '[Order: '.$order->id.'] '.$e->getMessage();
                 }
             }
