@@ -7,15 +7,15 @@ use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CategorySyncCommand extends ContainerAwareCommand
+class SynchronizeSitesCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:category-sync')
-            ->setDescription('Runs Category synchronization')
+            ->setName('loevgaard:dandomain-foundation:sync:sites')
+            ->setDescription('Synchronize sites from Dandomain til local database')
         ;
     }
 
@@ -27,8 +27,10 @@ class CategorySyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.category_service');
-        $service->setOutput($output)->categorySync();
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.site_service');
+        $service
+            ->setOutput($output)
+            ->syncAll();
 
         $this->release();
 

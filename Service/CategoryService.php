@@ -19,8 +19,6 @@ class CategoryService extends Service
     protected $categorySynchronizer;
 
     /**
-     * Constructor.
-     *
      * @param Api                  $api
      * @param CategorySynchronizer $categorySynchronizer
      */
@@ -28,14 +26,6 @@ class CategoryService extends Service
     {
         $this->api = $api;
         $this->categorySynchronizer = $categorySynchronizer;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function categorySync()
-    {
-        $this->syncAll();
     }
 
     public function syncAll(array $options = [])

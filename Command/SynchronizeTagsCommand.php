@@ -7,15 +7,15 @@ use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SiteSyncCommand extends ContainerAwareCommand
+class SynchronizeTagsCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:site-sync')
-            ->setDescription('Runs Site synchronization')
+            ->setName('loevgaard:dandomain-foundation:sync:tags')
+            ->setDescription('Synchronize tags from Dandomain til local database')
         ;
     }
 
@@ -27,8 +27,10 @@ class SiteSyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.site_service');
-        $service->setOutput($output)->siteSync();
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.tag_service');
+        $service
+            ->setOutput($output)
+            ->syncAll();
 
         $this->release();
 

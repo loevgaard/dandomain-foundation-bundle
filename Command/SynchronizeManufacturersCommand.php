@@ -7,15 +7,15 @@ use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ManufacturerSyncCommand extends ContainerAwareCommand
+class SynchronizeManufacturersCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:manufacturer-sync')
-            ->setDescription('Runs Manufacturer synchronization')
+            ->setName('loevgaard:dandomain-foundation:sync:manufacturers')
+            ->setDescription('Synchronize manufacturers from Dandomain til local database')
         ;
     }
 
@@ -28,7 +28,9 @@ class ManufacturerSyncCommand extends ContainerAwareCommand
         }
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.manufacturer_service');
-        $service->setOutput($output)->manufacturerSync();
+        $service
+            ->setOutput($output)
+            ->syncAll();
 
         $this->release();
 

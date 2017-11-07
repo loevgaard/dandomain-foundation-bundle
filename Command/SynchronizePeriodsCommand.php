@@ -7,15 +7,15 @@ use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PeriodSyncCommand extends ContainerAwareCommand
+class SynchronizePeriodsCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:period-sync')
-            ->setDescription('Runs Period synchronization')
+            ->setName('loevgaard:dandomain-foundation:sync:periods')
+            ->setDescription('Synchronize periods from Dandomain til local database')
         ;
     }
 
@@ -28,7 +28,9 @@ class PeriodSyncCommand extends ContainerAwareCommand
         }
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.period_service');
-        $service->setOutput($output)->periodSync();
+        $service
+            ->setOutput($output)
+            ->syncAll();
 
         $this->release();
 

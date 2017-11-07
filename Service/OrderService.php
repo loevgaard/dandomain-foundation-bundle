@@ -46,20 +46,6 @@ class OrderService extends Service
         $this->settingsFile = $kernel->getLogDir().'/dandomain-foundation-order-sync.log';
     }
 
-    /**
-     * @deprecated
-     *
-     * @param string $end Format must be Y-m-d
-     * @param string $start Format must be Y-m-d
-     */
-    public function orderSync($start = null, $end = null)
-    {
-        $this->syncAll([
-            'start' => $start,
-            'end' => $end,
-        ]);
-    }
-
     public function syncAll(array $options = [])
     {
         // @todo use options resolver

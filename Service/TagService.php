@@ -19,8 +19,6 @@ class TagService extends Service
     protected $tagSynchronizer;
 
     /**
-     * Constructor.
-     *
      * @param Api               $api
      * @param TagSynchronizer   $tagSynchronizer
      */

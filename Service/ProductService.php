@@ -45,22 +45,6 @@ class ProductService extends Service
         $this->settingsFile = $kernel->getLogDir().'/dandomain-foundation-product-sync.log';
     }
 
-    /**
-     * Synchronizates products.
-     *
-     * @param bool   $changed
-     * @param string $end
-     * @param string $start
-     */
-    public function productSync($changed = false, $start = null, $end = null)
-    {
-        $this->syncAll([
-            'changed' => $changed,
-            'start' => $start,
-            'end' => $end
-        ]);
-    }
-
     public function syncAll(array $options = [])
     {
         $resolver = $this->getOptionsResolverAll();
@@ -133,7 +117,7 @@ class ProductService extends Service
 
     public function syncOne(array $options = [])
     {
-        $this->syncAll();
+        throw new \RuntimeException('Method not implemented');
     }
 
     /**

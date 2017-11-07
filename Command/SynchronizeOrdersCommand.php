@@ -8,18 +8,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProductSyncCommand extends ContainerAwareCommand
+class SynchronizeOrdersCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:product-sync')
-            ->setDescription('Runs Product synchronization')
-            ->addOption('changed', null, InputOption::VALUE_NONE, 'If set, the command will sync products that have been changed in the given period of time')
-            ->addOption('start', null, InputOption::VALUE_OPTIONAL, 'Start date in the format `Y-m-d`')
-            ->addOption('end', null, InputOption::VALUE_OPTIONAL, 'End date in the format `Y-m-d`')
+            ->setName('loevgaard:dandomain-foundation:sync:orders')
+            ->setDescription('Synchronize orders from Dandomain til local database')
+            ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Start date in the format `Y-m-d`')
+            ->addOption('end', null, InputOption::VALUE_REQUIRED, 'End date in the format `Y-m-d`')
+            ->addOption('order', 'o', InputOption::VALUE_REQUIRED, 'If set, this is the only order that will be synced')
         ;
     }
 
@@ -31,9 +31,9 @@ class ProductSyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $changed = $input->getOption('changed');
         $optionStart = $input->getOption('start');
         $optionEnd = $input->getOption('end');
+        $order = $input->getOption('order');
         $start = $end = null;
 
         if($optionStart) {
@@ -52,12 +52,19 @@ class ProductSyncCommand extends ContainerAwareCommand
             $end = $end->setTime(23, 59, 59);
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.product_service');
-        $service->setOutput($output)->syncAll([
-            'changed' => $changed,
-            'start' => $start,
-            'end' => $end,
-        ]);
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.order_service');
+        $service->setOutput($output);
+
+        if($order) {
+            $service->syncOne([
+                'order' => (int)$order
+            ]);
+        } else {
+            $service->syncAll([
+                'start' => $start,
+                'end' => $end
+            ]);
+        }
 
         $this->release();
 

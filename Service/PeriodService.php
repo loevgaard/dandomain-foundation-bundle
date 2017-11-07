@@ -28,14 +28,6 @@ class PeriodService extends Service
         $this->periodSynchronizer = $periodSynchronizer;
     }
 
-    /**
-     * @deprecated
-     */
-    public function periodSync()
-    {
-        $this->syncAll();
-    }
-
     public function syncAll(array $options = [])
     {
         $periods = GuzzleHttp\json_decode($this->api->relatedData->getPeriods()->getBody()->getContents());

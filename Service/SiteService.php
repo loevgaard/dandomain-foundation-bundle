@@ -18,14 +18,6 @@ class SiteService extends Service
      */
     protected $siteSynchronizer;
 
-    /**
-     * @deprecated
-     */
-    public function siteSync()
-    {
-        $this->syncAll();
-    }
-
     public function syncAll(array $options = [])
     {
         $sites = $this->getSites();

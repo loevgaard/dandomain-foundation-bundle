@@ -7,15 +7,15 @@ use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TagSyncCommand extends ContainerAwareCommand
+class SynchronizeCategoriesCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     protected function configure()
     {
         $this
-            ->setName('dandomain-foundation:tag-sync')
-            ->setDescription('Runs tag synchronization')
+            ->setName('loevgaard:dandomain-foundation:sync:categories')
+            ->setDescription('Synchronize categories from Dandomain til local database')
         ;
     }
 
@@ -27,8 +27,10 @@ class TagSyncCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.tag_service');
-        $service->setOutput($output)->sync();
+        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.category_service');
+        $service
+            ->setOutput($output)
+            ->syncAll();
 
         $this->release();
 
