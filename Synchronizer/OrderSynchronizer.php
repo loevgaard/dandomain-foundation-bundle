@@ -33,11 +33,6 @@ class OrderSynchronizer extends Synchronizer
     protected $invoiceSynchronizer;
 
     /**
-     * @var OrderLineSynchronizer
-     */
-    protected $orderLineSynchronizer;
-
-    /**
      * @var PaymentMethodSynchronizer
      */
     protected $paymentMethodSynchronizer;
@@ -99,18 +94,6 @@ class OrderSynchronizer extends Synchronizer
     public function setInvoiceSynchronizer(InvoiceSynchronizer $invoiceSynchronizer)
     {
         $this->invoiceSynchronizer = $invoiceSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param OrderLineSynchronizer $orderLineSynchronizer
-     *
-     * @return OrderSynchronizer
-     */
-    public function setOrderLineSynchronizer(OrderLineSynchronizer $orderLineSynchronizer)
-    {
-        $this->orderLineSynchronizer = $orderLineSynchronizer;
 
         return $this;
     }
