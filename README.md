@@ -1180,18 +1180,16 @@ class VariantGroup extends BaseVariantGroup
 
 ```yaml
 loevgaard_dandomain_foundation:
+    default_site_id: "%default_site_id%"
     category_class: AppBundle\Entity\Category
     category_translation_class: AppBundle\Entity\CategoryTranslation
     customer_class: AppBundle\Entity\Customer
-    default_site_id: "%default_site_id%"
     delivery_class: AppBundle\Entity\Delivery
     invoice_class: AppBundle\Entity\Invoice
     manufacturer_class: AppBundle\Entity\Manufacturer
     media_class: AppBundle\Entity\Media
     order_class: AppBundle\Entity\Order
     order_line_class: AppBundle\Entity\OrderLine
-    payment_class: AppBundle\Entity\Payment
-    payment_line_class: AppBundle\Entity\PaymentLine
     payment_method_class: AppBundle\Entity\PaymentMethod
     period_class: AppBundle\Entity\Period
     price_class: AppBundle\Entity\Price
