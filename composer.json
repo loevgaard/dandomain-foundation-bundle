@@ -17,7 +17,6 @@
         "doctrine/doctrine-bundle": "^1.6",
         "loevgaard/dandomain-api": "^2.2",
         "loevgaard/dandomain-api-bundle": "^0.1",
-        "loevgaard/dandomain-pay-php-sdk": "~1.0",
         "doctrine/orm": "^2.5",
         "symfony/framework-bundle": "^2.7 || ^3.0",
         "symfony/filesystem": "^2.7 || ^3.0",
@@ -31,5 +30,7 @@
             "Loevgaard\\DandomainFoundationBundle\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "config": {
+        "sort-packages": true
+    }
 }
