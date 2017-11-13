@@ -266,7 +266,7 @@ class OrderSynchronizer extends Synchronizer
                     }
                 }
 
-                if($found) {
+                if(!$found) {
                     $removeOrderLines[] = $orderLineEntity;
                 }
             }
