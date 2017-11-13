@@ -31,26 +31,9 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $optionStart = $input->getOption('start');
-        $optionEnd = $input->getOption('end');
+        $start = $input->getOption('start');
+        $end = $input->getOption('end');
         $order = $input->getOption('order');
-        $start = $end = null;
-
-        if($optionStart) {
-            $start = \DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
-            if($start === false) {
-                throw new \InvalidArgumentException('Option --start has the wrong format');
-            }
-            $start = $start->setTime(0, 0, 0);
-        }
-
-        if($optionEnd) {
-            $end = \DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
-            if($end === false) {
-                throw new \InvalidArgumentException('Option --end has the wrong format');
-            }
-            $end = $end->setTime(23, 59, 59);
-        }
 
         $service = $this->getContainer()->get('loevgaard_dandomain_foundation.order_service');
         $service->setOutput($output);
