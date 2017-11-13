@@ -189,6 +189,13 @@ interface OrderInterface
     public function addOrderLine(OrderLineInterface $orderLine);
 
     /**
+     * Clears the order lines on this order
+     *
+     * @return void
+     */
+    public function clearOrderLines();
+
+    /**
      * @return ArrayCollection|OrderLineInterface[]
      */
     public function getOrderLines();

@@ -532,6 +532,14 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function clearOrderLines()
+    {
+        $this->orderLines = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getOrderLines()
     {
         return $this->orderLines;

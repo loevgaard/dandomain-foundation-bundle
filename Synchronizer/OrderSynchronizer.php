@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
+use Doctrine\Common\Collections\Criteria;
 use Loevgaard\DandomainFoundationBundle\Manager\OrderLineManager;
 use Loevgaard\DandomainFoundationBundle\Model\OrderInterface;
 
@@ -184,7 +185,7 @@ class OrderSynchronizer extends Synchronizer
             'externalId' => $order->id,
         ]);
 
-        if (!($entity)) {
+        if (!$entity) {
             $entity = new $this->entityClassName();
         }
 
@@ -255,10 +256,42 @@ class OrderSynchronizer extends Synchronizer
         $entity->setState($state);
 
         if (is_array($order->orderLines)) {
+            // first remove order lines that are not present anymore
+            $removeOrderLines = [];
+            foreach ($entity->getOrderLines() as $orderLineEntity) {
+                $found = false;
+                foreach ($order->orderLines as $orderLineData) {
+                    if($orderLineData->id === $orderLineEntity->getExternalId()) {
+                        $found = true;
+                    }
+                }
+
+                if($found) {
+                    $removeOrderLines[] = $orderLineEntity;
+                }
+            }
+
+            foreach ($removeOrderLines as $removeOrderLine) {
+                $entity->removeOrderLine($removeOrderLine);
+            }
+
+            // then update the rest of the order lines
             foreach ($order->orderLines as $orderLineData) {
-                $orderLine = $this->orderLineManager->create();
-                $orderLine
-                    ->setExternalId($orderLineData->id ?? null)
+                $collection = $entity
+                    ->getOrderLines()
+                    ->matching(
+                        Criteria::create()->where(Criteria::expr()->eq('externalId', $orderLineData->id))
+                    );
+
+                if($collection->count()) {
+                    $orderLineEntity = $collection->first();
+                } else {
+                    $orderLineEntity = $this->orderLineManager->create();
+                    $entity->addOrderLine($orderLineEntity);
+                }
+
+                $orderLineEntity
+                    ->setExternalId($orderLineData->id)
                     ->setFileUrl($orderLineData->fileUrl ?? null)
                     ->setProductNumber($orderLineData->productId ?? null)
                     ->setProductName($orderLineData->productName ?? null)
@@ -272,20 +305,14 @@ class OrderSynchronizer extends Synchronizer
 
                 if ($orderLineData->productId) {
                     $product = $this->productSynchronizer->syncProduct($orderLineData->productId, $flush);
-                    $orderLine->setProduct($product);
+                    $orderLineEntity->setProduct($product);
                 }
-                $entity->addOrderLine($orderLine);
             }
+        } else {
+            $entity->clearOrderLines();
         }
 
         $this->objectManager->persist($entity);
-
-        /*if (is_array($order->orderLines)) {
-            foreach ($order->orderLines as $orderLineData) {
-                $orderLine = $this->orderLineSynchronizer->syncOrderLine($orderLineData, $entity, $flush);
-                $entity->addOrderLine($orderLine);
-            }
-        }*/
 
         if ($flush) {
             $this->objectManager->flush($entity);
