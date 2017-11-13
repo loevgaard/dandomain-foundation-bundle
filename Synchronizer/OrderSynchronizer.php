@@ -277,6 +277,10 @@ class OrderSynchronizer extends Synchronizer
 
             // then update the rest of the order lines
             foreach ($order->orderLines as $orderLineData) {
+                if(!$orderLineData->id) {
+                    continue;
+                }
+
                 $collection = $entity
                     ->getOrderLines()
                     ->matching(
