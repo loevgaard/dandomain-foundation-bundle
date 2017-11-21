@@ -20,6 +20,7 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
             ->addOption('changed', null, InputOption::VALUE_NONE, 'If set, the command will sync products that have been changed in the given period of time')
             ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Start date in the format `Y-m-d`')
             ->addOption('end', null, InputOption::VALUE_REQUIRED, 'End date in the format `Y-m-d`')
+            ->addOption('number', 'n', InputOption::VALUE_REQUIRED, 'If number is set, the command will only sync the product with this number')
         ;
     }
 
@@ -34,30 +35,39 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
         $changed = $input->getOption('changed');
         $optionStart = $input->getOption('start');
         $optionEnd = $input->getOption('end');
+        $optionNumber = $input->getOption('number');
         $start = $end = null;
 
-        if($optionStart) {
-            $start = \DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
-            if($start === false) {
-                throw new \InvalidArgumentException('Option --start has the wrong format');
-            }
-            $start = $start->setTime(0, 0, 0);
-        }
+        $synchronizer = $this->getContainer()->get('loevgaard_dandomain_foundation.product_synchronizer');
 
-        if($optionEnd) {
-            $end = \DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
-            if($end === false) {
-                throw new \InvalidArgumentException('Option --end has the wrong format');
+        if($optionNumber) {
+            $synchronizer->syncOne([
+                'number' => $optionNumber
+            ]);
+        } else {
+            if ($optionStart) {
+                $start = \DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
+                if ($start === false) {
+                    throw new \InvalidArgumentException('Option --start has the wrong format');
+                }
+                $start = $start->setTime(0, 0, 0);
             }
-            $end = $end->setTime(23, 59, 59);
-        }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.product_service');
-        $service->setOutput($output)->syncAll([
-            'changed' => $changed,
-            'start' => $start,
-            'end' => $end,
-        ]);
+            if ($optionEnd) {
+                $end = \DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
+                if ($end === false) {
+                    throw new \InvalidArgumentException('Option --end has the wrong format');
+                }
+                $end = $end->setTime(23, 59, 59);
+            }
+
+
+            $synchronizer->setOutput($output)->syncAll([
+                'changed' => $changed,
+                'start' => $start,
+                'end' => $end,
+            ]);
+        }
 
         $this->release();
 

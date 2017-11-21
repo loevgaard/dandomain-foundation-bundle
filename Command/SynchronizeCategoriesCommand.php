@@ -27,8 +27,8 @@ class SynchronizeCategoriesCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.category_service');
-        $service
+        $synchronizer = $this->getContainer()->get('loevgaard_dandomain_foundation.category_synchronizer');
+        $synchronizer
             ->setOutput($output)
             ->syncAll();
 

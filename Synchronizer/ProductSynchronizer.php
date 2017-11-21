@@ -2,236 +2,136 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use GuzzleHttp\Exception\ClientException;
-use Loevgaard\DandomainFoundationBundle\Model\Product;
-use Loevgaard\DandomainFoundationBundle\Model\ProductInterface;
+use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
+use Loevgaard\DandomainFoundation\Entity\Product;
+use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Model\TranslatableInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 
-class ProductSynchronizer extends Synchronizer
+class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInterface
 {
     /**
-     * @var CategorySynchronizer
+     * @var ProductRepositoryInterface
      */
-    protected $categorySynchronizer;
+    protected $repository;
 
-    /**
-     * @var ManufacturerSynchronizer
-     */
-    protected $manufacturerSynchronizer;
-
-    /**
-     * @var MediaSynchronizer
-     */
-    protected $mediaSynchronizer;
-
-    /**
-     * @var string
-     */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Product';
-
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductInterface';
-
-    /**
-     * @var PeriodSynchronizer
-     */
-    protected $periodSynchronizer;
-
-    /**
-     * @var PriceSynchronizer
-     */
-    protected $priceSynchronizer;
-
-    /**
-     * @var ProductRelationSynchronizer
-     */
-    protected $productRelationSynchronizer;
-
-    /**
-     * @var ProductTypeSynchronizer
-     */
-    protected $productTypeSynchronizer;
-
-    /**
-     * @var SegmentSynchronizer
-     */
-    protected $segmentSynchronizer;
-
-    /**
-     * @var UnitSynchronizer
-     */
-    protected $unitSynchronizer;
-
-    /**
-     * @var VariantSynchronizer
-     */
-    protected $variantSynchronizer;
-
-    /**
-     * @var VariantGroupSynchronizer
-     */
-    protected $variantGroupSynchronizer;
-
-    /**
-     * @param CategorySynchronizer $categorySynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setCategorySynchronizer(CategorySynchronizer $categorySynchronizer)
+    public function syncOne(array $options = [])
     {
-        $this->categorySynchronizer = $categorySynchronizer;
-
-        return $this;
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
+        $product = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProduct($options['productNumber'])->getBody());
+        $entity = $this->createEntity($product);
+        $this->repository->save($entity);
     }
 
-    /**
-     * @param ManufacturerSynchronizer $manufacturerSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setManufacturerSynchronizer(ManufacturerSynchronizer $manufacturerSynchronizer)
+    public function syncAll(array $options = [])
     {
-        $this->manufacturerSynchronizer = $manufacturerSynchronizer;
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsAll']);
 
-        return $this;
-    }
+        $start = $options['start'];
+        $end = $options['end'];
 
-    /**
-     * @param MediaSynchronizer $mediaSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setMediaSynchronizer(MediaSynchronizer $mediaSynchronizer)
-    {
-        $this->mediaSynchronizer = $mediaSynchronizer;
+        if ($this->options['changed']) {
+            $settings = unserialize(@file_get_contents($this->settingsFile));
+            $now = new DateTimeImmutable();
 
-        return $this;
-    }
-
-    /**
-     * @param PeriodSynchronizer $periodSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setPeriodSynchronizer(PeriodSynchronizer $periodSynchronizer)
-    {
-        $this->periodSynchronizer = $periodSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param PriceSynchronizer $priceSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setPriceSynchronizer(PriceSynchronizer $priceSynchronizer)
-    {
-        $this->priceSynchronizer = $priceSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param ProductRelationSynchronizer $productRelationSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setProductRelationSynchronizer(ProductRelationSynchronizer $productRelationSynchronizer)
-    {
-        $this->productRelationSynchronizer = $productRelationSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param ProductTypeSynchronizer $productTypeSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setProductTypeSynchronizer(ProductTypeSynchronizer $productTypeSynchronizer)
-    {
-        $this->productTypeSynchronizer = $productTypeSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param SegmentSynchronizer $segmentSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setSegmentSynchronizer(SegmentSynchronizer $segmentSynchronizer)
-    {
-        $this->segmentSynchronizer = $segmentSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param UnitSynchronizer $unitSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setUnitSynchronizer(UnitSynchronizer $unitSynchronizer)
-    {
-        $this->unitSynchronizer = $unitSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param VariantSynchronizer $variantSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setVariantSynchronizer(VariantSynchronizer $variantSynchronizer)
-    {
-        $this->variantSynchronizer = $variantSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * @param VariantGroupSynchronizer $variantGroupSynchronizer
-     *
-     * @return ProductSynchronizer
-     */
-    public function setVariantGroupSynchronizer(VariantGroupSynchronizer $variantGroupSynchronizer)
-    {
-        $this->variantGroupSynchronizer = $variantGroupSynchronizer;
-
-        return $this;
-    }
-
-    /**
-     * Synchronizes Product.
-     *
-     * @param string|\stdClass $product
-     * @param bool             $flush
-     *
-     * @return ProductInterface|null
-     */
-    public function syncProduct($product, $flush = true)
-    {
-        try {
-            if (is_string($product)) {
-                $product = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProduct($product)->getBody());
+            if (!$start) {
+                if ($settings and array_key_exists('end', $settings) and ($settings['end'] instanceof DateTimeImmutable)) {
+                    $start = $settings['end'];
+                } else {
+                    $start = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
+                }
             }
-        } catch (ClientException $e) {
-            return null;
-        }
 
-        /** @var ProductInterface $entity */
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'number' => $product->number,
-        ]);
+            if(!$end) {
+                $end = $now;
+            }
+
+            // verification of dates
+            if($end > $now) {
+                $end = $now;
+            }
+
+            if($start > $end) {
+                throw new \InvalidArgumentException('Start date is after end date');
+            }
+
+            //$output->writeln($start->format('Y-m-d H:i:s').' - '.$end->format('Y-m-d H:i:s'), OutputInterface::VERBOSITY_VERBOSE);
+
+            $modifiedProductCount = $this->api->productData->countByModifiedInterval($start, $end);
+            $pages = ceil($modifiedProductCount / $options['pageSize']);
+
+            //$output->writeln('Modified products: '.$modifiedProductCount.' | Page size: '.$options['pageSize'].' | Page count: '.$pages, OutputInterface::VERBOSITY_VERBOSE);
+
+            for($page = 1; $page <= $pages; $page++) {
+                //$output->writeln($page.' / '.$pages, OutputInterface::VERBOSITY_VERBOSE);
+                $products = GuzzleHttp\json_decode((string)$this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
+
+                foreach ($products as $product) {
+                    //$output->writeln('Product: '.$product->number, OutputInterface::VERBOSITY_VERBOSE);
+                    $this->productSynchronizer->syncProduct($product, true);
+                }
+            }
+
+            file_put_contents($this->settingsFile, serialize([
+                'start' => $start,
+                'end' => $end
+            ]));
+        } else {
+            $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($options['pageSize'])->getBody()->getContents());
+
+            for ($page = $pageCount; $page >= 1; --$page) {
+                //$output->writeln($page.'/'.$pageCount, OutputInterface::VERBOSITY_VERBOSE);
+                $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $options['pageSize'])->getBody()->getContents());
+
+                foreach ($products as $product) {
+                    $this->productSynchronizer->syncProduct($product, true);
+                }
+            }
+        }
+    }
+
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefined(['number'])
+            ->setAllowedTypes('number', 'string')
+            ->setRequired('number')
+        ;
+    }
+
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'changed' => false,
+                'start' => null,
+                'end' => null,
+                'pageSize' => 100,
+            ])
+            ->setAllowedTypes('changed', 'bool')
+            ->setAllowedTypes('start', ['null', \DateTimeImmutable::class])
+            ->setAllowedTypes('end', ['null', \DateTimeImmutable::class])
+            ->setAllowedTypes('pageSize', 'int')
+        ;
+    }
+
+    /**
+     * @param \stdClass $product
+     *
+     * @return ProductInterface
+     */
+    protected function createEntity(\stdClass $product) : ProductInterface
+    {
+        $entity = $this->repository->findOneByProductNumber($product->number);
 
         if (!$entity) {
-            $entity = new $this->entityClassName();
+            $entity = new Product();
         }
+
+        $entity->populateFromApiResponse($product);
+
+        return $entity;
 
         if ($product->created) {
             $created = \Dandomain\Api\jsonDateToDate($product->created);

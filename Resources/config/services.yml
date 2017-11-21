@@ -318,3 +318,10 @@ services:
         arguments:
             - "@doctrine"
             - "%loevgaard_dandomain_foundation.product_class%"
+
+    # Repositories
+    loevgaard_dandomain_foundation.product_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\ProductRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\Product

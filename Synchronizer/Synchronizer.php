@@ -2,49 +2,46 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Dandomain\Api\Api as DandomainApi;
-use Symfony\Component\Console\Output\NullOutput;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-abstract class Synchronizer
+abstract class Synchronizer implements SynchronizerInterface
 {
     /**
-     * @var ObjectManager
+     * @var RepositoryInterface
      */
-    protected $objectManager;
+    protected $repository;
 
     /**
-     *@var DandomainApi
+     * @var Api
      */
     protected $api;
 
     /**
-     * @var string
+     * @var array
      */
-    protected $entityInterfaceName;
+    protected $options;
 
     /**
-     * @var string
+     * @param RepositoryInterface $repository
+     * @param Api $api
      */
-    protected $entityClassName;
-
-    /**
-     * @param ObjectManager $objectManager
-     * @param DandomainApi  $api
-     * @param string        $entityClassName
-     */
-    public function __construct(ObjectManager $objectManager, DandomainApi $api, $entityClassName = null)
+    public function __construct(RepositoryInterface $repository, Api $api)
     {
-        $this->objectManager = $objectManager;
+        $this->repository = $repository;
         $this->api = $api;
-        $this->output = new NullOutput();
+    }
 
-        if ($entityClassName) {
-            $interfaces = class_implements($entityClassName);
-            if (!isset($interfaces[$this->entityInterfaceName])) {
-                throw new \InvalidArgumentException("Class '$entityClassName' should implement {$this->entityInterfaceName}");
-            }
-            $this->entityClassName = $entityClassName;
-        }
+    /**
+     * @param array $options
+     * @param callable $optionsConfigurator
+     * @return array
+     */
+    protected function resolveOptions(array $options = [], callable $optionsConfigurator) : array
+    {
+        $resolver = new OptionsResolver();
+        call_user_func_array($optionsConfigurator, [$resolver]);
+        return $resolver->resolve($options);
     }
 }
