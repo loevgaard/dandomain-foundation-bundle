@@ -362,69 +362,6 @@ class OrderLine extends BaseOrderLine
     protected $product;
 }
 ```
-```php
-<?php
-
-namespace AppBundle\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Loevgaard\DandomainFoundationBundle\Model\Payment as BasePayment;
-
-/**
- * @ORM\Entity()
- * @ORM\Table(name="payments")
- */
-class Payment extends BasePayment
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Id
-     */
-    protected $id;
-
-    /**
-     * @ORM\OneToMany(mappedBy="payment", targetEntity="PaymentLine", cascade={"persist", "remove"})
-     */
-    protected $paymentLines;
-}
-```
-
-```php
-<?php
-
-namespace AppBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Loevgaard\DandomainFoundationBundle\Model\PaymentLine as BasePaymentLine;
-
-/**
- * @ORM\Entity()
- * @ORM\Table(name="payment_lines")
- */
-class PaymentLine extends BasePaymentLine
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Id
-     */
-    protected $id;
-
-    /**
-     * @var Payment
-     *
-     * @ORM\JoinColumn(onDelete="CASCADE", referencedColumnName="id", nullable=false)
-     * @ORM\ManyToOne(inversedBy="paymentLines", targetEntity="Payment")
-     */
-    protected $payment;
-}
-```
 
 ```php
 <?php
