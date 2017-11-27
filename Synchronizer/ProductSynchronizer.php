@@ -117,7 +117,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
     }
 
     /**
-     * @param \stdClass $product
+     * @param \stdClass $product An object retrieved from the Dandomain API
      *
      * @return ProductInterface
      */

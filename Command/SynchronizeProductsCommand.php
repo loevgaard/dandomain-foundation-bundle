@@ -62,7 +62,7 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
             }
 
 
-            $synchronizer->setOutput($output)->syncAll([
+            $synchronizer->syncAll([
                 'changed' => $changed,
                 'start' => $start,
                 'end' => $end,
