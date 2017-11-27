@@ -12,18 +12,17 @@
     ],
     "require": {
         "php": ">=7.1",
-        "a2lix/translation-form-bundle": "^2.1",
         "doctrine/common": "^2.6",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
-        "knplabs/doctrine-behaviors": "~1.1",
-        "knplabs/knp-paginator-bundle": "~2.5",
+        "knplabs/doctrine-behaviors": "^1.1",
+        "knplabs/knp-paginator-bundle": "^2.5",
         "loevgaard/dandomain-api": "^2.2",
         "loevgaard/dandomain-api-bundle": "^0.1",
         "loevgaard/dandomain-foundation-entities": "dev-master",
         "symfony/console": "^3.0",
-        "symfony/filesystem": "^2.7 || ^3.0",
-        "symfony/framework-bundle": "^2.7 || ^3.0"
+        "symfony/filesystem": "^3.0",
+        "symfony/framework-bundle": "^3.0"
     },
     "autoload": {
         "files": ["functions_include.php"],
