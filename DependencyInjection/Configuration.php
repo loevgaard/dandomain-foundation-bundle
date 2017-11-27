@@ -12,6 +12,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('loevgaard_dandomain_foundation');
 
+        /*
         $rootNode
             ->children()
                 ->scalarNode('category_class')->isRequired()->end()
@@ -44,6 +45,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('tag_class')->isRequired()->end()
             ->end()
         ;
+        */
 
         return $treeBuilder;
     }
