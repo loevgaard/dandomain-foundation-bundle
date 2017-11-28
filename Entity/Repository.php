@@ -25,19 +25,11 @@ abstract class Repository implements RepositoryInterface
     public function __construct(ManagerRegistry $managerRegistry, string $class)
     {
         $this->manager = $managerRegistry->getManagerForClass($class);
-        $this->class = $class;
-    }
-
-    /**
-     * @return ObjectRepository
-     */
-    public function getRepository() : ObjectRepository
-    {
-        if(!$this->repository) {
-            $this->repository = $this->manager->getRepository($this->class);
+        if(!$this->manager) {
+            throw new \RuntimeException('No manager exists for class '.$class);
         }
-
-        return $this->repository;
+        $this->repository = $this->manager->getRepository($class);
+        $this->class = $class;
     }
 
     public function save($obj)

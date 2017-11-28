@@ -20,9 +20,11 @@
         "loevgaard/dandomain-api": "^2.2",
         "loevgaard/dandomain-api-bundle": "^0.1",
         "loevgaard/dandomain-foundation-entities": "dev-master",
+        "psr/log": "^1.0",
         "symfony/console": "^3.0",
         "symfony/filesystem": "^3.0",
-        "symfony/framework-bundle": "^3.0"
+        "symfony/framework-bundle": "^3.0",
+        "symfony/options-resolver": "^3.3"
     },
     "autoload": {
         "files": ["functions_include.php"],

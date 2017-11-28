@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 interface SynchronizerInterface
@@ -24,4 +25,18 @@ interface SynchronizerInterface
      * @return void
      */
     public function configureOptionsAll(OptionsResolver $optionsResolver);
+
+    /**
+     * Reads the log for this synchronizer service
+     * This lets you output synchronizer results in other parts of your application
+     *
+     * @return array
+     */
+    public function readLog() : array;
+
+    /**
+     * @param LoggerInterface $logger
+     * @return mixed
+     */
+    public function setLogger(LoggerInterface $logger);
 }

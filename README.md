@@ -1114,35 +1114,3 @@ class VariantGroup extends BaseVariantGroup
     }
 }
 ```
-
-```yaml
-loevgaard_dandomain_foundation:
-    default_site_id: "%default_site_id%"
-    category_class: AppBundle\Entity\Category
-    category_translation_class: AppBundle\Entity\CategoryTranslation
-    customer_class: AppBundle\Entity\Customer
-    delivery_class: AppBundle\Entity\Delivery
-    invoice_class: AppBundle\Entity\Invoice
-    manufacturer_class: AppBundle\Entity\Manufacturer
-    media_class: AppBundle\Entity\Media
-    order_class: AppBundle\Entity\Order
-    order_line_class: AppBundle\Entity\OrderLine
-    payment_method_class: AppBundle\Entity\PaymentMethod
-    period_class: AppBundle\Entity\Period
-    price_class: AppBundle\Entity\Price
-    product_class: AppBundle\Entity\Product
-    product_relation_class: AppBundle\Entity\ProductRelation
-    product_translation_class: AppBundle\Entity\ProductTranslation
-    product_type_class: AppBundle\Entity\ProductType
-    product_type_field_class: AppBundle\Entity\ProductTypeField
-    product_type_formula_class: AppBundle\Entity\ProductTypeFormula
-    product_type_vat_class: AppBundle\Entity\ProductTypeVat
-    segment_class: AppBundle\Entity\Segment
-    shipping_method_class: AppBundle\Entity\ShippingMethod
-    site_class: AppBundle\Entity\Site
-    state_class: AppBundle\Entity\State
-    tag_class: AppBundle\Entity\Tag
-    unit_class: AppBundle\Entity\Unit
-    variant_class: AppBundle\Entity\Variant
-    variant_group_class: AppBundle\Entity\VariantGroup
-```

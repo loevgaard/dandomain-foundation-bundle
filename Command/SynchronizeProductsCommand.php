@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SynchronizeProductsCommand extends ContainerAwareCommand
@@ -20,7 +21,7 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
             ->addOption('changed', null, InputOption::VALUE_NONE, 'If set, the command will sync products that have been changed in the given period of time')
             ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Start date in the format `Y-m-d`')
             ->addOption('end', null, InputOption::VALUE_REQUIRED, 'End date in the format `Y-m-d`')
-            ->addOption('number', 'n', InputOption::VALUE_REQUIRED, 'If number is set, the command will only sync the product with this number')
+            ->addOption('number', null, InputOption::VALUE_REQUIRED, 'If number is set, the command will only sync the product with this number')
         ;
     }
 
@@ -39,6 +40,8 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
         $start = $end = null;
 
         $synchronizer = $this->getContainer()->get('loevgaard_dandomain_foundation.product_synchronizer');
+        $logger = new ConsoleLogger($output);
+        $synchronizer->setLogger($logger);
 
         if($optionNumber) {
             $synchronizer->syncOne([
