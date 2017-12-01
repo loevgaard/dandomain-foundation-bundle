@@ -4,7 +4,6 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,20 +12,15 @@ use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInterface
 {
     /**
-     * @var ProductRepositoryInterface
-     */
-    protected $repository;
-
-    /**
      * @var ProductUpdater
      */
     protected $productUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $productUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $categoryUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->productUpdater = $productUpdater;
+        $this->productUpdater = $categoryUpdater;
     }
 
     public function syncOne(array $options = [])

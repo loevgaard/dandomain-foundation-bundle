@@ -29,9 +29,12 @@ class ProductUpdater
         $this->manufacturerRepository = $manufacturerRepository;
     }
 
-    public function hydrateFromApiResponse(array $data) : ProductInterface
+    public function updateFromApiResponse(array $data) : ProductInterface
     {
-        $product = new Product();
+        $product = $this->productRepository->findOneByExternalId($data['id']);
+        if(!$product) {
+            $product = new Product();
+        }
 
         if ($data['created']) {
             $product->setCreated(DateTimeImmutable::createFromJson($data['created']));
@@ -59,7 +62,6 @@ class ProductUpdater
             ->setIsReviewVariants($data['isReviewVariants'])
             ->setIsVariantMaster($data['isVariantMaster'])
             ->setLocationNumber($data['locationNumber'])
-            ->setManufacturereIdList($data['manufacturereIdList'])
             ->setMaxBuyAmount($data['maxBuyAmount'])
             ->setMinBuyAmount($data['minBuyAmount'])
             ->setMinBuyAmountB2B($data['minBuyAmountB2B'])
@@ -181,17 +183,42 @@ class ProductUpdater
             $product->mergeNewTranslations();
         }
 
-        foreach ($data['manufacturers'] as $item) {
-            $manufacturer = new Manufacturer();
-            $manufacturer->hydrate([
-                'externalId' => $item['id'],
-                'link' => $item['link'],
-                'linkText' => $item['linkText'],
-                'name' => $item['name'],
-            ]);
+        /**
+         * Update manufacturers
+         */
+        $manufacturerIdsToRemove = array_diff($product->getManufacturereIdList() ?? [], $data['manufacturereIdList'] ?? []);
+        $manufacturerIdsToAdd = array_diff($data['manufacturereIdList'] ?? [], $product->getManufacturereIdList() ?? []);
+        $manufacturersToRemove = [];
 
-            $product->addManufacturer($manufacturer);
+        foreach ($product->getManufacturers() as $manufacturer) {
+            if (in_array($manufacturer->getExternalId(), $manufacturerIdsToRemove)) {
+                $manufacturersToRemove[] = $manufacturer;
+            }
         }
+
+        foreach ($manufacturersToRemove as $item) {
+            $product->getManufacturers()->removeElement($item);
+        }
+
+        foreach ($data['manufacturers'] as $manufacturerData) {
+            if(in_array($manufacturerData['id'], $manufacturerIdsToAdd)) {
+                $manufacturer = $this->manufacturerRepository->findOneByExternalId($manufacturerData['id']);
+                if(!$manufacturer) {
+                    $manufacturer = new Manufacturer();
+
+                    // only update properties if it's a new object
+                    $manufacturer->hydrate([
+                        'externalId' => $manufacturerData['id'],
+                        'link' => $manufacturerData['link'],
+                        'linkText' => $manufacturerData['linkText'],
+                        'name' => $manufacturerData['name'],
+                    ]);
+                }
+
+                $product->getManufacturers()->add($manufacturer);
+            }
+        }
+        $product->setManufacturereIdList($data['manufacturereIdList']);
 
         /*
          * @todo outcomment this and fix it
@@ -270,109 +297,4 @@ class ProductUpdater
 
         return $product;
     }
-
-    /**
-     * This method will take data from the Dandomain API DataProduct response
-     * and return an entity
-     *
-     * If the entity already exists, that entity will have its properties updated
-     *
-     * @param array $data
-     * @return ProductInterface
-     */
-    public function updateFromApiResponse(array $data) : ProductInterface
-    {
-        $product = $this->hydrateFromApiResponse($data);
-
-        $entity = $this->productRepository->findOneByExternalId($product->getExternalId());
-        if ($entity) {
-            $this->replace($entity, $product);
-        } else {
-            $entity = $product;
-        }
-
-        return $entity;
-    }
-
-    /**
-     * Will replace $product2 into $product1
-     *
-     * @param ProductInterface $product1
-     * @param ProductInterface $product2
-     */
-    public function replace(ProductInterface $product1, ProductInterface $product2)
-    {
-        $product1
-            ->setBarCodeNumber($product2->getBarCodeNumber())
-            ->setCategoryIdList($product2->getCategoryIdList())
-            ->setComments($product2->getComments())
-            ->setCostPrice($product2->getCostPrice())
-            ->setCreatedBy($product2->getCreatedBy())
-            ->setDefaultCategoryId($product2->getDefaultCategoryId())
-            ->setDisabledVariantIdList($product2->getDisabledVariantIdList())
-            ->setEdbPriserProductNumber($product2->getEdbPriserProductNumber())
-            ->setExternalId($product2->getExternalId())
-            ->setFileSaleLink($product2->getFileSaleLink())
-            ->setGoogleFeedCategory($product2->getGoogleFeedCategory())
-            ->setIsGiftCertificate($product2->getisGiftCertificate())
-            ->setIsModified($product2->getisModified())
-            ->setIsRateVariants($product2->getisRateVariants())
-            ->setIsReviewVariants($product2->getisReviewVariants())
-            ->setIsVariantMaster($product2->getisVariantMaster())
-            ->setLocationNumber($product2->getLocationNumber())
-            ->setManufacturereIdList($product2->getManufacturereIdList())
-            ->setMaxBuyAmount($product2->getMaxBuyAmount())
-            ->setMinBuyAmount($product2->getMinBuyAmount())
-            ->setMinBuyAmountB2B($product2->getMinBuyAmountB2B())
-            ->setNumber($product2->getNumber())
-            ->setPicture($product2->getPicture())
-            ->setSalesCount($product2->getSalesCount())
-            ->setSegmentIdList($product2->getSegmentIdList())
-            ->setSortOrder($product2->getSortOrder())
-            ->setStockCount($product2->getStockCount())
-            ->setStockLimit($product2->getStockLimit())
-            ->setTypeId($product2->getTypeId())
-            ->setUpdatedBy($product2->getUpdatedBy())
-            ->setVariantGroupIdList($product2->getVariantGroupIdList())
-            ->setVariantIdList($product2->getVariantIdList())
-            ->setVariantMasterId($product2->getVariantMasterId())
-            ->setVendorNumber($product2->getVendorNumber())
-            ->setWeight($product2->getWeight())
-            ->setCreated($product2->getCreated())
-            ->setUpdated($product2->getUpdated())
-        ;
-
-        // @todo replace embedded properties
-    }
-
-    /*
-    public function updateFromApiResponse(array $data) : ProductInterface
-    {
-        $entity = $this->productRepository->findOneByExternalId((int)$data['id']);
-
-        if (!$entity) {
-            $entity = new Product();
-        }
-
-        $entity->populateFromApiResponse($data);
-
-        $this->updateManufacturersFromApiResponse($entity, $data['manufacturers'] ?? []);
-
-        return $entity;
-    }
-
-    public function updateManufacturersFromApiResponse(ProductInterface $product, array $data)
-    {
-        foreach ($data as $item) {
-            $manufacturer = $this->manufacturerRepository->findOneByExternalId($item['id']);
-
-            if(!$manufacturer) {
-                $manufacturer = new Manufacturer();
-                $manufacturer->populateFromApiResponse($item);
-            }
-
-            $product->addManufacturer($manufacturer);
-        }
-    }
-    */
 }

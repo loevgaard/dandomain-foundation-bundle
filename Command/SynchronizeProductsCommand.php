@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
+use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +13,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SynchronizeProductsCommand extends ContainerAwareCommand
 {
     use LockableTrait;
+
+    /**
+     * @var ProductSynchronizer
+     */
+    protected $productSynchronizer;
+
+    public function __construct(ProductSynchronizer $productSynchronizer)
+    {
+        $this->productSynchronizer = $productSynchronizer;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -39,12 +52,10 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
         $optionNumber = $input->getOption('number');
         $start = $end = null;
 
-        $synchronizer = $this->getContainer()->get('loevgaard_dandomain_foundation.product_synchronizer');
-        $logger = new ConsoleLogger($output);
-        $synchronizer->setLogger($logger);
+        $this->productSynchronizer->setLogger(new ConsoleLogger($output));
 
         if($optionNumber) {
-            $synchronizer->syncOne([
+            $this->productSynchronizer->syncOne([
                 'number' => $optionNumber
             ]);
         } else {
@@ -65,7 +76,7 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
             }
 
 
-            $synchronizer->syncAll([
+            $this->productSynchronizer->syncAll([
                 'changed' => $changed,
                 'start' => $start,
                 'end' => $end,

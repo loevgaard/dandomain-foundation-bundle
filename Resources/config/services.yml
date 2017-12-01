@@ -34,6 +34,13 @@
 #    loevgaard_dandomain_foundation.tag_synchronizer_class: "Loevgaard\\DandomainFoundationBundle\\Synchronizer\\TagSynchronizer"
 
 services:
+    # Commands
+    loevgaard_dandomain_altapay.sync_terminals_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeProductsCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.product_synchronizer"
+        tags: [console.command]
+
     # Updaters
     loevgaard_dandomain_foundation.product_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater

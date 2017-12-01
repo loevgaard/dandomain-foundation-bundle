@@ -3,56 +3,52 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Doctrine\ORM\EntityManager;
+use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundationBundle\Model\CategoryInterface;
 use Loevgaard\DandomainFoundationBundle\Model\TranslatableInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategorySynchronizer extends Synchronizer
+class CategorySynchronizer extends Synchronizer implements CategorySynchronizerInterface
 {
     /**
-     * @var string
+     * @var CategoryUpdater
      */
-    protected $defaultSiteId = 23;
+    protected $categoryUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Category';
-
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\CategoryInterface';
-
-    /**
-     * @var SegmentSynchronizer
-     */
-    protected $segmentSynchronizer;
-
-    /**
-     * @param SegmentSynchronizer $segmentSynchronizer
-     *
-     * @return CategorySynchronizer
-     */
-    public function setSegmentSynchronizer(SegmentSynchronizer $segmentSynchronizer)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, CategoryUpdater $categoryUpdater)
     {
-        $this->segmentSynchronizer = $segmentSynchronizer;
+        parent::__construct($repository, $api, $logsDir);
 
-        return $this;
+        $this->categoryUpdater = $categoryUpdater;
     }
 
-    /**
-     * Constructor.
-     *
-     * @param EntityManager $em
-     * @param Api           $api
-     * @param string        $entityClassName
-     * @param string        $defaultSiteId
-     */
-    public function __construct(EntityManager $em, Api $api, $entityClassName, $defaultSiteId)
+    public function syncOne(array $options = [])
     {
-        parent::__construct($em, $api, $entityClassName);
-        $this->defaultSiteId = $defaultSiteId;
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
+        $category = \GuzzleHttp\json_decode((string)$this->api->productData->getDataCategory($options['id'])->getBody());
+        $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
+        $this->repository->save($entity);
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $this->recursiveSync(0);
+    }
+
+    private function recursiveSync(int $parentCategoryNumber = null)
+    {
+        if($parentCategoryNumber) {
+            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataSubCategories($parentCategoryNumber)->getBody()->getContents());
+        } else {
+            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataCategories()->getBody()->getContents());
+        }
+
+        foreach ($categories as $category) {
+            $this->categoryUpdater->updateFromApiResponse($category);
+            $this->recursiveSync((int)$category->number);
+        }
     }
 
     /**
@@ -165,5 +161,19 @@ class CategorySynchronizer extends Synchronizer
         }
 
         return $entity;
+    }
+
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefined(['id'])
+            ->setAllowedTypes('id', 'int')
+            ->setRequired('id')
+        ;
+    }
+
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
+
     }
 }

@@ -2,6 +2,6 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-interface ProductSynchronizerInterface extends SynchronizerInterface
+interface CategorySynchronizerInterface extends SynchronizerInterface
 {
 }
