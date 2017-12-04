@@ -2,57 +2,60 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\SiteInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\SiteRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\SiteUpdater;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SiteSynchronizer extends Synchronizer
+class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 {
     /**
-     * @var string
+     * @var SiteRepositoryInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Site';
+    protected $repository;
 
     /**
-     * @var string
+     * @var SiteUpdater
      */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\SiteInterface';
+    protected $siteUpdater;
 
-    /**
-     * Synchronizes Site.
-     *
-     * @param \stdClass|int $site
-     * @param bool      $flush
-     *
-     * @return SiteInterface
-     */
-    public function syncSite($site, $flush = true)
+    public function __construct(SiteRepositoryInterface $repository, Api $api, string $logsDir, SiteUpdater $siteUpdater)
     {
-        if (is_numeric($site)) {
-            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-                'externalId' => $site,
-            ]);
-        } else {
-            $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-                'externalId' => $site->id,
-            ]);
+        parent::__construct($repository, $api, $logsDir);
 
-            if (!($entity)) {
-                $entity = new $this->entityClassName();
-            }
+        $this->siteUpdater = $siteUpdater;
+    }
 
-            $entity
-                ->setExternalId($site->id ? : null)
-                ->setCountryId($site->countryId ? : null)
-                ->setCurrencyCode($site->currencyCode ? : null)
-                ->setName($site->name ? : null)
-            ;
+    public function syncOne(array $options = []) : ?SiteInterface
+    {
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
 
-            $this->objectManager->persist($entity);
+        $this->syncAll();
 
-            if (true === $flush) {
-                $this->objectManager->flush($entity);
-            }
+        return $this->repository->findOneByExternalId($options['externalId']);
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $sites = \GuzzleHttp\json_decode((string)$this->api->settings->getSites()->getBody());
+
+        foreach ($sites as $site) {
+            $entity = $this->siteUpdater->updateFromApiResponse($site);
+            $this->repository->save($entity);
         }
+    }
 
-        return $entity;
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefined(['externalId'])
+            ->setAllowedTypes('externalId', 'int')
+            ->setRequired('externalId')
+        ;
+    }
+
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

@@ -10,6 +10,7 @@ use Loevgaard\DandomainFoundation\Entity\Order;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 
 class OrderUpdater
 {
@@ -23,10 +24,40 @@ class OrderUpdater
      */
     protected $productSynchronizer;
 
-    public function __construct(OrderRepositoryInterface $orderRepository, ProductSynchronizerInterface $productSynchronizer)
-    {
+    /**
+     * @var ShippingMethodUpdater
+     */
+    protected $shippingMethodUpdater;
+
+    /**
+     * @var PaymentMethodUpdater
+     */
+    protected $paymentMethodUpdater;
+
+    /**
+     * @var SiteSynchronizerInterface
+     */
+    protected $siteSynchronizer;
+
+    /**
+     * @var StateUpdater
+     */
+    protected $stateUpdater;
+
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        ProductSynchronizerInterface $productSynchronizer,
+        ShippingMethodUpdater $shippingMethodUpdater,
+        PaymentMethodUpdater $paymentMethodUpdater,
+        SiteSynchronizerInterface $siteSynchronizer,
+        StateUpdater $stateUpdater
+    ) {
         $this->orderRepository = $orderRepository;
         $this->productSynchronizer = $productSynchronizer;
+        $this->shippingMethodUpdater = $shippingMethodUpdater;
+        $this->paymentMethodUpdater = $paymentMethodUpdater;
+        $this->siteSynchronizer = $siteSynchronizer;
+        $this->stateUpdater = $stateUpdater;
     }
 
     public function updateFromApiResponse(array $data) : OrderInterface
@@ -108,39 +139,25 @@ class OrderUpdater
             $this->setInvoice($invoice);
         }
         $invoice->populateFromApiResponse($data['invoiceInfo']);
+        */
 
         // populate payment info
-        $paymentMethod = $this->getPaymentMethod();
-        if (!$paymentMethod) {
-            $paymentMethod = new PaymentMethod();
-            $paymentMethod->populateFromApiResponse($data['paymentInfo'], (string)$data['currencyCode']);
-        }
-        $this->setPaymentMethod($paymentMethod);
+        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentMethod'], $currency);
+        $order->setPaymentMethod($paymentMethod);
 
         // populate shipping info
-        $shippingMethod = $this->getShippingMethod();
-        if (!$shippingMethod) {
-            $shippingMethod = new ShippingMethod();
-            $shippingMethod->populateFromApiResponse($data['shippingInfo'], (string)$data['currencyCode']);
-        }
-        $this->setShippingMethod($shippingMethod);
+        $shippingMethod = $this->shippingMethodUpdater->updateFromEmbeddedApiResponse($data['shippingInfo'], $currency);
+        $order->setShippingMethod($shippingMethod);
 
         // populate site
-        $site = $this->getSite();
-        if (!$site) {
-            $site = new Site();
-            $site->setExternalId($data['siteId']);
-        }
-        $this->setSite($site);
+        $site = $this->siteSynchronizer->syncAll([
+            'externalId' => $data['siteId']
+        ]);
+        $order->setSite($site);
 
         // populate state
-        $state = $this->getState();
-        if (!$state) {
-            $state = new State();
-            $state->populateFromApiResponse($data['orderState']);
-        }
-        $this->setState($state);
-        */
+        $state = $this->stateUpdater->updateFromEmbeddedApiResponse($data['orderState']);
+        $order->setState($state);
 
 
         if (count($orderLinesData)) {
@@ -199,10 +216,14 @@ class OrderUpdater
                 ;
 
                 if ($orderLineData['productId']) {
-                    $product = $this->productSynchronizer->syncOne([
-                        'number' => $orderLineData['productId']
-                    ]);
-                    $orderLineEntity->setProduct($product);
+                    try {
+                        $product = $this->productSynchronizer->syncOne([
+                            'number' => $orderLineData['productId']
+                        ]);
+                        $orderLineEntity->setProduct($product);
+                    } catch (\Exception $e) {
+
+                    }
                 }
             }
         } else {

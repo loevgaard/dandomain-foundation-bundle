@@ -17,11 +17,11 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
      */
     protected $orderUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, OrderUpdater $orderUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, OrderUpdater $siteUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->orderUpdater = $orderUpdater;
+        $this->orderUpdater = $siteUpdater;
     }
 
     public function syncOne(array $options = []) : OrderInterface
@@ -97,7 +97,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
     {
         $resolver
             ->setDefined(['externalId'])
-            ->setAllowedTypes('externalId', 'string')
+            ->setAllowedTypes('externalId', 'int')
             ->setRequired('externalId')
         ;
     }

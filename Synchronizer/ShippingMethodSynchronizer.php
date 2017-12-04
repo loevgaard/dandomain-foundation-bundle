@@ -2,55 +2,53 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\ShippingMethodInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\ShippingMethodUpdater;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ShippingMethodSynchronizer extends Synchronizer
+class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodSynchronizerInterface
 {
     /**
-     * @var string
+     * @var ShippingMethodUpdater
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ShippingMethod';
+    protected $shippingMethodUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ShippingMethodInterface';
-
-    /**
-     * Synchronizes ShippingMethod.
-     *
-     * @param \stdClass $shippingMethod
-     * @param bool      $flush
-     *
-     * @return ShippingMethodInterface
-     */
-    public function syncShippingMethod($shippingMethod, $flush = true)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ShippingMethodUpdater $siteUpdater)
     {
-        if (is_numeric($shippingMethod)) {
-            $shippingMethod = \GuzzleHttp\json_decode($this->api->settings->getShippingMethods($shippingMethod)->getBody()->getContents());
+        parent::__construct($repository, $api, $logsDir);
+
+        $this->shippingMethodUpdater = $siteUpdater;
+    }
+
+    public function syncOne(array $options = []) : OrderInterface
+    {
+        throw new \RuntimeException('Method not implemented');
+    }
+
+    public function syncAll(array $options = [])
+    {
+        // @todo fix site repository
+        $siteIds = [26];
+        $currency = 'DKK';
+
+        foreach ($siteIds as $siteId) {
+            $shippingMethods = \GuzzleHttp\json_decode((string)$this->api->settings->getShippingMethods($siteId)->getBody());
+
+            foreach ($shippingMethods as $shippingMethod) {
+                $entity = $this->shippingMethodUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($shippingMethod), $currency);
+                $this->repository->save($entity);
+            }
         }
+    }
 
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $shippingMethod->id,
-        ]);
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+    }
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-        }
-
-        $entity
-            ->setExternalId($shippingMethod->id ? : null)
-            ->setFee($shippingMethod->fee ? : null)
-            ->setFeeInclVat($shippingMethod->feeInclVat ? : null)
-            ->setName($shippingMethod->name ? : null)
-        ;
-
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

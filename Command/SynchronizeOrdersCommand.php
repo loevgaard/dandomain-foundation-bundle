@@ -20,9 +20,9 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
      */
     protected $orderSynchronizer;
 
-    public function __construct(OrderSynchronizerInterface $orderSynchronizer)
+    public function __construct(OrderSynchronizerInterface $siteSynchronizer)
     {
-        $this->orderSynchronizer = $orderSynchronizer;
+        $this->orderSynchronizer = $siteSynchronizer;
 
         parent::__construct();
     }
@@ -71,7 +71,7 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
 
         if($optionOrder) {
             $this->orderSynchronizer->syncOne([
-                'order' => (int)$optionOrder
+                'externalId' => (int)$optionOrder
             ]);
         } else {
             $this->orderSynchronizer->syncAll([

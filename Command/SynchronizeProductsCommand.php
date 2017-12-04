@@ -19,9 +19,9 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
      */
     protected $productSynchronizer;
 
-    public function __construct(ProductSynchronizer $orderSynchronizer)
+    public function __construct(ProductSynchronizer $siteSynchronizer)
     {
-        $this->productSynchronizer = $orderSynchronizer;
+        $this->productSynchronizer = $siteSynchronizer;
 
         parent::__construct();
     }
