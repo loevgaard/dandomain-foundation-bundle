@@ -41,12 +41,13 @@ class ShippingMethodUpdater
     public function updateFromEmbeddedApiResponse(array $data, string $currency) : ShippingMethodInterface
     {
         $shippingMethod = $this->getShippingMethod($data['id']);
-
-        $shippingMethod
-            ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
-            ->setFeeInclVat($data['feeInclVat'])
-            ->setName($data['name'])
-        ;
+        if(!$shippingMethod->getId()) {
+            // only update when we create a new entity because this is the embedded method
+            $shippingMethod
+                ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
+                ->setFeeInclVat($data['feeInclVat'])
+                ->setName($data['name']);
+        }
 
         return $shippingMethod;
     }

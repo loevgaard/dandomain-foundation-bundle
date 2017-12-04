@@ -30,11 +30,13 @@ class PaymentMethodUpdater
     {
         $paymentMethod = $this->getPaymentMethod($data['id']);
 
-        $paymentMethod
-            ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
-            ->setFeeInclVat($data['feeInclVat'])
-            ->setName($data['name'])
-        ;
+        if(!$paymentMethod->getId()) {
+            // only update when we create a new entity because this is the embedded method
+            $paymentMethod
+                ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
+                ->setFeeInclVat($data['feeInclVat'])
+                ->setName($data['name']);
+        }
 
         return $paymentMethod;
     }
