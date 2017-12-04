@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\PaymentMethodInterface;
-use Loevgaard\DandomainFoundation\Entity\ShippingMethod;
+use Loevgaard\DandomainFoundation\Entity\PaymentMethod;
 use Loevgaard\DandomainFoundationBundle\Entity\PaymentMethodRepositoryInterface;
 
 class PaymentMethodUpdater
@@ -45,7 +45,7 @@ class PaymentMethodUpdater
     {
         $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($externalId);
         if(!$paymentMethod) {
-            $paymentMethod = new ShippingMethod();
+            $paymentMethod = new PaymentMethod();
             $paymentMethod->setExternalId($externalId);
         }
 

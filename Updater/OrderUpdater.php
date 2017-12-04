@@ -44,13 +44,25 @@ class OrderUpdater
      */
     protected $stateUpdater;
 
+    /**
+     * @var CustomerUpdater
+     */
+    protected $customerUpdater;
+
+    /**
+     * @var DeliveryUpdater
+     */
+    protected $deliveryUpdater;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductSynchronizerInterface $productSynchronizer,
         ShippingMethodUpdater $shippingMethodUpdater,
         PaymentMethodUpdater $paymentMethodUpdater,
         SiteSynchronizerInterface $siteSynchronizer,
-        StateUpdater $stateUpdater
+        StateUpdater $stateUpdater,
+        CustomerUpdater $customerUpdater,
+        DeliveryUpdater $deliveryUpdater
     ) {
         $this->orderRepository = $orderRepository;
         $this->productSynchronizer = $productSynchronizer;
@@ -58,6 +70,8 @@ class OrderUpdater
         $this->paymentMethodUpdater = $paymentMethodUpdater;
         $this->siteSynchronizer = $siteSynchronizer;
         $this->stateUpdater = $stateUpdater;
+        $this->customerUpdater = $customerUpdater;
+        $this->deliveryUpdater = $deliveryUpdater;
     }
 
     public function updateFromApiResponse(array $data) : OrderInterface
@@ -115,23 +129,15 @@ class OrderUpdater
             ->setPaymentMethodFee($paymentMethodFee)
         ;
 
-        /*
-        // populate customer
-        $customer = $this->getCustomer();
-        if (!$customer) {
-            $customer = new Customer();
-            $this->setCustomer($customer);
-        }
-        $customer->populateFromApiResponse($data['customerInfo']);
+        // populate customer info
+        $customer = $this->customerUpdater->updateFromEmbeddedApiResponse($data['customerInfo']);
+        $order->setCustomer($customer);
 
         // populate delivery info
-        $delivery = $this->getDelivery();
-        if (!$delivery) {
-            $delivery = new Delivery();
-            $this->setDelivery($delivery);
-        }
-        $delivery->populateFromApiResponse($data['deliveryInfo']);
+        $delivery = $this->deliveryUpdater->updateFromEmbeddedApiResponse($data['deliveryInfo'], $order->getDelivery());
+        $order->setDelivery($delivery);
 
+        /*
         // populate invoice info
         $invoice = $this->getInvoice();
         if (!$invoice) {
@@ -142,7 +148,7 @@ class OrderUpdater
         */
 
         // populate payment info
-        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentMethod'], $currency);
+        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currency);
         $order->setPaymentMethod($paymentMethod);
 
         // populate shipping info
@@ -150,7 +156,7 @@ class OrderUpdater
         $order->setShippingMethod($shippingMethod);
 
         // populate site
-        $site = $this->siteSynchronizer->syncAll([
+        $site = $this->siteSynchronizer->syncOne([
             'externalId' => $data['siteId']
         ]);
         $order->setSite($site);
