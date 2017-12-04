@@ -2,15 +2,30 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SynchronizeOrdersCommand extends ContainerAwareCommand
 {
     use LockableTrait;
+
+    /**
+     * @var OrderSynchronizerInterface
+     */
+    protected $orderSynchronizer;
+
+    public function __construct(OrderSynchronizerInterface $orderSynchronizer)
+    {
+        $this->orderSynchronizer = $orderSynchronizer;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -31,19 +46,35 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $start = $input->getOption('start');
-        $end = $input->getOption('end');
-        $order = $input->getOption('order');
+        $optionStart = $input->getOption('start');
+        $optionEnd = $input->getOption('end');
+        $optionOrder = $input->getOption('order');
+        $start = $end = null;
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.order_service');
-        $service->setOutput($output);
+        if ($optionStart) {
+            $start = DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
+            if ($start === false) {
+                throw new \InvalidArgumentException('Option --start has the wrong format');
+            }
+            $start = $start->setTime(0, 0, 0);
+        }
 
-        if($order) {
-            $service->syncOne([
-                'order' => (int)$order
+        if ($optionEnd) {
+            $end = DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
+            if ($end === false) {
+                throw new \InvalidArgumentException('Option --end has the wrong format');
+            }
+            $end = $end->setTime(23, 59, 59);
+        }
+
+        $this->orderSynchronizer->setLogger(new ConsoleLogger($output));
+
+        if($optionOrder) {
+            $this->orderSynchronizer->syncOne([
+                'order' => (int)$optionOrder
             ]);
         } else {
-            $service->syncAll([
+            $this->orderSynchronizer->syncAll([
                 'start' => $start,
                 'end' => $end
             ]);

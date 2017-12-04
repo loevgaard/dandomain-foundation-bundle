@@ -17,11 +17,11 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
      */
     protected $categoryUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, CategoryUpdater $categoryUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, CategoryUpdater $orderUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->categoryUpdater = $categoryUpdater;
+        $this->categoryUpdater = $orderUpdater;
     }
 
     public function syncOne(array $options = [])

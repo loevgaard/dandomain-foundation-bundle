@@ -17,7 +17,7 @@
         "doctrine/orm": "^2.5",
         "knplabs/doctrine-behaviors": "^1.1",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "loevgaard/dandomain-api": "^2.2",
+        "loevgaard/dandomain-api": "^2.4",
         "loevgaard/dandomain-api-bundle": "^0.1",
         "loevgaard/dandomain-foundation-entities": "dev-master",
         "psr/log": "^1.0",

@@ -1,0 +1,215 @@
+<?php
+
+namespace Loevgaard\DandomainFoundationBundle\Updater;
+
+use Doctrine\Common\Collections\Criteria;
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundation\Entity\Order;
+use Loevgaard\DandomainFoundation\Entity\OrderLine;
+use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
+
+class OrderUpdater
+{
+    /**
+     * @var OrderRepositoryInterface
+     */
+    protected $orderRepository;
+
+    /**
+     * @var ProductSynchronizerInterface
+     */
+    protected $productSynchronizer;
+
+    public function __construct(OrderRepositoryInterface $orderRepository, ProductSynchronizerInterface $productSynchronizer)
+    {
+        $this->orderRepository = $orderRepository;
+        $this->productSynchronizer = $productSynchronizer;
+    }
+
+    public function updateFromApiResponse(array $data) : OrderInterface
+    {
+        $order = $this->orderRepository->findOneByExternalId($data['id']);
+        if(!$order) {
+            $order = new Order();
+        }
+
+        // this is the currency we use to create Money object through this method
+        $currency = $data['currencyCode'];
+
+        // set shortcuts for embedded objects
+        $orderLinesData = $data['orderLines'] ?? [];
+        $paymentData = $data['paymentInfo'] ?? [];
+        $shippingData = $data['shippingInfo'] ?? [];
+
+        $createdDate = DateTimeImmutable::createFromJson($data['createdDate']);
+        $modifiedDate = DateTimeImmutable::createFromJson($data['modifiedDate']);
+
+        $giftCertificateAmount = DandomainFoundation\createMoneyFromFloat($currency, $data['giftCertificateAmount']);
+        $totalPrice = DandomainFoundation\createMoneyFromFloat($currency, $data['totalPrice']);
+        $salesDiscount = DandomainFoundation\createMoneyFromFloat($currency, $data['salesDiscount']);
+        $paymentMethodFee = DandomainFoundation\createMoneyFromFloat($currency, $paymentData['fee'] ?? 0.0);
+        $shippingMethodFee = DandomainFoundation\createMoneyFromFloat($currency, $shippingData['fee'] ?? 0.0);
+
+        $order
+            ->setExternalId($data['id'])
+            ->setCurrencyCode($data['currencyCode'])
+            ->setComment($data['comment'])
+            ->setCreatedDate($createdDate)
+            ->setCustomerComment($data['customerComment'])
+            ->setGiftCertificateAmount($giftCertificateAmount)
+            ->setGiftCertificateNumber($data['giftCertificateNumber'])
+            ->setIncomplete($data['incomplete'])
+            ->setIp($data['ip'])
+            ->setModified($data['modified'])
+            ->setModifiedDate($modifiedDate)
+            ->setReferenceNumber($data['referenceNumber'])
+            ->setReferrer($data['referrer'])
+            ->setReservedField1($data['reservedField1'])
+            ->setReservedField2($data['reservedField2'])
+            ->setReservedField3($data['reservedField3'])
+            ->setReservedField4($data['reservedField4'])
+            ->setReservedField5($data['reservedField5'])
+            ->setSalesDiscount($salesDiscount)
+            ->setTotalPrice($totalPrice)
+            ->setTotalWeight($data['totalWeight'])
+            ->setTrackingNumber($data['trackingNumber'])
+            ->setTransactionNumber($data['transactionNumber'])
+            ->setVatPct($data['vatPct'])
+            ->setVatRegNumber($data['vatRegNumber'])
+            ->setXmlParams($data['xmlParams'])
+            ->setShippingMethodFee($shippingMethodFee)
+            ->setPaymentMethodFee($paymentMethodFee)
+        ;
+
+        /*
+        // populate customer
+        $customer = $this->getCustomer();
+        if (!$customer) {
+            $customer = new Customer();
+            $this->setCustomer($customer);
+        }
+        $customer->populateFromApiResponse($data['customerInfo']);
+
+        // populate delivery info
+        $delivery = $this->getDelivery();
+        if (!$delivery) {
+            $delivery = new Delivery();
+            $this->setDelivery($delivery);
+        }
+        $delivery->populateFromApiResponse($data['deliveryInfo']);
+
+        // populate invoice info
+        $invoice = $this->getInvoice();
+        if (!$invoice) {
+            $invoice = new Invoice();
+            $this->setInvoice($invoice);
+        }
+        $invoice->populateFromApiResponse($data['invoiceInfo']);
+
+        // populate payment info
+        $paymentMethod = $this->getPaymentMethod();
+        if (!$paymentMethod) {
+            $paymentMethod = new PaymentMethod();
+            $paymentMethod->populateFromApiResponse($data['paymentInfo'], (string)$data['currencyCode']);
+        }
+        $this->setPaymentMethod($paymentMethod);
+
+        // populate shipping info
+        $shippingMethod = $this->getShippingMethod();
+        if (!$shippingMethod) {
+            $shippingMethod = new ShippingMethod();
+            $shippingMethod->populateFromApiResponse($data['shippingInfo'], (string)$data['currencyCode']);
+        }
+        $this->setShippingMethod($shippingMethod);
+
+        // populate site
+        $site = $this->getSite();
+        if (!$site) {
+            $site = new Site();
+            $site->setExternalId($data['siteId']);
+        }
+        $this->setSite($site);
+
+        // populate state
+        $state = $this->getState();
+        if (!$state) {
+            $state = new State();
+            $state->populateFromApiResponse($data['orderState']);
+        }
+        $this->setState($state);
+        */
+
+
+        if (count($orderLinesData)) {
+            // first remove order lines that are not present anymore
+            $removeOrderLines = [];
+            foreach ($order->getOrderLines() as $orderLineEntity) {
+                $found = false;
+                foreach ($orderLinesData as $orderLineData) {
+                    if($orderLineData['id'] === $orderLineEntity->getExternalId()) {
+                        $found = true;
+                    }
+                }
+
+                if(!$found) {
+                    $removeOrderLines[] = $orderLineEntity;
+                }
+            }
+
+            foreach ($removeOrderLines as $removeOrderLine) {
+                $order->removeOrderLine($removeOrderLine);
+            }
+
+            // then update the rest of the order lines
+            foreach ($orderLinesData as $orderLineData) {
+                if(!$orderLineData['id']) {
+                    continue;
+                }
+
+                $collection = $order
+                    ->getOrderLines()
+                    ->matching(
+                        Criteria::create()->where(Criteria::expr()->eq('externalId', $orderLineData['id']))
+                    );
+
+                if($collection->count()) {
+                    $orderLineEntity = $collection->first();
+                } else {
+                    $orderLineEntity = new OrderLine();
+                    $order->addOrderLine($orderLineEntity);
+                }
+
+                $orderLineUnitPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['unitPrice'] ?? 0.0);
+                $orderLineTotalPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['totalPrice'] ?? 0.0);
+
+                $orderLineEntity
+                    ->setExternalId($orderLineData['id'])
+                    ->setFileUrl($orderLineData['fileUrl'])
+                    ->setProductNumber($orderLineData['productId'])
+                    ->setProductName($orderLineData['productName'])
+                    ->setQuantity($orderLineData['quantity'])
+                    ->setTotalPrice($orderLineTotalPrice)
+                    ->setUnitPrice($orderLineUnitPrice)
+                    ->setVatPct($orderLineData['vatPct'])
+                    ->setVariant($orderLineData['variant'])
+                    ->setXmlParams($orderLineData['xmlParams'])
+                ;
+
+                if ($orderLineData['productId']) {
+                    $product = $this->productSynchronizer->syncOne([
+                        'number' => $orderLineData['productId']
+                    ]);
+                    $orderLineEntity->setProduct($product);
+                }
+            }
+        } else {
+            $order->clearOrderLines();
+        }
+
+
+        return $order;
+    }
+}

@@ -4,6 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,19 +17,21 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
      */
     protected $productUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $categoryUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $orderUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->productUpdater = $categoryUpdater;
+        $this->productUpdater = $orderUpdater;
     }
 
-    public function syncOne(array $options = [])
+    public function syncOne(array $options = []) : ProductInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $product = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProduct($options['number'])->getBody());
         $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
         $this->repository->save($entity);
+
+        return $entity;
     }
 
     public function syncAll(array $options = [])
