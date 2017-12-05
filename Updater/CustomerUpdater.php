@@ -6,7 +6,7 @@ use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
 use Loevgaard\DandomainFoundation\Entity\Customer;
 use Loevgaard\DandomainFoundationBundle\Entity\CustomerRepositoryInterface;
 
-class CustomerUpdater
+class CustomerUpdater implements CustomerUpdaterInterface
 {
     /**
      * @var CustomerRepositoryInterface

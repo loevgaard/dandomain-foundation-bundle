@@ -6,7 +6,7 @@ use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
 use Loevgaard\DandomainFoundation\Entity\Delivery;
 use Loevgaard\DandomainFoundationBundle\Entity\DeliveryRepositoryInterface;
 
-class DeliveryUpdater
+class DeliveryUpdater implements DeliveryUpdaterInterface
 {
     /**
      * @var DeliveryRepositoryInterface

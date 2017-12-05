@@ -7,7 +7,7 @@ use Loevgaard\DandomainFoundation\Entity\Generated\PaymentMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\PaymentMethod;
 use Loevgaard\DandomainFoundationBundle\Entity\PaymentMethodRepositoryInterface;
 
-class PaymentMethodUpdater
+class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
 {
     /**
      * @var PaymentMethodRepositoryInterface
@@ -24,11 +24,19 @@ class PaymentMethodUpdater
      *
      * @param array $data
      * @param string $currency
+     * @param PaymentMethodInterface $paymentMethod
      * @return PaymentMethodInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, string $currency) : PaymentMethodInterface
+    public function updateFromEmbeddedApiResponse(array $data, string $currency, PaymentMethodInterface $paymentMethod = null) : PaymentMethodInterface
     {
-        $paymentMethod = $this->getPaymentMethod($data['id']);
+        if(!$paymentMethod) {
+            $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($data['id']);
+
+            if (!$paymentMethod) {
+                $paymentMethod = new PaymentMethod();
+                $paymentMethod->setExternalId($data['id']);
+            }
+        }
 
         if(!$paymentMethod->getId()) {
             // only update when we create a new entity because this is the embedded method
@@ -36,17 +44,6 @@ class PaymentMethodUpdater
                 ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
                 ->setFeeInclVat($data['feeInclVat'])
                 ->setName($data['name']);
-        }
-
-        return $paymentMethod;
-    }
-
-    private function getPaymentMethod(int $externalId) : PaymentMethodInterface
-    {
-        $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($externalId);
-        if(!$paymentMethod) {
-            $paymentMethod = new PaymentMethod();
-            $paymentMethod->setExternalId($externalId);
         }
 
         return $paymentMethod;

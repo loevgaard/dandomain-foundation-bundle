@@ -11,7 +11,7 @@ use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 
-class ProductUpdater
+class ProductUpdater implements ProductUpdaterInterface
 {
     /**
      * @var ProductRepositoryInterface

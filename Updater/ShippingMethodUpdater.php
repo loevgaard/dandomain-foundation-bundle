@@ -7,7 +7,7 @@ use Loevgaard\DandomainFoundation\Entity\Generated\ShippingMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\ShippingMethod;
 use Loevgaard\DandomainFoundationBundle\Entity\ShippingMethodRepositoryInterface;
 
-class ShippingMethodUpdater
+class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
 {
     /**
      * @var ShippingMethodRepositoryInterface
@@ -36,11 +36,15 @@ class ShippingMethodUpdater
      *
      * @param array $data
      * @param string $currency
+     * @param ShippingMethodInterface $shippingMethod
      * @return ShippingMethodInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, string $currency) : ShippingMethodInterface
+    public function updateFromEmbeddedApiResponse(array $data, string $currency, ShippingMethodInterface $shippingMethod = null) : ShippingMethodInterface
     {
-        $shippingMethod = $this->getShippingMethod($data['id']);
+        if(!$shippingMethod) {
+            $shippingMethod = $this->getShippingMethod($data['id']);
+        }
+
         if(!$shippingMethod->getId()) {
             // only update when we create a new entity because this is the embedded method
             $shippingMethod

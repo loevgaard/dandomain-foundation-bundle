@@ -12,7 +12,7 @@ use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 
-class OrderUpdater
+class OrderUpdater implements OrderUpdaterInterface
 {
     /**
      * @var OrderRepositoryInterface
@@ -148,11 +148,11 @@ class OrderUpdater
         */
 
         // populate payment info
-        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currency);
+        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currency, $order->getPaymentMethod());
         $order->setPaymentMethod($paymentMethod);
 
         // populate shipping info
-        $shippingMethod = $this->shippingMethodUpdater->updateFromEmbeddedApiResponse($data['shippingInfo'], $currency);
+        $shippingMethod = $this->shippingMethodUpdater->updateFromEmbeddedApiResponse($data['shippingInfo'], $currency, $order->getShippingMethod());
         $order->setShippingMethod($shippingMethod);
 
         // populate site
@@ -162,7 +162,7 @@ class OrderUpdater
         $order->setSite($site);
 
         // populate state
-        $state = $this->stateUpdater->updateFromEmbeddedApiResponse($data['orderState']);
+        $state = $this->stateUpdater->updateFromEmbeddedApiResponse($data['orderState'], $order->getState());
         $order->setState($state);
 
 
@@ -235,7 +235,6 @@ class OrderUpdater
         } else {
             $order->clearOrderLines();
         }
-
 
         return $order;
     }

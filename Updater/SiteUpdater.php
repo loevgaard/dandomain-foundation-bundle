@@ -6,7 +6,7 @@ use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
 use Loevgaard\DandomainFoundation\Entity\Site;
 use Loevgaard\DandomainFoundationBundle\Entity\SiteRepositoryInterface;
 
-class SiteUpdater
+class SiteUpdater implements SiteUpdaterInterface
 {
     /**
      * @var SiteRepositoryInterface
