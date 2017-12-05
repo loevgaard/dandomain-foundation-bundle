@@ -18,9 +18,9 @@ class SynchronizeManufacturersCommand extends ContainerAwareCommand
      */
     protected $manufacturerSynchronizer;
 
-    public function __construct(ManufacturerSynchronizerInterface $periodSynchronizer)
+    public function __construct(ManufacturerSynchronizerInterface $stateSynchronizer)
     {
-        $this->manufacturerSynchronizer = $periodSynchronizer;
+        $this->manufacturerSynchronizer = $stateSynchronizer;
 
         parent::__construct();
     }

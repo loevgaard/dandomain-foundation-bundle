@@ -21,9 +21,9 @@ class SynchronizeCategoriesCommand extends ContainerAwareCommand
      */
     protected $categorySynchronizer;
 
-    public function __construct(CategorySynchronizerInterface $periodSynchronizer)
+    public function __construct(CategorySynchronizerInterface $stateSynchronizer)
     {
-        $this->categorySynchronizer = $periodSynchronizer;
+        $this->categorySynchronizer = $stateSynchronizer;
 
         parent::__construct();
     }

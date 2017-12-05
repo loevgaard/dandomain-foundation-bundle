@@ -2,25 +2,25 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
-use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\StateSynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SynchronizeSitesCommand extends ContainerAwareCommand
+class SynchronizeStatesCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     /**
-     * @var SiteSynchronizerInterface
+     * @var StateSynchronizerInterface
      */
-    protected $siteSynchronizer;
+    protected $stateSynchronizer;
 
-    public function __construct(SiteSynchronizerInterface $stateSynchronizer)
+    public function __construct(StateSynchronizerInterface $stateSynchronizer)
     {
-        $this->siteSynchronizer = $stateSynchronizer;
+        $this->stateSynchronizer = $stateSynchronizer;
 
         parent::__construct();
     }
@@ -28,8 +28,8 @@ class SynchronizeSitesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('loevgaard:dandomain-foundation:sync:sites')
-            ->setDescription('Synchronize sites from Dandomain til local database')
+            ->setName('loevgaard:dandomain-foundation:sync:states')
+            ->setDescription('Synchronize states from Dandomain til local database')
         ;
     }
 
@@ -41,9 +41,9 @@ class SynchronizeSitesCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $this->siteSynchronizer->setLogger(new ConsoleLogger($output));
+        $this->stateSynchronizer->setLogger(new ConsoleLogger($output));
 
-        $this->siteSynchronizer->syncAll();
+        $this->stateSynchronizer->syncAll();
 
         $this->release();
 

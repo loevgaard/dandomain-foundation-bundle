@@ -2,51 +2,47 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\StateInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundationBundle\Entity\StateRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\StateUpdaterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StateSynchronizer extends Synchronizer
+class StateSynchronizer extends Synchronizer implements StateSynchronizerInterface
 {
     /**
-     * @var string
+     * @var StateUpdaterInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\State';
+    protected $stateUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\StateInterface';
-
-    /**
-     * Synchronizes State.
-     *
-     * @param \stdClass $state
-     * @param bool      $flush
-     *
-     * @return StateInterface
-     */
-    public function syncState($state, $flush = true)
+    public function __construct(StateRepositoryInterface $repository, Api $api, string $logsDir, StateUpdaterInterface $stateUpdater)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $state->id,
-        ]);
+        parent::__construct($repository, $api, $logsDir);
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
+        $this->stateUpdater = $stateUpdater;
+    }
+
+    public function syncOne(array $options = []) : ?StateInterface
+    {
+        throw new \RuntimeException('Method not implemented');
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $states = \GuzzleHttp\json_decode((string)$this->api->order->getOrderStates()->getBody());
+
+        foreach ($states as $state) {
+            $entity = $this->stateUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($state));
+            $this->repository->save($entity);
         }
+    }
 
-        $entity
-            ->setExternalId($state->id ? : null)
-            ->setExclStatistics($state->exclStatistics)
-            ->setIsDefault($state->isDefault)
-            ->setName($state->name ? : null)
-        ;
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+    }
 
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

@@ -16,11 +16,11 @@ class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynch
      */
     protected $manufacturerUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ManufacturerUpdaterInterface $periodUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ManufacturerUpdaterInterface $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->manufacturerUpdater = $periodUpdater;
+        $this->manufacturerUpdater = $stateUpdater;
     }
 
     public function syncOne(array $options = []) : OrderInterface

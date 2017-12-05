@@ -18,9 +18,9 @@ class SynchronizePeriodsCommand extends ContainerAwareCommand
      */
     protected $periodSynchronizer;
 
-    public function __construct(PeriodSynchronizerInterface $periodSynchronizer)
+    public function __construct(PeriodSynchronizerInterface $stateSynchronizer)
     {
-        $this->periodSynchronizer = $periodSynchronizer;
+        $this->periodSynchronizer = $stateSynchronizer;
 
         parent::__construct();
     }

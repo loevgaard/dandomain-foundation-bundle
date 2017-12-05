@@ -20,9 +20,9 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
      */
     protected $orderSynchronizer;
 
-    public function __construct(OrderSynchronizerInterface $periodSynchronizer)
+    public function __construct(OrderSynchronizerInterface $stateSynchronizer)
     {
-        $this->orderSynchronizer = $periodSynchronizer;
+        $this->orderSynchronizer = $stateSynchronizer;
 
         parent::__construct();
     }

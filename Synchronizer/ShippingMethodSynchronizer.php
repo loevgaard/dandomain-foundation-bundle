@@ -16,11 +16,11 @@ class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodS
      */
     protected $shippingMethodUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ShippingMethodUpdater $periodUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ShippingMethodUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->shippingMethodUpdater = $periodUpdater;
+        $this->shippingMethodUpdater = $stateUpdater;
     }
 
     public function syncOne(array $options = []) : OrderInterface

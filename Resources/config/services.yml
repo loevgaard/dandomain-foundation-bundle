@@ -42,6 +42,12 @@ services:
             - "@loevgaard_dandomain_foundation.site_synchronizer"
         tags: [console.command]
 
+    loevgaard_dandomain_altapay.synchronize_states_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeStatesCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.state_synchronizer"
+        tags: [console.command]
+
     # Updaters
     loevgaard_dandomain_foundation.category_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater
@@ -176,6 +182,14 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.site_updater"
+
+    loevgaard_dandomain_foundation.state_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\StateSynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.state_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.state_updater"
 
     # Repositories
     loevgaard_dandomain_foundation.category_repository:

@@ -15,11 +15,11 @@ class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInter
      */
     protected $periodUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, PeriodUpdaterInterface $periodUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, PeriodUpdaterInterface $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->periodUpdater = $periodUpdater;
+        $this->periodUpdater = $stateUpdater;
     }
 
     public function syncOne(array $options = []) : DandomainFoundation\Entity\Generated\PeriodInterface

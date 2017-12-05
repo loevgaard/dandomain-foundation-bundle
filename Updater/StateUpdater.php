@@ -18,6 +18,23 @@ class StateUpdater implements StateUpdaterInterface
         $this->stateRepository = $stateRepository;
     }
 
+    public function updateFromApiResponse(array $data) : StateInterface
+    {
+        $state = $this->stateRepository->findOneByExternalId($data['id']);
+        if (!$state) {
+            // only update when we create a new because this is the embedded method
+            $state = new State();
+            $state->setExternalId($data['id']);
+        }
+
+        $state
+            ->setExclStatistics($data['exclStatistics'])
+            ->setIsDefault($data['isDefault'])
+            ->setName($data['name']);
+
+        return $state;
+    }
+
     /**
      * This method is called when an payment method is embedded in another object, i.e. orders
      *
