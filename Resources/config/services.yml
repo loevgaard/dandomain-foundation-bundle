@@ -29,6 +29,11 @@ services:
         arguments:
             - "@loevgaard_dandomain_foundation.delivery_repository"
 
+    loevgaard_dandomain_foundation.invoice_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\InvoiceUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.invoice_repository"
+
     loevgaard_dandomain_foundation.order_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\OrderUpdater
         arguments:
@@ -120,6 +125,12 @@ services:
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Delivery
+
+    loevgaard_dandomain_foundation.invoice_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\InvoiceRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\Invoice
 
     loevgaard_dandomain_foundation.manufacturer_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepository

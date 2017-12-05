@@ -25,12 +25,12 @@ class OrderUpdater implements OrderUpdaterInterface
     protected $productSynchronizer;
 
     /**
-     * @var ShippingMethodUpdater
+     * @var ShippingMethodUpdaterInterface
      */
     protected $shippingMethodUpdater;
 
     /**
-     * @var PaymentMethodUpdater
+     * @var PaymentMethodUpdaterInterface
      */
     protected $paymentMethodUpdater;
 
@@ -40,29 +40,35 @@ class OrderUpdater implements OrderUpdaterInterface
     protected $siteSynchronizer;
 
     /**
-     * @var StateUpdater
+     * @var StateUpdaterInterface
      */
     protected $stateUpdater;
 
     /**
-     * @var CustomerUpdater
+     * @var CustomerUpdaterInterface
      */
     protected $customerUpdater;
 
     /**
-     * @var DeliveryUpdater
+     * @var DeliveryUpdaterInterface
      */
     protected $deliveryUpdater;
+
+    /**
+     * @var InvoiceUpdaterInterface
+     */
+    protected $invoiceUpdater;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductSynchronizerInterface $productSynchronizer,
-        ShippingMethodUpdater $shippingMethodUpdater,
-        PaymentMethodUpdater $paymentMethodUpdater,
+        ShippingMethodUpdaterInterface $shippingMethodUpdater,
+        PaymentMethodUpdaterInterface $paymentMethodUpdater,
         SiteSynchronizerInterface $siteSynchronizer,
-        StateUpdater $stateUpdater,
-        CustomerUpdater $customerUpdater,
-        DeliveryUpdater $deliveryUpdater
+        StateUpdaterInterface $stateUpdater,
+        CustomerUpdaterInterface $customerUpdater,
+        DeliveryUpdaterInterface $deliveryUpdater,
+        InvoiceUpdaterInterface $invoiceUpdater
     ) {
         $this->orderRepository = $orderRepository;
         $this->productSynchronizer = $productSynchronizer;
@@ -72,6 +78,7 @@ class OrderUpdater implements OrderUpdaterInterface
         $this->stateUpdater = $stateUpdater;
         $this->customerUpdater = $customerUpdater;
         $this->deliveryUpdater = $deliveryUpdater;
+        $this->invoiceUpdater = $invoiceUpdater;
     }
 
     public function updateFromApiResponse(array $data) : OrderInterface
@@ -137,15 +144,9 @@ class OrderUpdater implements OrderUpdaterInterface
         $delivery = $this->deliveryUpdater->updateFromEmbeddedApiResponse($data['deliveryInfo'], $order->getDelivery());
         $order->setDelivery($delivery);
 
-        /*
         // populate invoice info
-        $invoice = $this->getInvoice();
-        if (!$invoice) {
-            $invoice = new Invoice();
-            $this->setInvoice($invoice);
-        }
-        $invoice->populateFromApiResponse($data['invoiceInfo']);
-        */
+        $invoice = $this->invoiceUpdater->updateFromEmbeddedApiResponse($data['invoiceInfo'], $order->getInvoice());
+        $order->setInvoice($invoice);
 
         // populate payment info
         $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currency, $order->getPaymentMethod());
