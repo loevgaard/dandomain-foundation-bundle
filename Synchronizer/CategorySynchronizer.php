@@ -4,10 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundationBundle\Entity\CategoryRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundationBundle\Model\CategoryInterface;
-use Loevgaard\DandomainFoundationBundle\Model\TranslatableInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,11 +20,11 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
      */
     protected $categoryUpdater;
 
-    public function __construct(CategoryRepositoryInterface $repository, Api $api, string $logsDir, CategoryUpdater $siteUpdater)
+    public function __construct(CategoryRepositoryInterface $repository, Api $api, string $logsDir, CategoryUpdater $periodUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->categoryUpdater = $siteUpdater;
+        $this->categoryUpdater = $periodUpdater;
     }
 
     public function syncOne(array $options = [])

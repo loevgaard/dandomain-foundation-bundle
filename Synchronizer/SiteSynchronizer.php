@@ -21,11 +21,11 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
      */
     protected $siteUpdater;
 
-    public function __construct(SiteRepositoryInterface $repository, Api $api, string $logsDir, SiteUpdater $siteUpdater)
+    public function __construct(SiteRepositoryInterface $repository, Api $api, string $logsDir, SiteUpdater $periodUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->siteUpdater = $siteUpdater;
+        $this->siteUpdater = $periodUpdater;
     }
 
     public function syncOne(array $options = []) : ?SiteInterface

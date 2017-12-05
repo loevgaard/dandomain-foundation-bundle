@@ -17,11 +17,11 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
      */
     protected $productUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $siteUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $periodUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->productUpdater = $siteUpdater;
+        $this->productUpdater = $periodUpdater;
     }
 
     public function syncOne(array $options = []) : ProductInterface

@@ -2,75 +2,45 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\PeriodInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\PeriodUpdaterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PeriodSynchronizer extends Synchronizer
+class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInterface
 {
     /**
-     * @var string
+     * @var PeriodUpdaterInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Period';
+    protected $periodUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\PeriodInterface';
-
-    /**
-     * Synchronizes Period.
-     *
-     * @param \stdClass $period
-     * @param bool      $flush
-     *
-     * @return PeriodInterface
-     */
-    public function syncPeriod($period, $flush = true)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, PeriodUpdaterInterface $periodUpdater)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $period->id,
-        ]);
+        parent::__construct($repository, $api, $logsDir);
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
+        $this->periodUpdater = $periodUpdater;
+    }
+
+    public function syncOne(array $options = []) : DandomainFoundation\Entity\Generated\PeriodInterface
+    {
+        throw new \RuntimeException('Method not implemented');
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $periods = \GuzzleHttp\json_decode((string)$this->api->relatedData->getPeriods()->getBody());
+        foreach ($periods as $period) {
+            $entity = $this->periodUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($period));
+            $this->repository->save($entity);
         }
+    }
 
-        if ($period->endDate) {
-            $endDate = \Dandomain\Api\jsonDateToDate($period->endDate);
-            $endDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
-        } else {
-            $endDate = null;
-        }
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+    }
 
-        if ($period->startDate) {
-            $startDate = \Dandomain\Api\jsonDateToDate($period->startDate);
-            $startDate->setTimezone(new \DateTimeZone('Europe/Copenhagen'));
-        } else {
-            $startDate = null;
-        }
-
-        $entity
-            ->setDisabled($period->disabled ? true : false)
-            ->setExternalId($period->id ? : null)
-        ;
-
-        if (is_string($period->title)) {
-            $entity->setTitle($period->title);
-        }
-
-        if (null !== $endDate) {
-            $entity->setEndDate($endDate);
-        }
-
-        if (null !== $startDate) {
-            $entity->setStartDate($startDate);
-        }
-
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

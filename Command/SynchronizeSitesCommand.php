@@ -18,9 +18,9 @@ class SynchronizeSitesCommand extends ContainerAwareCommand
      */
     protected $siteSynchronizer;
 
-    public function __construct(SiteSynchronizerInterface $categorySynchronizer)
+    public function __construct(SiteSynchronizerInterface $periodSynchronizer)
     {
-        $this->siteSynchronizer = $categorySynchronizer;
+        $this->siteSynchronizer = $periodSynchronizer;
 
         parent::__construct();
     }

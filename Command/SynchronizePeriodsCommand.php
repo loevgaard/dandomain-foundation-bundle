@@ -2,14 +2,28 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
+use Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SynchronizePeriodsCommand extends ContainerAwareCommand
 {
     use LockableTrait;
+
+    /**
+     * @var PeriodSynchronizerInterface
+     */
+    protected $periodSynchronizer;
+
+    public function __construct(PeriodSynchronizerInterface $periodSynchronizer)
+    {
+        $this->periodSynchronizer = $periodSynchronizer;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -27,10 +41,9 @@ class SynchronizePeriodsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.period_service');
-        $service
-            ->setOutput($output)
-            ->syncAll();
+        $this->periodSynchronizer->setLogger(new ConsoleLogger($output));
+
+        $this->periodSynchronizer->syncAll();
 
         $this->release();
 

@@ -2,51 +2,46 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\ManufacturerInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\ManufacturerUpdaterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ManufacturerSynchronizer extends Synchronizer
+class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynchronizerInterface
 {
     /**
-     * @var string
+     * @var ManufacturerUpdaterInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Manufacturer';
+    protected $manufacturerUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ManufacturerInterface';
-
-    /**
-     * Synchronizes Manufacturer.
-     *
-     * @param \stdClass $manufacturer
-     * @param bool      $flush
-     *
-     * @return ManufacturerInterface
-     */
-    public function syncManufacturer($manufacturer, $flush = true)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ManufacturerUpdaterInterface $periodUpdater)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $manufacturer->id,
-        ]);
+        parent::__construct($repository, $api, $logsDir);
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
+        $this->manufacturerUpdater = $periodUpdater;
+    }
+
+    public function syncOne(array $options = []) : OrderInterface
+    {
+        throw new \RuntimeException('Method not implemented');
+    }
+
+    public function syncAll(array $options = [])
+    {
+        $manufacturers = \GuzzleHttp\json_decode((string)$this->api->relatedData->getManufacturers()->getBody());
+        foreach ($manufacturers as $manufacturer) {
+            $entity = $this->manufacturerUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($manufacturer));
+            $this->repository->save($entity);
         }
+    }
 
-        $entity
-            ->setExternalId($manufacturer->id ? : null)
-            ->setLink($manufacturer->link ? : null)
-            ->setLinkText($manufacturer->linkText ? : null)
-            ->setName($manufacturer->name ? : null)
-        ;
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+    }
 
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

@@ -12,16 +12,34 @@ services:
             - "@loevgaard_dandomain_foundation.product_synchronizer"
         tags: [console.command]
 
+    loevgaard_dandomain_altapay.synchronize_manufacturers_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeManufacturersCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.manufacturer_synchronizer"
+        tags: [console.command]
+
     loevgaard_dandomain_altapay.synchronize_orders_command:
         class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeOrdersCommand
         arguments:
             - "@loevgaard_dandomain_foundation.order_synchronizer"
         tags: [console.command]
 
+    loevgaard_dandomain_altapay.synchronize_periods_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizePeriodsCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.period_synchronizer"
+        tags: [console.command]
+
     loevgaard_dandomain_altapay.synchronize_shipping_methods_command:
         class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeShippingMethodsCommand
         arguments:
             - "@loevgaard_dandomain_foundation.shipping_method_synchronizer"
+        tags: [console.command]
+
+    loevgaard_dandomain_altapay.synchronize_sites_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeSitesCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.site_synchronizer"
         tags: [console.command]
 
     # Updaters
@@ -45,6 +63,11 @@ services:
         arguments:
             - "@loevgaard_dandomain_foundation.invoice_repository"
 
+    loevgaard_dandomain_foundation.manufacturer_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\ManufacturerUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.manufacturer_repository"
+
     loevgaard_dandomain_foundation.order_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\OrderUpdater
         arguments:
@@ -62,6 +85,11 @@ services:
         class: Loevgaard\DandomainFoundationBundle\Updater\PaymentMethodUpdater
         arguments:
             - "@loevgaard_dandomain_foundation.payment_method_repository"
+
+    loevgaard_dandomain_foundation.period_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\PeriodUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.period_repository"
 
     loevgaard_dandomain_foundation.product_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater
@@ -93,6 +121,14 @@ services:
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.category_updater"
 
+    loevgaard_dandomain_foundation.period_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.product_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.period_updater"
+
     loevgaard_dandomain_foundation.product_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer
         arguments:
@@ -100,6 +136,14 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.product_updater"
+
+    loevgaard_dandomain_foundation.manufacturer_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.order_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.manufacturer_updater"
 
     loevgaard_dandomain_foundation.order_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizer
@@ -174,6 +218,12 @@ services:
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\PaymentMethod
+
+    loevgaard_dandomain_foundation.period_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\PeriodRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\Period
 
     loevgaard_dandomain_foundation.product_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\ProductRepository

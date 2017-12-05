@@ -2,20 +2,34 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
+use Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SynchronizeManufacturersCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
+    /**
+     * @var ManufacturerSynchronizerInterface
+     */
+    protected $manufacturerSynchronizer;
+
+    public function __construct(ManufacturerSynchronizerInterface $periodSynchronizer)
+    {
+        $this->manufacturerSynchronizer = $periodSynchronizer;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
             ->setName('loevgaard:dandomain-foundation:sync:manufacturers')
-            ->setDescription('Synchronize manufacturers from Dandomain til local database')
+            ->setDescription('Synchronize manufacturers/brands from Dandomain til local database')
         ;
     }
 
@@ -27,10 +41,9 @@ class SynchronizeManufacturersCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $service = $this->getContainer()->get('loevgaard_dandomain_foundation.manufacturer_service');
-        $service
-            ->setOutput($output)
-            ->syncAll();
+        $this->manufacturerSynchronizer->setLogger(new ConsoleLogger($output));
+
+        $this->manufacturerSynchronizer->syncAll();
 
         $this->release();
 

@@ -17,11 +17,11 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
      */
     protected $orderUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, OrderUpdater $siteUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, OrderUpdater $periodUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->orderUpdater = $siteUpdater;
+        $this->orderUpdater = $periodUpdater;
     }
 
     public function syncOne(array $options = []) : OrderInterface

@@ -16,11 +16,11 @@ class PaymentMethodSynchronizer extends Synchronizer implements PaymentMethodSyn
      */
     protected $paymentMethodUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, PaymentMethodUpdater $siteUpdater)
+    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, PaymentMethodUpdater $periodUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->paymentMethodUpdater = $siteUpdater;
+        $this->paymentMethodUpdater = $periodUpdater;
     }
 
     public function syncOne(array $options = []) : OrderInterface
