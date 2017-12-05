@@ -27,12 +27,12 @@ class PeriodUpdater implements PeriodUpdaterInterface
             $period->setExternalId($data['id']);
         }
 
-        if ($period['startDate']) {
-            $period->setEndDate(DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s', $period['startDate']));
+        if ($data['startDate']) {
+            $period->setStartDate(DateTimeImmutable::createFromJson($data['startDate']));
         }
 
-        if ($period['endDate']) {
-            $period->setEndDate(DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s', $period['endDate']));
+        if ($data['endDate']) {
+            $period->setEndDate(DateTimeImmutable::createFromJson($data['endDate']));
         }
 
         $period
