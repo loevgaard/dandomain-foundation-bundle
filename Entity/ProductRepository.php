@@ -9,9 +9,10 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 {
     /**
      * @param string $number
+     * @param bool $fetchAll
      * @return ProductInterface|null
      */
-    public function findOneByProductNumber(string $number): ?ProductInterface
+    public function findOneByProductNumber(string $number, bool $fetchAll = false): ?ProductInterface
     {
         /** @var ProductInterface $obj */
         $obj = $this->repository->findOneBy([
@@ -21,8 +22,23 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         return $obj;
     }
 
-    public function findOneByExternalId(int $externalId) : ?ProductInterface
+    public function findOneByExternalId(int $externalId, bool $fetchAll = false) : ?ProductInterface
     {
+        if($fetchAll) {
+            // @todo test if this works
+            $qb = $this->repository->createQueryBuilder('p');
+            $qb->select('p, m, vg')
+                ->leftJoin('p.manufacturers', 'm')
+                ->leftJoin('p.variantGroups', 'vg')
+            ;
+            $qb->where($qb->expr()->eq('p.externalId', $externalId));
+
+            /** @var ProductInterface $obj */
+            $obj = $qb->getQuery()->getSingleResult();
+
+            return $obj;
+        }
+
         /** @var ProductInterface $obj */
         $obj = $this->repository->findOneBy([
             'externalId' => $externalId
@@ -30,53 +46,4 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 
         return $obj;
     }
-
-    /**
-     * @param ProductInterface $obj
-     */
-    /*
-    public function save($obj)
-    {
-        $objectManager = $this->manager;
-
-        if(!$obj->getId()) {
-            // check if product exists
-            $productEntity = $objectManager->getRepository(Product::class)->findOneBy([
-                'externalId' => $obj->getExternalId()
-            ]);
-
-            if ($productEntity) {
-                $obj = $objectManager->merge($obj);
-            }
-        }
-
-        $remove = [];
-        $add = [];
-
-        foreach ($obj->getManufacturers() as $manufacturer) {
-            if($manufacturer->getId()) {
-                continue;
-            }
-
-            $manufacturerEntity = $objectManager->getRepository(Manufacturer::class)->findOneBy([
-                'externalId' => $manufacturer->getExternalId()
-            ]);
-
-            if($manufacturerEntity) {
-                $add[] = $objectManager->merge($manufacturer);
-                $remove[] = $manufacturer;
-            }
-        }
-
-        foreach ($remove as $value) {
-            $obj->removeManufacturer($value);
-        }
-
-        foreach ($add as $value) {
-            $obj->addManufacturer($value);
-        }
-
-        parent::save($obj);
-    }
-    */
 }

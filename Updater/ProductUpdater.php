@@ -8,8 +8,10 @@ use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Period;
 use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
+use Loevgaard\DandomainFoundation\Entity\VariantGroup;
 use Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepositoryInterface;
 
 class ProductUpdater implements ProductUpdaterInterface
 {
@@ -23,15 +25,25 @@ class ProductUpdater implements ProductUpdaterInterface
      */
     protected $manufacturerRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository, ManufacturerRepositoryInterface $manufacturerRepository)
-    {
+    /**
+     * @var VariantGroupRepositoryInterface
+     */
+    protected $variantGroupRepository;
+
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        ManufacturerRepositoryInterface $manufacturerRepository,
+        VariantGroupRepositoryInterface $variantGroupRepository
+
+    ) {
         $this->productRepository = $productRepository;
         $this->manufacturerRepository = $manufacturerRepository;
+        $this->variantGroupRepository = $variantGroupRepository;
     }
 
     public function updateFromApiResponse(array $data) : ProductInterface
     {
-        $product = $this->productRepository->findOneByExternalId($data['id']);
+        $product = $this->productRepository->findOneByExternalId($data['id'], true);
         if(!$product) {
             $product = new Product();
         }
@@ -45,6 +57,7 @@ class ProductUpdater implements ProductUpdaterInterface
         }
 
         $product
+            ->setExternalId($data['id'])
             ->setBarCodeNumber($data['barCodeNumber'])
             ->setCategoryIdList($data['categoryIdList'])
             ->setComments($data['comments'])
@@ -53,7 +66,6 @@ class ProductUpdater implements ProductUpdaterInterface
             ->setDefaultCategoryId($data['defaultCategoryId'])
             ->setDisabledVariantIdList($data['disabledVariantIdList'])
             ->setEdbPriserProductNumber($data['edbPriserProductNumber'])
-            ->setExternalId($data['id'])
             ->setFileSaleLink($data['fileSaleLink'])
             ->setGoogleFeedCategory($data['googleFeedCategory'])
             ->setIsGiftCertificate($data['isGiftCertificate'])
@@ -74,7 +86,6 @@ class ProductUpdater implements ProductUpdaterInterface
             ->setStockLimit($data['stockLimit'])
             ->setTypeId($data['typeId'])
             ->setUpdatedBy($data['updatedBy'])
-            ->setVariantGroupIdList($data['variantGroupIdList'])
             ->setVariantIdList($data['variantIdList'])
             ->setVariantMasterId($data['variantMasterId'])
             ->setVendorNumber($data['vendorNumber'])
@@ -215,10 +226,48 @@ class ProductUpdater implements ProductUpdaterInterface
                     ]);
                 }
 
-                $product->getManufacturers()->add($manufacturer);
+                $product->addManufacturer($manufacturer);
             }
         }
         $product->setManufacturereIdList($data['manufacturereIdList']);
+
+        /**
+         * Update variant groups
+         */
+        $variantGroupIdsToRemove = array_diff($product->getVariantGroupIdList() ?? [], $data['variantGroupIdList'] ?? []);
+        $variantGroupIdsToAdd = array_diff($data['variantGroupIdList'] ?? [], $product->getVariantGroupIdList() ?? []);
+        $variantGroupsToRemove = [];
+
+        foreach ($product->getVariantGroups() as $variantGroup) {
+            if (in_array($variantGroup->getExternalId(), $variantGroupIdsToRemove)) {
+                $variantGroupsToRemove[] = $variantGroup;
+            }
+        }
+
+        foreach ($variantGroupsToRemove as $item) {
+            $product->getVariantGroups()->removeElement($item);
+        }
+
+        foreach ($data['variantGroups'] as $variantGroupData) {
+            if(in_array($variantGroupData['id'], $variantGroupIdsToAdd)) {
+                $variantGroup = $this->variantGroupRepository->findOneByExternalId($variantGroupData['id']);
+                if(!$variantGroup) {
+                    $variantGroup = new VariantGroup();
+
+                    // only update properties if it's a new object
+                    $variantGroup->hydrate([
+                        'externalId' => $variantGroupData['id'],
+                        'isFreeText' => $variantGroupData['isFreeText'],
+                        'selectText' => $variantGroupData['selectText'],
+                        'sortOrder' => $variantGroupData['sortOrder'],
+                        'text' => $variantGroupData['text']
+                    ]);
+                }
+
+                $product->addVariantGroup($variantGroup);
+            }
+        }
+        $product->setVariantGroupIdList($data['variantGroupIdList']);
 
         /*
          * @todo outcomment this and fix it
@@ -284,14 +333,6 @@ class ProductUpdater implements ProductUpdaterInterface
 //                $variant = new Variant();
 //                $variant->$productRelation($variantData);
 //                $this->addVariant($variant);
-//            }
-//        }
-//
-//        if (is_array($data['variantGroups'])) {
-//            foreach ($data['variantGroups'] as $variantGroupData) {
-//                $variantGroup = new VariantGroup();
-//                $variantGroup->$productRelation($variantGroupData);
-//                $this->addVariantGroup($variantGroup);
 //            }
 //        }
 

@@ -102,6 +102,7 @@ services:
         arguments:
             - "@loevgaard_dandomain_foundation.product_repository"
             - "@loevgaard_dandomain_foundation.manufacturer_repository"
+            - "@loevgaard_dandomain_foundation.variant_group_repository"
 
     loevgaard_dandomain_foundation.shipping_method_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\ShippingMethodUpdater
@@ -262,3 +263,9 @@ services:
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\State
+
+    loevgaard_dandomain_foundation.variant_group_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\VariantGroup
