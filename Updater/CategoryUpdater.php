@@ -35,11 +35,12 @@ class CategoryUpdater implements CategoryUpdaterInterface
         }
 
         $category
+            ->setNumber($data['number'])
             ->setB2bGroupId($data['b2BGroupId'])
             ->setCustomInfoLayout($data['customInfoLayout'])
             ->setCustomListLayout($data['customListLayout'])
             ->setDefaultParentId($data['defaultParentId'])
-            ->setExternalId($data['number'])
+            ->setExternalId($data['internalId'])
             ->setInfoLayout($data['infoLayout'])
             ->setInternalId($data['internalId'])
             ->setListLayout($data['listLayout'])
@@ -89,5 +90,7 @@ class CategoryUpdater implements CategoryUpdaterInterface
 
             $category->mergeNewTranslations();
         }
+
+        return $category;
     }
 }

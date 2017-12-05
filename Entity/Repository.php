@@ -2,13 +2,13 @@
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManager;
 
 abstract class Repository implements RepositoryInterface
 {
     /**
-     * @var ObjectManager
+     * @var EntityManager
      */
     protected $manager;
 
