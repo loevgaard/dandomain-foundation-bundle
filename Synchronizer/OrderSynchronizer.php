@@ -3,12 +3,12 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\OrderUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 
 class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterface
 {

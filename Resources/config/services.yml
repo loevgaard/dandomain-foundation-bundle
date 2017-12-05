@@ -1,5 +1,11 @@
 services:
     # Commands
+    loevgaard_dandomain_altapay.synchronize_categories_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeCategoriesCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.category_synchronizer"
+        tags: [console.command]
+
     loevgaard_dandomain_altapay.synchronize_products_command:
         class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeProductsCommand
         arguments:
@@ -12,13 +18,18 @@ services:
             - "@loevgaard_dandomain_foundation.order_synchronizer"
         tags: [console.command]
 
-    loevgaard_dandomain_altapay.synchronize_shipping_method_command:
+    loevgaard_dandomain_altapay.synchronize_shipping_methods_command:
         class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeShippingMethodsCommand
         arguments:
             - "@loevgaard_dandomain_foundation.shipping_method_synchronizer"
         tags: [console.command]
 
     # Updaters
+    loevgaard_dandomain_foundation.category_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.category_repository"
+
     loevgaard_dandomain_foundation.customer_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\CustomerUpdater
         arguments:
@@ -45,6 +56,7 @@ services:
             - "@loevgaard_dandomain_foundation.state_updater"
             - "@loevgaard_dandomain_foundation.customer_updater"
             - "@loevgaard_dandomain_foundation.delivery_updater"
+            - "@loevgaard_dandomain_foundation.invoice_updater"
 
     loevgaard_dandomain_foundation.payment_method_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\PaymentMethodUpdater
@@ -73,6 +85,14 @@ services:
             - "@loevgaard_dandomain_foundation.state_repository"
 
     # Synchronizers
+    loevgaard_dandomain_foundation.category_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.category_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.category_updater"
+
     loevgaard_dandomain_foundation.product_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizer
         arguments:
@@ -114,6 +134,12 @@ services:
             - "@loevgaard_dandomain_foundation.site_updater"
 
     # Repositories
+    loevgaard_dandomain_foundation.category_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\CategoryRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\Category
+
     loevgaard_dandomain_foundation.customer_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\CustomerRepository
         arguments:

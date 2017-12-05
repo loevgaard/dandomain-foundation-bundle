@@ -1,7 +1,0 @@
-app_admin_category:
-    resource: "@LoevgaardDandomainFoundationBundle/Resources/config/routing/category.yml"
-    prefix:   /admin/category
-
-app_admin_product:
-    resource: "@LoevgaardDandomainFoundationBundle/Resources/config/routing/product.yml"
-    prefix:   /admin/product

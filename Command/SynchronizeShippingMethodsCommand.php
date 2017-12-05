@@ -18,9 +18,9 @@ class SynchronizeShippingMethodsCommand extends ContainerAwareCommand
      */
     protected $shippingMethodSynchronizer;
 
-    public function __construct(ShippingMethodSynchronizerInterface $siteSynchronizer)
+    public function __construct(ShippingMethodSynchronizerInterface $categorySynchronizer)
     {
-        $this->shippingMethodSynchronizer = $siteSynchronizer;
+        $this->shippingMethodSynchronizer = $categorySynchronizer;
 
         parent::__construct();
     }

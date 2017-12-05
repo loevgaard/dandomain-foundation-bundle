@@ -46,7 +46,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
         }
 
         foreach ($categories as $category) {
-            $this->categoryUpdater->updateFromApiResponse($category);
+            $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
             $this->recursiveSync((int)$category->number);
         }
     }
@@ -166,9 +166,9 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
     public function configureOptionsOne(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefined(['id'])
-            ->setAllowedTypes('id', 'int')
-            ->setRequired('id')
+            ->setDefined(['externalId'])
+            ->setAllowedTypes('externalId', 'int')
+            ->setRequired('externalId')
         ;
     }
 

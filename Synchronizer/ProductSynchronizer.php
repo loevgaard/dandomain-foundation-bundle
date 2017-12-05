@@ -3,12 +3,12 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 
 class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInterface
 {
