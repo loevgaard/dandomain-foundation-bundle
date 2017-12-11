@@ -34,7 +34,6 @@ class ProductUpdater implements ProductUpdaterInterface
         ProductRepositoryInterface $productRepository,
         ManufacturerRepositoryInterface $manufacturerRepository,
         VariantGroupRepositoryInterface $variantGroupRepository
-
     ) {
         $this->productRepository = $productRepository;
         $this->manufacturerRepository = $manufacturerRepository;
