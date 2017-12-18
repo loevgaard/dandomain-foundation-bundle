@@ -2,7 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Period;
@@ -201,7 +201,7 @@ class ProductUpdater implements ProductUpdaterInterface
         return $product;
     }
 
-    protected function updateCollection(array $originalIdList, array $newIdList, ArrayCollection $collection) : array
+    protected function updateCollection(array $originalIdList, array $newIdList, Collection $collection) : array
     {
         $idsToRemove = array_diff($originalIdList, $newIdList);
         $idsToAdd = array_diff($newIdList, $originalIdList);
