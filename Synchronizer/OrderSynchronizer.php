@@ -82,6 +82,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
             $orders = \GuzzleHttp\json_decode((string)$this->api->order->getOrdersInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
             foreach ($orders as $order) {
+                $this->logger->info('Order: '.$order->id);
                 $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
                 $this->repository->save($entity);
             }
