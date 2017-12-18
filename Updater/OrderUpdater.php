@@ -229,7 +229,7 @@ class OrderUpdater implements OrderUpdaterInterface
                         ]);
                         $orderLineEntity->setProduct($product);
                     } catch (\Exception $e) {
-                        print_r($e);
+                        echo $e->getMessage()."\n";
                     }
                 }
             }
