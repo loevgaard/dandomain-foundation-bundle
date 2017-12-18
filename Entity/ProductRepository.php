@@ -1,6 +1,7 @@
 <?php
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
+use Doctrine\ORM\NoResultException;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Product;
@@ -22,19 +23,28 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         return $obj;
     }
 
+    /**
+     * @param int $externalId
+     * @param bool $fetchAll
+     * @return ProductInterface|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function findOneByExternalId(int $externalId, bool $fetchAll = false) : ?ProductInterface
     {
         if($fetchAll) {
-            // @todo test if this works
-            $qb = $this->repository->createQueryBuilder('p');
-            $qb->select('p, m, vg')
-                ->leftJoin('p.manufacturers', 'm')
-                ->leftJoin('p.variantGroups', 'vg')
-            ;
-            $qb->where($qb->expr()->eq('p.externalId', $externalId));
+            try {
+                // @todo test if this works
+                $qb = $this->repository->createQueryBuilder('p');
+                $qb->select('p, m, vg')
+                    ->leftJoin('p.manufacturers', 'm')
+                    ->leftJoin('p.variantGroups', 'vg');
+                $qb->where($qb->expr()->eq('p.externalId', $externalId));
 
-            /** @var ProductInterface $obj */
-            $obj = $qb->getQuery()->getSingleResult();
+                /** @var ProductInterface $obj */
+                $obj = $qb->getQuery()->getSingleResult();
+            } catch (NoResultException $e) {
+                return null;
+            }
 
             return $obj;
         }
