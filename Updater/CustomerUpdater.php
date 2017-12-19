@@ -2,8 +2,8 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
-use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
 use Loevgaard\DandomainFoundation\Entity\Customer;
+use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\CustomerRepositoryInterface;
 
 class CustomerUpdater implements CustomerUpdaterInterface
@@ -19,15 +19,16 @@ class CustomerUpdater implements CustomerUpdaterInterface
     }
 
     /**
-     * This method is called when an payment method is embedded in another object, i.e. orders
+     * This method is called when an payment method is embedded in another object, i.e. orders.
      *
      * @param array $data
+     *
      * @return CustomerInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data) : CustomerInterface
+    public function updateFromEmbeddedApiResponse(array $data): CustomerInterface
     {
         $customer = $this->customerRepository->findOneByExternalId($data['id']);
-        if(!$customer) {
+        if (!$customer) {
             $customer = new Customer();
             $customer->setExternalId($data['id']);
         }

@@ -1,9 +1,11 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\UnexpectedResultException;
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Product;
 
@@ -11,28 +13,31 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 {
     /**
      * @param string $number
-     * @param bool $fetchAll
+     * @param bool   $fetchAll
+     *
      * @return ProductInterface|null
      */
     public function findOneByProductNumber(string $number, bool $fetchAll = false): ?ProductInterface
     {
         /** @var ProductInterface $obj */
         $obj = $this->repository->findOneBy([
-            'number' => $number
+            'number' => $number,
         ]);
 
         return $obj;
     }
 
     /**
-     * @param int $externalId
+     * @param int  $externalId
      * @param bool $fetchAll
+     *
      * @return ProductInterface|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findOneByExternalId(int $externalId, bool $fetchAll = false) : ?ProductInterface
+    public function findOneByExternalId(int $externalId, bool $fetchAll = false): ?ProductInterface
     {
-        if($fetchAll) {
+        if ($fetchAll) {
             try {
                 // @todo test if this works
                 $qb = $this->repository->createQueryBuilder('p');
@@ -52,7 +57,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 
         /** @var ProductInterface $obj */
         $obj = $this->repository->findOneBy([
-            'externalId' => $externalId
+            'externalId' => $externalId,
         ]);
 
         return $obj;
@@ -72,7 +77,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
             ->andWhere('p.variantMasterId is not null')
         ;
 
-        if(count($productIds)) {
+        if (count($productIds)) {
             $qb->andWhere($qb->expr()->in('p.id', ':productIds'));
             $qb->setParameter('productIds', $productIds);
         }
@@ -85,7 +90,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
             /** @var ProductInterface $product */
             $product = $row[0];
 
-            if(!isset($variantMasterIdCache[$product->getVariantMasterId()])) {
+            if (!isset($variantMasterIdCache[$product->getVariantMasterId()])) {
                 try {
                     /** @var ProductInterface $parent */
                     $parent = $innerQb->setParameter('number',
@@ -99,7 +104,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
             }
 
             $ref = $variantMasterIdCache[$product->getVariantMasterId()];
-            if($ref) {
+            if ($ref) {
                 try {
                     $ref = $this->manager->getReference(Product::class, $ref);
                 } catch (ORMException $e) {
@@ -109,7 +114,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 
             $product->setParent($ref);
 
-            if (($i % $batchSize) === 0) {
+            if (0 === ($i % $batchSize)) {
                 $this->manager->flush();
                 $this->manager->clear();
             }
@@ -118,5 +123,28 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         }
 
         $this->manager->flush();
+    }
+
+    public function bulkRemove(array $in = [], array $notIn = [])
+    {
+        if (!count($in) && !count($notIn)) {
+            return;
+        }
+
+        $qb = $this->repository->createQueryBuilder('p');
+
+        $qb->update()->set('p.deletedAt', ':date')->setParameter('date', new DateTimeImmutable());
+
+        if (count($in)) {
+            $qb->andWhere($qb->expr()->in('p.id', ':inIds'));
+            $qb->setParameter('inIds', $in);
+        }
+
+        if (count($notIn)) {
+            $qb->andWhere($qb->expr()->notIn('p.id', ':notInIds'));
+            $qb->setParameter('notInIds', $notIn);
+        }
+
+        $qb->getQuery()->execute();
     }
 }

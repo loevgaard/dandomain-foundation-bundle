@@ -189,9 +189,7 @@ interface OrderInterface
     public function addOrderLine(OrderLineInterface $orderLine);
 
     /**
-     * Clears the order lines on this order
-     *
-     * @return void
+     * Clears the order lines on this order.
      */
     public function clearOrderLines();
 
@@ -334,6 +332,7 @@ interface OrderInterface
 
     /**
      * @param float $shippingMethodFee
+     *
      * @return OrderInterface
      */
     public function setShippingMethodFee($shippingMethodFee);
@@ -450,8 +449,10 @@ interface OrderInterface
      * @return float
      */
     public function getPaymentMethodFee();
+
     /**
      * @param float $paymentMethodFee
+     *
      * @return Order
      */
     public function setPaymentMethodFee($paymentMethodFee);

@@ -20,13 +20,11 @@ interface ServiceInterface
 
     /**
      * @param array $options
-     * @return void
      */
     public function syncAll(array $options = []);
 
     /**
      * @param array $options
-     * @return void
      */
     public function syncOne(array $options = []);
 }

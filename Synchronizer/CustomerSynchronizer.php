@@ -40,19 +40,19 @@ class CustomerSynchronizer extends Synchronizer
 
         // @todo some fields are missing here
         $entity
-            ->setExternalId($customer->id ? : null)
-            ->setAddress($customer->address ? : null)
-            ->setAddress2($customer->address2 ? : null)
-            ->setAttention($customer->attention ? : null)
-            ->setCity($customer->city ? : null)
-            ->setCountry($customer->country ? : null)
-            ->setEan($customer->ean ? : null)
-            ->setEmail($customer->email ? : null)
-            ->setFax($customer->fax ? : null)
-            ->setName($customer->name ? : null)
-            ->setPhone($customer->phone ? : null)
-            ->setState($customer->state ? : null)
-            ->setZipCode($customer->zipCode ? : null)
+            ->setExternalId($customer->id ?: null)
+            ->setAddress($customer->address ?: null)
+            ->setAddress2($customer->address2 ?: null)
+            ->setAttention($customer->attention ?: null)
+            ->setCity($customer->city ?: null)
+            ->setCountry($customer->country ?: null)
+            ->setEan($customer->ean ?: null)
+            ->setEmail($customer->email ?: null)
+            ->setFax($customer->fax ?: null)
+            ->setName($customer->name ?: null)
+            ->setPhone($customer->phone ?: null)
+            ->setState($customer->state ?: null)
+            ->setZipCode($customer->zipCode ?: null)
         ;
 
         $this->objectManager->persist($entity);

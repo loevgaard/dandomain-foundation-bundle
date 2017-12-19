@@ -18,10 +18,10 @@ class ManufacturerUpdater implements ManufacturerUpdaterInterface
         $this->manufacturerRepository = $invoiceRepository;
     }
 
-    public function updateFromApiResponse(array $data) : ManufacturerInterface
+    public function updateFromApiResponse(array $data): ManufacturerInterface
     {
         $manufacturer = $this->manufacturerRepository->findOneByExternalId($data['id']);
-        if(!$manufacturer) {
+        if (!$manufacturer) {
             $manufacturer = new Manufacturer();
             $manufacturer->setExternalId($data['id']);
         }

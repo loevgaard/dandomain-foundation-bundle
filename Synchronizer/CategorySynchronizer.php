@@ -3,8 +3,8 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Loevgaard\DandomainFoundationBundle\Entity\CategoryRepositoryInterface;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundationBundle\Entity\CategoryRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,7 +30,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
     public function syncOne(array $options = [])
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
-        $category = \GuzzleHttp\json_decode((string)$this->api->productData->getDataCategory($options['id'])->getBody());
+        $category = \GuzzleHttp\json_decode((string) $this->api->productData->getDataCategory($options['id'])->getBody());
         $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
         $this->repository->save($entity);
     }
@@ -47,25 +47,10 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
                 // @todo if an existing relationship that has been deleted in Dandomain then it isnt updated here
                 $parent = $this->repository->findOneByNumber($parentNumber);
 
-                if($parent) {
+                if ($parent) {
                     $category->addParentCategory($parent);
                 }
             }
-        }
-    }
-
-    private function recursiveSync(int $parentCategoryNumber = null)
-    {
-        if($parentCategoryNumber) {
-            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataSubCategories($parentCategoryNumber)->getBody()->getContents());
-        } else {
-            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataCategories()->getBody()->getContents());
-        }
-
-        foreach ($categories as $category) {
-            $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
-            $this->repository->save($entity);
-            $this->recursiveSync((int)$category->number);
         }
     }
 
@@ -80,6 +65,20 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     public function configureOptionsAll(OptionsResolver $resolver)
     {
+    }
 
+    private function recursiveSync(int $parentCategoryNumber = null)
+    {
+        if ($parentCategoryNumber) {
+            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataSubCategories($parentCategoryNumber)->getBody()->getContents());
+        } else {
+            $categories = \GuzzleHttp\json_decode($this->api->productData->getDataCategories()->getBody()->getContents());
+        }
+
+        foreach ($categories as $category) {
+            $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
+            $this->repository->save($entity);
+            $this->recursiveSync((int) $category->number);
+        }
     }
 }

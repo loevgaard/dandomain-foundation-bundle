@@ -2,13 +2,10 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
-use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizerInterface;
-use Loevgaard\DandomainFoundationBundle\Synchronizer\OrderSynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 

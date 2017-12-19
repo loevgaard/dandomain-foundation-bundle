@@ -20,16 +20,17 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
     }
 
     /**
-     * This method is called when an payment method is embedded in another object, i.e. orders
+     * This method is called when an payment method is embedded in another object, i.e. orders.
      *
-     * @param array $data
-     * @param string $currency
+     * @param array                  $data
+     * @param string                 $currency
      * @param PaymentMethodInterface $paymentMethod
+     *
      * @return PaymentMethodInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, string $currency, PaymentMethodInterface $paymentMethod = null) : PaymentMethodInterface
+    public function updateFromEmbeddedApiResponse(array $data, string $currency, PaymentMethodInterface $paymentMethod = null): PaymentMethodInterface
     {
-        if(!$paymentMethod) {
+        if (!$paymentMethod) {
             $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($data['id']);
 
             if (!$paymentMethod) {
@@ -38,10 +39,10 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
             }
         }
 
-        if(!$paymentMethod->getId()) {
+        if (!$paymentMethod->getId()) {
             // only update when we create a new entity because this is the embedded method
             $paymentMethod
-                ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
+                ->setFee(DandomainFoundation\createMoney((string) $currency, $data['fee']))
                 ->setFeeInclVat($data['feeInclVat'])
                 ->setName($data['name']);
         }

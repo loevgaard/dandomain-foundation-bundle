@@ -2,3 +2,4 @@
 /vendor/
 /tests/
 /cli-config.php
+/.php_cs.cache

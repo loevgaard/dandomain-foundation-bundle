@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 /**
@@ -13,6 +14,7 @@ interface TagValueInterface
 
     /**
      * @param int $externalId
+     *
      * @return TagValue
      */
     public function setExternalId($externalId);
@@ -24,6 +26,7 @@ interface TagValueInterface
 
     /**
      * @param int $sortOrder
+     *
      * @return TagValue
      */
     public function setSortOrder($sortOrder);
@@ -35,6 +38,7 @@ interface TagValueInterface
 
     /**
      * @param Tag $tag
+     *
      * @return TagValue
      */
     public function setTag($tag);

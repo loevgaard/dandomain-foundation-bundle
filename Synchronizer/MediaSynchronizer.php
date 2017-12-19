@@ -35,15 +35,15 @@ class MediaSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($media->id ? : null)
-            ->setHeight($media->height ? : null)
-            ->setMediaTranslations($media->mediaTranslations ? : null)
-            ->setSortorder($media->sortorder ? : null)
-            ->setThumbnail($media->thumbnail ? : null)
-            ->setThumbnailheight($media->thumbnailheight ? : null)
-            ->setThumbnailwidth($media->thumbnailwidth ? : null)
-            ->setUrl($media->url ? : null)
-            ->setWidth($media->width ? : null)
+            ->setExternalId($media->id ?: null)
+            ->setHeight($media->height ?: null)
+            ->setMediaTranslations($media->mediaTranslations ?: null)
+            ->setSortorder($media->sortorder ?: null)
+            ->setThumbnail($media->thumbnail ?: null)
+            ->setThumbnailheight($media->thumbnailheight ?: null)
+            ->setThumbnailwidth($media->thumbnailwidth ?: null)
+            ->setUrl($media->url ?: null)
+            ->setWidth($media->width ?: null)
         ;
 
         $this->objectManager->persist($entity);

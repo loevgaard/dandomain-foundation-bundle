@@ -18,10 +18,10 @@ class SiteUpdater implements SiteUpdaterInterface
         $this->siteRepository = $siteRepository;
     }
 
-    public function updateFromApiResponse(array $data) : SiteInterface
+    public function updateFromApiResponse(array $data): SiteInterface
     {
         $site = $this->siteRepository->findOneByExternalId($data['id']);
-        if(!$site) {
+        if (!$site) {
             $site = new Site();
             $site->setExternalId($data['id']);
         }

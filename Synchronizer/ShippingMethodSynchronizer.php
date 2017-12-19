@@ -23,7 +23,7 @@ class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodS
         $this->shippingMethodUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : OrderInterface
+    public function syncOne(array $options = []): OrderInterface
     {
         throw new \RuntimeException('Method not implemented');
     }
@@ -35,7 +35,7 @@ class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodS
         $currency = 'DKK';
 
         foreach ($siteIds as $siteId) {
-            $shippingMethods = \GuzzleHttp\json_decode((string)$this->api->settings->getShippingMethods($siteId)->getBody());
+            $shippingMethods = \GuzzleHttp\json_decode((string) $this->api->settings->getShippingMethods($siteId)->getBody());
 
             foreach ($shippingMethods as $shippingMethod) {
                 $entity = $this->shippingMethodUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($shippingMethod), $currency);

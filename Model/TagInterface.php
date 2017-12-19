@@ -1,10 +1,12 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 interface TagInterface
 {
     /**
      * @param TagValue $tagValue
+     *
      * @return $this
      */
     public function addTagValue(TagValue $tagValue);
@@ -21,6 +23,7 @@ interface TagInterface
 
     /**
      * @param int $externalId
+     *
      * @return Tag
      */
     public function setExternalId($externalId);
@@ -32,6 +35,7 @@ interface TagInterface
 
     /**
      * @param string $selectorType
+     *
      * @return Tag
      */
     public function setSelectorType($selectorType);
@@ -43,6 +47,7 @@ interface TagInterface
 
     /**
      * @param int $sortOrder
+     *
      * @return Tag
      */
     public function setSortOrder($sortOrder);
@@ -54,6 +59,7 @@ interface TagInterface
 
     /**
      * @param TagValue[] $tagValues
+     *
      * @return Tag
      */
     public function setTagValues($tagValues);

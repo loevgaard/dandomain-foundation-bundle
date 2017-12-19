@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
@@ -6,11 +7,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryRepository extends Repository implements CategoryRepositoryInterface
 {
-    public function findOneByNumber(string $number) : ?CategoryInterface
+    public function findOneByNumber(string $number): ?CategoryInterface
     {
         /** @var CategoryInterface $obj */
         $obj = $this->repository->findOneBy([
-            'number' => $number
+            'number' => $number,
         ]);
 
         return $obj;
@@ -19,7 +20,7 @@ class CategoryRepository extends Repository implements CategoryRepositoryInterfa
     /**
      * @return \Generator|CategoryInterface[]
      */
-    public function iterator(array $options = []) : \Generator
+    public function iterator(array $options = []): \Generator
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -29,14 +30,13 @@ class CategoryRepository extends Repository implements CategoryRepositoryInterfa
 
         $result = $qb->getQuery()->iterate();
         $i = 1;
-        foreach ($result as $item)
-        {
+        foreach ($result as $item) {
             /** @var CategoryInterface $obj */
             $obj = $item[0];
             yield $obj;
 
-            if($options['update']) {
-                if($i % $options['bulkSize'] == 0) {
+            if ($options['update']) {
+                if (0 == $i % $options['bulkSize']) {
                     $this->manager->flush();
                     $this->manager->clear();
                 }
@@ -44,7 +44,7 @@ class CategoryRepository extends Repository implements CategoryRepositoryInterfa
                 $this->manager->detach($obj);
             }
 
-            $i++;
+            ++$i;
         }
     }
 
@@ -52,7 +52,7 @@ class CategoryRepository extends Repository implements CategoryRepositoryInterfa
     {
         $resolver->setDefaults([
             'update' => true,
-            'bulkSize' => 50
+            'bulkSize' => 50,
         ]);
     }
 }

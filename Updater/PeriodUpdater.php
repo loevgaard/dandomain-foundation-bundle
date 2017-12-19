@@ -19,10 +19,10 @@ class PeriodUpdater implements PeriodUpdaterInterface
         $this->periodRepository = $periodRepository;
     }
 
-    public function updateFromApiResponse(array $data) : PeriodInterface
+    public function updateFromApiResponse(array $data): PeriodInterface
     {
         $period = $this->periodRepository->findOneByExternalId($data['id']);
-        if(!$period) {
+        if (!$period) {
             $period = new Period();
             $period->setExternalId($data['id']);
         }

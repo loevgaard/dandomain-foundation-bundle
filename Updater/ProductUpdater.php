@@ -40,10 +40,10 @@ class ProductUpdater implements ProductUpdaterInterface
         $this->variantGroupRepository = $variantGroupRepository;
     }
 
-    public function updateFromApiResponse(array $data) : ProductInterface
+    public function updateFromApiResponse(array $data): ProductInterface
     {
         $product = $this->productRepository->findOneByExternalId($data['id'], true);
-        if(!$product) {
+        if (!$product) {
             $product = new Product();
         }
 
@@ -92,14 +92,14 @@ class ProductUpdater implements ProductUpdaterInterface
         }
 
         /**
-         * Update manufacturers
+         * Update manufacturers.
          */
         $manufacturerIdsToAdd = $this->updateCollection($product->getManufacturereIdList() ?? [], $data['manufacturereIdList'] ?? [], $product->getManufacturers());
 
         foreach ($data['manufacturers'] as $manufacturerData) {
-            if(in_array($manufacturerData['id'], $manufacturerIdsToAdd)) {
+            if (in_array($manufacturerData['id'], $manufacturerIdsToAdd)) {
                 $manufacturer = $this->manufacturerRepository->findOneByExternalId($manufacturerData['id']);
-                if(!$manufacturer) {
+                if (!$manufacturer) {
                     $manufacturer = new Manufacturer();
 
                     // only update properties if it's a new object
@@ -112,14 +112,14 @@ class ProductUpdater implements ProductUpdaterInterface
         $product->setManufacturereIdList($data['manufacturereIdList']);
 
         /**
-         * Update variant groups
+         * Update variant groups.
          */
         $variantGroupIdsToAdd = $this->updateCollection($product->getVariantGroupIdList() ?? [], $data['variantGroupIdList'] ?? [], $product->getVariantGroups());
 
         foreach ($data['variantGroups'] as $variantGroupData) {
-            if(in_array($variantGroupData['id'], $variantGroupIdsToAdd)) {
+            if (in_array($variantGroupData['id'], $variantGroupIdsToAdd)) {
                 $variantGroup = $this->variantGroupRepository->findOneByExternalId($variantGroupData['id']);
-                if(!$variantGroup) {
+                if (!$variantGroup) {
                     $variantGroup = new VariantGroup();
 
                     // only update properties if it's a new object
@@ -201,7 +201,7 @@ class ProductUpdater implements ProductUpdaterInterface
         return $product;
     }
 
-    protected function updateCollection(array $originalIdList, array $newIdList, Collection $collection) : array
+    protected function updateCollection(array $originalIdList, array $newIdList, Collection $collection): array
     {
         $idsToRemove = array_diff($originalIdList, $newIdList);
         $idsToAdd = array_diff($newIdList, $originalIdList);

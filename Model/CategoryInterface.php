@@ -17,13 +17,13 @@ interface CategoryInterface
     public function setB2bGroupId($b2bGroupId);
 
     /**
-     * Add childrenCategory
+     * Add childrenCategory.
      *
      * @param CategoryInterface $childrenCategory
      *
      * @return CategoryInterface
      */
-    public function addChildrenCategory(CategoryInterface $childrenCategory);
+    public function addChildrenCategory(self $childrenCategory);
 
     /**
      * @return \Doctrine\Common\Collections\Collection
@@ -31,13 +31,13 @@ interface CategoryInterface
     public function getChildrenCategories();
 
     /**
-     * Remove childrenCategory
+     * Remove childrenCategory.
      *
      * @param CategoryInterface $childrenCategory
      *
      * @return CategoryInterface
      */
-    public function removeChildrenCategory(CategoryInterface $childrenCategory);
+    public function removeChildrenCategory(self $childrenCategory);
 
     /**
      * @return \DateTime
@@ -165,13 +165,13 @@ interface CategoryInterface
     public function setModified($modified);
 
     /**
-     * Add parentCategory
+     * Add parentCategory.
      *
      * @param CategoryInterface $parentCategory
      *
      * @return CategoryInterface
      */
-    public function addParentCategory(CategoryInterface $parentCategory);
+    public function addParentCategory(self $parentCategory);
 
     /**
      * @return \Doctrine\Common\Collections\Collection
@@ -179,13 +179,13 @@ interface CategoryInterface
     public function getParentCategories();
 
     /**
-     * Remove parentCategory
+     * Remove parentCategory.
      *
      * @param CategoryInterface $parentCategory
      *
      * @return CategoryInterface
      */
-    public function removeParentCategory(CategoryInterface $parentCategory);
+    public function removeParentCategory(self $parentCategory);
 
     /**
      * @return array
@@ -223,7 +223,7 @@ interface CategoryInterface
     public function removeProduct(ProductInterface $product);
 
     /**
-     * Add segment
+     * Add segment.
      *
      * @param SegmentInterface $segment
      *
@@ -237,7 +237,7 @@ interface CategoryInterface
     public function getSegments();
 
     /**
-     * Remove segment
+     * Remove segment.
      *
      * @param SegmentInterface $segment
      *

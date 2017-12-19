@@ -29,10 +29,10 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $this->productUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : ProductInterface
+    public function syncOne(array $options = []): ProductInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
-        $product = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProduct($options['number'])->getBody());
+        $product = \GuzzleHttp\json_decode((string) $this->api->productData->getDataProduct($options['number'])->getBody());
         $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
         $this->repository->save($entity);
 
@@ -51,9 +51,13 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $lastLog = $this->readLog();
         $log = ['options' => $options];
 
-        $productIds = [];
+        $productIdsToUpdateParentChildRelationsip = [];
 
-        if ($this->options['changed']) {
+        $this->repository->bulkRemove([], [811]);
+
+        return;
+
+        if ($options['changed']) {
             $now = new DateTimeImmutable();
 
             if (!$start) {
@@ -64,16 +68,16 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 }
             }
 
-            if(!$end) {
+            if (!$end) {
                 $end = $now;
             }
 
             // verification of dates
-            if($end > $now) {
+            if ($end > $now) {
                 $end = $now;
             }
 
-            if($start > $end) {
+            if ($start > $end) {
                 throw new \InvalidArgumentException('Start date is after end date');
             }
 
@@ -84,22 +88,23 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
             $this->logger->info('Modified products: '.$modifiedProductCount.' | Page size: '.$options['pageSize'].' | Page count: '.$pages);
 
-            for($page = 1; $page <= $pages; $page++) {
+            for ($page = 1; $page <= $pages; ++$page) {
                 $this->logger->info($page.' / '.$pages);
 
-                $products = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
+                $products = \GuzzleHttp\json_decode((string) $this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
                 foreach ($products as $product) {
                     $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
                     $this->repository->save($entity);
 
-                    $productIds[] = $entity->getId();
+                    $productIdsToUpdateParentChildRelationsip[] = $entity->getId();
                 }
             }
 
             $log['start'] = $start;
             $log['end'] = $end;
         } else {
+            $productIdsToNotRemove = [];
             $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($options['pageSize'])->getBody()->getContents());
 
             // we start from behind since this will sync the newest products first
@@ -110,11 +115,15 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 foreach ($products as $product) {
                     $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
                     $this->repository->save($entity);
+
+                    $productIdsToNotRemove[] = $entity->getId();
                 }
             }
+
+            $this->repository->bulkRemove([], $productIdsToNotRemove);
         }
 
-        $this->repository->updateParentChildRelationships($productIds);
+        $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationsip);
 
         $this->writeLog($log);
     }

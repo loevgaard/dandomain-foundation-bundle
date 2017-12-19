@@ -3,8 +3,8 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\StateRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\StateUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,14 +23,14 @@ class StateSynchronizer extends Synchronizer implements StateSynchronizerInterfa
         $this->stateUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : ?StateInterface
+    public function syncOne(array $options = []): ?StateInterface
     {
         throw new \RuntimeException('Method not implemented');
     }
 
     public function syncAll(array $options = [])
     {
-        $states = \GuzzleHttp\json_decode((string)$this->api->order->getOrderStates()->getBody());
+        $states = \GuzzleHttp\json_decode((string) $this->api->order->getOrderStates()->getBody());
 
         foreach ($states as $state) {
             $entity = $this->stateUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($state));

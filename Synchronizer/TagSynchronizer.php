@@ -43,7 +43,7 @@ class TagSynchronizer extends Synchronizer
     {
         /** @var TagInterface $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $tag->id
+            'externalId' => $tag->id,
         ]);
         if (!($entity)) {
             $entity = new $this->entityClassName();
@@ -64,7 +64,7 @@ class TagSynchronizer extends Synchronizer
 
         foreach ($tag->values as $tagValue) {
             $entityTagValue = $this->tagValueSynchronizer->syncTagValue($tagValue);
-            if($entityTagValue) {
+            if ($entityTagValue) {
                 $entity->addTagValue($entityTagValue);
             }
         }
@@ -72,7 +72,7 @@ class TagSynchronizer extends Synchronizer
         $this->objectManager->persist($entity);
         $entity->mergeNewTranslations();
 
-        if($flush) {
+        if ($flush) {
             $this->entityManager->flush();
         }
 

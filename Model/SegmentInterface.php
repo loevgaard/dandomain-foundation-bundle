@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Model;
 interface SegmentInterface
 {
     /**
-     * Add category
+     * Add category.
      *
      * @param CategoryInterface $category
      *
@@ -19,7 +19,7 @@ interface SegmentInterface
     public function getCategories();
 
     /**
-     * Remove category
+     * Remove category.
      *
      * @param CategoryInterface $category
      *

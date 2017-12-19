@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -13,12 +14,13 @@ abstract class TagTranslation implements TagTranslationInterface
 
     /**
      * @ORM\Column(type="string")
+     *
      * @var string
      **/
     protected $text;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getText()
     {
@@ -26,11 +28,12 @@ abstract class TagTranslation implements TagTranslationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 }

@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 
 interface OrderSynchronizerInterface extends SynchronizerInterface
 {
-    public function syncOne(array $options = []) : OrderInterface;
+    public function syncOne(array $options = []): OrderInterface;
 }

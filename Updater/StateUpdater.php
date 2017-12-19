@@ -18,7 +18,7 @@ class StateUpdater implements StateUpdaterInterface
         $this->stateRepository = $stateRepository;
     }
 
-    public function updateFromApiResponse(array $data) : StateInterface
+    public function updateFromApiResponse(array $data): StateInterface
     {
         $state = $this->stateRepository->findOneByExternalId($data['id']);
         if (!$state) {
@@ -36,15 +36,16 @@ class StateUpdater implements StateUpdaterInterface
     }
 
     /**
-     * This method is called when an payment method is embedded in another object, i.e. orders
+     * This method is called when an payment method is embedded in another object, i.e. orders.
      *
-     * @param array $data
+     * @param array          $data
      * @param StateInterface $state
+     *
      * @return StateInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, StateInterface $state = null) : StateInterface
+    public function updateFromEmbeddedApiResponse(array $data, StateInterface $state = null): StateInterface
     {
-        if(!$state) {
+        if (!$state) {
             $state = $this->stateRepository->findOneByExternalId($data['id']);
             if (!$state) {
                 // only update when we create a new because this is the embedded method

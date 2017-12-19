@@ -3,8 +3,8 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\SiteRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\SiteUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +28,7 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
         $this->siteUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : ?SiteInterface
+    public function syncOne(array $options = []): ?SiteInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
 
@@ -41,7 +41,7 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsAll']);
 
-        $sites = \GuzzleHttp\json_decode((string)$this->api->settings->getSites()->getBody());
+        $sites = \GuzzleHttp\json_decode((string) $this->api->settings->getSites()->getBody());
 
         foreach ($sites as $site) {
             $entity = $this->siteUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($site));

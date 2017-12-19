@@ -24,10 +24,10 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
         $this->orderUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : OrderInterface
+    public function syncOne(array $options = []): OrderInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
-        $order = \GuzzleHttp\json_decode((string)$this->api->order->getOrder($options['externalId'])->getBody());
+        $order = \GuzzleHttp\json_decode((string) $this->api->order->getOrder($options['externalId'])->getBody());
         $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
         $this->repository->save($entity);
 
@@ -56,16 +56,16 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
             }
         }
 
-        if(!$end) {
+        if (!$end) {
             $end = $now;
         }
 
         // verification of dates
-        if($end > $now) {
+        if ($end > $now) {
             $end = $now;
         }
 
-        if($start > $end) {
+        if ($start > $end) {
             throw new \InvalidArgumentException('Start date is after end date');
         }
 
@@ -76,10 +76,10 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
         $this->logger->info('Modified orders: '.$modifiedOrderCount.' | Page size: '.$options['pageSize'].' | Page count: '.$pages);
 
-        for($page = 1; $page <= $pages; $page++) {
+        for ($page = 1; $page <= $pages; ++$page) {
             $this->logger->info($page.' / '.$pages);
 
-            $orders = \GuzzleHttp\json_decode((string)$this->api->order->getOrdersInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
+            $orders = \GuzzleHttp\json_decode((string) $this->api->order->getOrdersInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
             foreach ($orders as $order) {
                 $this->logger->info('Order: '.$order->id);

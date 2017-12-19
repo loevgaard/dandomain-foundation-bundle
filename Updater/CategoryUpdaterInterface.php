@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
 
 interface CategoryUpdaterInterface extends UpdaterInterface
 {
-    public function updateFromApiResponse(array $data) : CategoryInterface;
+    public function updateFromApiResponse(array $data): CategoryInterface;
 }

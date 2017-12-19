@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
 
 interface DeliveryUpdaterInterface extends UpdaterInterface
 {
-    public function updateFromEmbeddedApiResponse(array $data, DeliveryInterface $delivery = null) : DeliveryInterface;
+    public function updateFromEmbeddedApiResponse(array $data, DeliveryInterface $delivery = null): DeliveryInterface;
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -13,12 +14,14 @@ abstract class TagValue implements TagValueInterface, TranslatableInterface
 
     /**
      * @ORM\Column(type="integer", unique=true)
+     *
      * @var int
      **/
     protected $externalId;
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @var int
      **/
     protected $sortOrder;
@@ -30,11 +33,11 @@ abstract class TagValue implements TagValueInterface, TranslatableInterface
 
     public function __toString()
     {
-        return (string)$this->externalId;
+        return (string) $this->externalId;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -42,16 +45,17 @@ abstract class TagValue implements TagValueInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSortOrder()
     {
@@ -59,16 +63,17 @@ abstract class TagValue implements TagValueInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setSortOrder($sortOrder)
     {
         $this->sortOrder = $sortOrder;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTag()
     {
@@ -76,11 +81,12 @@ abstract class TagValue implements TagValueInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setTag($tag)
     {
         $this->tag = $tag;
+
         return $this;
     }
 }

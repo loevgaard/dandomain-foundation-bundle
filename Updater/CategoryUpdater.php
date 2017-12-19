@@ -19,10 +19,10 @@ class CategoryUpdater implements CategoryUpdaterInterface
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function updateFromApiResponse(array $data) : CategoryInterface
+    public function updateFromApiResponse(array $data): CategoryInterface
     {
         $category = $this->categoryRepository->findOneByNumber($data['number']);
-        if(!$category) {
+        if (!$category) {
             $category = new Category();
         }
 

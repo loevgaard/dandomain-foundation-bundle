@@ -35,10 +35,10 @@ class ProductTypeFormulaSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($productTypeFormula->id ? : null)
-            ->setFormula($productTypeFormula->formula ? : null)
-            ->setProductTypeGroupId($productTypeFormula->productTypeGroupId ? : null)
-            ->setSiteId($productTypeFormula->siteId ? : null)
+            ->setExternalId($productTypeFormula->id ?: null)
+            ->setFormula($productTypeFormula->formula ?: null)
+            ->setProductTypeGroupId($productTypeFormula->productTypeGroupId ?: null)
+            ->setSiteId($productTypeFormula->siteId ?: null)
         ;
 
         $this->objectManager->persist($entity);

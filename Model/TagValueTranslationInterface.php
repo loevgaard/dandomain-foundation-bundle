@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 interface TagValueTranslationInterface
@@ -10,6 +11,7 @@ interface TagValueTranslationInterface
 
     /**
      * @param string $text
+     *
      * @return TagValueTranslation
      */
     public function setText($text);

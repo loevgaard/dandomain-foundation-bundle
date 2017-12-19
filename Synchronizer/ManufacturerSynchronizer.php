@@ -3,8 +3,8 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ManufacturerUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,14 +23,14 @@ class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynch
         $this->manufacturerUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : OrderInterface
+    public function syncOne(array $options = []): OrderInterface
     {
         throw new \RuntimeException('Method not implemented');
     }
 
     public function syncAll(array $options = [])
     {
-        $manufacturers = \GuzzleHttp\json_decode((string)$this->api->relatedData->getManufacturers()->getBody());
+        $manufacturers = \GuzzleHttp\json_decode((string) $this->api->relatedData->getManufacturers()->getBody());
         foreach ($manufacturers as $manufacturer) {
             $entity = $this->manufacturerUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($manufacturer));
             $this->repository->save($entity);

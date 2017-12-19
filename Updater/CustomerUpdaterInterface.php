@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
 
 interface CustomerUpdaterInterface extends UpdaterInterface
 {
-    public function updateFromEmbeddedApiResponse(array $data) : CustomerInterface;
+    public function updateFromEmbeddedApiResponse(array $data): CustomerInterface;
 }

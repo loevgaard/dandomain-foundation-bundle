@@ -220,7 +220,7 @@ abstract class Product implements ProductInterface, TranslatableInterface
     protected $minBuyAmountB2B;
 
     /**
-     * The product number
+     * The product number.
      *
      * @var string
      *

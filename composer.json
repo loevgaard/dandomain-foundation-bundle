@@ -26,11 +26,20 @@
         "symfony/framework-bundle": "^3.0",
         "symfony/options-resolver": "^3.3"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "phpunit/phpunit" : "~5.5||~6.0"
+    },
     "autoload": {
         "files": ["functions_include.php"],
         "psr-4": {
             "Loevgaard\\DandomainFoundationBundle\\": ""
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "./vendor/bin/php-cs-fixer fix --verbose --dry-run",
+        "fix-style": "./vendor/bin/php-cs-fixer fix --verbose"
     },
     "config": {
         "sort-packages": true

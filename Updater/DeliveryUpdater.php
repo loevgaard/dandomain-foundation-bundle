@@ -2,8 +2,8 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
-use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
 use Loevgaard\DandomainFoundation\Entity\Delivery;
+use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\DeliveryRepositoryInterface;
 
 class DeliveryUpdater implements DeliveryUpdaterInterface
@@ -19,15 +19,16 @@ class DeliveryUpdater implements DeliveryUpdaterInterface
     }
 
     /**
-     * This method is called when an payment method is embedded in another object, i.e. orders
+     * This method is called when an payment method is embedded in another object, i.e. orders.
      *
-     * @param array $data
+     * @param array                  $data
      * @param DeliveryInterface|null $delivery
+     *
      * @return DeliveryInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, DeliveryInterface $delivery = null) : DeliveryInterface
+    public function updateFromEmbeddedApiResponse(array $data, DeliveryInterface $delivery = null): DeliveryInterface
     {
-        if(!$delivery) {
+        if (!$delivery) {
             $delivery = new Delivery();
         }
 

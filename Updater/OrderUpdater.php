@@ -81,10 +81,10 @@ class OrderUpdater implements OrderUpdaterInterface
         $this->invoiceUpdater = $invoiceUpdater;
     }
 
-    public function updateFromApiResponse(array $data) : OrderInterface
+    public function updateFromApiResponse(array $data): OrderInterface
     {
         $order = $this->orderRepository->findOneByExternalId($data['id']);
-        if(!$order) {
+        if (!$order) {
             $order = new Order();
         }
 
@@ -158,7 +158,7 @@ class OrderUpdater implements OrderUpdaterInterface
 
         // populate site
         $site = $this->siteSynchronizer->syncOne([
-            'externalId' => $data['siteId']
+            'externalId' => $data['siteId'],
         ]);
         $order->setSite($site);
 
@@ -166,19 +166,18 @@ class OrderUpdater implements OrderUpdaterInterface
         $state = $this->stateUpdater->updateFromEmbeddedApiResponse($data['orderState'], $order->getState());
         $order->setState($state);
 
-
         if (count($orderLinesData)) {
             // first remove order lines that are not present anymore
             $removeOrderLines = [];
             foreach ($order->getOrderLines() as $orderLineEntity) {
                 $found = false;
                 foreach ($orderLinesData as $orderLineData) {
-                    if($orderLineData['id'] === $orderLineEntity->getExternalId()) {
+                    if ($orderLineData['id'] === $orderLineEntity->getExternalId()) {
                         $found = true;
                     }
                 }
 
-                if(!$found) {
+                if (!$found) {
                     $removeOrderLines[] = $orderLineEntity;
                 }
             }
@@ -189,7 +188,7 @@ class OrderUpdater implements OrderUpdaterInterface
 
             // then update the rest of the order lines
             foreach ($orderLinesData as $orderLineData) {
-                if(!$orderLineData['id']) {
+                if (!$orderLineData['id']) {
                     continue;
                 }
 
@@ -199,7 +198,7 @@ class OrderUpdater implements OrderUpdaterInterface
                         Criteria::create()->where(Criteria::expr()->eq('externalId', $orderLineData['id']))
                     );
 
-                if($collection->count()) {
+                if ($collection->count()) {
                     $orderLineEntity = $collection->first();
                 } else {
                     $orderLineEntity = new OrderLine();
@@ -225,7 +224,7 @@ class OrderUpdater implements OrderUpdaterInterface
                 if ($orderLineData['productId']) {
                     try {
                         $product = $this->productSynchronizer->syncOne([
-                            'number' => $orderLineData['productId']
+                            'number' => $orderLineData['productId'],
                         ]);
                         $orderLineEntity->setProduct($product);
                     } catch (\Exception $e) {

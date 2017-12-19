@@ -748,6 +748,7 @@ abstract class Order implements OrderInterface
     public function setShippingMethodFee($shippingMethodFee)
     {
         $this->shippingMethodFee = $shippingMethodFee;
+
         return $this;
     }
 
@@ -914,7 +915,7 @@ abstract class Order implements OrderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPaymentMethodFee()
     {
@@ -922,11 +923,12 @@ abstract class Order implements OrderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setPaymentMethodFee($paymentMethodFee)
     {
         $this->paymentMethodFee = $paymentMethodFee;
+
         return $this;
     }
 }

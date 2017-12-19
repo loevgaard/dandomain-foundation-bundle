@@ -46,7 +46,7 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $changed = $input->getOption('changed');
+        $optionChanged = $input->getOption('changed') ? true : false;
         $optionStart = $input->getOption('start');
         $optionEnd = $input->getOption('end');
         $optionNumber = $input->getOption('number');
@@ -54,14 +54,14 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
 
         $this->productSynchronizer->setLogger(new ConsoleLogger($output));
 
-        if($optionNumber) {
+        if ($optionNumber) {
             $this->productSynchronizer->syncOne([
-                'number' => $optionNumber
+                'number' => $optionNumber,
             ]);
         } else {
             if ($optionStart) {
                 $start = \DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
-                if ($start === false) {
+                if (false === $start) {
                     throw new \InvalidArgumentException('Option --start has the wrong format');
                 }
                 $start = $start->setTime(0, 0, 0);
@@ -69,15 +69,14 @@ class SynchronizeProductsCommand extends ContainerAwareCommand
 
             if ($optionEnd) {
                 $end = \DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
-                if ($end === false) {
+                if (false === $end) {
                     throw new \InvalidArgumentException('Option --end has the wrong format');
                 }
                 $end = $end->setTime(23, 59, 59);
             }
 
-
             $this->productSynchronizer->syncAll([
-                'changed' => $changed,
+                'changed' => $optionChanged,
                 'start' => $start,
                 'end' => $end,
             ]);

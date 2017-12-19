@@ -47,13 +47,13 @@ class PriceSynchronizer extends Synchronizer
         $entity = new $this->entityClassName();
 
         $entity
-            ->setAmount($price->amount ? : null)
-            ->setAvance($price->avance ? : null)
-            ->setB2bGroupId($price->b2BGroupId ? : null)
-            ->setCurrencyCode($price->currencyCode ? : null)
-            ->setIsoCode($price->ISOCode ? : null)
-            ->setSpecialOfferPrice($price->specialOfferPrice ? : null)
-            ->setUnitPrice($price->unitPrice ? : null)
+            ->setAmount($price->amount ?: null)
+            ->setAvance($price->avance ?: null)
+            ->setB2bGroupId($price->b2BGroupId ?: null)
+            ->setCurrencyCode($price->currencyCode ?: null)
+            ->setIsoCode($price->ISOCode ?: null)
+            ->setSpecialOfferPrice($price->specialOfferPrice ?: null)
+            ->setUnitPrice($price->unitPrice ?: null)
         ;
 
         if ($price->period) {

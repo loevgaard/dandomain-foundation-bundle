@@ -53,7 +53,7 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
 
         if ($optionStart) {
             $start = DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
-            if ($start === false) {
+            if (false === $start) {
                 throw new \InvalidArgumentException('Option --start has the wrong format');
             }
             $start = $start->setTime(0, 0, 0);
@@ -61,7 +61,7 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
 
         if ($optionEnd) {
             $end = DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
-            if ($end === false) {
+            if (false === $end) {
                 throw new \InvalidArgumentException('Option --end has the wrong format');
             }
             $end = $end->setTime(23, 59, 59);
@@ -69,14 +69,14 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
 
         $this->orderSynchronizer->setLogger(new ConsoleLogger($output));
 
-        if($optionOrder) {
+        if ($optionOrder) {
             $this->orderSynchronizer->syncOne([
-                'externalId' => (int)$optionOrder
+                'externalId' => (int) $optionOrder,
             ]);
         } else {
             $this->orderSynchronizer->syncAll([
                 'start' => $start,
-                'end' => $end
+                'end' => $end,
             ]);
         }
 

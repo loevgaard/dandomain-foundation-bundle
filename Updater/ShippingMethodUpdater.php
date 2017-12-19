@@ -19,7 +19,7 @@ class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
         $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
-    public function updateFromApiResponse(array $data, string $currency) : ShippingMethodInterface
+    public function updateFromApiResponse(array $data, string $currency): ShippingMethodInterface
     {
         $shippingMethod = $this->getShippingMethod($data['id']);
 
@@ -32,23 +32,24 @@ class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
     }
 
     /**
-     * This method is called when an payment method is embedded in another object, i.e. orders
+     * This method is called when an payment method is embedded in another object, i.e. orders.
      *
-     * @param array $data
-     * @param string $currency
+     * @param array                   $data
+     * @param string                  $currency
      * @param ShippingMethodInterface $shippingMethod
+     *
      * @return ShippingMethodInterface
      */
-    public function updateFromEmbeddedApiResponse(array $data, string $currency, ShippingMethodInterface $shippingMethod = null) : ShippingMethodInterface
+    public function updateFromEmbeddedApiResponse(array $data, string $currency, ShippingMethodInterface $shippingMethod = null): ShippingMethodInterface
     {
-        if(!$shippingMethod) {
+        if (!$shippingMethod) {
             $shippingMethod = $this->getShippingMethod($data['id']);
         }
 
-        if(!$shippingMethod->getId()) {
+        if (!$shippingMethod->getId()) {
             // only update when we create a new entity because this is the embedded method
             $shippingMethod
-                ->setFee(DandomainFoundation\createMoney((string)$currency, $data['fee']))
+                ->setFee(DandomainFoundation\createMoney((string) $currency, $data['fee']))
                 ->setFeeInclVat($data['feeInclVat'])
                 ->setName($data['name']);
         }
@@ -56,10 +57,10 @@ class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
         return $shippingMethod;
     }
 
-    private function getShippingMethod(int $externalId) : ShippingMethodInterface
+    private function getShippingMethod(int $externalId): ShippingMethodInterface
     {
         $shippingMethod = $this->shippingMethodRepository->findOneByExternalId($externalId);
-        if(!$shippingMethod) {
+        if (!$shippingMethod) {
             $shippingMethod = new ShippingMethod();
             $shippingMethod->setExternalId($externalId);
         }

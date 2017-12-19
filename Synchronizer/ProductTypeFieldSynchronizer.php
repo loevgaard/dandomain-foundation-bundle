@@ -35,10 +35,10 @@ class ProductTypeFieldSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($productTypeField->id ? : null)
-            ->setLabel($productTypeField->label ? : null)
-            ->setLanguageId($productTypeField->languageId ? : null)
-            ->setNumber($productTypeField->number ? : null)
+            ->setExternalId($productTypeField->id ?: null)
+            ->setLabel($productTypeField->label ?: null)
+            ->setLanguageId($productTypeField->languageId ?: null)
+            ->setNumber($productTypeField->number ?: null)
         ;
 
         $this->objectManager->persist($entity);

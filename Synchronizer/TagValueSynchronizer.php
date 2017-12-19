@@ -16,7 +16,6 @@ class TagValueSynchronizer extends Synchronizer
      */
     protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\TagValueInterface';
 
-
     /**
      * @param \stdClass $tagValue
      * @param bool      $flush
@@ -27,7 +26,7 @@ class TagValueSynchronizer extends Synchronizer
     {
         /** @var TagValueInterface $entity */
         $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $tagValue->id
+            'externalId' => $tagValue->id,
         ]);
         if (!($entity)) {
             $entity = new $this->entityClassName();
@@ -48,7 +47,7 @@ class TagValueSynchronizer extends Synchronizer
         $this->objectManager->persist($entity);
         $entity->mergeNewTranslations();
 
-        if($flush) {
+        if ($flush) {
             $this->objectManager->flush();
         }
 

@@ -35,8 +35,8 @@ class UnitSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($unit->id ? : null)
-            ->setText($unit->text ? : null)
+            ->setExternalId($unit->id ?: null)
+            ->setText($unit->text ?: null)
         ;
 
         $this->objectManager->persist($entity);

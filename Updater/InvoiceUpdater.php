@@ -19,9 +19,9 @@ class InvoiceUpdater implements InvoiceUpdaterInterface
         $this->invoiceRepository = $invoiceRepository;
     }
 
-    public function updateFromEmbeddedApiResponse(array $data, InvoiceInterface $invoice = null) : InvoiceInterface
+    public function updateFromEmbeddedApiResponse(array $data, InvoiceInterface $invoice = null): InvoiceInterface
     {
-        if(!$invoice) {
+        if (!$invoice) {
             $invoice = new Invoice();
         }
 

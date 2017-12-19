@@ -40,8 +40,8 @@ class SegmentSynchronizer extends Synchronizer
             }
 
             $entity
-                ->setExternalId($segment->id ? : null)
-                ->setSegmentOptions($segment->segmentOptions ? : null)
+                ->setExternalId($segment->id ?: null)
+                ->setSegmentOptions($segment->segmentOptions ?: null)
             ;
 
             $this->objectManager->persist($entity);

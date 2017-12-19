@@ -23,7 +23,7 @@ class LoevgaardDandomainFoundationExtension extends Extension implements Prepend
     public function prepend(ContainerBuilder $container)
     {
         foreach ($container->getExtensions() as $name => $extension) {
-            if($name !== 'doctrine') {
+            if ('doctrine' !== $name) {
                 continue;
             }
 
@@ -34,10 +34,10 @@ class LoevgaardDandomainFoundationExtension extends Extension implements Prepend
                             'type' => 'annotation',
                             'dir' => '%kernel.project_dir%/vendor/loevgaard/dandomain-foundation-entities/src/Entity',
                             'is_bundle' => false,
-                            'prefix' => 'Loevgaard\\DandomainFoundation\\Entity'
-                        ]
-                    ]
-                ]
+                            'prefix' => 'Loevgaard\\DandomainFoundation\\Entity',
+                        ],
+                    ],
+                ],
             ]);
         }
     }

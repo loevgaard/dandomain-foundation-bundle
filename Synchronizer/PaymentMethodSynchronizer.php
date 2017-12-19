@@ -23,7 +23,7 @@ class PaymentMethodSynchronizer extends Synchronizer implements PaymentMethodSyn
         $this->paymentMethodUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : OrderInterface
+    public function syncOne(array $options = []): OrderInterface
     {
         throw new \RuntimeException('Method not implemented');
     }
@@ -31,13 +31,12 @@ class PaymentMethodSynchronizer extends Synchronizer implements PaymentMethodSyn
     public function syncAll(array $options = [])
     {
         throw new \RuntimeException('Method not implemented');
-
         // @todo fix site repository
         $siteIds = [26];
         $currency = 'DKK';
 
         foreach ($siteIds as $siteId) {
-            $shippingMethods = \GuzzleHttp\json_decode((string)$this->api->settings->getShippingMethods($siteId)->getBody());
+            $shippingMethods = \GuzzleHttp\json_decode((string) $this->api->settings->getShippingMethods($siteId)->getBody());
 
             foreach ($shippingMethods as $shippingMethod) {
                 $entity = $this->paymentMethodUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($shippingMethod), $currency);

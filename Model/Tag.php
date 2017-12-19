@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,24 +17,28 @@ abstract class Tag implements TagInterface, TranslatableInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
      * @var int
      **/
     protected $id;
 
     /**
      * @ORM\Column(type="integer", unique=true)
+     *
      * @var int
      **/
     protected $externalId;
 
     /**
      * @ORM\Column(type="string")
+     *
      * @var string
      **/
     protected $selectorType;
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @var int
      **/
     protected $sortOrder;
@@ -48,36 +53,39 @@ abstract class Tag implements TagInterface, TranslatableInterface
         $this->tagValues = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string) $this->externalId;
+    }
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function addTagValue(TagValue $tagValue) {
-        if(!$this->tagValues->contains($tagValue)) {
+    public function addTagValue(TagValue $tagValue)
+    {
+        if (!$this->tagValues->contains($tagValue)) {
             $this->tagValues->add($tagValue);
             $tagValue->setTag($this);
         }
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function clearTagValues() {
-        foreach($this->tagValues as $tagValue) {
-            /** @var $tagValue TagValue */
+    public function clearTagValues()
+    {
+        foreach ($this->tagValues as $tagValue) {
+            /* @var $tagValue TagValue */
             $this->tagValues->removeElement($tagValue);
         }
 
         return $this;
     }
 
-    public function __toString()
-    {
-        return (string)$this->externalId;
-    }
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -85,16 +93,17 @@ abstract class Tag implements TagInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -102,16 +111,17 @@ abstract class Tag implements TagInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSelectorType()
     {
@@ -119,16 +129,17 @@ abstract class Tag implements TagInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setSelectorType($selectorType)
     {
         $this->selectorType = $selectorType;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSortOrder()
     {
@@ -136,16 +147,17 @@ abstract class Tag implements TagInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setSortOrder($sortOrder)
     {
         $this->sortOrder = $sortOrder;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTagValues()
     {
@@ -153,11 +165,12 @@ abstract class Tag implements TagInterface, TranslatableInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setTagValues($tagValues)
     {
         $this->tagValues = $tagValues;
+
         return $this;
     }
 }

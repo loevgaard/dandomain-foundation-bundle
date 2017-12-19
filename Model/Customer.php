@@ -220,7 +220,7 @@ abstract class Customer implements CustomerInterface
     protected $reservedField5;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAddress()
     {
@@ -228,7 +228,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setAddress($address)
     {
@@ -238,7 +238,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAddress2()
     {
@@ -246,7 +246,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setAddress2($address2)
     {
@@ -256,7 +256,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAttention()
     {
@@ -264,7 +264,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setAttention($attention)
     {
@@ -274,7 +274,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCity()
     {
@@ -282,7 +282,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCity($city)
     {
@@ -292,7 +292,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCountry()
     {
@@ -300,7 +300,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCountry($country)
     {
@@ -310,7 +310,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getEan()
     {
@@ -318,7 +318,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setEan($ean)
     {
@@ -328,7 +328,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getEmail()
     {
@@ -336,7 +336,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setEmail($email)
     {
@@ -346,7 +346,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getExternalId()
     {
@@ -354,7 +354,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setExternalId($externalId)
     {
@@ -364,7 +364,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFax()
     {
@@ -372,7 +372,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setFax($fax)
     {
@@ -382,7 +382,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -390,7 +390,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -398,7 +398,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -408,7 +408,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPhone()
     {
@@ -416,7 +416,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setPhone($phone)
     {
@@ -426,7 +426,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getState()
     {
@@ -434,7 +434,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setState($state)
     {
@@ -444,7 +444,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getZipCode()
     {
@@ -452,7 +452,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setZipCode($zipCode)
     {
@@ -462,7 +462,7 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCvr()
     {
@@ -470,16 +470,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCvr($cvr)
     {
         $this->cvr = $cvr;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getB2bGroupId()
     {
@@ -487,16 +488,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setB2bGroupId($b2bGroupId)
     {
         $this->b2bGroupId = $b2bGroupId;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getComments()
     {
@@ -504,16 +506,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setComments($comments)
     {
         $this->comments = $comments;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCountryId()
     {
@@ -521,16 +524,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCountryId($countryId)
     {
         $this->countryId = $countryId;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCreatedDate()
     {
@@ -538,16 +542,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCreatedDate($createdDate)
     {
         $this->createdDate = $createdDate;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCustomerGroupId()
     {
@@ -555,16 +560,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCustomerGroupId($customerGroupId)
     {
         $this->customerGroupId = $customerGroupId;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCustomerType()
     {
@@ -572,16 +578,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCustomerType($customerType)
     {
         $this->customerType = $customerType;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isB2b()
     {
@@ -589,16 +596,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setB2b($b2b)
     {
         $this->b2b = $b2b;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLastLoginDate()
     {
@@ -606,16 +614,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLastLoginDate($lastLoginDate)
     {
         $this->lastLoginDate = $lastLoginDate;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLoginCount()
     {
@@ -623,16 +632,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLoginCount($loginCount)
     {
         $this->loginCount = $loginCount;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPassword()
     {
@@ -640,16 +650,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReservedField1()
     {
@@ -657,16 +668,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReservedField1($reservedField1)
     {
         $this->reservedField1 = $reservedField1;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReservedField2()
     {
@@ -674,16 +686,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReservedField2($reservedField2)
     {
         $this->reservedField2 = $reservedField2;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReservedField3()
     {
@@ -691,16 +704,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReservedField3($reservedField3)
     {
         $this->reservedField3 = $reservedField3;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReservedField4()
     {
@@ -708,16 +722,17 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReservedField4($reservedField4)
     {
         $this->reservedField4 = $reservedField4;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReservedField5()
     {
@@ -725,11 +740,12 @@ abstract class Customer implements CustomerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReservedField5($reservedField5)
     {
         $this->reservedField5 = $reservedField5;
+
         return $this;
     }
 }

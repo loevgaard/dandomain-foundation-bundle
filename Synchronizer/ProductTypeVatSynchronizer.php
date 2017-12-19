@@ -35,10 +35,10 @@ class ProductTypeVatSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setCountry($productTypeVat->country ? : null)
-            ->setCountryId($productTypeVat->countryId ? : null)
-            ->setSiteId($productTypeVat->siteId ? : null)
-            ->setVatPct($productTypeVat->vatPct ? : null)
+            ->setCountry($productTypeVat->country ?: null)
+            ->setCountryId($productTypeVat->countryId ?: null)
+            ->setSiteId($productTypeVat->siteId ?: null)
+            ->setVatPct($productTypeVat->vatPct ?: null)
         ;
 
         $this->objectManager->persist($entity);

@@ -1,36 +1,40 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle;
 
 use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
 
 /**
- * Return a \DateTime|\DateTimeImmutable object based on a json string, i.e. '/Date(1484759471000+0100)/'
+ * Return a \DateTime|\DateTimeImmutable object based on a json string, i.e. '/Date(1484759471000+0100)/'.
  *
  * @param string $date
- * @param bool $immutable
+ * @param bool   $immutable
+ *
  * @return DateTimeImmutable
  */
-function jsonDateToDate($date) {
+function jsonDateToDate($date)
+{
     preg_match('/([0-9]+)\+/', $date, $matches);
-    if(!isset($matches[1])) {
-        throw new \InvalidArgumentException('$date is not a valid JSON date. Input: ' . $date);
+    if (!isset($matches[1])) {
+        throw new \InvalidArgumentException('$date is not a valid JSON date. Input: '.$date);
     }
     // remove the last three digits since the json date is given in milliseconds
     $timestamp = substr($matches[1], 0, -3);
 
     // timestamps will always be given in the UTC time zone
-    return DateTimeImmutable::createFromTimestamp('@' . $timestamp);
+    return DateTimeImmutable::createFromTimestamp('@'.$timestamp);
 }
 
 /**
  * @param \DateTimeImmutable $startDate
  * @param \DateTimeImmutable $endDate
- * @param \DateInterval $interval
+ * @param \DateInterval      $interval
+ *
  * @return \Generator|array
  */
-function datePeriodSteps(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate, \DateInterval $interval) : \Generator
+function datePeriodSteps(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate, \DateInterval $interval): \Generator
 {
-    if($startDate > $endDate) {
+    if ($startDate > $endDate) {
         throw new \InvalidArgumentException('Start date is after end date');
     }
 
@@ -41,11 +45,11 @@ function datePeriodSteps(\DateTimeImmutable $startDate, \DateTimeImmutable $endD
         /** @var \DateTimeImmutable $startStep */
         $endStep = $startStep->add($interval);
 
-        /**
+        /*
          * If it's the second round of the loop we want to add 1 second to the start step
          * This will have the effect that there are no overlapping periods
          */
-        if($first) {
+        if ($first) {
             $first = false;
         } else {
             $startStep = $startStep->add(new \DateInterval('PT1S'));
@@ -57,13 +61,13 @@ function datePeriodSteps(\DateTimeImmutable $startDate, \DateTimeImmutable $endD
         }
 
         // if the start step is after the end step we just continue, which practically means that the loop ends
-        if($startStep > $endStep) {
+        if ($startStep > $endStep) {
             continue;
         }
 
         yield [
             'startStep' => $startStep,
-            'endStep' => $endStep
+            'endStep' => $endStep,
         ];
     }
 }

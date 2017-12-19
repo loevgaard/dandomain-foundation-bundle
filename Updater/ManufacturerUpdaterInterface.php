@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\ManufacturerInterface;
 
 interface ManufacturerUpdaterInterface extends UpdaterInterface
 {
-    public function updateFromApiResponse(array $data) : ManufacturerInterface;
+    public function updateFromApiResponse(array $data): ManufacturerInterface;
 }

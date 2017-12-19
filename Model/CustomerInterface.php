@@ -172,6 +172,7 @@ interface CustomerInterface
 
     /**
      * @param string $cvr
+     *
      * @return CustomerInterface
      */
     public function setCvr($cvr);
@@ -183,6 +184,7 @@ interface CustomerInterface
 
     /**
      * @param string $b2bGroupId
+     *
      * @return CustomerInterface
      */
     public function setB2bGroupId($b2bGroupId);
@@ -194,6 +196,7 @@ interface CustomerInterface
 
     /**
      * @param string $comments
+     *
      * @return CustomerInterface
      */
     public function setComments($comments);
@@ -205,6 +208,7 @@ interface CustomerInterface
 
     /**
      * @param int $countryId
+     *
      * @return CustomerInterface
      */
     public function setCountryId($countryId);
@@ -216,6 +220,7 @@ interface CustomerInterface
 
     /**
      * @param \DateTimeInterface $createdDate
+     *
      * @return CustomerInterface
      */
     public function setCreatedDate($createdDate);
@@ -227,6 +232,7 @@ interface CustomerInterface
 
     /**
      * @param string $customerGroupId
+     *
      * @return CustomerInterface
      */
     public function setCustomerGroupId($customerGroupId);
@@ -238,6 +244,7 @@ interface CustomerInterface
 
     /**
      * @param string $customerType
+     *
      * @return CustomerInterface
      */
     public function setCustomerType($customerType);
@@ -249,6 +256,7 @@ interface CustomerInterface
 
     /**
      * @param bool $b2b
+     *
      * @return CustomerInterface
      */
     public function setB2b($b2b);
@@ -260,6 +268,7 @@ interface CustomerInterface
 
     /**
      * @param \DateTimeInterface $lastLoginDate
+     *
      * @return CustomerInterface
      */
     public function setLastLoginDate($lastLoginDate);
@@ -271,6 +280,7 @@ interface CustomerInterface
 
     /**
      * @param int $loginCount
+     *
      * @return CustomerInterface
      */
     public function setLoginCount($loginCount);
@@ -282,6 +292,7 @@ interface CustomerInterface
 
     /**
      * @param string $password
+     *
      * @return CustomerInterface
      */
     public function setPassword($password);
@@ -293,6 +304,7 @@ interface CustomerInterface
 
     /**
      * @param string $reservedField1
+     *
      * @return CustomerInterface
      */
     public function setReservedField1($reservedField1);
@@ -304,6 +316,7 @@ interface CustomerInterface
 
     /**
      * @param string $reservedField2
+     *
      * @return CustomerInterface
      */
     public function setReservedField2($reservedField2);
@@ -315,6 +328,7 @@ interface CustomerInterface
 
     /**
      * @param string $reservedField3
+     *
      * @return CustomerInterface
      */
     public function setReservedField3($reservedField3);
@@ -326,6 +340,7 @@ interface CustomerInterface
 
     /**
      * @param string $reservedField4
+     *
      * @return CustomerInterface
      */
     public function setReservedField4($reservedField4);
@@ -337,6 +352,7 @@ interface CustomerInterface
 
     /**
      * @param string $reservedField5
+     *
      * @return CustomerInterface
      */
     public function setReservedField5($reservedField5);

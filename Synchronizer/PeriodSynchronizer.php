@@ -22,14 +22,14 @@ class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInter
         $this->periodUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : DandomainFoundation\Entity\Generated\PeriodInterface
+    public function syncOne(array $options = []): DandomainFoundation\Entity\Generated\PeriodInterface
     {
         throw new \RuntimeException('Method not implemented');
     }
 
     public function syncAll(array $options = [])
     {
-        $periods = \GuzzleHttp\json_decode((string)$this->api->relatedData->getPeriods()->getBody());
+        $periods = \GuzzleHttp\json_decode((string) $this->api->relatedData->getPeriods()->getBody());
         foreach ($periods as $period) {
             $entity = $this->periodUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($period));
             $this->repository->save($entity);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -25,7 +26,7 @@ abstract class Repository implements RepositoryInterface
     public function __construct(ManagerRegistry $managerRegistry, string $class)
     {
         $this->manager = $managerRegistry->getManagerForClass($class);
-        if(!$this->manager) {
+        if (!$this->manager) {
             throw new \RuntimeException('No manager exists for class '.$class);
         }
         $this->repository = $this->manager->getRepository($class);

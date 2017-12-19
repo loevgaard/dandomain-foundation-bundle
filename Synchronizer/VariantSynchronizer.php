@@ -35,9 +35,9 @@ class VariantSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($variant->id ? : null)
-            ->setSortOrder($variant->sortOrder ? : null)
-            ->setText($variant->text ? : null)
+            ->setExternalId($variant->id ?: null)
+            ->setSortOrder($variant->sortOrder ?: null)
+            ->setText($variant->text ?: null)
         ;
 
         $this->objectManager->persist($entity);

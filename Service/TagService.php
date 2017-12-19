@@ -19,8 +19,8 @@ class TagService extends Service
     protected $tagSynchronizer;
 
     /**
-     * @param Api               $api
-     * @param TagSynchronizer   $tagSynchronizer
+     * @param Api             $api
+     * @param TagSynchronizer $tagSynchronizer
      */
     public function __construct(Api $api, TagSynchronizer $tagSynchronizer)
     {
@@ -42,7 +42,7 @@ class TagService extends Service
         $pageSize = 100;
         $pages = $this->api->productTag->getProductTagPageCount($pageSize);
 
-        for($page = 1; $page <= $pages; $page++) {
+        for ($page = 1; $page <= $pages; ++$page) {
             $output->writeln($page.' / '.$pages, OutputInterface::VERBOSITY_VERBOSE);
             $tags = $this->api->productTag->getProductTagPage($page, $pageSize);
             foreach ($tags as $tag) {

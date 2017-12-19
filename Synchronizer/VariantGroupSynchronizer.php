@@ -52,10 +52,10 @@ class VariantGroupSynchronizer extends Synchronizer
         }
 
         $entity
-            ->setExternalId($variantGroup->id ? : null)
-            ->setSelectText($variantGroup->selectText ? : null)
-            ->setSortOrder($variantGroup->sortOrder ? : null)
-            ->setText($variantGroup->text ? : null)
+            ->setExternalId($variantGroup->id ?: null)
+            ->setSelectText($variantGroup->selectText ?: null)
+            ->setSortOrder($variantGroup->sortOrder ?: null)
+            ->setText($variantGroup->text ?: null)
         ;
 
         if (is_array($variantGroup->variants)) {
