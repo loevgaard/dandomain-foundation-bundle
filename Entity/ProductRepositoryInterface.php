@@ -28,5 +28,5 @@ interface ProductRepositoryInterface extends RepositoryInterface
      * @param array $in
      * @param array $notIn
      */
-    public function bulkRemove(array $in = [], array $notIn = []);
+    public function removeBulk(array $in = [], array $notIn = []);
 }

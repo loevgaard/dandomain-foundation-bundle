@@ -125,7 +125,7 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         $this->manager->flush();
     }
 
-    public function bulkRemove(array $in = [], array $notIn = [])
+    public function removeBulk(array $in = [], array $notIn = [])
     {
         if (!count($in) && !count($notIn)) {
             return;

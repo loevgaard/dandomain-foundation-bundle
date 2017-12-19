@@ -51,11 +51,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $lastLog = $this->readLog();
         $log = ['options' => $options];
 
-        $productIdsToUpdateParentChildRelationsip = [];
-
-        $this->repository->bulkRemove([], [811]);
-
-        return;
+        $productIdsToUpdateParentChildRelationship = [];
 
         if ($options['changed']) {
             $now = new DateTimeImmutable();
@@ -97,7 +93,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                     $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
                     $this->repository->save($entity);
 
-                    $productIdsToUpdateParentChildRelationsip[] = $entity->getId();
+                    $productIdsToUpdateParentChildRelationship[] = $entity->getId();
                 }
             }
 
@@ -120,10 +116,10 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 }
             }
 
-            $this->repository->bulkRemove([], $productIdsToNotRemove);
+            $this->repository->removeBulk([], $productIdsToNotRemove);
         }
 
-        $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationsip);
+        $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationship);
 
         $this->writeLog($log);
     }
