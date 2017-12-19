@@ -6,18 +6,23 @@ use Dandomain\Api\Api;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\RepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInterface
 {
     /**
+     * @var ProductRepositoryInterface
+     */
+    protected $repository;
+
+    /**
      * @var ProductUpdater
      */
     protected $productUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $stateUpdater)
+    public function __construct(ProductRepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -45,6 +50,8 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
         $lastLog = $this->readLog();
         $log = ['options' => $options];
+
+        $productIds = [];
 
         if ($this->options['changed']) {
             $now = new DateTimeImmutable();
@@ -83,9 +90,10 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 $products = \GuzzleHttp\json_decode((string)$this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
                 foreach ($products as $product) {
-                    //$output->writeln('Product: '.$product->number, OutputInterface::VERBOSITY_VERBOSE);
                     $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
                     $this->repository->save($entity);
+
+                    $productIds[] = $entity->getId();
                 }
             }
 
@@ -105,6 +113,8 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 }
             }
         }
+
+        $this->repository->updateParentChildRelationships($productIds);
 
         $this->writeLog($log);
     }
