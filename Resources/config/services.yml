@@ -86,6 +86,7 @@ services:
             - "@loevgaard_dandomain_foundation.customer_updater"
             - "@loevgaard_dandomain_foundation.delivery_updater"
             - "@loevgaard_dandomain_foundation.invoice_updater"
+            - "@loevgaard_dandomain_foundation.product_repository"
 
     loevgaard_dandomain_foundation.payment_method_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\PaymentMethodUpdater

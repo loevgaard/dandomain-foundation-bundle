@@ -3,17 +3,29 @@
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Doctrine\Common\Collections\Criteria;
+use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Order;
+use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
+use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 
 class OrderUpdater implements OrderUpdaterInterface
 {
+    /**
+     * This will hold ids for products indexed by product number
+     *
+     * @var array
+     */
+    protected static $productCache;
+
     /**
      * @var OrderRepositoryInterface
      */
@@ -59,6 +71,11 @@ class OrderUpdater implements OrderUpdaterInterface
      */
     protected $invoiceUpdater;
 
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected $productRepository;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductSynchronizerInterface $productSynchronizer,
@@ -68,8 +85,10 @@ class OrderUpdater implements OrderUpdaterInterface
         StateUpdaterInterface $stateUpdater,
         CustomerUpdaterInterface $customerUpdater,
         DeliveryUpdaterInterface $deliveryUpdater,
-        InvoiceUpdaterInterface $invoiceUpdater
+        InvoiceUpdaterInterface $invoiceUpdater,
+        ProductRepositoryInterface $productRepository
     ) {
+        self::$productCache = [];
         $this->orderRepository = $orderRepository;
         $this->productSynchronizer = $productSynchronizer;
         $this->shippingMethodUpdater = $shippingMethodUpdater;
@@ -79,6 +98,7 @@ class OrderUpdater implements OrderUpdaterInterface
         $this->customerUpdater = $customerUpdater;
         $this->deliveryUpdater = $deliveryUpdater;
         $this->invoiceUpdater = $invoiceUpdater;
+        $this->productRepository = $productRepository;
     }
 
     public function updateFromApiResponse(array $data): OrderInterface
@@ -221,15 +241,9 @@ class OrderUpdater implements OrderUpdaterInterface
                     ->setXmlParams($orderLineData['xmlParams'])
                 ;
 
-                if ($orderLineData['productId']) {
-                    try {
-                        $product = $this->productSynchronizer->syncOne([
-                            'number' => $orderLineData['productId'],
-                        ]);
-                        $orderLineEntity->setProduct($product);
-                    } catch (\Exception $e) {
-                        echo $e->getMessage()."\n";
-                    }
+                $product = $this->getProductFromOrderLine($orderLineEntity);
+                if($product) {
+                    $orderLineEntity->setProduct($product);
                 }
             }
         } else {
@@ -237,5 +251,55 @@ class OrderUpdater implements OrderUpdaterInterface
         }
 
         return $order;
+    }
+
+    /**
+     * Returns true if the $orderLine is a product
+     * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product
+     *
+     * @param OrderLineInterface $orderLine
+     * @return ProductInterface|null
+     */
+    protected function getProductFromOrderLine(OrderLineInterface $orderLine) : ?ProductInterface
+    {
+        // if the order line does not have a product number we know it's not a product
+        // since this is a requirement in Dandomain for products
+        if(empty($orderLine->getProductNumber())) {
+            return null;
+        }
+
+        // products can not have a negative value, but discounts can
+        if($orderLine->getUnitPrice()->isNegative()) {
+            return null;
+        }
+
+        // the product cache will only hold valid products
+        if(isset(self::$productCache[$orderLine->getProductNumber()])) {
+            /** @var ProductInterface $product */
+            $product = $this->productRepository->getReference(self::$productCache[$orderLine->getProductNumber()]);
+            return $product;
+        }
+
+        try {
+            $product = $this->productSynchronizer->syncOne([
+                'number' => $orderLine->getProductNumber(),
+            ]);
+        } catch (ClientException $e) {
+            if($e->getResponse()->getStatusCode() === 404) {
+                $product = new Product();
+                $product->setNumber($orderLine->getProductNumber());
+
+                // if the product doesn't exist we mark it as deleted when we sync it
+                $product->delete();
+
+                $this->productRepository->save($product);
+            } else {
+                throw $e;
+            }
+        }
+
+        self::$productCache[$orderLine->getProductNumber()] = $product->getId();
+
+        return $product;
     }
 }

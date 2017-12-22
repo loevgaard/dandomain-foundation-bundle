@@ -36,6 +36,18 @@ abstract class Repository implements RepositoryInterface
     public function save($obj)
     {
         $this->manager->persist($obj);
-        $this->manager->flush();
+        $this->manager->flush($obj);
+    }
+
+    /**
+     * @todo we should probably handle some of the possible return values here
+     *
+     * @param $id
+     * @return bool|\Doctrine\Common\Proxy\Proxy|null|object
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function getReference($id)
+    {
+        return $this->manager->getReference($this->class, $id);
     }
 }
