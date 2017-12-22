@@ -106,6 +106,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
             // we start from behind since this will sync the newest products first
             for ($page = $pageCount; $page >= 1; --$page) {
                 $this->logger->info($page.'/'.$pageCount);
+                $this->outputMemoryUsage();
                 $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $options['pageSize'])->getBody()->getContents());
 
                 foreach ($products as $product) {
