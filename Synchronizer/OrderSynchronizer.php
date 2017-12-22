@@ -78,6 +78,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
         for ($page = 1; $page <= $pages; ++$page) {
             $this->logger->info($page.' / '.$pages);
+            $this->outputMemoryUsage();
 
             $orders = \GuzzleHttp\json_decode((string) $this->api->order->getOrdersInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
