@@ -27,7 +27,7 @@ class CustomerUpdater implements CustomerUpdaterInterface
      */
     public function updateFromEmbeddedApiResponse(array $data): CustomerInterface
     {
-        $customer = $this->customerRepository->findOneByExternalId($data['id']);
+        $customer = $this->customerRepository->findOneByExternalId((int)$data['id']);
         if (!$customer) {
             $customer = new Customer();
             $customer->setExternalId($data['id']);

@@ -131,4 +131,11 @@ abstract class Synchronizer implements SynchronizerInterface
     {
         return strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $string));
     }
+
+    protected function outputMemoryUsage()
+    {
+        $memoryUsage = memory_get_usage();
+        $memoryPeakUsage = memory_get_peak_usage();
+        $this->logger->info();
+    }
 }
