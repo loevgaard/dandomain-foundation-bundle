@@ -87,6 +87,8 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
                 $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
                 $this->repository->save($entity);
             }
+
+            $this->repository->clear();
         }
 
         $log['start'] = $start;

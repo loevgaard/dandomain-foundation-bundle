@@ -50,4 +50,9 @@ abstract class Repository implements RepositoryInterface
     {
         return $this->manager->getReference($this->class, $id);
     }
+
+    public function clear(?string $objectName = null)
+    {
+        $this->manager->clear($objectName);
+    }
 }
