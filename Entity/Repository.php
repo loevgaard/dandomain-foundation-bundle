@@ -3,9 +3,24 @@
 namespace Loevgaard\DandomainFoundationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
+/**
+ * This entity repository is implemented using the principles described here:
+ * https://www.tomasvotruba.cz/blog/2017/10/16/how-to-use-repository-with-doctrine-as-service-in-symfony/.
+ *
+ * @todo this class should probably be in a separate library
+ *
+ * @method null|object find($id)
+ * @method array findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * @method null|object findOneBy(array $criteria)
+ * @method array findAll()
+ * @method persist($object)
+ * @method flush()
+ * @method clear()
+ * @method remove($object)
+ */
 abstract class Repository implements RepositoryInterface
 {
     /**
@@ -14,7 +29,7 @@ abstract class Repository implements RepositoryInterface
     protected $manager;
 
     /**
-     * @var ObjectRepository
+     * @var EntityRepository
      */
     protected $repository;
 
@@ -51,8 +66,22 @@ abstract class Repository implements RepositoryInterface
         return $this->manager->getReference($this->class, $id);
     }
 
-    public function clear(?string $objectName = null)
+    /**
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed
+     */
+    public function __call($name, $arguments)
     {
-        $this->manager->clear($objectName);
+        if (method_exists($this->repository, $name)) {
+            return call_user_func_array([$this->repository, $name], $arguments);
+        }
+
+        if (method_exists($this->manager, $name)) {
+            return call_user_func_array([$this->manager, $name], $arguments);
+        }
+
+        throw new \RuntimeException('Method '.$name.' not defined in '.__CLASS__);
     }
 }
