@@ -13,12 +13,4 @@ interface RepositoryInterface
      * @return object
      */
     public function getReference($id);
-
-    /**
-     * This clears the manager
-     *
-     * @param null|string $objectName
-     * @return mixed
-     */
-    public function clear(?string $objectName = null);
 }
