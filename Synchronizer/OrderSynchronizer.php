@@ -88,7 +88,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
                 $this->repository->save($entity);
             }
 
-            $this->repository->clear();
+            $this->repository->clearAll();
         }
 
         $log['start'] = $start;

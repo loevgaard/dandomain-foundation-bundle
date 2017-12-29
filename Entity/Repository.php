@@ -6,21 +6,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-/**
- * This entity repository is implemented using the principles described here:
- * https://www.tomasvotruba.cz/blog/2017/10/16/how-to-use-repository-with-doctrine-as-service-in-symfony/.
- *
- * @todo this class should probably be in a separate library
- *
- * @method null|object find($id)
- * @method array findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
- * @method null|object findOneBy(array $criteria)
- * @method array findAll()
- * @method persist($object)
- * @method flush()
- * @method clear()
- * @method remove($object)
- */
 abstract class Repository implements RepositoryInterface
 {
     /**
@@ -64,6 +49,11 @@ abstract class Repository implements RepositoryInterface
     public function getReference($id)
     {
         return $this->manager->getReference($this->class, $id);
+    }
+
+    public function clearAll()
+    {
+        $this->manager->clear();
     }
 
     /**
