@@ -265,6 +265,12 @@ services:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\State
 
+    loevgaard_dandomain_foundation.tag_repository:
+            class: Loevgaard\DandomainFoundationBundle\Entity\TagRepository
+            arguments:
+                - "@doctrine"
+                - Loevgaard\DandomainFoundation\Entity\Tag
+
     loevgaard_dandomain_foundation.variant_group_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepository
         arguments:
