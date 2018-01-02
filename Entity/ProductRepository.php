@@ -9,6 +9,16 @@ use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Product;
 
+/**
+ * @method null|ProductInterface find($id)
+ * @method ProductInterface[] findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * @method null|ProductInterface findOneBy(array $criteria)
+ * @method ProductInterface[] findAll()
+ * @method persist($object)
+ * @method flush()
+ * @method clear()
+ * @method remove($object)
+ */
 class ProductRepository extends Repository implements ProductRepositoryInterface
 {
     /**

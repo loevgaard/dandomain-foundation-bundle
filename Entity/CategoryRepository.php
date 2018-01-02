@@ -5,6 +5,16 @@ namespace Loevgaard\DandomainFoundationBundle\Entity;
 use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method null|CategoryInterface find($id)
+ * @method CategoryInterface[] findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * @method null|CategoryInterface findOneBy(array $criteria)
+ * @method CategoryInterface[] findAll()
+ * @method persist($object)
+ * @method flush()
+ * @method clear()
+ * @method remove($object)
+ */
 class CategoryRepository extends Repository implements CategoryRepositoryInterface
 {
     public function findOneByNumber(string $number): ?CategoryInterface

@@ -9,6 +9,10 @@ use Loevgaard\DandomainFoundation\Entity\Generated\ManufacturerInterface;
  * @method ManufacturerInterface[] findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
  * @method null|ManufacturerInterface findOneBy(array $criteria)
  * @method ManufacturerInterface[] findAll()
+ * @method persist($object)
+ * @method flush()
+ * @method clear()
+ * @method remove($object)
  */
 class ManufacturerRepository extends Repository implements ManufacturerRepositoryInterface
 {
