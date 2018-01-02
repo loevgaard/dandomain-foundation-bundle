@@ -247,6 +247,12 @@ services:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Product
 
+    loevgaard_dandomain_foundation.product_type_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\ProductTypeRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\ProductType
+
     loevgaard_dandomain_foundation.shipping_method_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\ShippingMethodRepository
         arguments:
