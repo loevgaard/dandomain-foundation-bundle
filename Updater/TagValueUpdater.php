@@ -42,6 +42,8 @@ class TagValueUpdater implements TagValueUpdaterInterface
             foreach ($data['translations'] as $translation) {
                 $tagValue->translate($translation['siteId'])->setText($translation['text']);
             }
+
+            $tagValue->mergeNewTranslations();
         }
 
         return $tagValue;

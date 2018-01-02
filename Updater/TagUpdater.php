@@ -40,6 +40,8 @@ class TagUpdater implements TagUpdaterInterface
             $tag->translate($translation['siteId'])->setText($translation['text']);
         }
 
+        $tag->mergeNewTranslations();
+
         foreach ($data['values'] as $dataTagValue) {
             $tagValue = $this->tagValueUpdater->updateFromEmbeddedApiResponse($dataTagValue);
             $tag->addTagValue($tagValue);
