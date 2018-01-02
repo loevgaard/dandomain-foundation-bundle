@@ -48,6 +48,12 @@ services:
             - "@loevgaard_dandomain_foundation.state_synchronizer"
         tags: [console.command]
 
+    loevgaard_dandomain_altapay.synchronize_tags_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeTagsCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.tag_synchronizer"
+        tags: [console.command]
+
     # Updaters
     loevgaard_dandomain_foundation.category_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater
