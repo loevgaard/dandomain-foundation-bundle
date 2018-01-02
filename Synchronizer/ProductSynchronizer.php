@@ -115,6 +115,8 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
                     $productIdsToNotRemove[] = $entity->getId();
                 }
+
+                $this->repository->clearAll();
             }
 
             $this->repository->removeBulk([], $productIdsToNotRemove);
