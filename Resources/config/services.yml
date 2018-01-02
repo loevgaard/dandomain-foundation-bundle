@@ -120,6 +120,17 @@ services:
         arguments:
             - "@loevgaard_dandomain_foundation.state_repository"
 
+    loevgaard_dandomain_foundation.tag_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\TagUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.tag_repository"
+            - "@loevgaard_dandomain_foundation.tag_value_updater"
+
+    loevgaard_dandomain_foundation.tag_value_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\TagValueUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.tag_value_repository"
+
     # Synchronizers
     loevgaard_dandomain_foundation.category_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizer
@@ -192,6 +203,14 @@ services:
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.state_updater"
+
+    loevgaard_dandomain_foundation.tag_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\TagSynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.tag_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.tag_updater"
 
     # Repositories
     loevgaard_dandomain_foundation.category_repository:
@@ -272,10 +291,16 @@ services:
             - Loevgaard\DandomainFoundation\Entity\State
 
     loevgaard_dandomain_foundation.tag_repository:
-            class: Loevgaard\DandomainFoundationBundle\Entity\TagRepository
-            arguments:
-                - "@doctrine"
-                - Loevgaard\DandomainFoundation\Entity\Tag
+        class: Loevgaard\DandomainFoundationBundle\Entity\TagRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\Tag
+
+    loevgaard_dandomain_foundation.tag_value_repository:
+        class: Loevgaard\DandomainFoundationBundle\Entity\TagValueRepository
+        arguments:
+            - "@doctrine"
+            - Loevgaard\DandomainFoundation\Entity\TagValue
 
     loevgaard_dandomain_foundation.variant_group_repository:
         class: Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepository

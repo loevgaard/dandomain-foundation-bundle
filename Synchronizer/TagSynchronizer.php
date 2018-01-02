@@ -2,80 +2,51 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\TagInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\TagInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\TagRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Updater\TagUpdaterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TagSynchronizer extends Synchronizer
+class TagSynchronizer extends Synchronizer implements TagSynchronizerInterface
 {
     /**
-     * @var string
+     * @var TagUpdaterInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\Tag';
+    protected $tagUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\TagInterface';
-
-    /**
-     * @var TagValueSynchronizer
-     */
-    protected $tagValueSynchronizer;
-
-    /**
-     * @param TagValueSynchronizer $tagValueSynchronizer
-     *
-     * @return TagSynchronizer
-     */
-    public function setTagValueSynchronizer(TagValueSynchronizer $tagValueSynchronizer)
+    public function __construct(TagRepositoryInterface $repository, Api $api, string $logsDir, TagUpdaterInterface $tagUpdater)
     {
-        $this->tagValueSynchronizer = $tagValueSynchronizer;
+        parent::__construct($repository, $api, $logsDir);
 
-        return $this;
+        $this->tagUpdater = $tagUpdater;
     }
 
-    /**
-     * @param \stdClass $tag
-     * @param bool      $flush
-     *
-     * @return TagInterface
-     */
-    public function syncTag($tag, $flush = true)
+    public function syncOne(array $options = []): ?TagInterface
     {
-        /** @var TagInterface $entity */
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $tag->id,
-        ]);
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-            $entity->setExternalId($tag->id);
-        }
+        throw new \RuntimeException('Method not implemented');
+    }
 
-        $entity
-            ->setSelectorType($tag->selectorType)
-            ->setSortOrder($tag->sortOrder)
-        ;
+    public function syncAll(array $options = [])
+    {
+        $pageSize = 100;
+        $pages = \GuzzleHttp\json_decode((string) $this->api->productTag->getProductTagPageCount($pageSize));
 
-        foreach ($tag->translations as $translation) {
-            $entity
-                ->translate($languages[$translation->siteId]['id'])
-                ->setText($translation->text)
-            ;
-        }
-
-        foreach ($tag->values as $tagValue) {
-            $entityTagValue = $this->tagValueSynchronizer->syncTagValue($tagValue);
-            if ($entityTagValue) {
-                $entity->addTagValue($entityTagValue);
+        for($page = 1; $page <= $pages; $page++) {
+            $tags = $this->api->productTag->getProductTagPage($page, $pageSize);
+            foreach ($tags as $tag) {
+                $entity = $this->tagUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($tag));
+                $this->repository->save($entity);
             }
         }
+    }
 
-        $this->objectManager->persist($entity);
-        $entity->mergeNewTranslations();
+    public function configureOptionsOne(OptionsResolver $resolver)
+    {
+    }
 
-        if ($flush) {
-            $this->entityManager->flush();
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }

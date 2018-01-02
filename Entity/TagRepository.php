@@ -16,5 +16,13 @@ use Loevgaard\DandomainFoundation\Entity\Generated\TagInterface;
  */
 class TagRepository extends Repository implements TagRepositoryInterface
 {
+    public function findOneByExternalId(int $externalId): ?TagInterface
+    {
+        /** @var TagInterface $obj */
+        $obj = $this->repository->findOneBy([
+            'externalId' => $externalId,
+        ]);
 
+        return $obj;
+    }
 }
