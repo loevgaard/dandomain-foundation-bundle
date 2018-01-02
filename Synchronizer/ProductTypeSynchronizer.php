@@ -2,121 +2,46 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
-use Loevgaard\DandomainFoundationBundle\Model\ProductTypeInterface;
+use Dandomain\Api\Api;
+use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\ProductTypeInterface;
+use Loevgaard\DandomainFoundationBundle\Entity\ProductTypeRepositoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductTypeSynchronizer extends Synchronizer
+class ProductTypeSynchronizer extends Synchronizer implements ProductTypeSynchronizerInterface
 {
     /**
-     * @var string
+     * @var ProductTypeUpdaterInterface
      */
-    protected $entityClassName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductType';
+    protected $productTypeUpdater;
 
-    /**
-     * @var string
-     */
-    protected $entityInterfaceName = 'Loevgaard\\DandomainFoundationBundle\\Model\\ProductTypeInterface';
-
-    /**
-     * @var ProductTypeFieldSynchronizer
-     */
-    protected $productTypeFieldSynchronizer;
-
-    /**
-     * @var ProductTypeFormulaSynchronizer
-     */
-    protected $productTypeFormulaSynchronizer;
-
-    /**
-     * @var ProductTypeVatSynchronizer
-     */
-    protected $productTypeVatSynchronizer;
-
-    /**
-     * @param ProductTypeFieldSynchronizer $productTypeFieldSynchronizer
-     *
-     * @return ProductTypeSynchronizer
-     */
-    public function setProductTypeFieldSynchronizer(ProductTypeFieldSynchronizer $productTypeFieldSynchronizer)
+    public function __construct(ProductTypeRepositoryInterface $repository, Api $api, string $logsDir, ProductTypeUpdaterInterface $productTypeUpdater)
     {
-        $this->productTypeFieldSynchronizer = $productTypeFieldSynchronizer;
+        parent::__construct($repository, $api, $logsDir);
 
-        return $this;
+        $this->productTypeUpdater = $productTypeUpdater;
     }
 
-    /**
-     * @param ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer
-     *
-     * @return ProductTypeSynchronizer
-     */
-    public function setProductTypeFormulaSynchronizer(ProductTypeFormulaSynchronizer $productTypeFormulaSynchronizer)
+    public function syncOne(array $options = []): ?DandomainFoundation\Entity\Generated\ProductTypeInterface
     {
-        $this->productTypeFormulaSynchronizer = $productTypeFormulaSynchronizer;
-
-        return $this;
+        throw new \RuntimeException('Method not implemented');
     }
 
-    /**
-     * @param ProductTypeVatSynchronizer $productTypeVatSynchronizer
-     *
-     * @return ProductTypeSynchronizer
-     */
-    public function setProductTypeVatSynchronizer(ProductTypeVatSynchronizer $productTypeVatSynchronizer)
+    public function syncAll(array $options = [])
     {
-        $this->productTypeVatSynchronizer = $productTypeVatSynchronizer;
+        $states = \GuzzleHttp\json_decode((string) $this->api->order->getOrderStates()->getBody());
 
-        return $this;
+        foreach ($states as $state) {
+            $entity = $this->productTypeUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($state));
+            $this->repository->save($entity);
+        }
     }
 
-    /**
-     * Synchronizes ProductType.
-     *
-     * @param array $productType
-     * @param bool  $flush
-     *
-     * @return ProductTypeInterface
-     */
-    public function syncProductType($productType, $flush = true)
+    public function configureOptionsOne(OptionsResolver $resolver)
     {
-        $entity = $this->objectManager->getRepository($this->entityClassName)->findOneBy([
-            'externalId' => $productType->id,
-        ]);
+    }
 
-        if (!($entity)) {
-            $entity = new $this->entityClassName();
-        }
-
-        $entity
-            ->setExternalId($productType->id)
-            ->setName($productType->name)
-        ;
-
-        if (is_array($productType->fields)) {
-            foreach ($productType->fields as $fieldTmp) {
-                $productTypeField = $this->productTypeFieldSynchronizer->syncProductTypeField($fieldTmp, $flush);
-                $entity->addProductTypeField($productTypeField);
-            }
-        }
-
-        if (is_array($productType->formula)) {
-            foreach ($productType->formula as $formulaTmp) {
-                $productTypeFormula = $this->productTypeFormulaSynchronizer->syncProductTypeFormula($formulaTmp, $flush);
-                $entity->addProductTypeFormula($productTypeFormula);
-            }
-        }
-
-        if (is_array($productType->vat)) {
-            foreach ($productType->vat as $vatTmp) {
-                $productTypeVat = $this->productTypeVatSynchronizer->syncProductTypeVat($vatTmp, $flush);
-                $entity->addProductTypeVat($productTypeVat);
-            }
-        }
-
-        $this->objectManager->persist($entity);
-
-        if (true === $flush) {
-            $this->objectManager->flush($entity);
-        }
-
-        return $entity;
+    public function configureOptionsAll(OptionsResolver $resolver)
+    {
     }
 }
