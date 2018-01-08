@@ -229,14 +229,14 @@ class OrderUpdater implements OrderUpdaterInterface
                 $orderLineTotalPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['totalPrice'] ?? 0.0);
 
                 $orderLineEntity
-                    ->setExternalId($orderLineData['id'])
+                    ->setExternalId((int)$orderLineData['id'])
                     ->setFileUrl($orderLineData['fileUrl'])
                     ->setProductNumber($orderLineData['productId'])
                     ->setProductName($orderLineData['productName'])
-                    ->setQuantity($orderLineData['quantity'])
+                    ->setQuantity((int)$orderLineData['quantity'])
                     ->setTotalPrice($orderLineTotalPrice)
                     ->setUnitPrice($orderLineUnitPrice)
-                    ->setVatPct($orderLineData['vatPct'])
+                    ->setVatPct((float)$orderLineData['vatPct'])
                     ->setVariant($orderLineData['variant'])
                     ->setXmlParams($orderLineData['xmlParams'])
                 ;
