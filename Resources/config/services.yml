@@ -220,96 +220,96 @@ services:
 
     # Repositories
     loevgaard_dandomain_foundation.category_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\CategoryRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\CategoryRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Category
 
     loevgaard_dandomain_foundation.customer_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\CustomerRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\CustomerRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Customer
 
     loevgaard_dandomain_foundation.delivery_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\DeliveryRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\DeliveryRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Delivery
 
     loevgaard_dandomain_foundation.invoice_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\InvoiceRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\InvoiceRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Invoice
 
     loevgaard_dandomain_foundation.manufacturer_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Manufacturer
     loevgaard_dandomain_foundation.order_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\OrderRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\OrderRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Order
 
     loevgaard_dandomain_foundation.payment_method_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\PaymentMethodRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\PaymentMethodRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\PaymentMethod
 
     loevgaard_dandomain_foundation.period_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\PeriodRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\PeriodRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Period
 
     loevgaard_dandomain_foundation.product_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\ProductRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\ProductRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Product
 
     loevgaard_dandomain_foundation.product_type_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\ProductTypeRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\ProductTypeRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\ProductType
 
     loevgaard_dandomain_foundation.shipping_method_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\ShippingMethodRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\ShippingMethodRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\ShippingMethod
 
     loevgaard_dandomain_foundation.site_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\SiteRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\SiteRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Site
 
     loevgaard_dandomain_foundation.state_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\StateRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\StateRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\State
 
     loevgaard_dandomain_foundation.tag_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\TagRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\TagRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Tag
 
     loevgaard_dandomain_foundation.tag_value_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\TagValueRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\TagValueRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\TagValue
 
     loevgaard_dandomain_foundation.variant_group_repository:
-        class: Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepository
+        class: Loevgaard\DandomainFoundationBundle\Repository\VariantGroupRepository
         arguments:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\VariantGroup
