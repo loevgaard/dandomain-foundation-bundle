@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundationBundle\Entity\CategoryRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\CategoryRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

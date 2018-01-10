@@ -6,7 +6,7 @@ use Dandomain\Api\Api;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

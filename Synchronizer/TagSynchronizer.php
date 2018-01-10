@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\TagInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\TagRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\TagRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\TagUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

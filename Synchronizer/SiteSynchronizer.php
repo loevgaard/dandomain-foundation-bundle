@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\SiteRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\SiteRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\SiteUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
