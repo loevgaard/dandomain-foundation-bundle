@@ -33,29 +33,6 @@ abstract class Repository implements RepositoryInterface
         $this->class = $class;
     }
 
-    public function save($obj)
-    {
-        $this->manager->persist($obj);
-        $this->manager->flush($obj);
-    }
-
-    /**
-     * @todo we should probably handle some of the possible return values here
-     *
-     * @param $id
-     * @return bool|\Doctrine\Common\Proxy\Proxy|null|object
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function getReference($id)
-    {
-        return $this->manager->getReference($this->class, $id);
-    }
-
-    public function clearAll()
-    {
-        $this->manager->clear();
-    }
-
     /**
      * @param string $name
      * @param array  $arguments
@@ -73,5 +50,30 @@ abstract class Repository implements RepositoryInterface
         }
 
         throw new \RuntimeException('Method '.$name.' not defined in '.__CLASS__);
+    }
+
+    public function save($obj)
+    {
+        $this->manager->persist($obj);
+        $this->manager->flush($obj);
+    }
+
+    /**
+     * @todo we should probably handle some of the possible return values here
+     *
+     * @param $id
+     *
+     * @return bool|\Doctrine\Common\Proxy\Proxy|null|object
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function getReference($id)
+    {
+        return $this->manager->getReference($this->class, $id);
+    }
+
+    public function clearAll()
+    {
+        $this->manager->clear();
     }
 }

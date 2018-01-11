@@ -3,16 +3,19 @@
 namespace Loevgaard\DandomainFoundationBundle\Enqueuer;
 
 use Assert\Assert;
+use Loevgaard\DandomainFoundation\Entity\Generated\QueueItemInterface;
 use Loevgaard\DandomainFoundation\Entity\QueueItem;
 
 class OrderEnqueuer extends Enqueuer
 {
     /**
      * @param int $identifier The order id
+     * @return QueueItemInterface
      */
-    public function enqueue($identifier) {
+    public function enqueue($identifier) : QueueItemInterface
+    {
         Assert::that($identifier)->integerish('The $identifier has to be an int, i.e. the order id');
 
-        $this->_enqueue($identifier, QueueItem::TYPE_ORDER);
+        return $this->_enqueue((string)$identifier, QueueItem::TYPE_ORDER);
     }
 }

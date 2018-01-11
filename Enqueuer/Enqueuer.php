@@ -2,6 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Enqueuer;
 
+use Loevgaard\DandomainFoundation\Entity\Generated\QueueItemInterface;
 use Loevgaard\DandomainFoundation\Entity\QueueItem;
 use Loevgaard\DandomainFoundationBundle\Repository\QueueRepositoryInterface;
 
@@ -17,9 +18,17 @@ abstract class Enqueuer implements EnqueuerInterface
         $this->queueRepository = $queueRepository;
     }
 
-    protected function _enqueue($identifier, string $type) {
+    /**
+     * @param string $identifier
+     * @param string $type
+     * @return QueueItemInterface
+     */
+    protected function _enqueue(string $identifier, string $type) : QueueItemInterface
+    {
         $queueItem = QueueItem::create($identifier, $type);
 
         $this->queueRepository->save($queueItem);
+
+        return $queueItem;
     }
 }

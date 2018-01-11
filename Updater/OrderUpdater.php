@@ -7,11 +7,11 @@ use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
-use Loevgaard\DandomainFoundation\Entity\Order;
-use Loevgaard\DandomainFoundation\Entity\Product;
-use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
+use Loevgaard\DandomainFoundation\Entity\Order;
+use Loevgaard\DandomainFoundation\Entity\OrderLine;
+use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
@@ -20,7 +20,7 @@ use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 class OrderUpdater implements OrderUpdaterInterface
 {
     /**
-     * This will hold ids for products indexed by product number
+     * This will hold ids for products indexed by product number.
      *
      * @var array
      */
@@ -229,20 +229,20 @@ class OrderUpdater implements OrderUpdaterInterface
                 $orderLineTotalPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['totalPrice'] ?? 0.0);
 
                 $orderLineEntity
-                    ->setExternalId((int)$orderLineData['id'])
+                    ->setExternalId((int) $orderLineData['id'])
                     ->setFileUrl($orderLineData['fileUrl'])
                     ->setProductNumber($orderLineData['productId'])
                     ->setProductName($orderLineData['productName'])
-                    ->setQuantity((int)$orderLineData['quantity'])
+                    ->setQuantity((int) $orderLineData['quantity'])
                     ->setTotalPrice($orderLineTotalPrice)
                     ->setUnitPrice($orderLineUnitPrice)
-                    ->setVatPct((float)$orderLineData['vatPct'])
+                    ->setVatPct((float) $orderLineData['vatPct'])
                     ->setVariant($orderLineData['variant'])
                     ->setXmlParams($orderLineData['xmlParams'])
                 ;
 
                 $product = $this->getProductFromOrderLine($orderLineEntity);
-                if($product) {
+                if ($product) {
                     $orderLineEntity->setProduct($product);
                 }
             }
@@ -255,28 +255,30 @@ class OrderUpdater implements OrderUpdaterInterface
 
     /**
      * Returns true if the $orderLine is a product
-     * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product
+     * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product.
      *
      * @param OrderLineInterface $orderLine
+     *
      * @return ProductInterface|null
      */
-    protected function getProductFromOrderLine(OrderLineInterface $orderLine) : ?ProductInterface
+    protected function getProductFromOrderLine(OrderLineInterface $orderLine): ?ProductInterface
     {
         // if the order line does not have a product number we know it's not a product
         // since this is a requirement in Dandomain for products
-        if(empty($orderLine->getProductNumber())) {
+        if (empty($orderLine->getProductNumber())) {
             return null;
         }
 
         // products can not have a negative value, but discounts can
-        if($orderLine->getUnitPrice()->isNegative()) {
+        if ($orderLine->getUnitPrice()->isNegative()) {
             return null;
         }
 
         // the product cache will only hold valid products
-        if(isset(self::$productCache[$orderLine->getProductNumber()])) {
+        if (isset(self::$productCache[$orderLine->getProductNumber()])) {
             /** @var ProductInterface $product */
             $product = $this->productRepository->getReference(self::$productCache[$orderLine->getProductNumber()]);
+
             return $product;
         }
 
@@ -285,7 +287,7 @@ class OrderUpdater implements OrderUpdaterInterface
                 'number' => $orderLine->getProductNumber(),
             ]);
         } catch (ClientException $e) {
-            if($e->getResponse()->getStatusCode() === 404) {
+            if (404 === $e->getResponse()->getStatusCode()) {
                 $product = new Product();
                 $product->setNumber($orderLine->getProductNumber());
 

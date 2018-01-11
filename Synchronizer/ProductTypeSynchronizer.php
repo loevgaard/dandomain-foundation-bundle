@@ -4,7 +4,6 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Entity\ProductTypeInterface;
 use Loevgaard\DandomainFoundationBundle\Repository\ProductTypeRepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

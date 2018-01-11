@@ -134,14 +134,14 @@ abstract class Synchronizer implements SynchronizerInterface
 
     protected function outputMemoryUsage()
     {
-        $memoryUsage = memory_get_usage()  / 1024 / 1024;
-        $memoryPeakUsage = memory_get_peak_usage()  / 1024 / 1024;
+        $memoryUsage = memory_get_usage() / 1024 / 1024;
+        $memoryPeakUsage = memory_get_peak_usage() / 1024 / 1024;
         $limit = $this->getMemoryLimit() / 1024 / 1024;
         $this->logger->info('Memory info | Limit: '.$limit.' | Peak: '.$memoryPeakUsage.' | Usage: '.$memoryUsage);
     }
 
     /**
-     * Returns the memory limit in bytes
+     * Returns the memory limit in bytes.
      *
      * @return int
      */
@@ -150,16 +150,16 @@ abstract class Synchronizer implements SynchronizerInterface
         $short = [
             'k' => 1024,
             'm' => 1048576,
-            'g' => 1073741824
+            'g' => 1073741824,
         ];
 
-        $setting = (string)ini_get('memory_limit');
+        $setting = (string) ini_get('memory_limit');
 
         if (!($len = strlen($setting))) {
             return null;
         }
 
-        $last    = strtolower($setting[$len - 1]);
+        $last = strtolower($setting[$len - 1]);
         $numeric = (int) $setting;
         $numeric *= isset($short[$last]) ? $short[$last] : 1;
 

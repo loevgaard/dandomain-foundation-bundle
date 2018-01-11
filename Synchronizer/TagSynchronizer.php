@@ -33,7 +33,7 @@ class TagSynchronizer extends Synchronizer implements TagSynchronizerInterface
         $pageSize = 100;
         $pages = \GuzzleHttp\json_decode((string) $this->api->productTag->getProductTagPageCount($pageSize));
 
-        for($page = 1; $page <= $pages; $page++) {
+        for ($page = 1; $page <= $pages; ++$page) {
             $tags = $this->api->productTag->getProductTagPage($page, $pageSize);
             foreach ($tags as $tag) {
                 $entity = $this->tagUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($tag));

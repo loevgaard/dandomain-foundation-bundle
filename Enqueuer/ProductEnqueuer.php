@@ -3,16 +3,19 @@
 namespace Loevgaard\DandomainFoundationBundle\Enqueuer;
 
 use Assert\Assert;
+use Loevgaard\DandomainFoundation\Entity\Generated\QueueItemInterface;
 use Loevgaard\DandomainFoundation\Entity\QueueItem;
 
 class ProductEnqueuer extends Enqueuer
 {
     /**
      * @param string $identifier The product number
+     * @return QueueItemInterface
      */
-    public function enqueue($identifier) {
+    public function enqueue($identifier) : QueueItemInterface
+    {
         Assert::that($identifier)->string('The $identifier has to be a string, i.e. the product number');
 
-        $this->_enqueue($identifier, QueueItem::TYPE_PRODUCT);
+        return $this->_enqueue($identifier, QueueItem::TYPE_PRODUCT);
     }
 }

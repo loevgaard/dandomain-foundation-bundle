@@ -24,7 +24,7 @@ class TagValueUpdater implements TagValueUpdaterInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function updateFromEmbeddedApiResponse(array $data, bool $updateData = true): TagValueInterface
     {

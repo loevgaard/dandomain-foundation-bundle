@@ -22,17 +22,16 @@ interface RepositoryInterface
     public function save($obj);
 
     /**
-     * This will get a reference for the specified id
+     * This will get a reference for the specified id.
      *
      * @param $id
+     *
      * @return object
      */
     public function getReference($id);
 
     /**
-     * This will clear all entities in the manager, not only the the entity associated with this repository
-     *
-     * @return void
+     * This will clear all entities in the manager, not only the the entity associated with this repository.
      */
     public function clearAll();
 }

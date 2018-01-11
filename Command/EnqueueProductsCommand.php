@@ -2,11 +2,11 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
-use Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Enqueuer\ProductEnqueuerInterface;
+use Loevgaard\DandomainFoundationBundle\UpdatedEntityProvider\UpdatedProductProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class EnqueueProductsCommand extends ContainerAwareCommand
@@ -14,13 +14,19 @@ class EnqueueProductsCommand extends ContainerAwareCommand
     use LockableTrait;
 
     /**
-     * @var CategorySynchronizerInterface
+     * @var UpdatedProductProviderInterface
      */
-    protected $categorySynchronizer;
+    protected $updatedProductProvider;
 
-    public function __construct(CategorySynchronizerInterface $stateSynchronizer)
+    /**
+     * @var ProductEnqueuerInterface
+     */
+    protected $productEnqueuer;
+
+    public function __construct(UpdatedProductProviderInterface $updatedProductProvider, ProductEnqueuerInterface $productEnqueuer)
     {
-        $this->categorySynchronizer = $stateSynchronizer;
+        $this->updatedProductProvider = $updatedProductProvider;
+        $this->productEnqueuer = $productEnqueuer;
 
         parent::__construct();
     }
@@ -41,11 +47,9 @@ class EnqueueProductsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $this->categorySynchronizer->setLogger(new ConsoleLogger($output));
-
-        $this->categorySynchronizer->syncAll();
-
-        $this->release();
+        foreach ($this->updatedProductProvider->getUpdatedEntities() as $product) {
+            $this->productEnqueuer->enqueue($product->number);
+        }
 
         return 0;
     }

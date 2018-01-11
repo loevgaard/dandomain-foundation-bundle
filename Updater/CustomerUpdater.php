@@ -29,7 +29,7 @@ class CustomerUpdater implements CustomerUpdaterInterface
     {
         // we cast to int because for some reason Dandomain can (sometimes) have customers where the id is not set
         // and instead of setting the id to 0, Dandomain sets it to ''
-        $id = (int)$data['id'];
+        $id = (int) $data['id'];
 
         $customer = $this->customerRepository->findOneByExternalId($id);
         if (!$customer) {
