@@ -56,6 +56,10 @@ class CategoryRepository extends Repository implements CategoryRepositoryInterfa
 
             ++$i;
         }
+
+        if ($options['update']) {
+            $this->manager->flush();
+        }
     }
 
     protected function configureOptions(OptionsResolver $resolver)
