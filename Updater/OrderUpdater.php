@@ -12,8 +12,8 @@ use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Order;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundation\Entity\Product;
-use Loevgaard\DandomainFoundationBundle\Entity\OrderRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\OrderRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 

@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
 use Loevgaard\DandomainFoundation\Entity\Site;
-use Loevgaard\DandomainFoundationBundle\Entity\SiteRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\SiteRepositoryInterface;
 
 class SiteUpdater implements SiteUpdaterInterface
 {

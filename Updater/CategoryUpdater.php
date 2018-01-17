@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Category;
 use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\CategoryRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\CategoryRepositoryInterface;
 
 class CategoryUpdater implements CategoryUpdaterInterface
 {

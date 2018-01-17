@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\PaymentMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\PaymentMethod;
-use Loevgaard\DandomainFoundationBundle\Entity\PaymentMethodRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\PaymentMethodRepositoryInterface;
 
 class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
 {

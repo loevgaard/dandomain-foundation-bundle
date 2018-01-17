@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
 use Loevgaard\DandomainFoundation\Entity\State;
-use Loevgaard\DandomainFoundationBundle\Entity\StateRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\StateRepositoryInterface;
 
 class StateUpdater implements StateUpdaterInterface
 {

@@ -39,8 +39,6 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 
     public function syncAll(array $options = [])
     {
-        $options = $this->resolveOptions($options, [$this, 'configureOptionsAll']);
-
         $sites = \GuzzleHttp\json_decode((string) $this->api->settings->getSites()->getBody());
 
         foreach ($sites as $site) {

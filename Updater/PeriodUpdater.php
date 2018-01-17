@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Generated\PeriodInterface;
 use Loevgaard\DandomainFoundation\Entity\Period;
-use Loevgaard\DandomainFoundationBundle\Entity\PeriodRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\PeriodRepositoryInterface;
 
 class PeriodUpdater implements PeriodUpdaterInterface
 {

@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Generated\InvoiceInterface;
 use Loevgaard\DandomainFoundation\Entity\Invoice;
-use Loevgaard\DandomainFoundationBundle\Entity\InvoiceRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\InvoiceRepositoryInterface;
 
 class InvoiceUpdater implements InvoiceUpdaterInterface
 {

@@ -9,9 +9,9 @@ use Loevgaard\DandomainFoundation\Entity\Period;
 use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundation\Entity\VariantGroup;
-use Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\ProductRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\VariantGroupRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\VariantGroupRepositoryInterface;
 
 class ProductUpdater implements ProductUpdaterInterface
 {

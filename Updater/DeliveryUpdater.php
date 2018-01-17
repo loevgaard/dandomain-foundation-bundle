@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Delivery;
 use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\DeliveryRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\DeliveryRepositoryInterface;
 
 class DeliveryUpdater implements DeliveryUpdaterInterface
 {

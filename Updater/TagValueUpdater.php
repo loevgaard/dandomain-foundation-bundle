@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\TagValueInterface;
 use Loevgaard\DandomainFoundation\Entity\TagValue;
-use Loevgaard\DandomainFoundationBundle\Entity\TagValueRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\TagValueRepositoryInterface;
 
 class TagValueUpdater implements TagValueUpdaterInterface
 {

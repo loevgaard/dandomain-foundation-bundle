@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\ManufacturerInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
-use Loevgaard\DandomainFoundationBundle\Entity\ManufacturerRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepositoryInterface;
 
 class ManufacturerUpdater implements ManufacturerUpdaterInterface
 {

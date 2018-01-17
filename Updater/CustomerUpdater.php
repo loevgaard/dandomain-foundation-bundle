@@ -4,7 +4,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Customer;
 use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
-use Loevgaard\DandomainFoundationBundle\Entity\CustomerRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\CustomerRepositoryInterface;
 
 class CustomerUpdater implements CustomerUpdaterInterface
 {

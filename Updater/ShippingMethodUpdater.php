@@ -5,7 +5,7 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\ShippingMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\ShippingMethod;
-use Loevgaard\DandomainFoundationBundle\Entity\ShippingMethodRepositoryInterface;
+use Loevgaard\DandomainFoundationBundle\Repository\ShippingMethodRepositoryInterface;
 
 class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
 {
