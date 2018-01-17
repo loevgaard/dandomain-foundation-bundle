@@ -3,17 +3,18 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\ProductRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInterface
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var ProductRepository
      */
     protected $repository;
 
@@ -22,7 +23,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
      */
     protected $productUpdater;
 
-    public function __construct(ProductRepositoryInterface $repository, Api $api, string $logsDir, ProductUpdater $stateUpdater)
+    public function __construct(ProductRepository $repository, Api $api, string $logsDir, ProductUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -34,11 +35,20 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $product = \GuzzleHttp\json_decode((string) $this->api->productData->getDataProduct($options['number'])->getBody());
         $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
-        $this->repository->save($entity);
+
+        try {
+            $this->repository->save($entity);
+        } catch (OptimisticLockException $e) {
+            return null;
+        }
 
         return $entity;
     }
 
+    /**
+     * @param array $options
+     * @throws OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         // @todo what happens if the sync stops at page 50/125? Could we implement something that resumed the sync?
@@ -106,7 +116,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
             // we start from behind since this will sync the newest products first
             for ($page = $pageCount; $page >= 1; --$page) {
                 $this->logger->info($page.'/'.$pageCount);
-                $this->outputMemoryUsage();
+
                 $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $options['pageSize'])->getBody()->getContents());
 
                 foreach ($products as $product) {
@@ -119,9 +129,10 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 $this->repository->clearAll();
             }
 
-            $this->repository->removeBulk([], $productIdsToNotRemove);
+            $this->repository->removeByIds([], $productIdsToNotRemove);
         }
 
+        // @todo remember to fix this
         $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationship);
 
         $this->writeLog($log);

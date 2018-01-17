@@ -3,7 +3,7 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
-use Loevgaard\DandomainFoundationBundle\Repository\RepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\RepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -9,7 +9,7 @@ use Loevgaard\DandomainFoundation\Entity\Period;
 use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundation\Entity\VariantGroup;
-use Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Repository\VariantGroupRepositoryInterface;
 
@@ -21,7 +21,7 @@ class ProductUpdater implements ProductUpdaterInterface
     protected $productRepository;
 
     /**
-     * @var ManufacturerRepositoryInterface
+     * @var ManufacturerRepository
      */
     protected $manufacturerRepository;
 
@@ -32,7 +32,7 @@ class ProductUpdater implements ProductUpdaterInterface
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        ManufacturerRepositoryInterface $manufacturerRepository,
+        ManufacturerRepository $manufacturerRepository,
         VariantGroupRepositoryInterface $variantGroupRepository
     ) {
         $this->productRepository = $productRepository;

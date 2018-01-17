@@ -19,6 +19,17 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
+    public function updateFromApiResponse(array $data, string $currency): PaymentMethodInterface
+    {
+        $paymentMethod = $this->getPaymentMethod($data['id']);
+        $paymentMethod
+            ->setFee(DandomainFoundation\createMoney($currency, $data['fee']))
+            ->setFeeInclVat($data['feeVat'])
+            ->setName($data['name']);
+
+        return $paymentMethod;
+    }
+
     /**
      * This method is called when an payment method is embedded in another object, i.e. orders.
      *
@@ -31,12 +42,7 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
     public function updateFromEmbeddedApiResponse(array $data, string $currency, PaymentMethodInterface $paymentMethod = null): PaymentMethodInterface
     {
         if (!$paymentMethod) {
-            $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($data['id']);
-
-            if (!$paymentMethod) {
-                $paymentMethod = new PaymentMethod();
-                $paymentMethod->setExternalId($data['id']);
-            }
+            $paymentMethod = $this->getPaymentMethod($data['id']);
         }
 
         if (!$paymentMethod->getId()) {
@@ -45,6 +51,18 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
                 ->setFee(DandomainFoundation\createMoney((string) $currency, $data['fee']))
                 ->setFeeInclVat($data['feeInclVat'])
                 ->setName($data['name']);
+        }
+
+        return $paymentMethod;
+    }
+
+    protected function getPaymentMethod(int $externalId) : PaymentMethodInterface
+    {
+        $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($externalId);
+
+        if (!$paymentMethod) {
+            $paymentMethod = new PaymentMethod();
+            $paymentMethod->setExternalId($externalId);
         }
 
         return $paymentMethod;

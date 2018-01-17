@@ -3,21 +3,27 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\OrderRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\OrderUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterface
 {
     /**
+     * @var OrderRepository
+     */
+    protected $repository;
+
+    /**
      * @var OrderUpdater
      */
     protected $orderUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, OrderUpdater $stateUpdater)
+    public function __construct(OrderRepository $repository, Api $api, string $logsDir, OrderUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -29,11 +35,20 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $order = \GuzzleHttp\json_decode((string) $this->api->order->getOrder($options['externalId'])->getBody());
         $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
-        $this->repository->save($entity);
+
+        try {
+            $this->repository->save($entity);
+        } catch (OptimisticLockException $e) {
+            return null;
+        }
 
         return $entity;
     }
 
+    /**
+     * @param array $options
+     * @throws OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         // @todo what happens if the sync stops at page 50/125? Could we implement something that resumed the sync?

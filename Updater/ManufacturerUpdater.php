@@ -4,16 +4,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\ManufacturerInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
-use Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 
 class ManufacturerUpdater implements ManufacturerUpdaterInterface
 {
     /**
-     * @var ManufacturerRepositoryInterface
+     * @var ManufacturerRepository
      */
     protected $manufacturerRepository;
 
-    public function __construct(ManufacturerRepositoryInterface $invoiceRepository)
+    public function __construct(ManufacturerRepository $invoiceRepository)
     {
         $this->manufacturerRepository = $invoiceRepository;
     }

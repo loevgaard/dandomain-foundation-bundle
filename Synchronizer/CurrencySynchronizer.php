@@ -3,47 +3,55 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\SiteRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Updater\SiteUpdater;
+use Loevgaard\DandomainFoundationBundle\Updater\CurrencyUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerInterface
 {
     /**
-     * @var SiteRepositoryInterface
+     * @var CurrencyRepository
      */
     protected $repository;
 
     /**
-     * @var SiteUpdater
+     * @var CurrencyUpdaterInterface
      */
-    protected $siteUpdater;
+    protected $currencyUpdater;
 
-    public function __construct(CurrencyRepository $repository, Api $api, string $logsDir, SiteUpdater $stateUpdater)
+    public function __construct(CurrencyRepository $repository, Api $api, string $logsDir, CurrencyUpdaterInterface $currencyUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->siteUpdater = $stateUpdater;
+        $this->currencyUpdater = $currencyUpdater;
     }
 
     public function syncOne(array $options = []): ?CurrencyInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
 
-        $this->syncAll();
+        try {
+            $this->syncAll();
+        } catch (OptimisticLockException $e) {
+            return null;
+        }
 
         return $this->repository->findOneByExternalId($options['externalId']);
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
-        $sites = \GuzzleHttp\json_decode((string) $this->api->settings->getSites()->getBody());
+        $currencies = \GuzzleHttp\json_decode((string) $this->api->settings->getCurrencies()->getBody());
 
-        foreach ($sites as $site) {
-            $entity = $this->siteUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($site));
+        foreach ($currencies as $currency) {
+            $entity = $this->currencyUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($currency));
             $this->repository->save($entity);
         }
     }
@@ -52,7 +60,7 @@ class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerI
     {
         $resolver
             ->setDefined(['externalId'])
-            ->setAllowedTypes('externalId', 'int')
+            ->setAllowedTypes('externalId', 'string')
             ->setRequired('externalId')
         ;
     }

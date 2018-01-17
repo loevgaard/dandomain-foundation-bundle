@@ -4,19 +4,24 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ManufacturerUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynchronizerInterface
 {
     /**
+     * @var ManufacturerRepository
+     */
+    protected $repository;
+
+    /**
      * @var ManufacturerUpdaterInterface
      */
     protected $manufacturerUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ManufacturerUpdaterInterface $stateUpdater)
+    public function __construct(ManufacturerRepository $repository, Api $api, string $logsDir, ManufacturerUpdaterInterface $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -25,9 +30,14 @@ class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynch
 
     public function syncOne(array $options = []): OrderInterface
     {
+        // @todo implement this the same way as the site synchronizer
         throw new \RuntimeException('Method not implemented');
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         $manufacturers = \GuzzleHttp\json_decode((string) $this->api->relatedData->getManufacturers()->getBody());

@@ -5,16 +5,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Category;
 use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\CategoryRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\CategoryRepository;
 
 class CategoryUpdater implements CategoryUpdaterInterface
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @var CategoryRepository
      */
     protected $categoryRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
@@ -42,7 +42,7 @@ class CategoryUpdater implements CategoryUpdaterInterface
             ->setDefaultParentId($data['defaultParentId'])
             ->setExternalId($data['internalId'])
             ->setInfoLayout($data['infoLayout'])
-            ->setInternalId($data['internalId'])
+            ->setExternalId($data['internalId'])
             ->setListLayout($data['listLayout'])
             ->setModified($data['modified'])
             ->setParentIdList($data['parentIdList'])

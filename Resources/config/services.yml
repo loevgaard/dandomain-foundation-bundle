@@ -60,6 +60,11 @@ services:
         arguments:
             - "@loevgaard_dandomain_foundation.category_repository"
 
+    loevgaard_dandomain_foundation.currency_updater:
+        class: Loevgaard\DandomainFoundationBundle\Updater\CurrencyUpdater
+        arguments:
+            - "@loevgaard_dandomain_foundation.currency_repository"
+
     loevgaard_dandomain_foundation.customer_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\CustomerUpdater
         arguments:
@@ -146,6 +151,14 @@ services:
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.category_updater"
 
+    loevgaard_dandomain_foundation.currency_synchronizer:
+        class: Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizer
+        arguments:
+            - "@loevgaard_dandomain_foundation.currency_repository"
+            - "@dandomain.api"
+            - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
+            - "@loevgaard_dandomain_foundation.currency_updater"
+
     loevgaard_dandomain_foundation.period_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizer
         arguments:
@@ -165,7 +178,7 @@ services:
     loevgaard_dandomain_foundation.manufacturer_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\ManufacturerSynchronizer
         arguments:
-            - "@loevgaard_dandomain_foundation.order_repository"
+            - "@loevgaard_dandomain_foundation.manufacturer_repository"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.manufacturer_updater"
@@ -181,7 +194,7 @@ services:
     loevgaard_dandomain_foundation.payment_method_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\PaymentMethodSynchronizer
         arguments:
-            - "@loevgaard_dandomain_foundation.order_repository"
+            - "@loevgaard_dandomain_foundation.payment_method_repository"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.payment_method_updater"
@@ -189,7 +202,7 @@ services:
     loevgaard_dandomain_foundation.shipping_method_synchronizer:
         class: Loevgaard\DandomainFoundationBundle\Synchronizer\ShippingMethodSynchronizer
         arguments:
-            - "@loevgaard_dandomain_foundation.order_repository"
+            - "@loevgaard_dandomain_foundation.shipping_method_repository"
             - "@dandomain.api"
             - "%loevgaard_dandomain_foundation.synchronizer_logs_dir%"
             - "@loevgaard_dandomain_foundation.shipping_method_updater"
@@ -220,13 +233,12 @@ services:
 
     # Repositories
     loevgaard_dandomain_foundation.category_repository:
-        class: Loevgaard\DandomainFoundationBundle\Repository\CategoryRepository
+        class: Loevgaard\DandomainFoundation\Repository\CategoryRepository
         arguments:
             - "@doctrine"
-            - Loevgaard\DandomainFoundation\Entity\Category
 
     loevgaard_dandomain_foundation.currency_repository:
-        class: Loevgaard\DandomainFoundation\Repository\CustomerRepository
+        class: Loevgaard\DandomainFoundation\Repository\CurrencyRepository
         arguments:
             - "@doctrine"
 
@@ -249,15 +261,13 @@ services:
             - Loevgaard\DandomainFoundation\Entity\Invoice
 
     loevgaard_dandomain_foundation.manufacturer_repository:
-        class: Loevgaard\DandomainFoundationBundle\Repository\ManufacturerRepository
+        class: Loevgaard\DandomainFoundation\Repository\ManufacturerRepository
         arguments:
             - "@doctrine"
-            - Loevgaard\DandomainFoundation\Entity\Manufacturer
     loevgaard_dandomain_foundation.order_repository:
-        class: Loevgaard\DandomainFoundationBundle\Repository\OrderRepository
+        class: Loevgaard\DandomainFoundation\Repository\OrderRepository
         arguments:
             - "@doctrine"
-            - Loevgaard\DandomainFoundation\Entity\Order
 
     loevgaard_dandomain_foundation.payment_method_repository:
         class: Loevgaard\DandomainFoundationBundle\Repository\PaymentMethodRepository
