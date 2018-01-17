@@ -225,6 +225,11 @@ services:
             - "@doctrine"
             - Loevgaard\DandomainFoundation\Entity\Category
 
+    loevgaard_dandomain_foundation.currency_repository:
+        class: Loevgaard\DandomainFoundation\Repository\CustomerRepository
+        arguments:
+            - "@doctrine"
+
     loevgaard_dandomain_foundation.customer_repository:
         class: Loevgaard\DandomainFoundationBundle\Repository\CustomerRepository
         arguments:
