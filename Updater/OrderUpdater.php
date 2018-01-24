@@ -170,7 +170,7 @@ class OrderUpdater implements OrderUpdaterInterface
 
         $order
             ->setExternalId($data['id'])
-            ->setCurrencyCode($data['currencyCode'])
+            ->setCurrency($currency)
             ->setComment($data['comment'])
             ->setCreatedDate($createdDate)
             ->setCustomerComment($data['customerComment'])
