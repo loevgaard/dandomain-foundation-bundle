@@ -41,12 +41,12 @@ class SiteUpdater implements SiteUpdaterInterface
         }
 
         $currency = $this->currencyRepository->findOneByCode($data['currencyCode']);
-        if(!$currency) {
+        if (!$currency) {
             $currency = $this->currencySynchronizer->syncOne([
-                'code' => $data['currencyCode']
+                'code' => $data['currencyCode'],
             ]);
 
-            if(!$currency) {
+            if (!$currency) {
                 throw new \RuntimeException('Could not sync currency `'.$data['currencyCode'].'`. Try again');
             }
         }

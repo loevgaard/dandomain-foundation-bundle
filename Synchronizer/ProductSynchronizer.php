@@ -6,8 +6,8 @@ use Dandomain\Api\Api;
 use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\ProductRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
+use Loevgaard\DandomainFoundation\Repository\ProductRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\ProductUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,6 +47,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
     /**
      * @param array $options
+     *
      * @throws OptimisticLockException
      */
     public function syncAll(array $options = [])

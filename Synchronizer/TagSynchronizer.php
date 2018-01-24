@@ -35,6 +35,7 @@ class TagSynchronizer extends Synchronizer implements TagSynchronizerInterface
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

@@ -56,7 +56,7 @@ class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
         return $paymentMethod;
     }
 
-    protected function getPaymentMethod(int $externalId) : PaymentMethodInterface
+    protected function getPaymentMethod(int $externalId): PaymentMethodInterface
     {
         $paymentMethod = $this->paymentMethodRepository->findOneByExternalId($externalId);
 

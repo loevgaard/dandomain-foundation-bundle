@@ -44,6 +44,7 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

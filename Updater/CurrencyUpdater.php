@@ -2,8 +2,8 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
-use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
 use Loevgaard\DandomainFoundation\Entity\Currency;
+use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
 use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 
 class CurrencyUpdater implements CurrencyUpdaterInterface

@@ -10,10 +10,12 @@ class ProductEnqueuer extends Enqueuer
 {
     /**
      * @param string $identifier The product number
+     *
      * @return QueueItemInterface
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function enqueue($identifier) : QueueItemInterface
+    public function enqueue($identifier): QueueItemInterface
     {
         Assert::that($identifier)->string('The $identifier has to be a string, i.e. the product number');
 

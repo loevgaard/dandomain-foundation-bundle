@@ -35,6 +35,7 @@ class StateSynchronizer extends Synchronizer implements StateSynchronizerInterfa
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

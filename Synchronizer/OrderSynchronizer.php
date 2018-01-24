@@ -6,8 +6,8 @@ use Dandomain\Api\Api;
 use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\OrderRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundation\Repository\OrderRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\OrderUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,6 +47,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
     /**
      * @param array $options
+     *
      * @throws OptimisticLockException
      * @throws \Doctrine\ORM\ORMException
      */

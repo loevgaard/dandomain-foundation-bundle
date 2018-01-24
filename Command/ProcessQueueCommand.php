@@ -34,9 +34,11 @@ class ProcessQueueCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @return int|null
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -49,10 +51,9 @@ class ProcessQueueCommand extends ContainerAwareCommand
 
         $producer = $this->getContainer()->get('enqueue.producer');
 
-
         // @todo iterate through all instead of limiting to 500
         $queueItems = $this->queueItemRepository->findBy([
-            'status' => QueueItem::STATUS_PENDING
+            'status' => QueueItem::STATUS_PENDING,
         ], [], 500);
 
         foreach ($queueItems as $queueItem) {

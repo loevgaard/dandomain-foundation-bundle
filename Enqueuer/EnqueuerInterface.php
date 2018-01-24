@@ -12,7 +12,8 @@ interface EnqueuerInterface
      * For orders the $identifier is the order id where as for products it is the product number.
      *
      * @param $identifier
+     *
      * @return QueueItemInterface
      */
-    public function enqueue($identifier) : QueueItemInterface;
+    public function enqueue($identifier): QueueItemInterface;
 }

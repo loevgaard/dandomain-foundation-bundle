@@ -4,8 +4,8 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\ManufacturerUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,6 +36,7 @@ class ManufacturerSynchronizer extends Synchronizer implements ManufacturerSynch
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

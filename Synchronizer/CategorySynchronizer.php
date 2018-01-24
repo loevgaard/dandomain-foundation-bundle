@@ -5,8 +5,8 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\CategoryRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
+use Loevgaard\DandomainFoundation\Repository\CategoryRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,7 +29,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
         $this->categoryUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []) : ?CategoryInterface
+    public function syncOne(array $options = []): ?CategoryInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $category = \GuzzleHttp\json_decode((string) $this->api->productData->getDataCategory($options['externalId'])->getBody());
@@ -46,6 +46,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])
@@ -82,6 +83,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param int|null $parentCategoryNumber
+     *
      * @throws OptimisticLockException
      */
     private function recursiveSync(int $parentCategoryNumber = null)

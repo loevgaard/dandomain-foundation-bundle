@@ -34,6 +34,7 @@ class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInter
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

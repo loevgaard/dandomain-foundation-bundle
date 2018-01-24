@@ -21,10 +21,12 @@ abstract class Enqueuer implements EnqueuerInterface
     /**
      * @param string $identifier
      * @param string $type
+     *
      * @return QueueItemInterface
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function _enqueue(string $identifier, string $type) : QueueItemInterface
+    protected function _enqueue(string $identifier, string $type): QueueItemInterface
     {
         $queueItem = QueueItem::create($identifier, $type);
 

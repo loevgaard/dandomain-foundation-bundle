@@ -5,8 +5,8 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
+use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\CurrencyUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,6 +44,7 @@ class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerI
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

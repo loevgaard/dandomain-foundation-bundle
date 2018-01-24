@@ -6,16 +6,16 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\SiteRepository;
-use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Order;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundation\Entity\Product;
+use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Repository\OrderRepository;
 use Loevgaard\DandomainFoundation\Repository\ProductRepository;
+use Loevgaard\DandomainFoundation\Repository\SiteRepository;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
@@ -127,7 +127,9 @@ class OrderUpdater implements OrderUpdaterInterface
 
     /**
      * @param array $data
+     *
      * @return OrderInterface
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -140,12 +142,12 @@ class OrderUpdater implements OrderUpdaterInterface
 
         // we start by syncing the currency, since we use the currency to create Money objects
         $currency = $this->currencyRepository->findOneByCode($data['currencyCode']);
-        if(!$currency) {
+        if (!$currency) {
             $currency = $this->currencySynchronizer->syncOne([
-                'code' => $data['currencyCode']
+                'code' => $data['currencyCode'],
             ]);
 
-            if(!$currency) {
+            if (!$currency) {
                 throw new \RuntimeException('Could not sync currency `'.$data['currencyCode'].'`. Try again');
             }
         }
@@ -219,12 +221,12 @@ class OrderUpdater implements OrderUpdaterInterface
 
         // populate site
         $site = $this->siteRepository->findOneByExternalId($data['siteId']);
-        if(!$site) {
+        if (!$site) {
             $site = $this->siteSynchronizer->syncOne([
                 'externalId' => $data['siteId'],
             ]);
 
-            if(!$site) {
+            if (!$site) {
                 throw new \RuntimeException('Could not sync site with id `'.$data['siteId'].'`. Try again');
             }
         }
@@ -306,7 +308,9 @@ class OrderUpdater implements OrderUpdaterInterface
      * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product.
      *
      * @param OrderLineInterface $orderLine
+     *
      * @return ProductInterface|null
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

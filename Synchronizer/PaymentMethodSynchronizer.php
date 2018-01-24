@@ -4,9 +4,9 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Repository\PaymentMethodRepository;
 use Loevgaard\DandomainFoundation\Repository\SiteRepository;
-use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\PaymentMethodUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -42,6 +42,7 @@ class PaymentMethodSynchronizer extends Synchronizer implements PaymentMethodSyn
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])

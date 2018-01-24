@@ -4,8 +4,8 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Repository\ShippingMethodRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
+use Loevgaard\DandomainFoundation\Repository\ShippingMethodRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\ShippingMethodUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,6 +35,7 @@ class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodS
 
     /**
      * @param array $options
+     *
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])
