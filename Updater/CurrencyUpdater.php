@@ -29,6 +29,8 @@ class CurrencyUpdater implements CurrencyUpdaterInterface
         $entity
             ->setCode($data['code'])
             ->setDeActivated($data['deActivated'])
+            ->setDelimiterDecimal($data['delimiterDecimal'])
+            ->setDelimiterThousand($data['delimiterThousand'])
             ->setFactor($data['factor'])
             ->setIcon($data['icon'])
             ->setDefault($data['isDefault'])
