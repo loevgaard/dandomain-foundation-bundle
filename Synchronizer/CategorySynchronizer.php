@@ -57,7 +57,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
         foreach ($this->repository->iterate(['update' => true]) as $category) {
             foreach ($category->getParentIdList() as $parentNumber) {
                 // @todo create a reference cache so we don't need to query the database for each parent
-                // @todo if an existing relationship that has been deleted in Dandomain then it isnt updated here
+                // @todo if an existing relationship that has been deleted in Dandomain then it isn't updated here
                 $parent = $this->repository->findOneByNumber($parentNumber);
 
                 if ($parent) {

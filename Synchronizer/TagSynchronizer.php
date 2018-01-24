@@ -5,18 +5,23 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\TagInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\TagRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\TagRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\TagUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TagSynchronizer extends Synchronizer implements TagSynchronizerInterface
 {
     /**
+     * @var TagRepository
+     */
+    protected $repository;
+
+    /**
      * @var TagUpdaterInterface
      */
     protected $tagUpdater;
 
-    public function __construct(TagRepositoryInterface $repository, Api $api, string $logsDir, TagUpdaterInterface $tagUpdater)
+    public function __construct(TagRepository $repository, Api $api, string $logsDir, TagUpdaterInterface $tagUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -28,6 +33,10 @@ class TagSynchronizer extends Synchronizer implements TagSynchronizerInterface
         throw new \RuntimeException('Method not implemented');
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         $pageSize = 100;

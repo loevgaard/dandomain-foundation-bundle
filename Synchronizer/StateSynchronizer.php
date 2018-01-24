@@ -5,18 +5,23 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\StateRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\StateRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\StateUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StateSynchronizer extends Synchronizer implements StateSynchronizerInterface
 {
     /**
+     * @var StateRepository
+     */
+    protected $repository;
+
+    /**
      * @var StateUpdaterInterface
      */
     protected $stateUpdater;
 
-    public function __construct(StateRepositoryInterface $repository, Api $api, string $logsDir, StateUpdaterInterface $stateUpdater)
+    public function __construct(StateRepository $repository, Api $api, string $logsDir, StateUpdaterInterface $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -28,6 +33,10 @@ class StateSynchronizer extends Synchronizer implements StateSynchronizerInterfa
         throw new \RuntimeException('Method not implemented');
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         $states = \GuzzleHttp\json_decode((string) $this->api->order->getOrderStates()->getBody());

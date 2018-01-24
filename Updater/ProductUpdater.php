@@ -10,13 +10,13 @@ use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundation\Entity\VariantGroup;
 use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
-use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\VariantGroupRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\ProductRepository;
+use Loevgaard\DandomainFoundation\Repository\VariantGroupRepository;
 
 class ProductUpdater implements ProductUpdaterInterface
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var ProductRepository
      */
     protected $productRepository;
 
@@ -26,14 +26,14 @@ class ProductUpdater implements ProductUpdaterInterface
     protected $manufacturerRepository;
 
     /**
-     * @var VariantGroupRepositoryInterface
+     * @var VariantGroupRepository
      */
     protected $variantGroupRepository;
 
     public function __construct(
-        ProductRepositoryInterface $productRepository,
+        ProductRepository $productRepository,
         ManufacturerRepository $manufacturerRepository,
-        VariantGroupRepositoryInterface $variantGroupRepository
+        VariantGroupRepository $variantGroupRepository
     ) {
         $this->productRepository = $productRepository;
         $this->manufacturerRepository = $manufacturerRepository;
@@ -42,7 +42,7 @@ class ProductUpdater implements ProductUpdaterInterface
 
     public function updateFromApiResponse(array $data): ProductInterface
     {
-        $product = $this->productRepository->findOneByExternalId($data['id'], true);
+        $product = $this->productRepository->findOneByExternalId($data['id']);
         if (!$product) {
             $product = new Product();
         }
@@ -132,7 +132,7 @@ class ProductUpdater implements ProductUpdaterInterface
         $product->setVariantGroupIdList($data['variantGroupIdList']);
 
         /*
-         * @todo outcomment this and fix it
+         * @todo out comment this and fix it
          */
 
 //        if (is_array($data['disabledVariants'])) {

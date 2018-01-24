@@ -4,22 +4,11 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Delivery;
 use Loevgaard\DandomainFoundation\Entity\Generated\DeliveryInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\DeliveryRepositoryInterface;
 
 class DeliveryUpdater implements DeliveryUpdaterInterface
 {
     /**
-     * @var DeliveryRepositoryInterface
-     */
-    protected $deliveryRepository;
-
-    public function __construct(DeliveryRepositoryInterface $deliveryRepository)
-    {
-        $this->deliveryRepository = $deliveryRepository;
-    }
-
-    /**
-     * This method is called when an payment method is embedded in another object, i.e. orders.
+     * This method is called when a delivery object is embedded in another object, i.e. orders.
      *
      * @param array                  $data
      * @param DeliveryInterface|null $delivery

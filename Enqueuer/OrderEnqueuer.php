@@ -11,6 +11,7 @@ class OrderEnqueuer extends Enqueuer
     /**
      * @param int $identifier The order id
      * @return QueueItemInterface
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function enqueue($identifier) : QueueItemInterface
     {

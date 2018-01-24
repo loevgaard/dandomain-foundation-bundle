@@ -4,16 +4,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Customer;
 use Loevgaard\DandomainFoundation\Entity\Generated\CustomerInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\CustomerRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\CustomerRepository;
 
 class CustomerUpdater implements CustomerUpdaterInterface
 {
     /**
-     * @var CustomerRepositoryInterface
+     * @var CustomerRepository
      */
     protected $customerRepository;
 
-    public function __construct(CustomerRepositoryInterface $customerRepository)
+    public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }

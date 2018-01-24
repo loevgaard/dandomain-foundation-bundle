@@ -11,6 +11,7 @@ class ProductEnqueuer extends Enqueuer
     /**
      * @param string $identifier The product number
      * @return QueueItemInterface
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function enqueue($identifier) : QueueItemInterface
     {

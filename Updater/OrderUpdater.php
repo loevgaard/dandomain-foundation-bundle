@@ -6,14 +6,17 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\SiteRepository;
+use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Order;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundation\Entity\Product;
-use Loevgaard\DandomainFoundationBundle\Repository\OrderRepositoryInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\ProductRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\OrderRepository;
+use Loevgaard\DandomainFoundation\Repository\ProductRepository;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
 
@@ -27,9 +30,14 @@ class OrderUpdater implements OrderUpdaterInterface
     protected static $productCache;
 
     /**
-     * @var OrderRepositoryInterface
+     * @var OrderRepository
      */
     protected $orderRepository;
+
+    /**
+     * @var ProductRepository
+     */
+    protected $productRepository;
 
     /**
      * @var ProductSynchronizerInterface
@@ -45,6 +53,11 @@ class OrderUpdater implements OrderUpdaterInterface
      * @var PaymentMethodUpdaterInterface
      */
     protected $paymentMethodUpdater;
+
+    /**
+     * @var SiteRepository
+     */
+    protected $siteRepository;
 
     /**
      * @var SiteSynchronizerInterface
@@ -72,35 +85,52 @@ class OrderUpdater implements OrderUpdaterInterface
     protected $invoiceUpdater;
 
     /**
-     * @var ProductRepositoryInterface
+     * @var CurrencyRepository
      */
-    protected $productRepository;
+    protected $currencyRepository;
+
+    /**
+     * @var CurrencySynchronizerInterface
+     */
+    protected $currencySynchronizer;
 
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
+        OrderRepository $orderRepository,
+        ProductRepository $productRepository,
         ProductSynchronizerInterface $productSynchronizer,
         ShippingMethodUpdaterInterface $shippingMethodUpdater,
         PaymentMethodUpdaterInterface $paymentMethodUpdater,
+        SiteRepository $siteRepository,
         SiteSynchronizerInterface $siteSynchronizer,
         StateUpdaterInterface $stateUpdater,
         CustomerUpdaterInterface $customerUpdater,
         DeliveryUpdaterInterface $deliveryUpdater,
         InvoiceUpdaterInterface $invoiceUpdater,
-        ProductRepositoryInterface $productRepository
+        CurrencyRepository $currencyRepository,
+        CurrencySynchronizerInterface $currencySynchronizer
     ) {
         self::$productCache = [];
         $this->orderRepository = $orderRepository;
+        $this->productRepository = $productRepository;
         $this->productSynchronizer = $productSynchronizer;
         $this->shippingMethodUpdater = $shippingMethodUpdater;
         $this->paymentMethodUpdater = $paymentMethodUpdater;
+        $this->siteRepository = $siteRepository;
         $this->siteSynchronizer = $siteSynchronizer;
         $this->stateUpdater = $stateUpdater;
         $this->customerUpdater = $customerUpdater;
         $this->deliveryUpdater = $deliveryUpdater;
         $this->invoiceUpdater = $invoiceUpdater;
-        $this->productRepository = $productRepository;
+        $this->currencyRepository = $currencyRepository;
+        $this->currencySynchronizer = $currencySynchronizer;
     }
 
+    /**
+     * @param array $data
+     * @return OrderInterface
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function updateFromApiResponse(array $data): OrderInterface
     {
         $order = $this->orderRepository->findOneByExternalId($data['id']);
@@ -108,8 +138,19 @@ class OrderUpdater implements OrderUpdaterInterface
             $order = new Order();
         }
 
-        // this is the currency we use to create Money object through this method
-        $currency = $data['currencyCode'];
+        // we start by syncing the currency, since we use the currency to create Money objects
+        $currency = $this->currencyRepository->findOneByCode($data['currencyCode']);
+        if(!$currency) {
+            $currency = $this->currencySynchronizer->syncOne([
+                'code' => $data['currencyCode']
+            ]);
+
+            if(!$currency) {
+                throw new \RuntimeException('Could not sync currency `'.$data['currencyCode'].'`. Try again');
+            }
+        }
+
+        $currencyCode = $currency->getIsoCodeAlpha();
 
         // set shortcuts for embedded objects
         $orderLinesData = $data['orderLines'] ?? [];
@@ -119,11 +160,11 @@ class OrderUpdater implements OrderUpdaterInterface
         $createdDate = DateTimeImmutable::createFromJson($data['createdDate']);
         $modifiedDate = DateTimeImmutable::createFromJson($data['modifiedDate']);
 
-        $giftCertificateAmount = DandomainFoundation\createMoneyFromFloat($currency, $data['giftCertificateAmount']);
-        $totalPrice = DandomainFoundation\createMoneyFromFloat($currency, $data['totalPrice']);
-        $salesDiscount = DandomainFoundation\createMoneyFromFloat($currency, $data['salesDiscount']);
-        $paymentMethodFee = DandomainFoundation\createMoneyFromFloat($currency, $paymentData['fee'] ?? 0.0);
-        $shippingMethodFee = DandomainFoundation\createMoneyFromFloat($currency, $shippingData['fee'] ?? 0.0);
+        $giftCertificateAmount = DandomainFoundation\createMoneyFromFloat($currencyCode, $data['giftCertificateAmount']);
+        $totalPrice = DandomainFoundation\createMoneyFromFloat($currencyCode, $data['totalPrice']);
+        $salesDiscount = DandomainFoundation\createMoneyFromFloat($currencyCode, $data['salesDiscount']);
+        $paymentMethodFee = DandomainFoundation\createMoneyFromFloat($currencyCode, $paymentData['fee'] ?? 0.0);
+        $shippingMethodFee = DandomainFoundation\createMoneyFromFloat($currencyCode, $shippingData['fee'] ?? 0.0);
 
         $order
             ->setExternalId($data['id'])
@@ -169,17 +210,24 @@ class OrderUpdater implements OrderUpdaterInterface
         $order->setInvoice($invoice);
 
         // populate payment info
-        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currency, $order->getPaymentMethod());
+        $paymentMethod = $this->paymentMethodUpdater->updateFromEmbeddedApiResponse($data['paymentInfo'], $currencyCode, $order->getPaymentMethod());
         $order->setPaymentMethod($paymentMethod);
 
         // populate shipping info
-        $shippingMethod = $this->shippingMethodUpdater->updateFromEmbeddedApiResponse($data['shippingInfo'], $currency, $order->getShippingMethod());
+        $shippingMethod = $this->shippingMethodUpdater->updateFromEmbeddedApiResponse($data['shippingInfo'], $currencyCode, $order->getShippingMethod());
         $order->setShippingMethod($shippingMethod);
 
         // populate site
-        $site = $this->siteSynchronizer->syncOne([
-            'externalId' => $data['siteId'],
-        ]);
+        $site = $this->siteRepository->findOneByExternalId($data['siteId']);
+        if(!$site) {
+            $site = $this->siteSynchronizer->syncOne([
+                'externalId' => $data['siteId'],
+            ]);
+
+            if(!$site) {
+                throw new \RuntimeException('Could not sync site with id `'.$data['siteId'].'`. Try again');
+            }
+        }
         $order->setSite($site);
 
         // populate state
@@ -225,8 +273,8 @@ class OrderUpdater implements OrderUpdaterInterface
                     $order->addOrderLine($orderLineEntity);
                 }
 
-                $orderLineUnitPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['unitPrice'] ?? 0.0);
-                $orderLineTotalPrice = DandomainFoundation\createMoneyFromFloat($currency, $orderLineData['totalPrice'] ?? 0.0);
+                $orderLineUnitPrice = DandomainFoundation\createMoneyFromFloat($currencyCode, $orderLineData['unitPrice'] ?? 0.0);
+                $orderLineTotalPrice = DandomainFoundation\createMoneyFromFloat($currencyCode, $orderLineData['totalPrice'] ?? 0.0);
 
                 $orderLineEntity
                     ->setExternalId((int) $orderLineData['id'])
@@ -258,8 +306,9 @@ class OrderUpdater implements OrderUpdaterInterface
      * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product.
      *
      * @param OrderLineInterface $orderLine
-     *
      * @return ProductInterface|null
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     protected function getProductFromOrderLine(OrderLineInterface $orderLine): ?ProductInterface
     {

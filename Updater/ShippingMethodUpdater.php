@@ -5,16 +5,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\ShippingMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\ShippingMethod;
-use Loevgaard\DandomainFoundationBundle\Repository\ShippingMethodRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\ShippingMethodRepository;
 
 class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
 {
     /**
-     * @var ShippingMethodRepositoryInterface
+     * @var ShippingMethodRepository
      */
     protected $shippingMethodRepository;
 
-    public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
+    public function __construct(ShippingMethodRepository $shippingMethodRepository)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;
     }

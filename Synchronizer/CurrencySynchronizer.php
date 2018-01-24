@@ -39,7 +39,7 @@ class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerI
             return null;
         }
 
-        return $this->repository->findOneByExternalId($options['externalId']);
+        return $this->repository->findOneByCode($options['code']);
     }
 
     /**
@@ -59,9 +59,9 @@ class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerI
     public function configureOptionsOne(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefined(['externalId'])
-            ->setAllowedTypes('externalId', 'string')
-            ->setRequired('externalId')
+            ->setDefined(['code'])
+            ->setAllowedTypes('code', 'string')
+            ->setRequired('code')
         ;
     }
 

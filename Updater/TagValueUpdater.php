@@ -4,12 +4,12 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\TagValueInterface;
 use Loevgaard\DandomainFoundation\Entity\TagValue;
-use Loevgaard\DandomainFoundationBundle\Repository\TagValueRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\TagValueRepository;
 
 class TagValueUpdater implements TagValueUpdaterInterface
 {
     /**
-     * @var TagValueRepositoryInterface
+     * @var TagValueRepository
      */
     protected $tagValueRepository;
 
@@ -18,7 +18,7 @@ class TagValueUpdater implements TagValueUpdaterInterface
      */
     protected $tagValueUpdater;
 
-    public function __construct(TagValueRepositoryInterface $tagValueRepository)
+    public function __construct(TagValueRepository $tagValueRepository)
     {
         $this->tagValueRepository = $tagValueRepository;
     }

@@ -3,7 +3,7 @@
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
 use Loevgaard\DandomainFoundation\Entity\QueueItem;
-use Loevgaard\DandomainFoundationBundle\Repository\QueueRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\QueueItemRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,13 +14,13 @@ class ProcessQueueCommand extends ContainerAwareCommand
     use LockableTrait;
 
     /**
-     * @var QueueRepositoryInterface
+     * @var QueueItemRepository
      */
-    protected $queueRepository;
+    protected $queueItemRepository;
 
-    public function __construct(QueueRepositoryInterface $queueRepository)
+    public function __construct(QueueItemRepository $queueItemRepository)
     {
-        $this->queueRepository = $queueRepository;
+        $this->queueItemRepository = $queueItemRepository;
 
         parent::__construct();
     }
@@ -33,6 +33,12 @@ class ProcessQueueCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!($this->lock())) {
@@ -45,7 +51,7 @@ class ProcessQueueCommand extends ContainerAwareCommand
 
 
         // @todo iterate through all instead of limiting to 500
-        $queueItems = $this->queueRepository->findBy([
+        $queueItems = $this->queueItemRepository->findBy([
             'status' => QueueItem::STATUS_PENDING
         ], [], 500);
 
@@ -53,7 +59,7 @@ class ProcessQueueCommand extends ContainerAwareCommand
             $queueItem->setStatus(QueueItem::STATUS_PROCESSING);
             $producer->sendEvent($queueItem->getType(), $queueItem->getIdentifier());
 
-            $this->queueRepository->save($queueItem);
+            $this->queueItemRepository->save($queueItem);
         }
 
         return 0;

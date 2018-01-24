@@ -4,19 +4,24 @@ namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\ShippingMethodRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\RepositoryInterface;
 use Loevgaard\DandomainFoundationBundle\Updater\ShippingMethodUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodSynchronizerInterface
 {
     /**
+     * @var ShippingMethodRepository
+     */
+    protected $repository;
+
+    /**
      * @var ShippingMethodUpdater
      */
     protected $shippingMethodUpdater;
 
-    public function __construct(RepositoryInterface $repository, Api $api, string $logsDir, ShippingMethodUpdater $stateUpdater)
+    public function __construct(ShippingMethodRepository $repository, Api $api, string $logsDir, ShippingMethodUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -28,6 +33,10 @@ class ShippingMethodSynchronizer extends Synchronizer implements ShippingMethodS
         throw new \RuntimeException('Method not implemented');
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         // @todo fix site repository

@@ -5,16 +5,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation\Entity\Generated\PeriodInterface;
 use Loevgaard\DandomainFoundation\Entity\Period;
-use Loevgaard\DandomainFoundationBundle\Repository\PeriodRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\PeriodRepository;
 
 class PeriodUpdater implements PeriodUpdaterInterface
 {
     /**
-     * @var PeriodRepositoryInterface
+     * @var PeriodRepository
      */
     protected $periodRepository;
 
-    public function __construct(PeriodRepositoryInterface $periodRepository)
+    public function __construct(PeriodRepository $periodRepository)
     {
         $this->periodRepository = $periodRepository;
     }

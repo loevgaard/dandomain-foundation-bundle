@@ -30,15 +30,15 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
         $this->orderUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []): OrderInterface
+    public function syncOne(array $options = []): ?OrderInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $order = \GuzzleHttp\json_decode((string) $this->api->order->getOrder($options['externalId'])->getBody());
-        $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
 
         try {
+            $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
             $this->repository->save($entity);
-        } catch (OptimisticLockException $e) {
+        } catch (\Exception $e) {
             return null;
         }
 
@@ -48,6 +48,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
     /**
      * @param array $options
      * @throws OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function syncAll(array $options = [])
     {

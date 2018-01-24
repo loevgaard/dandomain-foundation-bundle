@@ -3,16 +3,17 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\SiteInterface;
-use Loevgaard\DandomainFoundationBundle\Repository\SiteRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\SiteRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\SiteUpdater;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 {
     /**
-     * @var SiteRepositoryInterface
+     * @var SiteRepository
      */
     protected $repository;
 
@@ -21,7 +22,7 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
      */
     protected $siteUpdater;
 
-    public function __construct(SiteRepositoryInterface $repository, Api $api, string $logsDir, SiteUpdater $stateUpdater)
+    public function __construct(SiteRepository $repository, Api $api, string $logsDir, SiteUpdater $stateUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
@@ -32,11 +33,19 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
 
-        $this->syncAll();
+        try {
+            $this->syncAll();
+        } catch (OptimisticLockException $e) {
+            return null;
+        }
 
         return $this->repository->findOneByExternalId($options['externalId']);
     }
 
+    /**
+     * @param array $options
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function syncAll(array $options = [])
     {
         $sites = \GuzzleHttp\json_decode((string) $this->api->settings->getSites()->getBody());

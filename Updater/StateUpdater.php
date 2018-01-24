@@ -4,16 +4,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Loevgaard\DandomainFoundation\Entity\Generated\StateInterface;
 use Loevgaard\DandomainFoundation\Entity\State;
-use Loevgaard\DandomainFoundationBundle\Repository\StateRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\StateRepository;
 
 class StateUpdater implements StateUpdaterInterface
 {
     /**
-     * @var StateRepositoryInterface
+     * @var StateRepository
      */
     protected $stateRepository;
 
-    public function __construct(StateRepositoryInterface $stateRepository)
+    public function __construct(StateRepository $stateRepository)
     {
         $this->stateRepository = $stateRepository;
     }

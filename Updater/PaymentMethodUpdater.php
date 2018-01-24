@@ -5,16 +5,16 @@ namespace Loevgaard\DandomainFoundationBundle\Updater;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\PaymentMethodInterface;
 use Loevgaard\DandomainFoundation\Entity\PaymentMethod;
-use Loevgaard\DandomainFoundationBundle\Repository\PaymentMethodRepositoryInterface;
+use Loevgaard\DandomainFoundation\Repository\PaymentMethodRepository;
 
 class PaymentMethodUpdater implements PaymentMethodUpdaterInterface
 {
     /**
-     * @var PaymentMethodRepositoryInterface
+     * @var PaymentMethodRepository
      */
     protected $paymentMethodRepository;
 
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    public function __construct(PaymentMethodRepository $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
