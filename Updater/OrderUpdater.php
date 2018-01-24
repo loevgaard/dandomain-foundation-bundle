@@ -192,7 +192,7 @@ class OrderUpdater implements OrderUpdaterInterface
             ->setTotalWeight($data['totalWeight'])
             ->setTrackingNumber($data['trackingNumber'])
             ->setTransactionNumber($data['transactionNumber'])
-            ->setVatPct($data['vatPct'])
+            ->setVatPct((float)$data['vatPct'])
             ->setVatRegNumber($data['vatRegNumber'])
             ->setXmlParams($data['xmlParams'])
             ->setShippingMethodFee($shippingMethodFee)
