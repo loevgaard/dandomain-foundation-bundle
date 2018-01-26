@@ -168,7 +168,7 @@ class ProductUpdater implements ProductUpdaterInterface
          * Update prices
          */
         $product->clearPrices();
-        if (is_array($data['prices'])) {
+        /*if (is_array($data['prices'])) {
             foreach ($data['prices'] as $priceData) {
                 $currency = $this->currencyRepository->findOneByCode($priceData['currencyCode']);
                 if(!$currency) {
@@ -200,7 +200,7 @@ class ProductUpdater implements ProductUpdaterInterface
                 $price->setPeriod($period);
                 $product->addPrice($price);
             }
-        }
+        }*/
 
         /*
          * @todo out comment this and fix it
