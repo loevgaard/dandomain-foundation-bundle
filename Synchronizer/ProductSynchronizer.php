@@ -121,6 +121,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 $products = \GuzzleHttp\json_decode($this->api->productData->getProductPage($page, $options['pageSize'])->getBody()->getContents());
 
                 foreach ($products as $product) {
+                    $this->logger->info('Product number: '.$product->number);
                     $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
                     $this->repository->save($entity);
 
