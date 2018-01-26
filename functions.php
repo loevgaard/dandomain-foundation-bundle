@@ -2,7 +2,7 @@
 
 namespace Loevgaard\DandomainFoundationBundle;
 
-use Loevgaard\DandomainFoundationBundle\DateTime\DateTimeImmutable;
+use Loevgaard\DandomainDateTime\DateTimeImmutable;
 
 /**
  * Return a \DateTime|\DateTimeImmutable object based on a json string, i.e. '/Date(1484759471000+0100)/'.
