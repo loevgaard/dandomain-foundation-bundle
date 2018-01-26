@@ -114,6 +114,10 @@ services:
             - "@loevgaard_dandomain_foundation.product_repository"
             - "@loevgaard_dandomain_foundation.manufacturer_repository"
             - "@loevgaard_dandomain_foundation.variant_group_repository"
+            - "@loevgaard_dandomain_foundation.currency_repository"
+            - "@loevgaard_dandomain_foundation.currency_synchronizer"
+            - "@loevgaard_dandomain_foundation.period_repository"
+            - "@loevgaard_dandomain_foundation.period_synchronizer"
 
     loevgaard_dandomain_foundation.shipping_method_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\ShippingMethodUpdater

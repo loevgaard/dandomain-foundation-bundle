@@ -6,12 +6,17 @@ use Doctrine\Common\Collections\Collection;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Period;
+use Loevgaard\DandomainFoundation\Entity\Price;
 use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundation\Entity\VariantGroup;
+use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
+use Loevgaard\DandomainFoundation\Repository\PeriodRepository;
 use Loevgaard\DandomainFoundation\Repository\ProductRepository;
 use Loevgaard\DandomainFoundation\Repository\VariantGroupRepository;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\PeriodSynchronizerInterface;
 
 class ProductUpdater implements ProductUpdaterInterface
 {
@@ -30,14 +35,42 @@ class ProductUpdater implements ProductUpdaterInterface
      */
     protected $variantGroupRepository;
 
+    /**
+     * @var CurrencyRepository
+     */
+    protected $currencyRepository;
+
+    /**
+     * @var CurrencySynchronizerInterface
+     */
+    protected $currencySynchronizer;
+
+    /**
+     * @var PeriodRepository
+     */
+    protected $periodRepository;
+
+    /**
+     * @var PeriodSynchronizerInterface
+     */
+    protected $periodSynchronizer;
+
     public function __construct(
         ProductRepository $productRepository,
         ManufacturerRepository $manufacturerRepository,
-        VariantGroupRepository $variantGroupRepository
+        VariantGroupRepository $variantGroupRepository,
+        CurrencyRepository $currencyRepository,
+        CurrencySynchronizerInterface $currencySynchronizer,
+        PeriodRepository $periodRepository,
+        PeriodSynchronizerInterface $periodSynchronizer
     ) {
         $this->productRepository = $productRepository;
         $this->manufacturerRepository = $manufacturerRepository;
         $this->variantGroupRepository = $variantGroupRepository;
+        $this->currencyRepository = $currencyRepository;
+        $this->currencySynchronizer = $currencySynchronizer;
+        $this->periodRepository = $periodRepository;
+        $this->periodSynchronizer = $periodSynchronizer;
     }
 
     public function updateFromApiResponse(array $data): ProductInterface
@@ -132,6 +165,44 @@ class ProductUpdater implements ProductUpdaterInterface
         $product->setVariantGroupIdList($data['variantGroupIdList']);
 
         /*
+         * Update prices
+         */
+        $product->clearPrices();
+        if (is_array($data['prices'])) {
+            foreach ($data['prices'] as $priceData) {
+                $currency = $this->currencyRepository->findOneByCode($priceData['currencyCode']);
+                if(!$currency) {
+                    $currency = $this->currencySynchronizer->syncOne([
+                        'code' => $priceData['currencyCode']
+                    ]);
+
+                    if(!$currency) {
+                        throw new \RuntimeException('The currency `'.$priceData['currencyCode'].'` was not found in the local database');
+                    }
+                }
+
+                $period = null;
+                if($priceData['periodId']) {
+                    $period = $this->periodRepository->findOneByExternalId($priceData['periodId']);
+
+                    if(!$period) {
+                        $period = $this->periodSynchronizer->syncOne([
+                            'externalId' => $priceData['periodId']
+                        ]);
+
+                        if(!$period) {
+                            throw new \RuntimeException('The period `'.$priceData['periodId'].'` was not found in the local database');
+                        }
+                    }
+                }
+
+                $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $priceData['specialOfferPrice'] * 100, $priceData['unitPrice'] * 100);
+                $price->setPeriod($period);
+                $product->addPrice($price);
+            }
+        }
+
+        /*
          * @todo out comment this and fix it
          */
 
@@ -159,14 +230,6 @@ class ProductUpdater implements ProductUpdaterInterface
 //            }
 //        }
 //
-//
-//        if (is_array($data['prices'])) {
-//            foreach ($data['prices'] as $priceData) {
-//                $price = new Price();
-//                $price->populateFromApiResponse($priceData);
-//                $this->addPrice($price);
-//            }
-//        }
 //
 //        if (is_array($data['productRelations'])) {
 //            foreach ($data['productRelations'] as $productRelationData) {

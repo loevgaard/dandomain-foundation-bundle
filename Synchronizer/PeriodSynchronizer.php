@@ -3,7 +3,9 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\PeriodInterface;
 use Loevgaard\DandomainFoundation\Repository\PeriodRepository;
 use Loevgaard\DandomainFoundationBundle\Updater\PeriodUpdaterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,9 +29,17 @@ class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInter
         $this->periodUpdater = $stateUpdater;
     }
 
-    public function syncOne(array $options = []): DandomainFoundation\Entity\Generated\PeriodInterface
+    public function syncOne(array $options = []): PeriodInterface
     {
-        throw new \RuntimeException('Method not implemented');
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
+
+        try {
+            $this->syncAll();
+        } catch (OptimisticLockException $e) {
+            return null;
+        }
+
+        return $this->repository->findOneByExternalId($options['externalId']);
     }
 
     /**
@@ -48,6 +58,11 @@ class PeriodSynchronizer extends Synchronizer implements PeriodSynchronizerInter
 
     public function configureOptionsOne(OptionsResolver $resolver)
     {
+        $resolver
+            ->setDefined(['externalId'])
+            ->setAllowedTypes('externalId', 'string')
+            ->setRequired('externalId')
+        ;
     }
 
     public function configureOptionsAll(OptionsResolver $resolver)
