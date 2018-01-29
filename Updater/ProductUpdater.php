@@ -167,8 +167,8 @@ class ProductUpdater implements ProductUpdaterInterface
         /*
          * Update prices
          */
-        $product->clearPrices();
-        /*if (is_array($data['prices'])) {
+        if (is_array($data['prices'])) {
+            $prices = [];
             foreach ($data['prices'] as $priceData) {
                 $currency = $this->currencyRepository->findOneByCode($priceData['currencyCode']);
                 if(!$currency) {
@@ -198,9 +198,12 @@ class ProductUpdater implements ProductUpdaterInterface
 
                 $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $priceData['specialOfferPrice'] * 100, $priceData['unitPrice'] * 100);
                 $price->setPeriod($period);
-                $product->addPrice($price);
+
+                $prices[] = $price;
             }
-        }*/
+
+            $product->updatePrices($prices);
+        }
 
         /*
          * @todo out comment this and fix it
