@@ -198,8 +198,8 @@ class ProductUpdater implements ProductUpdaterInterface
                     }
                 }
 
-                $specialOfferPrice = BigDecimal::of((string)$priceData['specialOfferPrice'])->multipliedBy(100)->toInt();
-                $unitPrice = BigDecimal::of((string)$priceData['unitPrice'])->multipliedBy(100)->toInt();
+                $specialOfferPrice = BigDecimal::of((string)round($priceData['specialOfferPrice'], 2))->multipliedBy(100)->toInt();
+                $unitPrice = BigDecimal::of((string)round($priceData['unitPrice'], 2))->multipliedBy(100)->toInt();
 
                 $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $specialOfferPrice, $unitPrice);
                 $price->setPeriod($period);
