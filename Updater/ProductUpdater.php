@@ -2,6 +2,8 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
+use Brick\Math\BigDecimal;
+use Brick\Math\BigInteger;
 use Doctrine\Common\Collections\Collection;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
@@ -196,7 +198,10 @@ class ProductUpdater implements ProductUpdaterInterface
                     }
                 }
 
-                $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $priceData['specialOfferPrice'] * 100, $priceData['unitPrice'] * 100);
+                $specialOfferPrice = BigDecimal::of((string)$priceData['specialOfferPrice'])->multipliedBy(100)->toInt();
+                $unitPrice = BigDecimal::of((string)$priceData['unitPrice'])->multipliedBy(100)->toInt();
+
+                $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $specialOfferPrice, $unitPrice);
                 $price->setPeriod($period);
 
                 $prices[] = $price;
