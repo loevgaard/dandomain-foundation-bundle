@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
+use Loevgaard\DandomainFoundation\Entity\Price;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
@@ -291,7 +293,7 @@ class OrderUpdater implements OrderUpdaterInterface
                     ->setXmlParams($orderLineData['xmlParams'])
                 ;
 
-                $product = $this->getProductFromOrderLine($orderLineEntity);
+                $product = $this->getProductFromOrderLine($orderLineEntity, $currency);
                 if ($product) {
                     $orderLineEntity->setProduct($product);
                 }
@@ -308,13 +310,14 @@ class OrderUpdater implements OrderUpdaterInterface
      * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product.
      *
      * @param OrderLineInterface $orderLine
+     * @param CurrencyInterface $currency
      *
      * @return ProductInterface|null
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function getProductFromOrderLine(OrderLineInterface $orderLine): ?ProductInterface
+    protected function getProductFromOrderLine(OrderLineInterface $orderLine, CurrencyInterface $currency): ?ProductInterface
     {
         // if the order line does not have a product number we know it's not a product
         // since this is a requirement in Dandomain for products
@@ -343,6 +346,9 @@ class OrderUpdater implements OrderUpdaterInterface
             if (404 === $e->getResponse()->getStatusCode()) {
                 $product = new Product();
                 $product->setNumber($orderLine->getProductNumber());
+
+                $price = Price::create(1, 0, "0", $currency, 0, 0);
+                $product->addPrice($price);
 
                 // if the product doesn't exist we mark it as deleted when we sync it
                 $product->delete();

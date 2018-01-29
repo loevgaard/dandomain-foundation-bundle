@@ -3,7 +3,6 @@
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
 use Brick\Math\BigDecimal;
-use Brick\Math\BigInteger;
 use Doctrine\Common\Collections\Collection;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
@@ -198,6 +197,7 @@ class ProductUpdater implements ProductUpdaterInterface
                     }
                 }
 
+                // we use round() method because Dandomain apparently can have three decimal floats for the specialOfferPrice
                 $specialOfferPrice = BigDecimal::of((string)round($priceData['specialOfferPrice'], 2))->multipliedBy(100)->toInt();
                 $unitPrice = BigDecimal::of((string)round($priceData['unitPrice'], 2))->multipliedBy(100)->toInt();
 
