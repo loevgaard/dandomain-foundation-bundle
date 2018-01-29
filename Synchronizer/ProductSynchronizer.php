@@ -106,6 +106,8 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
                     $productIdsToUpdateParentChildRelationship[] = $entity->getId();
                 }
+
+                $this->repository->clearAll();
             }
 
             $log['start'] = $start;
