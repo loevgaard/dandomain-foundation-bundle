@@ -293,7 +293,7 @@ class OrderUpdater implements OrderUpdaterInterface
                     ->setXmlParams($orderLineData['xmlParams'])
                 ;
 
-                $product = $this->getProductFromOrderLine($orderLineEntity, $currency);
+                $product = $this->getProductFromOrderLine($orderLineEntity);
                 if ($product) {
                     $orderLineEntity->setProduct($product);
                 }
@@ -310,14 +310,13 @@ class OrderUpdater implements OrderUpdaterInterface
      * Returns false if the $orderLine is a gift card, or something else that doesn't qualify as a product.
      *
      * @param OrderLineInterface $orderLine
-     * @param CurrencyInterface $currency
      *
      * @return ProductInterface|null
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function getProductFromOrderLine(OrderLineInterface $orderLine, CurrencyInterface $currency): ?ProductInterface
+    protected function getProductFromOrderLine(OrderLineInterface $orderLine): ?ProductInterface
     {
         // if the order line does not have a product number we know it's not a product
         // since this is a requirement in Dandomain for products
@@ -345,10 +344,10 @@ class OrderUpdater implements OrderUpdaterInterface
         } catch (ClientException $e) {
             if (404 === $e->getResponse()->getStatusCode()) {
                 $product = new Product();
-                $product->setNumber($orderLine->getProductNumber());
-
-                $price = Price::create(1, 0, "0", $currency, 0, 0);
-                $product->addPrice($price);
+                $product
+                    ->setNumber($orderLine->getProductNumber())
+                    ->setPriceLess(true)
+                ;
 
                 // if the product doesn't exist we mark it as deleted when we sync it
                 $product->delete();
