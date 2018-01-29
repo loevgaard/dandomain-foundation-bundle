@@ -110,6 +110,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
 
             $log['start'] = $start;
             $log['end'] = $end;
+            $this->writeLog($log);
         } else {
             $productIdsToNotRemove = [];
             $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($options['pageSize'])->getBody()->getContents());
@@ -134,10 +135,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
             $this->repository->removeByIds([], $productIdsToNotRemove);
         }
 
-        // @todo remember to fix this
         $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationship);
-
-        $this->writeLog($log);
     }
 
     public function configureOptionsOne(OptionsResolver $resolver)
