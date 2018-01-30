@@ -97,21 +97,11 @@ abstract class UpdatedEntityProvider implements UpdatedEntityProviderInterface
     protected function getLogPath(): string
     {
         if (!$this->logPath) {
-            $this->logPath = $this->logsDir.'/'.$this->decamelize(get_class($this));
+            $className = str_replace('\\', '', get_class($this));
+            $filename = strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $className)).'.log';
+            $this->logPath = $this->logsDir.'/'.$filename;
         }
 
         return $this->logPath;
-    }
-
-    /**
-     * Decamelizes a string.
-     *
-     * @param $string
-     *
-     * @return string
-     */
-    protected function decamelize($string): string
-    {
-        return strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $string));
     }
 }
