@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Entity\Generated\CurrencyInterface;
-use Loevgaard\DandomainFoundation\Entity\Price;
+use Loevgaard\DandomainFoundation\Entity\Site;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
@@ -149,6 +148,8 @@ class OrderUpdater implements OrderUpdaterInterface
                 'code' => $data['currencyCode'],
             ]);
 
+            // this means that the currency does not exist anymore
+            // @todo create placeholder
             if (!$currency) {
                 throw new \RuntimeException('Could not sync currency `'.$data['currencyCode'].'`. Try again');
             }
@@ -225,11 +226,21 @@ class OrderUpdater implements OrderUpdaterInterface
         $site = $this->siteRepository->findOneByExternalId($data['siteId']);
         if (!$site) {
             $site = $this->siteSynchronizer->syncOne([
-                'externalId' => $data['siteId'],
+                'externalId' => $data['siteId']
             ]);
 
+            // this means that the site does not exist anymore so we create a placeholder
             if (!$site) {
-                throw new \RuntimeException('Could not sync site with id `'.$data['siteId'].'`. Try again');
+                $site = new Site();
+                $site->setExternalId($data['siteId'])
+                    ->setName((string)$data['siteId'])
+                    ->setCurrency($currency)
+                ;
+
+                // we soft delete the site because it does not exist anymore
+                $site->delete();
+
+                $this->siteRepository->save($site);
             }
         }
         $order->setSite($site);
