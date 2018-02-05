@@ -348,24 +348,27 @@ class OrderUpdater implements OrderUpdaterInterface
             return $product;
         }
 
-        try {
-            $product = $this->productSynchronizer->syncOne([
-                'number' => $orderLine->getProductNumber(),
-            ]);
-        } catch (ClientException $e) {
-            if (404 === $e->getResponse()->getStatusCode()) {
-                $product = new Product();
-                $product
-                    ->setNumber($orderLine->getProductNumber())
-                    ->setPriceLess(true)
-                ;
+        $product = $this->productRepository->findOneByNumber($orderLine->getProductNumber());
 
-                // if the product doesn't exist we mark it as deleted when we sync it
-                $product->delete();
+        if(!$product) {
+            try {
+                $product = $this->productSynchronizer->syncOne([
+                    'number' => $orderLine->getProductNumber(),
+                ]);
+            } catch (ClientException $e) {
+                if (404 === $e->getResponse()->getStatusCode()) {
+                    $product = new Product();
+                    $product
+                        ->setNumber($orderLine->getProductNumber())
+                        ->setPriceLess(true);
 
-                $this->productRepository->save($product);
-            } else {
-                throw $e;
+                    // if the product doesn't exist we mark it as deleted when we sync it
+                    $product->delete();
+
+                    $this->productRepository->save($product);
+                } else {
+                    throw $e;
+                }
             }
         }
 
