@@ -49,10 +49,13 @@ class CurrencySynchronizer extends Synchronizer implements CurrencySynchronizerI
      */
     public function syncAll(array $options = [])
     {
+        $this->logger->info('Synchronizing currencies');
+
         $currencies = \GuzzleHttp\json_decode((string) $this->api->settings->getCurrencies()->getBody());
 
         foreach ($currencies as $currency) {
             $entity = $this->currencyUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($currency));
+            $this->logger->info('- '.$entity->getIsoCodeAlpha());
             $this->repository->save($entity);
         }
     }

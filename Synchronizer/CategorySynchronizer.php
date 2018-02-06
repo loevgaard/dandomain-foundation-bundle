@@ -106,7 +106,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
         foreach ($categories as $category) {
             $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
-            $this->logger->info(str_repeat(' ', $level - 1).'- '.$entity->getNumber());
+            $this->logger->info(str_repeat('  ', $level - 1).'- '.$entity->getNumber());
             $this->repository->save($entity);
             $this->recursiveSync((int) $category->number, $level + 1);
         }
