@@ -46,20 +46,29 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param array $options
-     *
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function syncAll(array $options = [])
     {
+        $this->logger->info('Synchronizing categories');
         $this->recursiveSync(0);
+
+        $cache = [];
+
+        $this->logger->info('Synchronizing parent/child relationships');
 
         // when all categories has been saved we iterate through them to update their parent/child relationship
         // @todo this should probably be moved to the updater
         foreach ($this->repository->iterate(['update' => true]) as $category) {
             foreach ($category->getParentIdList() as $parentNumber) {
-                // @todo create a reference cache so we don't need to query the database for each parent
-                // @todo if an existing relationship that has been deleted in Dandomain then it isn't updated here
-                $parent = $this->repository->findOneByNumber($parentNumber);
+                if(isset($cache[$parentNumber])) {
+                    $parent = $this->repository->getReference($cache[$parentNumber]);
+                } else {
+                    // @todo if an existing relationship that has been deleted in Dandomain then it isn't updated here
+                    $parent = $this->repository->findOneByNumber($parentNumber);
+                    $cache[$parentNumber] = $parent->getId();
+                }
 
                 if ($parent) {
                     $category->addParentCategory($parent);
@@ -83,10 +92,11 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param int|null $parentCategoryNumber
+     * @param int $level
      *
      * @throws OptimisticLockException
      */
-    private function recursiveSync(int $parentCategoryNumber = null)
+    private function recursiveSync(int $parentCategoryNumber = null, int $level = 1)
     {
         if ($parentCategoryNumber) {
             $categories = \GuzzleHttp\json_decode($this->api->productData->getDataSubCategories($parentCategoryNumber)->getBody()->getContents());
@@ -96,8 +106,9 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
         foreach ($categories as $category) {
             $entity = $this->categoryUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($category));
+            $this->logger->info(str_repeat(' ', $level - 1).'- '.$entity->getNumber());
             $this->repository->save($entity);
-            $this->recursiveSync((int) $category->number);
+            $this->recursiveSync((int) $category->number, $level + 1);
         }
     }
 }
