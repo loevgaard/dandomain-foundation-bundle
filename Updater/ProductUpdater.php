@@ -180,7 +180,10 @@ class ProductUpdater implements ProductUpdaterInterface
         /*
          * Update prices
          */
-        if (is_array($data['prices'])) {
+        if(empty($data['prices'])) {
+            $product->setPriceLess(true);
+            $product->clearPrices();
+        } else {
             $prices = [];
             foreach ($data['prices'] as $priceData) {
                 $currency = $this->currencyRepository->findOneByCode($priceData['currencyCode']);
