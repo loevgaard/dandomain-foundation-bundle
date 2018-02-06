@@ -6,6 +6,12 @@ services:
             - "@loevgaard_dandomain_foundation.category_synchronizer"
         tags: [console.command]
 
+    loevgaard_dandomain_foundation.synchronize_currencies_command:
+        class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeCurrenciesCommand
+        arguments:
+            - "@loevgaard_dandomain_foundation.currency_synchronizer"
+        tags: [console.command]
+
     loevgaard_dandomain_foundation.synchronize_products_command:
         class: Loevgaard\DandomainFoundationBundle\Command\SynchronizeProductsCommand
         arguments:

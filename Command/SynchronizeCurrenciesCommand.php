@@ -2,25 +2,25 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Command;
 
-use Loevgaard\DandomainFoundationBundle\Synchronizer\CategorySynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SynchronizeCategoriesCommand extends ContainerAwareCommand
+class SynchronizeCurrenciesCommand extends ContainerAwareCommand
 {
     use LockableTrait;
 
     /**
-     * @var CategorySynchronizerInterface
+     * @var CurrencySynchronizerInterface
      */
-    protected $categorySynchronizer;
+    protected $currencySynchronizer;
 
-    public function __construct(CategorySynchronizerInterface $stateSynchronizer)
+    public function __construct(CurrencySynchronizerInterface $currencySynchronizer)
     {
-        $this->categorySynchronizer = $stateSynchronizer;
+        $this->currencySynchronizer = $currencySynchronizer;
 
         parent::__construct();
     }
@@ -28,8 +28,8 @@ class SynchronizeCategoriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('loevgaard:dandomain-foundation:sync:categories')
-            ->setDescription('Synchronize categories from Dandomain til local database')
+            ->setName('loevgaard:dandomain-foundation:sync:currencies')
+            ->setDescription('Synchronize currencies from Dandomain til local database')
         ;
     }
 
@@ -41,8 +41,8 @@ class SynchronizeCategoriesCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $this->categorySynchronizer->setLogger(new ConsoleLogger($output));
-        $this->categorySynchronizer->syncAll();
+        $this->currencySynchronizer->setLogger(new ConsoleLogger($output));
+        $this->currencySynchronizer->syncAll();
 
         $this->release();
 
