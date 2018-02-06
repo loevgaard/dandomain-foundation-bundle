@@ -125,45 +125,57 @@ class ProductUpdater implements ProductUpdaterInterface
             $product->mergeNewTranslations();
         }
 
-        /**
-         * Update manufacturers.
+        /*
+         * Update manufacturers
          */
-        $manufacturerIdsToAdd = $this->updateCollection($product->getManufacturereIdList() ?? [], $data['manufacturereIdList'] ?? [], $product->getManufacturers());
+        if (empty($data['manufacturereIdList'])) {
+            $product->setManufacturereIdList(null);
+            $product->clearManufacturers();
+        } else {
+            $manufacturerIdsToAdd = $this->updateCollection($product->getManufacturereIdList() ?? [],
+                $data['manufacturereIdList'] ?? [], $product->getManufacturers());
 
-        foreach ($data['manufacturers'] as $manufacturerData) {
-            if (in_array($manufacturerData['id'], $manufacturerIdsToAdd)) {
-                $manufacturer = $this->manufacturerRepository->findOneByExternalId($manufacturerData['id']);
-                if (!$manufacturer) {
-                    $manufacturer = new Manufacturer();
+            foreach ($data['manufacturers'] as $manufacturerData) {
+                if (in_array($manufacturerData['id'], $manufacturerIdsToAdd)) {
+                    $manufacturer = $this->manufacturerRepository->findOneByExternalId($manufacturerData['id']);
+                    if (!$manufacturer) {
+                        $manufacturer = new Manufacturer();
 
-                    // only update properties if it's a new object
-                    $manufacturer->hydrate($manufacturerData, true);
+                        // only update properties if it's a new object
+                        $manufacturer->hydrate($manufacturerData, true);
+                    }
+
+                    $product->addManufacturer($manufacturer);
                 }
-
-                $product->addManufacturer($manufacturer);
             }
+            $product->setManufacturereIdList($data['manufacturereIdList']);
         }
-        $product->setManufacturereIdList($data['manufacturereIdList']);
 
-        /**
-         * Update variant groups.
+        /*
+         * Update variant groups
          */
-        $variantGroupIdsToAdd = $this->updateCollection($product->getVariantGroupIdList() ?? [], $data['variantGroupIdList'] ?? [], $product->getVariantGroups());
+        if (empty($data['variantGroupIdList'])) {
+            $product->setVariantGroupIdList(null);
+            $product->clearVariantGroups();
+        } else {
+            $variantGroupIdsToAdd = $this->updateCollection($product->getVariantGroupIdList() ?? [],
+                $data['variantGroupIdList'] ?? [], $product->getVariantGroups());
 
-        foreach ($data['variantGroups'] as $variantGroupData) {
-            if (in_array($variantGroupData['id'], $variantGroupIdsToAdd)) {
-                $variantGroup = $this->variantGroupRepository->findOneByExternalId($variantGroupData['id']);
-                if (!$variantGroup) {
-                    $variantGroup = new VariantGroup();
+            foreach ($data['variantGroups'] as $variantGroupData) {
+                if (in_array($variantGroupData['id'], $variantGroupIdsToAdd)) {
+                    $variantGroup = $this->variantGroupRepository->findOneByExternalId($variantGroupData['id']);
+                    if (!$variantGroup) {
+                        $variantGroup = new VariantGroup();
 
-                    // only update properties if it's a new object
-                    $variantGroup->hydrate($variantGroupData, true);
+                        // only update properties if it's a new object
+                        $variantGroup->hydrate($variantGroupData, true);
+                    }
+
+                    $product->addVariantGroup($variantGroup);
                 }
-
-                $product->addVariantGroup($variantGroup);
             }
+            $product->setVariantGroupIdList($data['variantGroupIdList']);
         }
-        $product->setVariantGroupIdList($data['variantGroupIdList']);
 
         /*
          * Update prices
@@ -172,34 +184,34 @@ class ProductUpdater implements ProductUpdaterInterface
             $prices = [];
             foreach ($data['prices'] as $priceData) {
                 $currency = $this->currencyRepository->findOneByCode($priceData['currencyCode']);
-                if(!$currency) {
+                if (!$currency) {
                     $currency = $this->currencySynchronizer->syncOne([
-                        'code' => $priceData['currencyCode']
+                        'code' => $priceData['currencyCode'],
                     ]);
 
-                    if(!$currency) {
+                    if (!$currency) {
                         throw new \RuntimeException('The currency `'.$priceData['currencyCode'].'` was not found in the local database');
                     }
                 }
 
                 $period = null;
-                if($priceData['periodId']) {
+                if ($priceData['periodId']) {
                     $period = $this->periodRepository->findOneByExternalId($priceData['periodId']);
 
-                    if(!$period) {
+                    if (!$period) {
                         $period = $this->periodSynchronizer->syncOne([
-                            'externalId' => $priceData['periodId']
+                            'externalId' => $priceData['periodId'],
                         ]);
 
-                        if(!$period) {
+                        if (!$period) {
                             throw new \RuntimeException('The period `'.$priceData['periodId'].'` was not found in the local database');
                         }
                     }
                 }
 
                 // we use round() method because Dandomain apparently can have three decimal floats for the specialOfferPrice
-                $specialOfferPrice = BigDecimal::of((string)round($priceData['specialOfferPrice'], 2))->multipliedBy(100)->toInt();
-                $unitPrice = BigDecimal::of((string)round($priceData['unitPrice'], 2))->multipliedBy(100)->toInt();
+                $specialOfferPrice = BigDecimal::of((string) round($priceData['specialOfferPrice'], 2))->multipliedBy(100)->toInt();
+                $unitPrice = BigDecimal::of((string) round($priceData['unitPrice'], 2))->multipliedBy(100)->toInt();
 
                 $price = Price::create($priceData['amount'], $priceData['avance'], $priceData['b2BGroupId'], $currency, $specialOfferPrice, $unitPrice);
                 $price->setPeriod($period);

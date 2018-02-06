@@ -46,6 +46,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param array $options
+     *
      * @throws OptimisticLockException
      * @throws \Doctrine\ORM\ORMException
      */
@@ -62,7 +63,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
         // @todo this should probably be moved to the updater
         foreach ($this->repository->iterate(['update' => true]) as $category) {
             foreach ($category->getParentIdList() as $parentNumber) {
-                if(isset($cache[$parentNumber])) {
+                if (isset($cache[$parentNumber])) {
                     $parent = $this->repository->getReference($cache[$parentNumber]);
                 } else {
                     // @todo if an existing relationship that has been deleted in Dandomain then it isn't updated here
@@ -92,7 +93,7 @@ class CategorySynchronizer extends Synchronizer implements CategorySynchronizerI
 
     /**
      * @param int|null $parentCategoryNumber
-     * @param int $level
+     * @param int      $level
      *
      * @throws OptimisticLockException
      */

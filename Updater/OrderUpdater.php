@@ -6,13 +6,13 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
-use Loevgaard\DandomainFoundation\Entity\Site;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Order;
 use Loevgaard\DandomainFoundation\Entity\OrderLine;
 use Loevgaard\DandomainFoundation\Entity\Product;
+use Loevgaard\DandomainFoundation\Entity\Site;
 use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Repository\OrderRepository;
 use Loevgaard\DandomainFoundation\Repository\ProductRepository;
@@ -195,7 +195,7 @@ class OrderUpdater implements OrderUpdaterInterface
             ->setTotalWeight($data['totalWeight'])
             ->setTrackingNumber($data['trackingNumber'])
             ->setTransactionNumber($data['transactionNumber'])
-            ->setVatPct((float)$data['vatPct'])
+            ->setVatPct((float) $data['vatPct'])
             ->setVatRegNumber($data['vatRegNumber'])
             ->setXmlParams($data['xmlParams'])
             ->setShippingMethodFee($shippingMethodFee)
@@ -226,14 +226,14 @@ class OrderUpdater implements OrderUpdaterInterface
         $site = $this->siteRepository->findOneByExternalId($data['siteId']);
         if (!$site) {
             $site = $this->siteSynchronizer->syncOne([
-                'externalId' => $data['siteId']
+                'externalId' => $data['siteId'],
             ]);
 
             // this means that the site does not exist anymore so we create a placeholder
             if (!$site) {
                 $site = new Site();
                 $site->setExternalId($data['siteId'])
-                    ->setName((string)$data['siteId'])
+                    ->setName((string) $data['siteId'])
                     ->setCurrency($currency)
                 ;
 
@@ -350,7 +350,7 @@ class OrderUpdater implements OrderUpdaterInterface
 
         $product = $this->productRepository->findOneByNumber($orderLine->getProductNumber());
 
-        if(!$product) {
+        if (!$product) {
             try {
                 $product = $this->productSynchronizer->syncOne([
                     'number' => $orderLine->getProductNumber(),
