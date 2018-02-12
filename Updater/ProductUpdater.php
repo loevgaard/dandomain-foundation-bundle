@@ -181,7 +181,6 @@ class ProductUpdater implements ProductUpdaterInterface
          * Update prices
          */
         if(empty($data['prices'])) {
-            $product->setPriceLess(true);
             $product->clearPrices();
         } else {
             $prices = [];
