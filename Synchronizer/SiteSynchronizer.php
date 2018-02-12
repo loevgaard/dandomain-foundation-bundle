@@ -35,7 +35,7 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 
         try {
             $this->syncAll();
-        } catch (OptimisticLockException $e) {
+        } catch (\Exception $e) {
             return null;
         }
 
@@ -44,8 +44,8 @@ class SiteSynchronizer extends Synchronizer implements SiteSynchronizerInterface
 
     /**
      * @param array $options
-     *
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function syncAll(array $options = [])
     {

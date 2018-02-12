@@ -30,12 +30,20 @@ class StateSynchronizer extends Synchronizer implements StateSynchronizerInterfa
 
     public function syncOne(array $options = []): ?StateInterface
     {
-        throw new \RuntimeException('Method not implemented');
+        $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
+
+        try {
+            $this->syncAll();
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return $this->repository->findOneByExternalId($options['externalId']);
     }
 
     /**
      * @param array $options
-     *
+     * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function syncAll(array $options = [])
@@ -50,6 +58,11 @@ class StateSynchronizer extends Synchronizer implements StateSynchronizerInterfa
 
     public function configureOptionsOne(OptionsResolver $resolver)
     {
+        $resolver
+            ->setDefined(['externalId'])
+            ->setAllowedTypes('externalId', 'int')
+            ->setRequired('externalId')
+        ;
     }
 
     public function configureOptionsAll(OptionsResolver $resolver)

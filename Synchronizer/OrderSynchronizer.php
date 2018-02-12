@@ -47,8 +47,8 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
     /**
      * @param array $options
-     *
      * @throws OptimisticLockException
+     * @throws \Doctrine\Common\Persistence\Mapping\MappingException
      * @throws \Doctrine\ORM\ORMException
      */
     public function syncAll(array $options = [])

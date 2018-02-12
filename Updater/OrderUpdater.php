@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Criteria;
 use GuzzleHttp\Exception\ClientException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
+use Loevgaard\DandomainFoundation\Repository\StateRepository;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderLineInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
@@ -20,6 +21,7 @@ use Loevgaard\DandomainFoundation\Repository\SiteRepository;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\CurrencySynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\ProductSynchronizerInterface;
 use Loevgaard\DandomainFoundationBundle\Synchronizer\SiteSynchronizerInterface;
+use Loevgaard\DandomainFoundationBundle\Synchronizer\StateSynchronizerInterface;
 
 class OrderUpdater implements OrderUpdaterInterface
 {
@@ -66,11 +68,6 @@ class OrderUpdater implements OrderUpdaterInterface
     protected $siteSynchronizer;
 
     /**
-     * @var StateUpdaterInterface
-     */
-    protected $stateUpdater;
-
-    /**
      * @var CustomerUpdaterInterface
      */
     protected $customerUpdater;
@@ -95,6 +92,16 @@ class OrderUpdater implements OrderUpdaterInterface
      */
     protected $currencySynchronizer;
 
+    /**
+     * @var StateRepository
+     */
+    protected $stateRepository;
+
+    /**
+     * @var StateSynchronizerInterface
+     */
+    protected $stateSynchronizer;
+
     public function __construct(
         OrderRepository $orderRepository,
         ProductRepository $productRepository,
@@ -108,7 +115,9 @@ class OrderUpdater implements OrderUpdaterInterface
         DeliveryUpdaterInterface $deliveryUpdater,
         InvoiceUpdaterInterface $invoiceUpdater,
         CurrencyRepository $currencyRepository,
-        CurrencySynchronizerInterface $currencySynchronizer
+        CurrencySynchronizerInterface $currencySynchronizer,
+        StateRepository $stateRepository,
+        StateSynchronizerInterface $stateSynchronizer
     ) {
         self::$productCache = [];
         $this->orderRepository = $orderRepository;
@@ -118,12 +127,13 @@ class OrderUpdater implements OrderUpdaterInterface
         $this->paymentMethodUpdater = $paymentMethodUpdater;
         $this->siteRepository = $siteRepository;
         $this->siteSynchronizer = $siteSynchronizer;
-        $this->stateUpdater = $stateUpdater;
         $this->customerUpdater = $customerUpdater;
         $this->deliveryUpdater = $deliveryUpdater;
         $this->invoiceUpdater = $invoiceUpdater;
         $this->currencyRepository = $currencyRepository;
         $this->currencySynchronizer = $currencySynchronizer;
+        $this->stateRepository = $stateRepository;
+        $this->stateSynchronizer = $stateSynchronizer;
     }
 
     /**
@@ -246,7 +256,17 @@ class OrderUpdater implements OrderUpdaterInterface
         $order->setSite($site);
 
         // populate state
-        $state = $this->stateUpdater->updateFromEmbeddedApiResponse($data['orderState'], $order->getState());
+        $state = $this->stateRepository->findOneByExternalId($data['orderState']['id']);
+        if(!$state) {
+            $state = $this->stateSynchronizer->syncOne([
+                'externalId' => $data['orderState']['id']
+            ]);
+
+            if(!$state) {
+                // @todo create placeholder
+                throw new \InvalidArgumentException('The order state `'.$data['orderState']['name'].'` (id: '.$data['orderState']['id'].') does not exist');
+            }
+        }
         $order->setState($state);
 
         if (count($orderLinesData)) {
