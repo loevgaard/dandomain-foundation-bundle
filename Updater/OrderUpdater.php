@@ -110,7 +110,6 @@ class OrderUpdater implements OrderUpdaterInterface
         PaymentMethodUpdaterInterface $paymentMethodUpdater,
         SiteRepository $siteRepository,
         SiteSynchronizerInterface $siteSynchronizer,
-        StateUpdaterInterface $stateUpdater,
         CustomerUpdaterInterface $customerUpdater,
         DeliveryUpdaterInterface $deliveryUpdater,
         InvoiceUpdaterInterface $invoiceUpdater,
