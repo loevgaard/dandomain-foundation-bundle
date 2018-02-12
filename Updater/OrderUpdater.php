@@ -359,8 +359,7 @@ class OrderUpdater implements OrderUpdaterInterface
                 if (404 === $e->getResponse()->getStatusCode()) {
                     $product = new Product();
                     $product
-                        ->setNumber($orderLine->getProductNumber())
-                        ->setPriceLess(true);
+                        ->setNumber($orderLine->getProductNumber());
 
                     // if the product doesn't exist we mark it as deleted when we sync it
                     $product->delete();
