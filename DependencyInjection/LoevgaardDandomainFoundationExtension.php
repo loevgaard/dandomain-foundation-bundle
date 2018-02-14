@@ -22,23 +22,24 @@ class LoevgaardDandomainFoundationExtension extends Extension implements Prepend
 
     public function prepend(ContainerBuilder $container)
     {
-        foreach ($container->getExtensions() as $name => $extension) {
-            if ('doctrine' !== $name) {
-                continue;
-            }
+        $ext = 'doctrine';
 
-            $container->prependExtensionConfig($name, [
-                'orm' => [
-                    'mappings' => [
-                        'Loevgaard\\DandomainFoundation\\Entity' => [
-                            'type' => 'annotation',
-                            'dir' => '%kernel.project_dir%/vendor/loevgaard/dandomain-foundation-entities/src/Entity',
-                            'is_bundle' => false,
-                            'prefix' => 'Loevgaard\\DandomainFoundation\\Entity',
-                        ],
+        if (!$container->hasExtension($ext)) {
+            throw new \LogicException('You need to enable the doctrine bundle');
+        }
+
+
+        $container->prependExtensionConfig($ext, [
+            'orm' => [
+                'mappings' => [
+                    'Loevgaard\\DandomainFoundation\\Entity' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/vendor/loevgaard/dandomain-foundation-entities/src/Entity',
+                        'is_bundle' => false,
+                        'prefix' => 'Loevgaard\\DandomainFoundation\\Entity',
                     ],
                 ],
-            ]);
-        }
+            ],
+        ]);
     }
 }
