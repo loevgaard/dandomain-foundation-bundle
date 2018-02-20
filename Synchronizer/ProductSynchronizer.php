@@ -30,6 +30,11 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $this->productUpdater = $stateUpdater;
     }
 
+    /**
+     * @param array $options
+     * @return ProductInterface
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function syncOne(array $options = []): ProductInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
@@ -63,13 +68,12 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $lastLog = $this->readLog();
         $log = ['options' => $options];
 
-        $productIdsToUpdateParentChildRelationship = [];
-
         if ($options['changed']) {
+            $productIdsToUpdateParentChildRelationship = [];
             $now = new DateTimeImmutable();
 
             if (!$start) {
-                if (array_key_exists('end', $lastLog) and ($lastLog['end'] instanceof DateTimeImmutable)) {
+                if (array_key_exists('end', $lastLog) and ($lastLog['end'] instanceof \DateTimeInterface)) {
                     $start = $lastLog['end'];
                 } else {
                     $start = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
@@ -114,6 +118,10 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
             $log['start'] = $start;
             $log['end'] = $end;
             $this->writeLog($log);
+
+            if(!empty($productIdsToUpdateParentChildRelationship)) {
+                $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationship);
+            }
         } else {
             $productIdsToNotRemove = [];
             $pageCount = \GuzzleHttp\json_decode($this->api->productData->getProductPageCount($options['pageSize'])->getBody()->getContents());
@@ -136,9 +144,9 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
             }
 
             $this->repository->removeByIds([], $productIdsToNotRemove);
-        }
 
-        $this->repository->updateParentChildRelationships($productIdsToUpdateParentChildRelationship);
+            $this->repository->updateParentChildRelationships();
+        }
     }
 
     public function configureOptionsOne(OptionsResolver $resolver)

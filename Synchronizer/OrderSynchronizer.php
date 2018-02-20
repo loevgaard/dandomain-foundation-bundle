@@ -66,7 +66,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
         $now = new DateTimeImmutable();
 
         if (!$start) {
-            if (array_key_exists('end', $lastLog) and ($lastLog['end'] instanceof DateTimeImmutable)) {
+            if (array_key_exists('end', $lastLog) and ($lastLog['end'] instanceof \DateTimeInterface)) {
                 $start = $lastLog['end'];
             } else {
                 $start = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
