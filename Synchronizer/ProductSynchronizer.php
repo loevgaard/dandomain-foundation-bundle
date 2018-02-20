@@ -3,6 +3,7 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\OptimisticLockException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
@@ -53,6 +54,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
     /**
      * @param array $options
      * @throws OptimisticLockException
+     * @throws UniqueConstraintViolationException
      * @throws \Doctrine\Common\Persistence\Mapping\MappingException
      * @throws \Doctrine\ORM\ORMException
      */
@@ -106,8 +108,15 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
                 $products = \GuzzleHttp\json_decode((string) $this->api->productData->getDataProductsInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
 
                 foreach ($products as $product) {
-                    $entity = $this->productUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($product));
-                    $this->repository->save($entity);
+                    $product = DandomainFoundation\objectToArray($product);
+                    $entity = $this->productUpdater->updateFromApiResponse($product);
+
+                    try {
+                        $this->repository->save($entity);
+                    } catch (UniqueConstraintViolationException $e) {
+                        $this->logger->emergency('['.$product['number'].'] '.$e->getMessage());
+                        throw $e;
+                    }
 
                     $productIdsToUpdateParentChildRelationship[] = $entity->getId();
                 }
