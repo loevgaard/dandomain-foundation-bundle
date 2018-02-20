@@ -2,8 +2,11 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
+use Assert\Assert;
 use Brick\Math\BigDecimal;
 use Doctrine\Common\Collections\Collection;
+use Loevgaard\DandomainFoundation\Entity\Category;
+use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Period;
@@ -11,6 +14,7 @@ use Loevgaard\DandomainFoundation\Entity\Price;
 use Loevgaard\DandomainFoundation\Entity\Product;
 use Loevgaard\DandomainFoundation\Entity\Unit;
 use Loevgaard\DandomainFoundation\Entity\VariantGroup;
+use Loevgaard\DandomainFoundation\Repository\CategoryRepository;
 use Loevgaard\DandomainFoundation\Repository\CurrencyRepository;
 use Loevgaard\DandomainFoundation\Repository\ManufacturerRepository;
 use Loevgaard\DandomainFoundation\Repository\PeriodRepository;
@@ -56,6 +60,11 @@ class ProductUpdater implements ProductUpdaterInterface
      */
     protected $periodSynchronizer;
 
+    /**
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
+
     public function __construct(
         ProductRepository $productRepository,
         ManufacturerRepository $manufacturerRepository,
@@ -63,7 +72,8 @@ class ProductUpdater implements ProductUpdaterInterface
         CurrencyRepository $currencyRepository,
         CurrencySynchronizerInterface $currencySynchronizer,
         PeriodRepository $periodRepository,
-        PeriodSynchronizerInterface $periodSynchronizer
+        PeriodSynchronizerInterface $periodSynchronizer,
+        CategoryRepository $categoryRepository
     ) {
         $this->productRepository = $productRepository;
         $this->manufacturerRepository = $manufacturerRepository;
@@ -72,6 +82,7 @@ class ProductUpdater implements ProductUpdaterInterface
         $this->currencySynchronizer = $currencySynchronizer;
         $this->periodRepository = $periodRepository;
         $this->periodSynchronizer = $periodSynchronizer;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function updateFromApiResponse(array $data): ProductInterface
@@ -124,6 +135,12 @@ class ProductUpdater implements ProductUpdaterInterface
 
             $product->mergeNewTranslations();
         }
+
+        /*
+         * Update categories
+         */
+        $categories = $this->createCategoryArrayFromCategoryData($data['productCategories']);
+        $product->updateCategories($categories);
 
         /*
          * Update manufacturers
@@ -244,15 +261,6 @@ class ProductUpdater implements ProductUpdaterInterface
 //            }
 //        }
 //
-//        if (is_array($data['productCategories'])) {
-//            foreach ($data['productCategories'] as $categoryData) {
-//                $category = new Category();
-//                $category->populateFromApiResponse($categoryData);
-//                $this->addCategory($category);
-//            }
-//        }
-//
-//
 //        if (is_array($data['productRelations'])) {
 //            foreach ($data['productRelations'] as $productRelationData) {
 //                $productRelation = new ProductRelation();
@@ -284,6 +292,25 @@ class ProductUpdater implements ProductUpdaterInterface
 //        }
 
         return $product;
+    }
+
+    public function createCategoryArrayFromCategoryData(array $categoryData) : array
+    {
+        $categories = [];
+
+        foreach ($categoryData as $categoryDataItem) {
+            $category = $this->categoryRepository->findOneByNumber($categoryData['number']);
+            if (!$category) {
+                $category = new Category();
+
+                // only update properties if it's a new object
+                $category->hydrate($categoryDataItem, true);
+            }
+
+            $categories[] = $category;
+        }
+
+        return $categories;
     }
 
     protected function updateCollection(array $originalIdList, array $newIdList, Collection $collection): array
