@@ -2,11 +2,9 @@
 
 namespace Loevgaard\DandomainFoundationBundle\Updater;
 
-use Assert\Assert;
 use Brick\Math\BigDecimal;
 use Doctrine\Common\Collections\Collection;
 use Loevgaard\DandomainFoundation\Entity\Category;
-use Loevgaard\DandomainFoundation\Entity\Generated\CategoryInterface;
 use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 use Loevgaard\DandomainFoundation\Entity\Manufacturer;
 use Loevgaard\DandomainFoundation\Entity\Period;
