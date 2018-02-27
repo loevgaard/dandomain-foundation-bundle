@@ -33,12 +33,16 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
     public function syncOne(array $options = []): ?OrderInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
+
+        $this->logger->debug('Syncing order '.$options['externalId']);
+
         $order = \GuzzleHttp\json_decode((string) $this->api->order->getOrder($options['externalId'])->getBody());
 
         try {
             $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
             $this->repository->save($entity);
         } catch (\Exception $e) {
+            $this->logger->debug('Exception thrown: '.$e->getMessage());
             return null;
         }
 
