@@ -299,7 +299,7 @@ class ProductUpdater implements ProductUpdaterInterface
         $categories = [];
 
         foreach ($categoryData as $categoryDataItem) {
-            $category = $this->categoryRepository->findOneByNumber($categoryData['number']);
+            $category = $this->categoryRepository->findOneByNumber($categoryDataItem['number']);
             if (!$category) {
                 $category = new Category();
 
