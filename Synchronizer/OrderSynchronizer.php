@@ -42,7 +42,7 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
             $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
             $this->repository->save($entity);
         } catch (\Exception $e) {
-            $this->logger->debug("Exception thrown: \n".print_r($e, true));
+            $this->logger->debug("Exception thrown\n".$e->getMessage()."\n".$e->getTraceAsString());
             return null;
         }
 
