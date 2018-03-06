@@ -172,7 +172,7 @@ class OrderUpdater implements OrderUpdaterInterface
         $shippingData = $data['shippingInfo'] ?? [];
 
         $createdDate = DateTimeImmutable::createFromJson($data['createdDate']);
-        $modifiedDate = DateTimeImmutable::createFromJson($data['modifiedDate']);
+        $modifiedDate = $data['modifiedDate'] ? DateTimeImmutable::createFromJson($data['modifiedDate']) : null;
 
         $giftCertificateAmount = DandomainFoundation\createMoneyFromFloat($currencyCode, $data['giftCertificateAmount']);
         $totalPrice = DandomainFoundation\createMoneyFromFloat($currencyCode, $data['totalPrice']);
