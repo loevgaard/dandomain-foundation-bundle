@@ -28,7 +28,7 @@ abstract class Synchronizer implements SynchronizerInterface
     /**
      * @var string
      */
-    protected $logFilePath;
+    protected $logFileName;
 
     /**
      * @var LoggerInterface
@@ -51,6 +51,9 @@ abstract class Synchronizer implements SynchronizerInterface
         $this->api = $api;
         $this->logsDir = rtrim($logsDir, '/');
         $this->logger = new NullLogger();
+
+        $refl = new \ReflectionClass($this);
+        $this->logFileName = $this->decamelize($refl->getShortName());
     }
 
     /**
@@ -113,11 +116,13 @@ abstract class Synchronizer implements SynchronizerInterface
      */
     protected function getLogFilePath(): string
     {
-        if (!$this->logFilePath) {
-            $this->logFilePath = $this->logsDir.'/'.$this->decamelize(get_class($this));
-        }
+        return $this->logsDir.'/'.$this->logFileName.'.log';
+    }
 
-        return $this->logFilePath;
+    protected function addToLogFileName($val) : void
+    {
+        $val = trim($val, '_');
+        $this->logFileName .= '_'.$val;
     }
 
     /**

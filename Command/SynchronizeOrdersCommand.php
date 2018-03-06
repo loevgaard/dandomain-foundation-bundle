@@ -20,9 +20,9 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
      */
     protected $orderSynchronizer;
 
-    public function __construct(OrderSynchronizerInterface $stateSynchronizer)
+    public function __construct(OrderSynchronizerInterface $orderSynchronizer)
     {
-        $this->orderSynchronizer = $stateSynchronizer;
+        $this->orderSynchronizer = $orderSynchronizer;
 
         parent::__construct();
     }
@@ -34,33 +34,34 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
             ->setDescription('Synchronize orders from Dandomain til local database')
             ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Start date in the format `Y-m-d`')
             ->addOption('end', null, InputOption::VALUE_REQUIRED, 'End date in the format `Y-m-d`')
-            ->addOption('order', 'o', InputOption::VALUE_REQUIRED, 'If set, this is the only order that will be synced')
+            ->addOption('order', 'o', InputOption::VALUE_REQUIRED, 'If set, this is the only order that will be synced', 0)
+            ->addOption('changed', null, InputOption::VALUE_NONE, 'If set, the command will sync changed orders')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!($this->lock())) {
+        $changed = boolval($input->getOption('changed'));
+        if (!($this->lock($this->getName().($changed ? '-changed' : '')))) {
             $output->writeln('The command is already running in another process.');
 
             return 0;
         }
 
-        $optionStart = $input->getOption('start');
-        $optionEnd = $input->getOption('end');
-        $optionOrder = $input->getOption('order');
-        $start = $end = null;
+        $start = $input->getOption('start');
+        $end = $input->getOption('end');
+        $order = (int)$input->getOption('order');
 
-        if ($optionStart) {
-            $start = DateTimeImmutable::createFromFormat('Y-m-d', $optionStart);
+        if ($start) {
+            $start = DateTimeImmutable::createFromFormat('Y-m-d', $start);
             if (false === $start) {
                 throw new \InvalidArgumentException('Option --start has the wrong format');
             }
             $start = $start->setTime(0, 0, 0);
         }
 
-        if ($optionEnd) {
-            $end = DateTimeImmutable::createFromFormat('Y-m-d', $optionEnd);
+        if ($end) {
+            $end = DateTimeImmutable::createFromFormat('Y-m-d', $end);
             if (false === $end) {
                 throw new \InvalidArgumentException('Option --end has the wrong format');
             }
@@ -69,14 +70,15 @@ class SynchronizeOrdersCommand extends ContainerAwareCommand
 
         $this->orderSynchronizer->setLogger(new ConsoleLogger($output));
 
-        if ($optionOrder) {
+        if ($order) {
             $this->orderSynchronizer->syncOne([
-                'externalId' => (int) $optionOrder,
+                'externalId' => $order,
             ]);
         } else {
             $this->orderSynchronizer->syncAll([
                 'start' => $start,
                 'end' => $end,
+                'changed' => $changed
             ]);
         }
 

@@ -3,7 +3,9 @@
 namespace Loevgaard\DandomainFoundationBundle\Synchronizer;
 
 use Dandomain\Api\Api;
+use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Loevgaard\DandomainDateTime\DateTimeImmutable;
 use Loevgaard\DandomainFoundation;
 use Loevgaard\DandomainFoundation\Entity\Generated\OrderInterface;
@@ -23,11 +25,11 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
      */
     protected $orderUpdater;
 
-    public function __construct(OrderRepository $repository, Api $api, string $logsDir, OrderUpdater $stateUpdater)
+    public function __construct(OrderRepository $repository, Api $api, string $logsDir, OrderUpdater $orderUpdater)
     {
         parent::__construct($repository, $api, $logsDir);
 
-        $this->orderUpdater = $stateUpdater;
+        $this->orderUpdater = $orderUpdater;
     }
 
     /**
@@ -52,9 +54,9 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
     /**
      * @param array $options
+     * @throws ORMException
      * @throws OptimisticLockException
-     * @throws \Doctrine\Common\Persistence\Mapping\MappingException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws MappingException
      */
     public function syncAll(array $options = [])
     {
@@ -62,17 +64,20 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
         $options = $this->resolveOptions($options, [$this, 'configureOptionsAll']);
 
+        if($options['changed']) {
+            $this->addToLogFileName('changed');
+        }
+
         $start = $options['start'];
         $end = $options['end'];
 
-        $lastLog = $this->readLog();
-        $log = ['options' => $options];
+        $log = $this->readLog();
 
         $now = new DateTimeImmutable();
 
         if (!$start) {
-            if (array_key_exists('end', $lastLog) and ($lastLog['end'] instanceof \DateTimeInterface)) {
-                $start = $lastLog['end'];
+            if (array_key_exists('end', $log) and ($log['end'] instanceof \DateTimeImmutable)) {
+                $start = $log['end'];
             } else {
                 $start = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
             }
@@ -91,32 +96,75 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
             throw new \InvalidArgumentException('Start date is after end date');
         }
 
-        $this->logger->info($start->format('Y-m-d H:i:s').' - '.$end->format('Y-m-d H:i:s'));
+        $orders = $this->getOrders($start, $end, $options['pageSize'], $options['changed']);
 
-        $modifiedOrderCount = $this->api->order->countByModifiedInterval($start, $end);
-        $pages = ceil($modifiedOrderCount / $options['pageSize']);
-
-        $this->logger->info('Modified orders: '.$modifiedOrderCount.' | Page size: '.$options['pageSize'].' | Page count: '.$pages);
-
-        for ($page = 1; $page <= $pages; ++$page) {
-            $this->logger->info($page.' / '.$pages);
-            $this->outputMemoryUsage();
-
-            $orders = \GuzzleHttp\json_decode((string) $this->api->order->getOrdersInModifiedInterval($start, $end, $page, $options['pageSize'])->getBody());
-
-            foreach ($orders as $order) {
-                $this->logger->info('Order: '.$order->id);
-                $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
-                $this->repository->save($entity);
-            }
-
-            $this->repository->clearAll();
+        foreach ($orders as $order) {
+            $this->logger->info('Order: '.$order->id);
+            $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
+            $this->repository->save($entity);
         }
 
-        $log['start'] = $start;
-        $log['end'] = $end;
+        $this->writeLog([
+            'start' => $start,
+            'end' => $end,
+            'options' => $options
+        ]);
+    }
 
-        $this->writeLog($log);
+    /**
+     * @param \DateTimeImmutable $start
+     * @param \DateTimeImmutable $end
+     * @param int $pageSize
+     * @param bool $changed
+     * @return \Generator
+     * @throws MappingException
+     */
+    protected function getOrders(\DateTimeImmutable $start, \DateTimeImmutable $end, int $pageSize, bool $changed) : \Generator
+    {
+        $this->logger->info($start->format('Y-m-d H:i:s').' - '.$end->format('Y-m-d H:i:s'));
+
+        if($changed) {
+            $modifiedOrderCount = $this->api->order->countByModifiedInterval($start, $end);
+            $pages = ceil($modifiedOrderCount / $pageSize);
+
+            $this->logger->info('Modified orders: '.$modifiedOrderCount.' | Page size: '.$pageSize.' | Page count: '.$pages);
+
+            for ($page = 1; $page <= $pages; ++$page) {
+                $this->logger->info($page.' / '.$pages);
+                $this->outputMemoryUsage();
+
+                $orders = \GuzzleHttp\json_decode((string) $this->api->order->getOrdersInModifiedInterval($start, $end, $page, $pageSize)->getBody());
+
+                foreach ($orders as $order) {
+                    yield $order;
+                }
+
+                $this->repository->clearAll();
+            }
+        } else {
+            $interval = new \DateInterval('PT60M');
+
+            /** @var \DateTimeImmutable[]|\DatePeriod $period */
+            $period = new \DatePeriod($start, $interval, $end);
+
+            foreach($period as $dt) {
+                $periodStart = $dt;
+                $periodEnd = $dt->add($interval);
+                if($periodEnd > $period->getEndDate()) {
+                    $periodEnd = $period->getEndDate();
+                }
+
+                $this->logger->info($periodStart->format('Y-m-d H:i:s').' - '.$periodEnd->format('Y-m-d H:i:s'));
+
+                $orders = \GuzzleHttp\json_decode((string) $this->api->order->getOrders($periodStart, $periodEnd)->getBody());
+
+                foreach ($orders as $order) {
+                    yield $order;
+                }
+
+                $this->repository->clearAll();
+            }
+        }
     }
 
     public function configureOptionsOne(OptionsResolver $resolver)
@@ -134,10 +182,12 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
             ->setDefaults([
                 'start' => null,
                 'end' => null,
+                'changed' => false,
                 'pageSize' => 100,
             ])
             ->setAllowedTypes('start', ['null', \DateTimeImmutable::class])
             ->setAllowedTypes('end', ['null', \DateTimeImmutable::class])
+            ->setAllowedTypes('changed', 'bool')
             ->setAllowedTypes('pageSize', 'int')
         ;
     }
