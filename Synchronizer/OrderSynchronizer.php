@@ -54,9 +54,8 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
     /**
      * @param array $options
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws MappingException
+     * @throws \RuntimeException
      */
     public function syncAll(array $options = [])
     {
@@ -100,8 +99,12 @@ class OrderSynchronizer extends Synchronizer implements OrderSynchronizerInterfa
 
         foreach ($orders as $order) {
             $this->logger->info('Order: '.$order->id);
-            $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
-            $this->repository->save($entity);
+            try {
+                $entity = $this->orderUpdater->updateFromApiResponse(DandomainFoundation\objectToArray($order));
+                $this->repository->save($entity);
+            } catch (\Exception $e) {
+                throw new \RuntimeException('Order: '.$order->id, $e->getCode(), $e);
+            }
         }
 
         $this->writeLog([
