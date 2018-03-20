@@ -43,7 +43,7 @@ class ClassMetaDataSubscriber implements EventSubscriber
             ->getNamingStrategy()
         ;
 
-        $indices = $classMetaData->table['indexes'];
+        $indices = $classMetaData->table['indexes'] ?? [];
 
         foreach ($properties as $property) {
             $propertyNamed = $namingStrategy->propertyToColumnName($property);
