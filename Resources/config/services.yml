@@ -64,7 +64,7 @@ services:
     loevgaard_dandomain_foundation.class_meta_data_event_listener:
         class: Loevgaard\DandomainFoundationBundle\EventListener\ClassMetaDataSubscriber
         tags:
-            - { name: doctrine.event_subscriber }
+            - { name: doctrine.event_subscriber, priority: -999 }
 
     # Updaters
     loevgaard_dandomain_foundation.category_updater:
