@@ -60,6 +60,12 @@ services:
             - "@loevgaard_dandomain_foundation.tag_synchronizer"
         tags: [console.command]
 
+    # Event Listeners / Subscribers
+    loevgaard_dandomain_foundation.class_meta_data_event_listener:
+        class: Loevgaard\DandomainFoundationBundle\EventListener\ClassMetaDataSubscriber
+        tags:
+            - { name: doctrine.event_subscriber }
+
     # Updaters
     loevgaard_dandomain_foundation.category_updater:
         class: Loevgaard\DandomainFoundationBundle\Updater\CategoryUpdater
