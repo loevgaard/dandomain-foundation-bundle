@@ -20,29 +20,32 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "loevgaard/dandomain-api": "^2.5",
         "loevgaard/dandomain-api-bundle": "^0.1",
-        "loevgaard/dandomain-foundation-entities": "dev-master",
+        "loevgaard/dandomain-foundation-entities": "^1.5",
         "psr/log": "^1.0",
-        "symfony/console": "^3.0||^4.0",
-        "symfony/filesystem": "^3.0||^4.0",
-        "symfony/framework-bundle": "^3.0||^4.0",
-        "symfony/options-resolver": "^3.3||^4.0"
+        "symfony/console": "^3.0 || ^4.0",
+        "symfony/filesystem": "^3.0 || ^4.0",
+        "symfony/framework-bundle": "^3.0 || ^4.0",
+        "symfony/options-resolver": "^3.3 || ^4.0"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.3",
         "friendsofphp/php-cs-fixer": "^2.0",
         "roave/security-advisories": "dev-master"
     },
-    "autoload": {
-        "files": ["functions_include.php"],
-        "psr-4": {
-            "Loevgaard\\DandomainFoundationBundle\\": ""
-        }
-    },
-    "scripts": {
-        "test": "phpunit",
-        "check-style": "./vendor/bin/php-cs-fixer fix --verbose --dry-run",
-        "fix-style": "./vendor/bin/php-cs-fixer fix --verbose"
-    },
     "config": {
         "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Loevgaard\\DandomainFoundationBundle\\": ""
+        },
+        "files": [
+            "functions_include.php"
+        ]
+    },
+    "scripts": {
+        "check-style": "./vendor/bin/php-cs-fixer fix --verbose --dry-run",
+        "fix-style": "./vendor/bin/php-cs-fixer fix --verbose",
+        "test": "phpunit"
     }
 }
