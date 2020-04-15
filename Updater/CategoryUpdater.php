@@ -21,7 +21,7 @@ class CategoryUpdater implements CategoryUpdaterInterface
 
     public function updateFromApiResponse(array $data): CategoryInterface
     {
-        $category = $this->categoryRepository->findOneByNumber($data['number']);
+        $category = $this->categoryRepository->findOneByExternalId($data['internalId']);
         if (!$category) {
             $category = new Category();
         }
