@@ -6,5 +6,5 @@ use Loevgaard\DandomainFoundation\Entity\Generated\ProductInterface;
 
 interface ProductSynchronizerInterface extends SynchronizerInterface
 {
-    public function syncOne(array $options = []): ProductInterface;
+    public function syncOne(array $options = []): ?ProductInterface;
 }

@@ -31,12 +31,7 @@ class ProductSynchronizer extends Synchronizer implements ProductSynchronizerInt
         $this->productUpdater = $stateUpdater;
     }
 
-    /**
-     * @param array $options
-     * @return ProductInterface
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function syncOne(array $options = []): ProductInterface
+    public function syncOne(array $options = []): ?ProductInterface
     {
         $options = $this->resolveOptions($options, [$this, 'configureOptionsOne']);
         $product = \GuzzleHttp\json_decode((string) $this->api->productData->getDataProduct($options['number'])->getBody());

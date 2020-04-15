@@ -85,7 +85,7 @@ class ProductUpdater implements ProductUpdaterInterface
 
     public function updateFromApiResponse(array $data): ProductInterface
     {
-        $product = $this->productRepository->findOneByNumber($data['number']);
+        $product = $this->productRepository->findOneByExternalId($data['id']);
         if (!$product) {
             $product = new Product();
         }
